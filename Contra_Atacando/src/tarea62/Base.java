@@ -21,9 +21,9 @@ public class Base {
     private int iX;     //posicion en x.       
     private int iY;     //posicion en y.
     private int iAncho; //ancho del objeto
-    private int iAlto; //largo del objeto
-    private Image imaImagen;	//imagen.
-    private ImageIcon imiImagen;  // imagen con medidas
+    private int iAlto;  //largo del objeto
+    private Image imaImagen;        // imagen.
+    private ImageIcon imiImagen;    // imagen con medidas
     private boolean bAlive;
 
     /**

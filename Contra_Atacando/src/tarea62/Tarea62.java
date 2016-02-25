@@ -1,10 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tarea62;
 
+/**
+ * Jframe, Contra-Atacando
+ *
+ *
+ * @author Jose Humberto Garza Rosado
+ * @date 24/02/2016
+ * @version A00808689
+ */
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Color;
@@ -33,16 +36,9 @@ import java.util.logging.Logger;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-/**
- * Jframe, Contra-Atacando
- *
- *
- * @author Jose Humberto Garza Rosado
- * @date 17/2/2016
- * @version A00808689
- */
+public class Tarea62 extends JFrame implements Runnable, MouseListener,
+        KeyListener {
 
-public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyListener {
     //Jframe Size
     private int iHeight;
     private int iWidth;
@@ -53,47 +49,50 @@ public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyList
     // Banners tipo Base
     private Base basBoard;
     private Base basPause;
+    private Base basGameOver;
     private Base basLives;
-   
+
     // Objetos tipo Principal
     private int iDirPrinX;
     private int iDirPrinY;
-    private int iVelocidadPrincipal; // La velocidad del principal
+    private int iVelocidadPrincipal;
     private Principal priPrincipal;
 
     // Objetos  secundarios
     private LinkedList< Bala> lklBalas; // ListaEncadenada de *Balas
-    private LinkedList< Foe>  lklFoes;  // ListaEncadenada de *Pokebolas
-    private int iVelocidadBala;     // La velocidad del principal
-    private int iVelocidadFoe;      // La velocidad del principal
+    private LinkedList< Foe> lklFoes;  // ListaEncadenada de *Pokebolas
+    private int iVelocidadBala;
+    private int iVelocidadFoe;
 
     // Clips de Audio
-    private SoundClip aChump; // Sonido de Mordisco
-    private SoundClip aSplat; // Sonido Pierde una vida
-    private SoundClip aShoot; // Sonido Colision Bala
-    private SoundClip aHurt; // Sonido Colision con Principal
+    private SoundClip aShoot;           // Sonido Colision Bala
+    private SoundClip aHurt;            // Sonido Pierde una vida
 
     // Vida y Puntaje
-    private int iVidasRestantes; // Contador de Vidas
-    private int iPuntos; // Contador de puntos totales
-    private int iColisionesMalas;  // Contador de Colisiones con malos
+    private int iVidasRestantes;
+    private int iPuntos;
+    private int iColisionesMalas;
 
     // Dinamica Juego
     private boolean bGameOver;
     private boolean bPause;
-    boolean bKeyPressed; // Condicion de tecla presionada
-    
+    boolean bKeyPressed;
+
     /* objetos para manejar el buffer del Applet y 
     que la imagen no parpadee */
     private Image imaImagenApplet; // Imagen a proyectar en Applet 
     private Graphics graGraficaApplet; // Objeto grafico de la Imagen
 
+    /**
+     * Tarea62
+     *
+     * Constructor de la clase principal del JFrame
+     */
     public Tarea62() {
-
         //Jframe Configuration
         iWidth = 800;
         iHeight = 500;
-        Dimension d = new Dimension(iWidth,iHeight);
+        Dimension d = new Dimension(iWidth, iHeight);
         Container c = this.getContentPane();
         c.setPreferredSize(d);
         this.pack();
@@ -101,39 +100,39 @@ public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyList
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Creo la imagen de fondo.
+        // Crear la imagen de fondo.
         imaImagenFondo = Toolkit.getDefaultToolkit().getImage(this.getClass()
                 .getResource("Images/Fondo.png"));
-        
-        // Banners
+
+        // Banners de Fondo, Pausa y de vidas
         basBoard = new Base(0, 0, Toolkit.getDefaultToolkit()
                 .getImage(this.getClass().getResource("Images/Banner.png")));
         basPause = new Base(0, 0, Toolkit.getDefaultToolkit()
                 .getImage(this.getClass().getResource("Images/Pause.gif")));
         basLives = new Base(337, 8, Toolkit.getDefaultToolkit()
                 .getImage(this.getClass().getResource("Images/Life.png")));
+        basGameOver = new Base(0, 0, Toolkit.getDefaultToolkit()
+                .getImage(this.getClass().getResource("Images/GameOver.gif")));
 
         // Clips de Audio
-        aChump = new SoundClip("Audio/Chump.wav");
-        aSplat = new SoundClip("Audio/Splat.wav");
         aShoot = new SoundClip("Audio/Shoot.wav");
-        aHurt  = new SoundClip("Audio/Hurt.wav");
+        aHurt = new SoundClip("Audio/Hurt.wav");
 
         // Objeto Principal
         priPrincipal = new Principal(0, 0, Toolkit.getDefaultToolkit()
-                .getImage(this.getClass().getResource("Images/S_Abre.gif")),1);
-        
+                .getImage(this.getClass().getResource("Images/S_Abre.gif")), 1);
+
         // Listas encadenada de personajes secundarios
         lklBalas = new LinkedList< Bala>();
         lklFoes = new LinkedList< Foe>();
 
-        // Hacer un set de variables para iniciar el juego
+        // Configurar el set de variables de juego para iniciar
         restart();
 
         // Listeners: Teclado y Mouse
         addKeyListener(this);
         addMouseListener(this);
-        
+
         // Declaras un hilo
         Thread th = new Thread(this);
         // Empieza el hilo
@@ -142,23 +141,25 @@ public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyList
 
     /**
      * restart
-     * 
+     *
+     * Metodo que configura las variables de inicio a su estado original
+     *
      */
     public void restart() {
         // Contadores
-        iVidasRestantes     = 5; 
-        iPuntos             = 0; 
-        iColisionesMalas    = 0;
+        iVidasRestantes = 5;
+        iPuntos = 0;
+        iColisionesMalas = 0;
 
         // Boleanos
-        bKeyPressed = false;  
-        bGameOver   = false;
-        bPause      = false;
+        bKeyPressed = false;
+        bGameOver = false;
+        bPause = false;
 
         // Velocidad de personajes
-        iVelocidadPrincipal = 5; 
-        iVelocidadBala      = 5;
-        iVelocidadFoe       = 1;
+        iVelocidadPrincipal = 5;
+        iVelocidadBala = 5;
+        iVelocidadFoe = 1;
 
         // Resetear las velocidades
         priPrincipal.setVelocidad(iVelocidadPrincipal);
@@ -168,8 +169,8 @@ public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyList
         lklBalas.clear();
 
         // Movimiento del Principal
-        iDirPrinX           = 0;
-        iDirPrinY           = 0;
+        iDirPrinX = 0;
+        iDirPrinY = 0;
 
         // Generar una coleccion (al azar de 10 a 15) *Enemigos
         int iRandomFoes = (int) (Math.random() * 6 + 10);
@@ -179,100 +180,51 @@ public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyList
         reposiciona();
     }
 
-
-    /**
-     * generaBala
-     * Metodo para crear una bala
-     * 
-     */
-    public void generaBala(int iDireccionX, int iDireccionY) {
-        
-        Bala balAux = new Bala( priPrincipal.getX()+priPrincipal.getAncho()/2, priPrincipal.getY()+10, Toolkit.getDefaultToolkit()
-                    .getImage(this.getClass().getResource("Images/Bala.png")), 
-                    iDireccionX, iDireccionY, iVelocidadBala);
-
-        balAux.setX(balAux.getX()-balAux.getAncho()/2);
-        lklBalas.add(balAux);
-    }
-
-    /**
-     * generaFoes
-     * 
-     */
-    public void generaFoes(int iTotalFoes) {
-        
-        int iTotalFollows = (int)(Math.ceil(iTotalFoes*0.1));
-        iTotalFoes -= iTotalFollows;
-
-        // Crear un Total de (iTotalFollows) que seguiran al principal
-        for (int iI = 0; iI < iTotalFollows; iI++) {
-            Foe foeAux = new Foe(0, 0, Toolkit.getDefaultToolkit()
-                        .getImage(this.getClass().getResource("Images/Pokeball.png")), iVelocidadFoe, true);
-            lklFoes.add(foeAux);
-        }
-
-        // Creo la lista de objetos secundarios *Sushis[10]
-        for (int iI = 0; iI < iTotalFoes; iI++) {
-            Foe foeAux = new Foe(0, 0, Toolkit.getDefaultToolkit()
-                        .getImage(this.getClass().getResource("Images/Pokeball.png")), iVelocidadFoe, false);
-            lklFoes.add(foeAux);
-        }
-    }
-
     /**
      * reposiciona
      *
      * Reposiciona a los objetos base principal y los secundarios Posiciona al
-     * objeto principal en la mitad del applet inicialmente Posiciona los buenos
-     * del lado Izquierdo (por fuera) Posiciona los malos del lado derecho (por
-     * fuera)
+     * objeto principal en la mitad del applet hasta abajo
+     *
      */
     public void reposiciona() {
-
         // Posicionar a Snorlax en el centro del applet
         priPrincipal.setX((iWidth / 2) - (priPrincipal.getAncho() / 2));
-        priPrincipal.setY( iHeight - priPrincipal.getAlto());
+        priPrincipal.setY(iHeight - priPrincipal.getAlto());
 
         // Iterador para posicionar los secundarios *Malos
-        for (Foe foeAux: lklFoes) {
+        for (Foe foeAux : lklFoes) {
             //Posicionar objeto en la parte superior negativa en Y
             foeAux.posiciona(iWidth, iHeight, priPrincipal.getAncho(), 'u');
         }
     }
 
-    @Override
-    public void paint(Graphics graGrafico) {
-        
-        // Inicializan el DoubleBuffer
-        // Si quitamos el if funciona con el resize
-        if (imaImagenApplet == null) {
-            imaImagenApplet = createImage(this.getSize().width,
-                    this.getSize().height);
-            graGraficaApplet = imaImagenApplet.getGraphics();
-        }
-        // Actualiza el Foreground.
-        graGraficaApplet.setColor(getForeground());
-        paintCustom(graGraficaApplet);
-
-        // Dibuja la imagen actualizada
-        graGrafico.drawImage(imaImagenApplet, 0, 0, this);
-    }
-
     /**
+     * main
+     *
+     * Metodo que se manda a llamar al iniciar el JFrame
+     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         Tarea62 tarGame = new Tarea62();
     }
 
+    /**
+     * run
+     *
+     * Metodo que corre la logica del JFrame
+     *
+     */
     @Override
     public void run() {
         /* mientras dure el juego, se actualizan posiciones del Principal
            se checa si hubo colisiones con los objetos malos y buenos
          */
-        // Mientras no sea el fin del juego
         while (true) {
-            if (!bGameOver) {            
+            // Si no es El fin del juego, seguir normalmente
+            if (!bGameOver) {
+                // Si no es el fin y no hay pausa seguir normalmente    
                 if (!bPause) {
                     actualiza();
                     checaColision();
@@ -291,6 +243,59 @@ public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyList
     }
 
     /**
+     * generaFoes
+     *
+     * Metodo para generar n numero de enemigos, de los cuales 10% perseguiran
+     * al principal
+     *
+     * @param iTotalFoes es el <code>numero</code> total de enemigos a crear
+     *
+     */
+    public void generaFoes(int iTotalFoes) {
+
+        //10% perseguira al principal
+        int iTotalFollows = (int) (Math.ceil(iTotalFoes * 0.1));
+        iTotalFoes -= iTotalFollows;
+
+        // Crear un Total de (iTotalFollows) que seguiran al principal
+        for (int iI = 0; iI < iTotalFollows; iI++) {
+            Foe foeAux = new Foe(0, 0, Toolkit.getDefaultToolkit()
+                    .getImage(this.getClass()
+                            .getResource("Images/Pokeball.png")), iVelocidadFoe, true);
+            lklFoes.add(foeAux);
+        }
+
+        // El resto solo caeran verticalmente
+        for (int iI = 0; iI < iTotalFoes; iI++) {
+            Foe foeAux = new Foe(0, 0, Toolkit.getDefaultToolkit()
+                    .getImage(this.getClass()
+                            .getResource("Images/Pokeball.png")), iVelocidadFoe, false);
+            lklFoes.add(foeAux);
+        }
+    }
+
+    /**
+     * generaBala
+     *
+     * Metodo para crear una bala
+     *
+     * @param iDireccionX es la <code>direccion en x</code> de la bala.
+     * @param iDireccionY es la <code>direccion en y</code> de la bala.
+     *
+     */
+    public void generaBala(int iDireccionX, int iDireccionY) {
+        // Crear una bala nueva
+        Bala balAux = new Bala(priPrincipal.getX() + priPrincipal.getAncho() / 2,
+                priPrincipal.getY() + 10, Toolkit.getDefaultToolkit()
+                .getImage(this.getClass().getResource("Images/Bala.png")),
+                iDireccionX, iDireccionY, iVelocidadBala);
+        // Mover la bala en X para que coincida con el centro del principal
+        balAux.setX(balAux.getX() - balAux.getAncho() / 2);
+        // Agregar la bala a la lista 
+        lklBalas.add(balAux);
+    }
+
+    /**
      * actualiza
      *
      * Metodo que actualiza la posicion de principal y de los secundarios
@@ -304,12 +309,14 @@ public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyList
             priPrincipal.avanza(iDirPrinX, iDirPrinY);
         }
 
+        // Iterar la lista de Balas para moverlas
         for (Bala balAux : lklBalas) {
             balAux.avanza();
         }
 
+        // Iterar la lista de enemigos para Moverlos
         for (Foe foeAux : lklFoes) {
-            foeAux.avanza(priPrincipal.getX()+priPrincipal.getAncho()/2);
+            foeAux.avanza(priPrincipal.getX() + priPrincipal.getAncho() / 2);
         }
     }
 
@@ -320,68 +327,112 @@ public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyList
      * usado para checar la colision entre el principal y los secundarios Para
      * que una colision entre los mismos cuente, debe ser por abajo del
      * secundario Checar la colision de los secundarios con el borde inferior
-     * del applet
+     * del applet Checar la colision de las balas con los enemigos
      */
     public void checaColision() {
 
         // Colision del principal con el applet
         priPrincipal.choqueFrame(iWidth, iHeight);
 
+        // Checar la colision de los enemigos
         for (Foe foeAux : lklFoes) {
-            // Checar si los malos chocan con el principal
-            if (priPrincipal.colisionaLado(foeAux, 14, 17, 92)==2) {
-                iColisionesMalas ++;
-                foeAux. posiciona(iWidth, iHeight, priPrincipal.getAncho(), 'u');
+            // Checar si los malos chocan al principal por la parte de arriba
+            if (priPrincipal.colisionaLado(foeAux, 14, 17, 92) == 2) {
+                iColisionesMalas++;
+                foeAux.posiciona(iWidth, iHeight, priPrincipal.getAncho(), 'u');
+                // Si se choca con el principal, ajustar las vidas
                 ajustaVidas();
             }
-            // Checar Si los malos se salen del applet
+            // Checar Si los malos se salen por abajo del JFrame
             foeAux.choqueFrame(iWidth, iHeight, priPrincipal.getAncho());
         }
 
-        for (int iI =0; iI < lklBalas.size(); iI++) {
+        // Checar las colisiones de las Balas
+        for (int iI = 0; iI < lklBalas.size(); iI++) {
             Bala balAux = (Bala) lklBalas.get(iI);
             // Checar si las balas se salen del applet 
             if (balAux.choqueFrame(iWidth, iHeight)) {
                 lklBalas.remove(balAux);
-            }
-            else
-            {   
+            } else {
                 //Checar Si las balas chocan con los malos
-                for (int iC =0; iC < lklFoes.size(); iC++) {
+                for (int iC = 0; iC < lklFoes.size(); iC++) {
                     Foe foeAux = (Foe) lklFoes.get(iC);
                     if (balAux.colisiona(foeAux)) {
-                        aShoot.play();
+                        // Si se destruye un enemigo, ajustar los puntos
                         ajustaPuntos();
                         lklBalas.remove(balAux);
-                        foeAux. posiciona(iWidth, iHeight, priPrincipal.getAncho(),'u');
+                        foeAux.posiciona(iWidth, iHeight,
+                                priPrincipal.getAncho(), 'u');
                     }
                 }
             }
         }
 
     }
+
+    /**
+     * ajustaVidas
+     *
+     * Metodo que ajusta el contador de vidas, Cada que se hagan 5 contactos con
+     * los enemigos, se perdera una vida Cada que se pierda una vida, se
+     * aumentara la velocidad de los enemigos Cuando se pierde una vida, se
+     * reproduce un sonido
+     */
     public void ajustaVidas() {
         iPuntos--;
-        if(iColisionesMalas == 5) {
+        if (iColisionesMalas == 5) {
             aHurt.play();
             iVelocidadFoe++;
+            // Iterar los enemigos para aumentar su velocidad
             for (Foe foeAux : lklFoes) {
                 foeAux.setVelocidad(iVelocidadFoe);
             }
             iVidasRestantes--;
-            iColisionesMalas =0;
+            iColisionesMalas = 0;
         }
-        if(iVidasRestantes<1) {
+        if (iVidasRestantes < 1) {
             bGameOver = true;
         }
     }
-    public void ajustaPuntos() {
-        iPuntos+=10;
-    }
 
+    /**
+     * ajustaPuntos
+     *
+     * Metodo que ajusta los puntos Cada que se elimine un enemigo, se ganan 10
+     * puntos Reproduce un sonido cada que eso pasa
+     */
+    public void ajustaPuntos() {
+        aShoot.play();
+        iPuntos += 10;
+    }
 
     /**
      * paint
+     *
+     * Metodo que pinta el JFrame
+     *
+     * @param graGrafico el <code>objeto Grafico</code> del JFrame
+     */
+    @Override
+    public void paint(Graphics graGrafico) {
+
+        // Inicializan el DoubleBuffer
+        // Si quitamos el if funciona con el resize
+        if (imaImagenApplet == null) {
+            imaImagenApplet = createImage(this.getSize().width,
+                    this.getSize().height);
+            graGraficaApplet = imaImagenApplet.getGraphics();
+        }
+        // Actualiza el Foreground.
+        graGraficaApplet.setColor(getForeground());
+        paintCustom(graGraficaApplet);
+
+        // Dibuja la imagen actualizada
+        graGrafico.drawImage(imaImagenApplet, 0, 0, this);
+    }
+
+    /**
+     * paintCustom
      *
      * Metodo sobrescrito de la clase <code>Applet</code>, heredado de la clase
      * <P>
@@ -394,12 +445,13 @@ public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyList
      */
     public void paintCustom(Graphics graDibujo) {
         // si la imagen ya se cargo *No olvidar checar el secundario
-        if (priPrincipal != null && imaImagenFondo != null && basBoard!= null) {
-            
+        if (priPrincipal != null && imaImagenFondo != null
+                && basBoard != null) {
+
             // Dibuja la imagen de fondo
             graDibujo.drawImage(imaImagenFondo, 0, 0, iWidth,
                     iHeight, this);
- 
+
             // Dibujar el principal
             priPrincipal.paint(graDibujo, this);
 
@@ -413,37 +465,32 @@ public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyList
                 foeAux.paint(graDibujo, this);
             }
 
-
-            // Si se acaba el juego, mostrar el banner de GAMEOVER
-            if (bGameOver) {
-                graDibujo.drawImage(Toolkit.getDefaultToolkit()
-                        .getImage(this.getClass()
-                                .getResource("Images/GameOver.gif")),
-                        0, 0, iWidth, iHeight, this);
-            }
-
-            // Banner
-            basBoard.paint(graDibujo, this); 
-            if (bPause) {
-                basPause.paint(graDibujo, this); 
-            } 
+            // Pintar las vidas con imagenes
+            basBoard.paint(graDibujo, this);
             int iCord = 337;
-            for (int iI =0; iI<iVidasRestantes; iI++) {
+            for (int iI = 0; iI < iVidasRestantes; iI++) {
                 basLives.setX(iCord);
-                basLives.paint(graDibujo, this); 
-                iCord += basLives.getAncho()+2;
+                basLives.paint(graDibujo, this);
+                iCord += basLives.getAncho() + 2;
             }
 
             // Elegir el color del string a pintar y el tipo de letra
             graDibujo.setColor(Color.white);
             graDibujo.setFont(new Font("Serif", Font.BOLD, 20));
 
-            // Escribir las vidas restantes
-            //graDibujo.drawString(String.valueOf(iVidasRestantes), 337, 28);
             // Escribir los puntos ganados
             graDibujo.drawString(String.valueOf(iPuntos), 647, 28);
             // Escribir cuantos se han ido
             graDibujo.drawString(String.valueOf(iColisionesMalas), 100, 28);
+
+            // Banner de GameOver
+            if (bGameOver) {
+                basGameOver.paint(graDibujo, this);
+            }
+            // Banner de Pausa
+            if (bPause) {
+                basPause.paint(graDibujo, this);
+            }
 
         } // Si no se ha cargado se dibuja un mensaje 
         else {
@@ -460,28 +507,28 @@ public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyList
      */
     @Override
     public void keyTyped(KeyEvent keyEvent) {
-        //throw new UnsupportedOperationException("Not supported yet."); 
-        //To change body of generated methods, choose Tools | Templates.
+
     }
 
     /**
      * keyPressed
      *
-     * Checar si la tecla presionada fue una de movimiento Q, A, P o L
+     * Checar si la tecla presionada fue una de movimiento LEFT o RIGHT
      *
      * @param keyEvent es el objeto de <code>keyTyped</code> del teclado.
      *
      */
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-
         /* Revisar que tecla se presiono y cambiar la posicion*/
+        // Tecla IZQUIERDA
         if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
             iDirPrinX = -1;
             bKeyPressed = true;
         }
+        // Tecla DERECHA
         if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
-            iDirPrinX =  1;
+            iDirPrinX = 1;
             bKeyPressed = true;
         }
 
@@ -490,27 +537,32 @@ public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyList
     /**
      * keyReleased
      *
-     * Si se suelta la tecla, no actualizar al principal
+     * Si se suelta la tecla, no actualizar al principal Ademas checar si se
+     * hizo un disparo con la tecla A, Espacio o S Se checa si se solto la tecla
+     * de movimiento para poderse mover y disparar al mismo tiempo
      *
      * @param keyEvent es el objeto de <code>keyTyped</code> del teclado.
      *
      */
     @Override
     public void keyReleased(KeyEvent keyEvent) {
-        //throw new UnsupportedOperationException("Not supported yet."); 
-        //To change body of generated methods, choose Tools | Templates.
+        // En caso que no sea el fin del juego ni este en pausa
         if (!bGameOver && !bPause) {
-            /* Revisar que tecla se presiono y cambiar la posicion*/
+            /* Revisar que tecla se presiono*/
+            // Disparo IZQ a 45 Grados
             if (keyEvent.getKeyCode() == KeyEvent.VK_A) {
-                generaBala(-1,-1);
+                generaBala(-1, -1);
             }
+            // Disparo Hacia Arriba
             if (keyEvent.getKeyCode() == KeyEvent.VK_SPACE) {
-                generaBala( 0,-1);
+                generaBala(0, -1);
             }
+            // Disparo a la DER a 45 Grados
             if (keyEvent.getKeyCode() == KeyEvent.VK_S) {
-                generaBala( 1,-1);
+                generaBala(1, -1);
             }
 
+            // Si se suelta la tecla de IZQ o DER cancelar el movimientoo
             if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
                 bKeyPressed = false;
             }
@@ -518,17 +570,24 @@ public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyList
                 bKeyPressed = false;
             }
         }
+        // Si no es GameOver poder pausar el juego
         if (keyEvent.getKeyCode() == KeyEvent.VK_P && !bGameOver) {
             bPause = !bPause;
             bKeyPressed = false;
         }
-
-        
     }
 
+    /**
+     * mouseClicked
+     *
+     * Metodo para saber si se hizo un click al terminar el juego y poder
+     * reiniciarlo
+     *
+     * @param mouMouseEvent es el objeto de <code>MouseEvent</code> del mouse.
+     *
+     */
     @Override
-    public void mouseClicked(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void mouseClicked(MouseEvent mouMouseEvent) {
         if (bGameOver) {
             restart();
         }
@@ -536,21 +595,25 @@ public class Tarea62  extends JFrame implements Runnable, MouseListener, KeyList
 
     @Override
     public void mousePressed(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); 
+        //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); 
+        //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); 
+        //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); 
+        //To change body of generated methods, choose Tools | Templates.
     }
 }
