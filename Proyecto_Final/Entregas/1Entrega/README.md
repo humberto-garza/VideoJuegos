@@ -223,11 +223,11 @@ Project Roles and Responsibilities. N.p., n.d. Web. 16 Mar. 2016.
 - Asistentes: Humberto, Sergio, Ana Karen 
 - Fecha: 16/marzo/2016
 - Hora de inicio: 10:30 am
-1. Se definio el nombre de la empresa. (Left & Right)
-2. Se definio un slogan: "Whatever you like"
-3. Se definieron los roles de equipo.
-4. Se genero el documento de entrega 1 "trabajo en equipo".
-5. Acordamos en usar cloud9 para trabajar.
+- 1. Se definio el nombre de la empresa. (Left & Right)
+- 2. Se definio un slogan: "Whatever you like"
+- 3. Se definieron los roles de equipo.
+- 4. Se genero el documento de entrega 1 "trabajo en equipo".
+- 5. Acordamos en usar cloud9 para trabajar.
 - La junta termino a la 1:30 pm
 
 -------------------
