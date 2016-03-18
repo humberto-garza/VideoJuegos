@@ -98,37 +98,37 @@ oportunidades, debilidades y amenzas de cada miembro del equipo.
 
 ##### Humberto
 
-![Foda Humberto](Humberto_DAFO.png)
+![Foda Humberto](Images/Humberto_DAFO.png)
 
 
 ##### Sergio
 
-![Foda Serfio](Sergio_DAFO.png)
+![Foda Serfio](Images/Sergio_DAFO.png)
 
 ##### Ana Karen
 
-![Foda Ana](anak_DAFO.png)
+![Foda Ana](Images/anak_DAFO.png)
 
 #### Áreas de Oportunidades
 
 En cualquier equipo de trabajo, es necesario entender las caulidades y áreas de oportunidad de una persona, por lo mismo se debe trazar una forma de trabajo en la que se pueda impulsar su desempeño.
 Para esto, mostramos el gráfico de progreso sugerido de acuerdo al Foda de los integrantes:
 
-![Grafica Leyenda](Leyenda.png)
+![Grafica Leyenda](Images/Leyenda.png)
 
 
 ##### Humberto
 
-![Grafica Humberto](Humberto_Grafica.png)
+![Grafica Humberto](Images/Humberto_Grafica.png)
 
 
 ##### Sergio
 
-![Grafica Serfio](Sergio_Grafica.png)
+![Grafica Serfio](Images/Sergio_Grafica.png)
 
 ##### Ana Karen
 
-![Grafica Ana](anak_Grafica.png)
+![Grafica Ana](Images/anak_Grafica.png)
 
 
 ----------------------
