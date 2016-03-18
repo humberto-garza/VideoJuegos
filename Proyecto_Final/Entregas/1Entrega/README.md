@@ -177,20 +177,30 @@ empresa:
 | Identificar problemas y sugerir mejoras | 1/3 | 1/3 | 1/3  |
 
 
+# **Conclusión**
 
-
-
-**Conclusión**
----
 Siendo una empresa desarrolladora de videojuegos decidimos asignar roles de trabajo
 entre los miembros. Los roles nos ayudarán a poder desarrollar el producto que el cliente
 busca, de la mejor manera. Los roles y compromisos que acordamos tener y seguir en 
 la empresa serán la base de un excelente trabajo pues estaremos cubriendo y pensando en 
 todos los aspectos del producto.
 
+
+## **Bibliografía**
+
+> C. (2015, November). "Job roles." N.p., n.d. Web. 16 Mar. 2016.
+<http://creativeskillset.org/creative_industries/games/job_roles>
+
+> Lifecyclestep. "Project Roles and Responsibilities." 
+Project Roles and Responsibilities. N.p., n.d. Web. 16 Mar. 2016. 
+<http://www.lifecyclestep.com/open/408.0LifecycleRoles.htm>
+
+
+
 -------------------
-**Minuta**
--------------------
+
+### **Minuta**
+
 - Asistentes: Humberto, Sergio, Ana Karen 
 - Fecha: 16/marzo/2016
 - Hora de inicio: 10:30 am
@@ -202,7 +212,8 @@ todos los aspectos del producto.
 - La junta termino a la 1:30 pm
 
 -------------------
-**Coevaluación**
+
+### **Coevaluación**
 
 
 | Evaluador (abajo) | Ana Karen | Humberto | Sergio |
