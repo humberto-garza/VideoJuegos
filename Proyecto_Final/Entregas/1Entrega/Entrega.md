@@ -1,5 +1,5 @@
-**Introduccion**
--------------------
+# **Introduccion**
+
 
 La industria de los videojuegos es enorme. 
 Es por eso que en ella podemos encontrar una serie de roles y de funciones muy 
@@ -8,89 +8,105 @@ dicen que si quieres hacer dinero debes de hacer software, pero si quieres
 hacer mucho dinero debes de hacer videojuegos.
 
 
-**Desarrollo**
--------------------
 
+
+# **Desarrollo**
 
 Antes de poder pensar en 
 generar económicamente se debe de tomar en cuenta que se debe de contar con un 
 equipo que cumpla los siguientes roles con sus respectivas funciones:
 
-**Diseño Visual**
-
--  Tech Artists: 
-   -  Encargarse del flujo de trabajo de la producción artística y de los posibles problemas que pueden surgir.  
--  Artista: 
-   -  Crea bocetos y esquemas de color de los mundos, personajes, vehículos, etc.
-- Animator: 
-   -  Representación del movimiento y el comportamiento del proyecto
-
--------------------
-**Diseño del Juego**
-
-- Game Designer: 
-   -  Formula el concepto del juego 
-   -  Idear un juego consiste
-   -  Planearla jugabilidad
-   -  Definir los elementos centrales.
-- Level Designer:
-  - Crea la estructura del nivel según el documento de diseño
-  - Definir y crear arquitectura interactiva para un segmento del juego: paisajes, edificios y objetos.
-  
--------------------
-**Programación**
-
-- Programadores:
-  - Diseñan cuestiones técnicas del juego.
-  - Escriben el código que controla el juego
-  - Incorpora y adapta las partes hechas. 
-- Game Programmer:
-  - Diseñar y escribir código para controlar el juego
-- Lead Programmer:
-  - Líder del equipo de programación que está generando el código.
-- Database Administrator:
-  - Especialista en modelación, diseño y creación de bases de datos usadas por el proyecto
-
--------------------
-**Audio**
-
-- Ingeniero de Audio:
-  - Crea efectos de sonido
-  - Grabación , producción y composición musical.
-  - Dirigir el doblaje de ser necesario
-  - Crear el soundtrack del juego, música, efectos, voces de personajes y otros.
-  
--------------------
-**Liderazgo**
-
-- Productor:
-  - Administrador de proyecto
-  - Encargarse de la entrega exitosa del juego a tiempo
-  - Controlar recursos financieros
-  - Monitorear calendario
-  - Asignar roles de trabajo al equipo
-  - Dirigir al equipo de trabajo
+##### Responsabilidades y compromisos de un equipo de desarrollo de software
  
-- Asistente del procuctor
-  - Dar seguimiento a los milestones
-  - Dar seguimiento de las minutas
-  - Resolver problemas de primer grado
+>#### Diseño Visual
+>
+>-  Tech Artists: 
+>   -  Encargarse del flujo de trabajo de la producción artística y de los posibles problemas que pueden surgir.  
+>-  Artista: 
+>   -  Crea bocetos y esquemas de color de los mundos, personajes, vehículos, etc.
+>- Animator: 
+>   -  Representación del movimiento y el comportamiento del proyecto
+>
+>
+>#### Diseño del Juego
+>
+>- Game Designer: 
+>   -  Formula el concepto del juego 
+>   -  Idear un juego consiste
+>   -  Planearla jugabilidad
+>   -  Definir los elementos centrales.
+>- Level Designer:
+>  - Crea la estructura del nivel según el documento de diseño
+>  - Definir y crear arquitectura interactiva para un segmento del juego: paisajes, edificios y objetos.
+>  
+>
+>#### Programación
+>
+>- Programadores:
+>  - Diseñan cuestiones técnicas del juego.
+>  - Escriben el código que controla el juego
+>  - Incorpora y adapta las partes hechas. 
+>- Game Programmer:
+>  - Diseñar y escribir código para controlar el juego
+>- Lead Programmer:
+>  - Líder del equipo de programación que está generando el código.
+>- Database Administrator:
+>  - Especialista en modelación, diseño y creación de bases de datos usadas por el proyecto
+>
+>
+>#### Audio
+>
+>- Ingeniero de Audio:
+>  - Crea efectos de sonido
+>  - Grabación , producción y composición musical.
+>  - Dirigir el doblaje de ser necesario
+>  - Crear el soundtrack del juego, música, efectos, voces de personajes y otros.
+>  
+>#### Liderazgo
+>
+>- Productor:
+>  - Administrador de proyecto
+>  - Encargarse de la entrega exitosa del juego a tiempo
+>  - Controlar recursos financieros
+>  - Monitorear calendario
+>  - Asignar roles de trabajo al equipo
+>  - Dirigir al equipo de trabajo
+> 
+>- Asistente del procuctor
+>  - Dar seguimiento a los milestones
+>  - Dar seguimiento de las minutas
+>  - Resolver problemas de primer grado
+> 
+>#### Testing
+>- Quality Assuarace y Testers:
+>  - Probar los juegos de manera sistemática. 
+>  - Analizar rendimiento del juego
+>  - Identificar problemas y sugerir mejoras. 
+>
 
--------------------
-**Testing**
-- Quality Assuarace y Testers:
-  - Probar los juegos de manera sistemática. 
-  - Analizar rendimiento del juego
-  - Identificar problemas y sugerir mejoras. 
 
--------------------
+#### Análisis Foda
 
-**Análisis FODA**
 Cuando se trabaja en equipo, se debe de realizar un análisis para concer a
 cada integrante del mismo, pues se deben de aprovechar las cualidades 
 de cada quién para que el desarolllo sea todavia más efectivo. A continuación se
 presenta un análisis de las fortalezas,
 oportunidades, debilidades y amenzas de cada miembro del equipo. 
+
+##### Humberto
+
+![Foda Humberto](Humberto_DAFO.png)
+
+
+##### Sergio
+
+![Foda Humberto](Sergio_DAFO.png)
+
+##### Ana Karen
+
+![Foda Humberto](anak_DAFO.png)
+
+
 
 ---------------------
 **Fortalezas**
@@ -276,7 +292,7 @@ todos los aspectos del producto.
 
 
 | Evaluador (abajo) | Ana Karen | Humberto | Sergio |
-| ------------- |:-------------:|:-------------:|-----:|
+| ------------------|:---------:|:--------:|-------:|
 | **Ana Karen** | 100 | 100 | 100  |
 | **Humberto** | 100 | 100 | 100 |
 | **Sergio** | 100 | 100 | 100 | 
