@@ -276,7 +276,7 @@ todos los aspectos del producto.
 
 
 | Evaluador (abajo) | Ana Karen | Humberto | Sergio |
- -       | -         | -        | -      |
+| ------------- |:-------------:|:-------------:|-----:|
 | **Ana Karen** | 100 | 100 | 100  |
 | **Humberto** | 100 | 100 | 100 |
 | **Sergio** | 100 | 100 | 100 | 
