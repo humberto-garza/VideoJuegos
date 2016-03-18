@@ -1,13 +1,14 @@
 ![LeftAndRight](Images/Logo.png)
 
-Proyecto de desarrollo de VideoJuegos Enero-Mayo 2016
+## Proyecto de desarrollo de VideoJuegos Enero-Mayo 2016
 
-Humberto:
+
+###### Humberto Garza:
 humberto.garza.13@gmail.com
 
-Sergio:
+###### Sergio Díaz:
 sdiazn19@gmail.com
 
 
-Ana Karen:
+###### Ana Karen:
 9c2anakaren@gmail.com
