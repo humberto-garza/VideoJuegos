@@ -2,16 +2,12 @@
 
 Proyecto de desarrollo de VideoJuegos Enero-Mayo 2016
 
+Humberto:
+humberto.garza.13@gmail.com
 
-*Estructura de las entregas*
+Sergio:
+sdiazn19@gmail.com
 
- - Introducción
- - Conclusión
- - Bibliografía
- 
 
-*Puntos Importantes*
-  - Minuta
-  - Coevaluación
-  
-
+Ana Karen:
+9c2anakaren@gmail.com
