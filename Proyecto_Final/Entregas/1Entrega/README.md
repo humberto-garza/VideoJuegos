@@ -6,27 +6,32 @@
 
 La industria de los videojuegos es enorme. 
 Es por eso que en ella podemos encontrar una serie de roles y de funciones muy 
-extensa, pues realizar uno no es una tarea sencilla. Es por eso que por ahí
-dicen que si quieres hacer dinero debes de hacer software, pero si quieres 
-hacer mucho dinero debes de hacer videojuegos.
+extensa, pues realizar uno no es una tarea sencilla. Existe un dicho coloquial
+que dice que si quieres hacer dinero debes de hacer software, pero si quieres 
+hacer mucho dinero debes de hacer videojuegos. 
 
-
-
+A lo largo de este trabajo, se describirán los roles necesarios para una empresa
+de desarrollo de videojuegos así como los seleccionados para nuestro caso en 
+particular, de igual forma se describirá el análisi FODA de los integrantes
+del equipo y los comprimsos generales.
 
 # **Desarrollo**
 
-Antes de poder pensar en 
-generar económicamente se debe de tomar en cuenta que se debe de contar con un 
-equipo que cumpla los siguientes roles con sus respectivas funciones:
+Para poder tener cualquier equipo de trabajo, se deben definir los roles. Para 
+nuestro caso, hicimos una investigación donde describimos los roles más destacados
+de las empresas de desarrollo de videojuegos.
+
+En la investigación previa, pudimos encontrar los siguientes roles que se 
+adaptan mejor a las necesidades de nuestra empresa.
 
 ##### Responsabilidades y compromisos de un equipo de desarrollo de software
  
 >#### Diseño Visual
 >
->-  Tech Artists: 
->   -  Encargarse del flujo de trabajo de la producción artística y de los posibles problemas que pueden surgir.  
+>-  Artista técnico: 
+>    -  Encargarse del flujo de trabajo de la producción artística y de los posibles problemas que pueden surgir.  
 >-  Artista: 
->   -  Crea bocetos y esquemas de color de los mundos, personajes, vehículos, etc.
+>    -  Crea bocetos y esquemas de color de los mundos, personajes, vehículos, etc.
 >- Animator: 
 >   -  Representación del movimiento y el comportamiento del proyecto
 >
@@ -39,52 +44,52 @@ equipo que cumpla los siguientes roles con sus respectivas funciones:
 >   -  Planearla jugabilidad
 >   -  Definir los elementos centrales.
 >- Level Designer:
->  - Crea la estructura del nivel según el documento de diseño
->  - Definir y crear arquitectura interactiva para un segmento del juego: paisajes, edificios y objetos.
+>   - Crea la estructura del nivel según el documento de diseño
+>   - Definir y crear arquitectura interactiva para un segmento del juego: paisajes, edificios y objetos.
 >  
 >
 >#### Programación
 >
 >- Programadores:
->  - Diseñan cuestiones técnicas del juego.
->  - Escriben el código que controla el juego
->  - Incorpora y adapta las partes hechas. 
+>   - Diseñan cuestiones técnicas del juego.
+>   - Escriben el código que controla el juego
+>   - Incorpora y adapta las partes hechas. 
 >- Game Programmer:
->  - Diseñar y escribir código para controlar el juego
+>   - Diseñar y escribir código para controlar el juego
 >- Lead Programmer:
->  - Líder del equipo de programación que está generando el código.
+>   - Líder del equipo de programación que está generando el código.
 >- Database Administrator:
->  - Especialista en modelación, diseño y creación de bases de datos usadas por el proyecto
+>   - Especialista en modelación, diseño y creación de bases de datos usadas por el proyecto
 >
 >
 >#### Audio
 >
 >- Ingeniero de Audio:
->  - Crea efectos de sonido
->  - Grabación , producción y composición musical.
->  - Dirigir el doblaje de ser necesario
->  - Crear el soundtrack del juego, música, efectos, voces de personajes y otros.
+>   - Crea efectos de sonido
+>   - Grabación , producción y composición musical.
+>   - Dirigir el doblaje de ser necesario
+>   - Crear el soundtrack del juego, música, efectos, voces de personajes y otros.
 >  
 >#### Liderazgo
 >
 >- Productor:
->  - Administrador de proyecto
->  - Encargarse de la entrega exitosa del juego a tiempo
->  - Controlar recursos financieros
->  - Monitorear calendario
->  - Asignar roles de trabajo al equipo
->  - Dirigir al equipo de trabajo
+>   - Administrador de proyecto
+>   - Encargarse de la entrega exitosa del juego a tiempo
+>   - Controlar recursos financieros
+>   - Monitorear calendario
+>   - Asignar roles de trabajo al equipo
+>   - Dirigir al equipo de trabajo
 > 
 >- Asistente del procuctor
->  - Dar seguimiento a los milestones
->  - Dar seguimiento de las minutas
->  - Resolver problemas de primer grado
+>   - Dar seguimiento a los milestones
+>   - Dar seguimiento de las minutas
+>   - Resolver problemas de primer grado
 > 
 >#### Testing
 >- Quality Assuarace y Testers:
->  - Probar los juegos de manera sistemática. 
->  - Analizar rendimiento del juego
->  - Identificar problemas y sugerir mejoras. 
+>   - Probar los juegos de manera sistemática. 
+>   - Analizar rendimiento del juego
+>   - Identificar problemas y sugerir mejoras. 
 >
 
 
@@ -137,13 +142,14 @@ Para esto, mostramos el gráfico de progreso sugerido de acuerdo al Foda de los 
 De acuerdo a los roles definidos por todos los integrantes del equipo y 
 a las habilidades de cada quién, se llegó
 a la conclusión de que estos eran los roles que más se apegaban a nuestra 
-empresa:
+empresa, cabe mencionar que la descripción de los roles, se hizo previamente
+en la sección inicial del desarrollo:
 
 
 
 | Diseño Visual | Ana Karen | Humberto | Sergio |
 | ------------------|:---------:|:--------:|-------:|
-| Producción Artística | 0 | 70 | 30  |
+| Producción Artística| 0 | 70 | 30  |
 | Bocetos y esquemas de color | 0 | 90 | 10 |
 | Movimientos y comportamientos | 0 |50  | 50 |
 | **Diseño del juego**|
@@ -175,6 +181,19 @@ empresa:
 | Planear jugabilidad | 1/3 | 1/3 | 1/3 |
 | Analizar rendimiento del juego | 1/3 | 1/3 | 1/3  |
 | Identificar problemas y sugerir mejoras | 1/3 | 1/3 | 1/3  |
+
+# **Compromisos Generales**
+
+ - Constante comunicación (whatspp, facebook, interpersonal)
+ - Apegarnos al reglamento de la empresa
+ - Comentar el codigo correctamente
+ - Consultar antes de cambiar cualquier parte del codigo
+ - Usar Github
+ - Documentar cambios 
+ - Darle al usuario lo que quiere 
+ - Trabajar en equipo
+ - Cumplir con responsabilidades asignadas
+
 
 
 # **Conclusión**
