@@ -210,10 +210,11 @@ todos los aspectos del producto.
 > C. (2015, November). "Job roles." N.p., n.d. Web. 16 Mar. 2016.
 <http://creativeskillset.org/creative_industries/games/job_roles>
 
+> Caro. D (26 de noviembre del 2012). Roles en la industria del desarrollo de videojuegos. Recuperado el 15 de marzo del 2016.
+
 > Lifecyclestep. "Project Roles and Responsibilities." 
 Project Roles and Responsibilities. N.p., n.d. Web. 16 Mar. 2016. 
 <http://www.lifecyclestep.com/open/408.0LifecycleRoles.htm>
-
 
 
 -------------------
