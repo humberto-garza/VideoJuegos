@@ -25,7 +25,6 @@ equipo que cumpla los siguientes roles con sus respectivas funciones:
 - Animator: 
    -  Representación del movimiento y el comportamiento del proyecto
 
-   
 -------------------
 **Diseño del Juego**
 
@@ -37,6 +36,7 @@ equipo que cumpla los siguientes roles con sus respectivas funciones:
 - Level Designer:
   - Crea la estructura del nivel según el documento de diseño
   - Definir y crear arquitectura interactiva para un segmento del juego: paisajes, edificios y objetos.
+  
 -------------------
 **Programación**
 
@@ -59,6 +59,7 @@ equipo que cumpla los siguientes roles con sus respectivas funciones:
   - Grabación , producción y composición musical.
   - Dirigir el doblaje de ser necesario
   - Crear el soundtrack del juego, música, efectos, voces de personajes y otros.
+  
 -------------------
 **Liderazgo**
 
@@ -90,7 +91,6 @@ cada integrante del mismo, pues se deben de aprovechar las cualidades
 de cada quién para que el desarolllo sea todavia más efectivo. A continuación se
 presenta un análisis de las fortalezas,
 oportunidades, debilidades y amenzas de cada miembro del equipo. 
-
 
 ---------------------
 **Fortalezas**
@@ -157,6 +157,7 @@ Ganas de aprender.
 ----------------------
 **Amenazas**
 ----------------------
+
 **Humberto:**
 - Lento para tomar decisiones
 - Falta de experiencia en software
@@ -170,12 +171,6 @@ Ganas de aprender.
 **Ana Karen:**
 - Falta de conocimiento/pasión por jugar videojuegos
 - Sin experiencia usando Unity
-
-
-
-
-
-
 
 
 
@@ -197,7 +192,6 @@ empresa:
 - Animator: **Sergio**
 -  Representación del movimiento y el comportamiento del proyecto
 
-   
 -------------------
 **Diseño del Juego**
 
@@ -209,6 +203,7 @@ empresa:
 - Level Designer:  **Todos**
   - Crea la estructura del nivel según el documento de diseño
   - Definir y crear arquitectura interactiva para un segmento del juego: paisajes, edificios y objetos.
+ 
 -------------------
 **Programación**
 
@@ -227,6 +222,7 @@ empresa:
   - Grabación , producción y composición musical.
   - Dirigir el doblaje de ser necesario
   - Crear el soundtrack del juego, música, efectos, voces de personajes y otros.
+  
 -------------------
 **Liderazgo**
 
@@ -254,12 +250,6 @@ empresa:
 -------------------
 
 
-
-
-
-
-
-
 **Conclusión**
 ---
 Siendo una empresa desarrolladora de videojuegos decidimos asignar roles de trabajo
@@ -283,6 +273,7 @@ todos los aspectos del producto.
 
 -------------------
 **Coevaluación**
+
 
 | Evaluador (abajo) | Ana Karen | Humberto | Sergio |
  -       | -         | -        | -      |
