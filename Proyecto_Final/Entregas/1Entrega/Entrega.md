@@ -127,87 +127,6 @@ Para esto, mostramos el gráfico de progreso sugerido de acuerdo al Foda de los 
 
 ![Grafica Ana](anak_Grafica.png)
 
----------------------
-**Fortalezas**
-----------------------
-**Humberto**
-- Motivación
-- Responsabilidad
-- Creatividad
-- Optimismo
-
-**Sergio**
-- Trabajo en equipo 
-- Disposición 
-- Planeación
-
-**Ana Karen**
-- Dedicación
--Trabajos en equipo
-- Conocimiento de java
-- Disposición
-
----------------------------------
-**Debilidades**
----------------------------------
-
-**Humberto**:
-- Planeación de Software
-- Documentación
-- Trabajo en equipo
-- Distraído
-
-**Sergio**:
-- Me tomo mi tiempo
-- Impaciente 
-
-**Ana Karen:**
-- Sin experiencia en diseño
-- Primera vez usando GUIs en Java
-- No planear con tiempo
-
---------------------------------- 
-**Oportunidades**
----------------------------------
-
-**Humberto:**:
-- Software en equipo
-- Experiencia con videojuegos
-- Experiencia laboral 
-- Habilidades artísticas
-- Programación OO y ED
-
-**Sergio:**
-Ganas de aprender.
-- Hasta cierto punto perfeccionista.
-- Mantener una buena actitud a lo largo de un proyecto.
-- Trabajar con personas con distintas habilidades y aptitudes.
-
-**Ana Karen:**
-- Trabajar bajo presión
-- Aprender más sobre diseño
-- Mejorar creatividad 
-- Aprender más sobre desarrollo de videojuegos
-
-----------------------
-**Amenazas**
-----------------------
-
-**Humberto:**
-- Lento para tomar decisiones
-- Falta de experiencia en software
-- Competitivo
-- Formación profesional en electrónica
-
-**Sergio:**
-- Falta de experiencia en UNITY
-- No poder entender a los usuarios
-
-**Ana Karen:**
-- Falta de conocimiento/pasión por jugar videojuegos
-- Sin experiencia usando Unity
-
-
 
 ----------------------
 **Nuestro Desarrollo**
@@ -217,72 +136,58 @@ a las habilidades de cada quién, se llegó
 a la conclusión de que estos eran los roles que más se apegaban a nuestra 
 empresa:
 
-**Diseño Visual** 
 
-- Tech Artists: **Humberto**
-   -  Encargarse del flujo de trabajo de la producción artística y de los 
-    posibles problemas que pueden surgir.  
-- Artista: **Humberto**
-   -  Crea bocetos y esquemas de color de los mundos, personajes, vehículos, etc.
-- Animator: **Sergio**
--  Representación del movimiento y el comportamiento del proyecto
 
--------------------
-**Diseño del Juego**
+| Diseño Visual | Ana Karen | Humberto | Sergio |
+| ------------------|:---------:|:--------:|-------:|
+| Producción Artística | 0 | 70 | 30  |
+| Bocetos y esquemas de color | 0 | 90 | 10 |
+| Movimientos y comportamientos | 0 |50  | 50 |
 
-- Game Designer: **Todos**
-   -  Formula el concepto del juego 
-   -  Idear un juego consiste
-   -  Planearla jugabilidad
-   -  Definir los elementos centrales.
-- Level Designer:  **Todos**
-  - Crea la estructura del nivel según el documento de diseño
-  - Definir y crear arquitectura interactiva para un segmento del juego: paisajes, edificios y objetos.
- 
--------------------
-**Programación**
 
-- Programadores: **Sergio y Humberto**
-  - Diseñan cuestiones técnicas del juego.
-  - Escriben el código que controla el juego
-  - Incorpora y adapta las partes hechas.
-- Lead Programmer: **Ana**
-  - Líder del equipo de programación que está generando el código.
 
--------------------
-**Audio**
+| Diseño del Juego | Ana Karen | Humberto | Sergio |
+| ------------------|:---------:|:--------:|-------:|
+| Formular concepto del juego | 1/3 | 1/3 | 1/3  |
+| Planear jugabilidad | 1/3 | 1/3 | 1/3 |
+| Definir elementos centrales | 1/3 | 1/3 | 1/3  |
+| Estructura de niveles | 1/3 | 1/3 | 1/3  |
+| Arquitectura interactiva | 1/3 | 1/3 | 1/3  |
 
-- Ingeniero de Audio: **Sergio y Humberto**
-  - Crea efectos de sonido
-  - Grabación , producción y composición musical.
-  - Dirigir el doblaje de ser necesario
-  - Crear el soundtrack del juego, música, efectos, voces de personajes y otros.
-  
--------------------
-**Liderazgo**
 
-- Productor: **Sergio**
-  - Administrador de proyecto
-  - Encargarse de la entrega exitosa del juego a tiempo
-  - Controlar recursos financieros
-  - Monitorear calendario
-  - Asignar roles de trabajo al equipo
-  - Dirigir al equipo de trabajo
- 
-- Asistente del procuctor **Ana**
-  - Dar seguimiento a los milestones
-  - Dar seguimiento de las minutas
-  - Resolver problemas de primer grado
+| Programación | Ana Karen | Humberto | Sergio |
+| ------------------|:---------:|:--------:|-------:|
+| Diseño técnico | 0 | 50 | 50  |
+| Generar código de control | 0 | 50 | 50 |
+| Incorporacóin y adaptación | 0 |50  | 50 |
+| Supervisión| 100 |0  | 0 |
 
--------------------
-**Testing**
- 
-- Quality Assuarace y Testers: **Todos**
-  - Probar los juegos de manera sistemática. 
-  - Analizar rendimiento del juego
-  - Identificar problemas y sugerir mejoras. 
+| Audio | Ana Karen | Humberto | Sergio |
+| ------------------|:---------:|:--------:|-------:|
+| Efectos de sonido | 0 | 50 | 50  |
+| Producción musical | 0 | 50 | 50 |
+| Voces/doblaje | 0 |50  | 50 |
+| Soundtrack | 0 |50  | 50 |
 
--------------------
+| Liderazgo | Ana Karen | Humberto | Sergio |
+| ------------------|:---------:|:--------:|-------:|
+| Administrar proyecto | 0 | 0 | 100  |
+| Verificar la entrega | 1/3 | 1/3 | 1/3 |
+| Monitorear calendario | 10 |10  | 80 |
+| Asignar roles de trabajo al equipo | 10 |10  | 80 |
+| Dar seguimiento a los milestones | 100 |0  | 0 |
+| Dar seguimiento a las minutas | 100 |0  | 0 |
+| Resolver problemas de primer grado | 100 |0  | 0 |
+
+| Testing | Ana Karen | Humberto | Sergio |
+| ------------------|:---------:|:--------:|-------:|
+| Probar los juegos de manera sistemática | 1/3 | 1/3 | 1/3  |
+| Planear jugabilidad | 1/3 | 1/3 | 1/3 |
+| Analizar rendimiento del juego | 1/3 | 1/3 | 1/3  |
+| Identificar problemas y sugerir mejoras | 1/3 | 1/3 | 1/3  |
+
+
+
 
 
 **Conclusión**
