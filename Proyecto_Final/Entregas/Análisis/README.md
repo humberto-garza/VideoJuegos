@@ -406,6 +406,10 @@ https://www.nngroup.com/articles/persona/
 Preece, J., Rogers, Y., & Sharp, H. (2002). Interaction design: Beyond
 human-computer interaction. New York, NY: J. Wiley & Sons.
 
+https://www.nngroup.com/articles/first-rule-of-usability-dont-listen-to-users/
+
+Nielsen, J., and Levy, J. (1994). Measuring usability — preference vs. 
+performance. Communications of the ACM 37, 4 (April), 66-75.
 
 
 ---
