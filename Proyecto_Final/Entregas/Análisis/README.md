@@ -58,7 +58,7 @@ nuestro sistema computacional.
     - Se aburre facilmente, ya que el juego no capta su atención.
     
 #### Análisis jerárquico de tareas (HTA)
-![HTA Estudiante Daltonico](Personas/HTA1.jpg)
+![HTA Estudiante Daltonico](Personas/HTA1.png)
 
 ----------------
 
@@ -75,7 +75,7 @@ nuestro sistema computacional.
     - Esta acostumbrado a ciertos controles.
 
 #### Análisis jerárquico de tareas (HTA)
-![HTA Estudiante Que le gustan los videojuegos](Personas/HTA2.jpg)
+![HTA Estudiante Que le gustan los videojuegos](Personas/HTA2.png)
 
 ----------------
 
@@ -93,7 +93,7 @@ nuestro sistema computacional.
     - No es hábil con los controles.
 
 #### Análisis jerárquico de tareas (HTA)
-![HTA Estudiante Que no acostumbra los videojuegos](Personas/HTA3.jpg)
+![HTA Estudiante Que no acostumbra los videojuegos](Personas/HTA3.png)
 
 ----------------
 
