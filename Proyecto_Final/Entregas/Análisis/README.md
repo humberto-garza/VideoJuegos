@@ -1,3 +1,4 @@
+![LeftAndRight](../../Images/Logo.png)
 
 **Trabajo Individual**
 ---
@@ -186,6 +187,29 @@ El salón es un laboratorio de computadoras donde varios estudiantes estarán
 jugando al mismo tiempo, cada quien en una Desktop. Es probable que no se tenga 
 una buena connexión de internet.
 
+---
+<h1> Métricas de Usabilidad </h1>
+
+Que el uso de nuestro juego sea efectivo
+
+Que la eficiencia de nuestro juego sea apropiada
+
+Seguridad
+
+Que nuestro producto sea usable
+
+Que nuestro porducto sea fácil de aprender
+
+
+
+
+Nombre del objetivo: eficacia
+Métrica: 
+Método de medición: 
+Nivel actual:
+Nivel planeado: 
+Mejor caso: 
+Peor caso: 
 
 ---
 **Coevaluación**
