@@ -25,11 +25,11 @@
 
 You can also render sequence diagrams like this:
 
-```sequence
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
-```
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
 
 --------
 
