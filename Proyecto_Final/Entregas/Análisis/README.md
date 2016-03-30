@@ -23,10 +23,6 @@
 | **Nivel de concentración** | Bajo | Medio | Bajo | 
 
 
-You can also render sequence diagrams like this:
-
-
-
 --------
 
 
