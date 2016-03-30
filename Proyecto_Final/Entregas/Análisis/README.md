@@ -102,7 +102,7 @@ You can also render sequence diagrams like this:
 
 ---
 
- **insertar imagen**
+![Foto Manuel](Personas/Marielle.jpg)
  
  **Nombre:** Marielle Urquiza
  
@@ -132,7 +132,7 @@ You can also render sequence diagrams like this:
  
  ---
 
- **insertar imagen**
+![Foto Manuel](Personas/Javier.jpg)
  
  **Nombre:** Javier Gutierrez
  
