@@ -155,16 +155,16 @@ Que Marielle no sienta que el juego no es lo suficientemente es retador o
  muy poco. Los videjuegos no son tanto de su agrado, pero jugará en su Desktop,
  si tiene el tiempo para ello.
  
- **Objetivos:**
+ **Objetivos:** <br />
 Hacer que a Javier le guste el juego en poco tiempo
-
+<br />
 Hacer el juego para que Javier pueda jugarlo aunque no disponga de mucho tiempo
  
- **Amenazas:**
+ **Amenazas:** <br />
 Que javier no tenga tiempo de jugar.
-
+<br />
 Hacer que el juego no sea atractivo para Javier.
-
+<br />
 Que los controles o la curva de aprendizaje del juego no sea del agrado del usuario. 
  
 ---
