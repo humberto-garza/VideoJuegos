@@ -418,13 +418,17 @@ human-computer interaction. New York, NY: J. Wiley & Sons.
 | **Ana Karen** | 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
 | **Humberto**| 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
 | **Sergio** | 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
+
 <br/>
+
 | **Sergio** | Responsabilidad de elaborar act. previa | Puntualidad | Cantidad de trabajo | Calidad de trabajo | Interés | Colboración (dar y recibir) | Espíritu de ayuda | Cumplimiento de compromiso |
 | ------------------|:---------:|:--------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|
 | **Ana Karen** | 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
 | **Humberto**| 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
 | **Sergio** | 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
+
 <br/>
+
 | **Ana Karen** | Responsabilidad de elaborar act. previa | Puntualidad | Cantidad de trabajo | Calidad de trabajo | Interés | Colboración (dar y recibir) | Espíritu de ayuda | Cumplimiento de compromiso |
 | ------------------|:---------:|:--------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|
 | **Ana Karen** | 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
