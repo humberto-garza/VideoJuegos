@@ -156,15 +156,13 @@ Que Marielle no sienta que el juego no es lo suficientemente es retador o
  si tiene el tiempo para ello.
  
  **Objetivos:**
- - Hacer que a Javier le guste el juego en poco tiempo
- - Hacer el juego para que Javier pueda jugarlo aunque no disponga de mucho
-  tiempo
+Hacer que a Javier le guste el juego en poco tiempo
+Hacer el juego para que Javier pueda jugarlo aunque no disponga de mucho tiempo
  
  **Amenazas:**
- - Que javier no tenga tiempo de jugar.
- - Hacer que el juego no sea atractivo para Javier.
- - Que los controles o la curva de aprendizaje del juego no sea del agrado del
-  usuario. 
+Que javier no tenga tiempo de jugar.
+Hacer que el juego no sea atractivo para Javier.
+Que los controles o la curva de aprendizaje del juego no sea del agrado del usuario. 
  
 ---
 <h1> Medio ambiente </h1>
