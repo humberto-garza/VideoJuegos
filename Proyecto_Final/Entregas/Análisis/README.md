@@ -124,12 +124,13 @@ You can also render sequence diagrams like this:
  también es abierta a jugar videjuegos Desktop. 
  
  **Objetivos:**
- - Hacer que a Marielle le encante el juego y represente un reto para ella.
+Hacer que a Marielle le encante el juego y represente un reto para ella.
  
  **Amenazas:**
- - Que Marielle no sienta que el juego no es lo suficientemente es retador o 
+Que Marielle no sienta que el juego no es lo suficientemente es retador o 
  entretenido para cautivar su atención.
  
+
  ---
 
 ![Foto Manuel](Personas/Javier.jpg)
@@ -168,10 +169,18 @@ You can also render sequence diagrams like this:
 ---
 <h1> Medio ambiente </h1>
 
+**Casa:**
 El usuario juagrá el juego en una computadora Windows en su casa. El usuario no 
 tendra una buena connexión de internet y no contará con un sistema de sonido 
 avanzado. El usuario estará sentado mientras interactua con el juego, normalmente
 jugará en sus tiempos libres (tarde o noche).
+
+**Salón de clases:**
+El usuario jugará en el salón de clases para practicar los contenidos de clase.
+
+El salón es un laboratorio de computadoras donde varios estudiantes estarán 
+jugando al mismo tiempo, cada quien en una Desktop. Es probable que no se tenga 
+una buena connexión de internet.
 
 
 ---
