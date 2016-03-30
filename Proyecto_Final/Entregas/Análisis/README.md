@@ -171,13 +171,20 @@ Que los controles o la curva de aprendizaje del juego no sea del agrado del usua
 <h1> Medio ambiente </h1>
 
 **Casa:**
+
+![Foto Casa](Ambiente/Home.jpg)
+
 El usuario juagrá el juego en una computadora Windows en su casa. El usuario no 
 tendra una buena connexión de internet y no contará con un sistema de sonido 
 avanzado. El usuario estará sentado mientras interactua con el juego, normalmente
 jugará en sus tiempos libres (tarde o noche).
 
 **Salón de clases:**
+
+![Foto Salon de Clase](Ambiente/ComputerLab.jpg)
+
 El usuario jugará en el salón de clases para practicar los contenidos de clase.
+
 
 El salón es un laboratorio de computadoras donde varios estudiantes estarán 
 jugando al mismo tiempo, cada quien en una Desktop. Es probable que no se tenga 
