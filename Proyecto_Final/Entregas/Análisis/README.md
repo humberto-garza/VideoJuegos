@@ -25,16 +25,12 @@
 
 You can also render sequence diagrams like this:
 
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
+
 
 --------
 
 
-<h1> **Perfiles de usuario:** </h1>
+<h1> Perfiles de usuario: </h1>
 
 
 <h2> Estudiante daltónico </h2>
