@@ -178,7 +178,7 @@ jugará en sus tiempos libres (tarde o noche).
 **Coevaluación**
 
 | Evaluador (abajo) | Ana Karen | Humberto | Sergio |
-| ------------------|:---------:|:--------:|-------:|
+| ------------------|:---------:|:--------:|:-------:|
 | **Ana Karen** | 100 | 100 | 100  |
 | **Humberto** | 100 | 100 | 100 |
 | **Sergio** | 100 | 100 | 100 | 
