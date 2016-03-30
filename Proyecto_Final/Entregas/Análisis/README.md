@@ -45,7 +45,7 @@ You can also render sequence diagrams like this:
     
     - Se aburre facilmente, ya que el juego no capta su atención.
     
-<h2> **Estudiante que le gustan los videojuegos** </h2>
+<h2> Estudiante que le gustan los videojuegos </h2>
    
     - Edad: 9-12
     
