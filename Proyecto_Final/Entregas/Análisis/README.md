@@ -1,6 +1,10 @@
 ![LeftAndRight](../../Images/Logo.png)
 
 <h1> Análisis </h1>
+- Humberto Garza A00808689
+- Ana Karen Beltrán A01192508 (Secretaria)
+- Sergio Díaz A01192313 (Líder)
+
 
 <h2> Introducción </h2>
 En este trabajo se llevará a cabo un análisis de los usuarios que se 
@@ -49,10 +53,64 @@ nuestro sistema computacional.
     * Quiere practicar, los temas
     
 ###### Puntos importantes del artículo
-
+* Simplicidad > Complejidad 
+* Ver lo que la gente realmente hace (sus acciones), no creen lo que dicen que hacen 
+* Usabilidad de manera correcta: 
+  * evitar misguidances 
+  * crear varios diseños y obtener retroalimentación con uso real 
+  * (Evitar menús desplegables) 
+* Fácil de usar & efectivo
+*Hablar con usuarios: 
+  * dicen lo que piensan que quieres escuchar (biass). 
+  * No recuerdan detalles. 
+  * Sugieren soluciones. (you just care about the problem/issue)
 
 --------
 **Sergio**
+
+**Perfiles:**
+
+**Niño que le gustan los videojuegos**
+- 9-12 años
+- Le gustan los retos
+- Sabe que videojuegos le gustan
+- Tiene plataforma favorita 
+- Sabe distinguir de un juego bueno y un juego malo
+
+**Niño que no sabe de videojuegos**
+- 9-12 años
+- Le gustan actividades en el exterior
+- Le gusta estudiar
+- Le gustan actividades como leer
+- No sabe mucho sobre el mundo digital
+
+**Niño que no acostumbra jugar videojuegos**
+- 9-12 años
+- Juega cuando tiene tiempo o antoja
+- Sabe entablar una conversación sobre el tema de videojuegos
+- Sabe usarlos después de haber interactuado poco tiempo con el juego
+- No se clava fácilmente en el juego
+
+**Niña que no le gusta la tecnología**
+- 9-12 años
+- No sabe que pasa cuando ve un juego
+- Si juega, no le es fácil aprender los controles 
+- Prefiere hacer otra cosa
+- Puede tener otros hobbies
+- Le gusta el exterior
+
+**Maestro que busca herramientas didácticas para complementar su enseñanza**
+- No es muy hábil computacionalmente 
+- Le interesan sus alumnos
+- Le apasiona su vocación
+- Cree en diferentes métodos de enseñanza
+- Es un maestro abierto
+
+**Mis ideas del artículo "First rule of usability?: Dont't listen to users"**
+-	Observar lo que realmente hacen las personas.
+-	No creerse del todo lo que las personas dicen que hacen.
+-	No creer en lo que las personas predicen que a lo mejor van a hacer en el futuro. 
+
 
 
 --------
@@ -324,14 +382,6 @@ veces se ve el tutoria.
 
 **Peor caso:** Hace click una vez.
 
----
-**Coevaluación**
-
-| Evaluador (abajo) | Ana Karen | Humberto | Sergio |
-| ------------------|:---------:|:--------:|:-------:|
-| **Ana Karen** | 100 | 100 | 100  |
-| **Humberto** | 100 | 100 | 100 |
-| **Sergio** | 100 | 100 | 100 | 
 
 ---
 <h2>Conclusión</h2>
@@ -355,3 +405,28 @@ https://www.nngroup.com/articles/persona/
 
 Preece, J., Rogers, Y., & Sharp, H. (2002). Interaction design: Beyond
 human-computer interaction. New York, NY: J. Wiley & Sons.
+
+
+
+---
+
+**Coevaluación**
+
+
+| **Humberto** | Responsabilidad de elaborar act. previa | Puntualidad | Cantidad de trabajo | Calidad de trabajo | Interés | Colboración (dar y recibir) | Espíritu de ayuda | Cumplimiento de compromiso |
+| ------------------|:---------:|:--------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+| **Ana Karen** | 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
+| **Humberto**| 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
+| **Sergio** | 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
+<br/>
+| **Sergio** | Responsabilidad de elaborar act. previa | Puntualidad | Cantidad de trabajo | Calidad de trabajo | Interés | Colboración (dar y recibir) | Espíritu de ayuda | Cumplimiento de compromiso |
+| ------------------|:---------:|:--------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+| **Ana Karen** | 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
+| **Humberto**| 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
+| **Sergio** | 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
+<br/>
+| **Ana Karen** | Responsabilidad de elaborar act. previa | Puntualidad | Cantidad de trabajo | Calidad de trabajo | Interés | Colboración (dar y recibir) | Espíritu de ayuda | Cumplimiento de compromiso |
+| ------------------|:---------:|:--------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-------:|
+| **Ana Karen** | 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
+| **Humberto**| 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
+| **Sergio** | 100 | 100 | 100  | 100 | 100 | 100  | 100 | 100   |
