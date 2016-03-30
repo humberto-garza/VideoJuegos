@@ -74,7 +74,7 @@ You can also render sequence diagrams like this:
 ---
 <h1> Diseño de personas: </h1>
 
- **insertar imagen**
+![Foto Manuel](Personas/Manuel.jpg)
  
  **Nombre:** Manuel Flores
  
