@@ -11,14 +11,44 @@ llevan a cabo usando el análisis jerárquico de tareas. Por último se hará un
 descripción del medio ambiente en el cual los usuarios van a interactuar con 
 nuestro sistema computacional. 
 
-
-
-
 **Trabajo Individual**
 ---
 
 
 **Ana Karen**
+###### Perfiles de usuarios
+* Apasionado por los videojuegos
+    * Le es fácil jugar y entender por primera vez los juegos
+    * Le encantan los juegos retadores
+    * Puede pasar mucho tiempo jugando
+    * Quiere seguir avanzando y superarse en el juego.
+* No le gustan los videojuegos
+    * No le llaman la atención los juegos
+    * No tiene experiencia jugando
+    * Si no conoce el juego, batalla en entender como funciona
+* Alumno Reprobado
+    * Asiste a pocas clases
+    * Tiene muy malas calificaciones
+    * No entiende los temas
+    * No puede hacer las taras y trabajos
+    * Va reprobando
+    * Quiere entender los temas
+* Alumno Condicionado
+    * Asiste a las clases
+    * No tiene tan buenas calificaciones
+    * Le es complicado entender los temas
+    * Batalla al hacer las tareas y trabajos
+    * Esta cerca de reprobar
+    * Quiere practicar y entender mejor, los temas
+* Alumno Calificaciones Altas
+    * Asiste a las clases
+    * Participa
+    * Entiende el contenido de la clase
+    * Hace los trabajos y tareas demostrando un buen desempeño
+    * Tiene buenas calificaciones 
+    * Quiere practicar, los temas
+    
+###### Puntos importantes del artículo
 
 
 --------
@@ -305,6 +335,19 @@ veces se ve el tutoria.
 
 ---
 <h2>Conclusión</h2>
+El desarrollo de videojuegos debe estar orientado a sus posibles usuarios, pues 
+ellos serán quienes estarán interactuando con el juego. Para que nuestro producto 
+final cumpla con las expectativas de nuestros usuarios: definimos perfiles  y 
+diseñamos personas. La descripción de las personas define a detalle lo que 
+buscan y quieren nuestros usuarios más importantes en este caso los estudiantes 
+de primaria y secundaria de la escuela Ciudad de los Niños. El modelo HTA que se
+generó, nos ayudará a la hora del desarrollo, pues hemos identificado las tareas
+más importantes para cada tipo de usuario. Al momento de planear la arquitectura
+y el diseño del juego en general estaremos basándonos en las métricas de 
+usabilidad que definimos. Tal y como lo menciona el artículo de Nielsen, lo que
+hace a un sistema excelente es que sea simple y fácil de usar, por lo tanto 
+nuestras métricas van dirigidas al desempeño que tendrán los estudiantes cuando 
+estén jugando.
 
 **Referencias**
 ---
