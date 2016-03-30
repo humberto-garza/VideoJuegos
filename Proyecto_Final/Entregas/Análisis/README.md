@@ -1,7 +1,22 @@
 ![LeftAndRight](../../Images/Logo.png)
 
+<h1> Análisis </h1>
+
+<h2> Introducción </h2>
+En este trabajo se llevará a cabo un análisis de los usuarios que se 
+entrevistaron en la escuela Ciudad de los Niños. En base a eso, se elaboraran 
+perfiles de usuarios y con ellos se hará el diseño de tres personas en base a 
+dichos perfiles. También se elaborará un estudio de las taras que los usuarios
+llevan a cabo usando el análisis jerárquico de tareas. Por último se hará una 
+descripción del medio ambiente en el cual los usuarios van a interactuar con 
+nuestro sistema computacional. 
+
+
+
+
 **Trabajo Individual**
 ---
+
 
 **Ana Karen**
 
@@ -42,6 +57,11 @@
     
     - Se aburre facilmente, ya que el juego no capta su atención.
     
+#### Análisis jerárquico de tareas (HTA)
+![HTA Estudiante Daltonico](Personas/HTA1.jpg)
+
+----------------
+
 <h2> Estudiante que le gustan los videojuegos </h2>
    
     - Edad: 9-12
@@ -53,6 +73,11 @@
     - Sabe distinguir su estilo preferido de juegos.
     
     - Esta acostumbrado a ciertos controles.
+
+#### Análisis jerárquico de tareas (HTA)
+![HTA Estudiante Que le gustan los videojuegos](Personas/HTA2.jpg)
+
+----------------
 
 <h2> Estudiante que no acostumbra jugar videojuegos </h2>
     
@@ -67,8 +92,11 @@
     
     - No es hábil con los controles.
 
+#### Análisis jerárquico de tareas (HTA)
+![HTA Estudiante Que no acostumbra los videojuegos](Personas/HTA3.jpg)
 
----
+----------------
+
 <h1> Diseño de personas: </h1>
 
 ![Foto Manuel](Personas/Manuel.jpg)
@@ -190,26 +218,81 @@ una buena connexión de internet.
 ---
 <h1> Métricas de Usabilidad </h1>
 
-Que el uso de nuestro juego sea efectivo
+---
+**Nombre del objetivo:** Eficiencia
 
-Que la eficiencia de nuestro juego sea apropiada
+**Métrica:** Número de clicks que el usuario tarda en emezar a jugar.
 
-Seguridad
+**Método de medición:** Contar el número de clicks para iniciar el juego.
 
-Que nuestro producto sea usable
+**Nivel actual:** NA (es nuevo)
 
-Que nuestro porducto sea fácil de aprender
+**Nivel planeado:** 3 clicks.
 
+**Mejor caso:** 1 click.
 
+**Peor caso:** 3 clicks
 
+---
+**Nombre del objetivo:** Fácil de recordar
 
-Nombre del objetivo: eficacia
-Métrica: 
-Método de medición: 
-Nivel actual:
-Nivel planeado: 
-Mejor caso: 
-Peor caso: 
+**Métrica:** El usuario logra jugar sin ver el tutorial, una segunda vez.
+
+**Método de medición:** Después de usar el juego por primera vez, contar cuantas
+veces se ve el tutoria.
+
+**Nivel actual:** NA (es nuevo)
+
+**Nivel planeado:** Ve el tutorial una vez más.
+
+**Mejor caso:** No ve el tutorial.
+
+**Peor caso:** Ve el tutorial una vez más.
+
+---
+**Nombre del objetivo:** Facilidad de Aprendizaje (learnability)
+
+**Métrica:** El juego es lo suficientemente fácil de usar.
+
+**Método de medición:** Número de veces que el usuario ve el tutorial.
+
+**Nivel actual:** NA (es nuevo)
+
+**Nivel planeado:** Una vez.
+
+**Mejor caso:** Ninguna vez.
+
+**Peor caso:** Una vez.
+
+---
+**Nombre del objetivo:** Utilidad
+
+**Métrica:** Tiempo que el usuario usa el juego. 
+
+**Método de medición:** Contador, marcando el avance de niveles.
+
+**Nivel actual:** NA (es nuevo)
+
+**Nivel planeado:** Que complete por lo menos un nivel.
+
+**Mejor caso:** Que termine el juego.
+
+**Peor caso:** Que complete por lo menos un nivel.
+
+---
+**Nombre del objetivo:** Facilidad de Aprendizaje (learnability)
+
+**Métrica:** El usuario puede jugar sin hacer click en el botón de "ayuda".
+
+**Método de medición:** Contar las veces en que el usuario hace click en "ayuda".
+
+**Nivel actual:** NA (es nuevo)
+
+**Nivel planeado:** Hace click una vez.
+
+**Mejor caso:** No hace click.
+
+**Peor caso:** Hace click una vez.
 
 ---
 **Coevaluación**
@@ -220,7 +303,12 @@ Peor caso:
 | **Humberto** | 100 | 100 | 100 |
 | **Sergio** | 100 | 100 | 100 | 
 
+---
+<h2>Conclusión</h2>
 
 **Referencias**
 ---
 https://www.nngroup.com/articles/persona/
+
+Preece, J., Rogers, Y., & Sharp, H. (2002). Interaction design: Beyond
+human-computer interaction. New York, NY: J. Wiley & Sons.
