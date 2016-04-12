@@ -1,4 +1,4 @@
-package Flood;
+package Flood; 
 
 /**
  * Base
@@ -6,13 +6,12 @@ package Flood;
  * Modela la definición de todos los objetos de tipo
  * <code>Base</code>
  *
- * @author Jose Humberto Garza Rosado
- * @version A00808689
- * @date 24/02/2016
+ * @author XXXXXXX
+ * @version 99 
+ * @date 99/XXX/99
  */
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
 
@@ -24,20 +23,21 @@ public class Base {
     private int iAlto; //largo del objeto
     private Image imaImagen;	//imagen.
     private ImageIcon imiImagen;  // imagen con medidas
-    private boolean bAlive;
 
     /**
      * Base
-     *
-     * Metodo constructor usado para crear el objeto animal creando el icono a
-     * partir de una imagen
-     *
+     * 
+     * Metodo constructor usado para crear el objeto animal
+     * creando el icono a partir de una imagen
+     * 
      * @param iX es la <code>posicion en x</code> del objeto.
      * @param iY es la <code>posicion en y</code> del objeto.
+     * @param iAncho es el <code>ancho</code> del objeto.
+     * @param iAlto es el <code>Largo</code> del objeto.
      * @param imaImagen es la <code>imagen</code> del objeto.
-     *
+     * 
      */
-    public Base(int iX, int iY, Image imaImagen) {
+    public Base(int iX, int iY ,  Image imaImagen) {
         this.iX = iX;
         this.iY = iY;
         this.imaImagen = imaImagen;
@@ -46,13 +46,14 @@ public class Base {
         this.iAlto = this.imiImagen.getIconHeight();
     }
 
+    
     /**
      * setX
-     *
+     * 
      * Metodo modificador usado para cambiar la posicion en x del objeto
-     *
+     * 
      * @param iX es la <code>posicion en x</code> del objeto.
-     *
+     * 
      */
     public void setX(int iX) {
         this.iX = iX;
@@ -60,35 +61,35 @@ public class Base {
 
     /**
      * getX
-     *
-     * Metodo de acceso que regresa la posicion en x del objeto
-     *
+     * 
+     * Metodo de acceso que regresa la posicion en x del objeto 
+     * 
      * @return iX es la <code>posicion en x</code> del objeto.
-     *
+     * 
      */
     public int getX() {
-        return iX;
+            return iX;
     }
 
     /**
      * setY
-     *
-     * Metodo modificador usado para cambiar la posicion en y del objeto
-     *
+     * 
+     * Metodo modificador usado para cambiar la posicion en y del objeto 
+     * 
      * @param iY es la <code>posicion en y</code> del objeto.
-     *
+     * 
      */
     public void setY(int iY) {
-        this.iY = iY;
+            this.iY = iY;
     }
 
     /**
      * getY
-     *
-     * Metodo de acceso que regresa la posicion en y del objeto
-     *
+     * 
+     * Metodo de acceso que regresa la posicion en y del objeto 
+     * 
      * @return posY es la <code>posicion en y</code> del objeto.
-     *
+     * 
      */
     public int getY() {
         return iY;
@@ -96,12 +97,12 @@ public class Base {
 
     /**
      * setImagen
-     *
+     * 
      * Metodo modificador usado para cambiar el icono de imagen del objeto
      * tomandolo de un objeto imagen
-     *
+     * 
      * @param imaImagen es la <code>imagen</code> del objeto.
-     *
+     * 
      */
     public void setImagen(Image imaImagen) {
         this.imaImagen = imaImagen;
@@ -112,11 +113,11 @@ public class Base {
 
     /**
      * getImagen
-     *
+     * 
      * Metodo de acceso que regresa la imagen que representa el icono del objeto
-     *
+     * 
      * @return la imagen a partide del <code>icono</code> del objeto.
-     *
+     * 
      */
     public Image getImagen() {
         return imaImagen;
@@ -124,11 +125,11 @@ public class Base {
 
     /**
      * getAncho
-     *
-     * Metodo de acceso que regresa el ancho del icono
-     *
+     * 
+     * Metodo de acceso que regresa el ancho del icono 
+     * 
      * @return un <code>entero</code> que es el ancho de la imagen.
-     *
+     * 
      */
     public int getAncho() {
         return iAncho;
@@ -136,40 +137,39 @@ public class Base {
 
     /**
      * getAlto
-     *
-     * Metodo que da el alto del icono
-     *
+     * 
+     * Metodo que  da el alto del icono 
+     * 
      * @return un <code>entero</code> que es el alto de la imagen.
-     *
+     * 
      */
     public int getAlto() {
         return iAlto;
     }
-
+    
     /**
      * paint
-     *
-     * Metodo para pintar el principal
-     *
-     * @param graGrafico objeto de la clase <code>Graphics</code> para graficar
-     * @param imoObserver objeto de la clase <code>ImageObserver</code> es el
-     * Applet donde se pintara
-     *
+     * 
+     * Metodo para pintar el animal
+     * 
+     * @param graGrafico    objeto de la clase <code>Graphics</code> para graficar
+     * @param imoObserver  objeto de la clase <code>ImageObserver</code> es el 
+     *    Applet donde se pintara
+     * 
      */
     public void paint(Graphics graGrafico, ImageObserver imoObserver) {
-        graGrafico.drawImage(getImagen(), getX(), getY(),
-                getAncho(), getAlto(), imoObserver);
+        graGrafico.drawImage(getImagen(), getX(), getY(), getAncho(), getAlto(), imoObserver);
     }
 
     /**
      * equals
-     *
+     * 
      * Metodo para checar igualdad con otro objeto
-     *
-     * @param objObjeto objeto de la clase <code>Object</code> para comparar
-     * @return un valor <code>boleano</code> que sera verdadero si el objeto que
-     * invoca es igual al objeto recibido como parámetro
-     *
+     * 
+     * @param objObjeto    objeto de la clase <code>Object</code> para comparar
+     * @return un valor <code>boleano</code> que sera verdadero si el objeto
+     *   que invoca es igual al objeto recibido como parámetro
+     * 
      */
     public boolean equals(Object objObjeto) {
         // si el objeto parametro es una instancia de la clase Base
@@ -177,12 +177,13 @@ public class Base {
             // se regresa la comparación entre este objeto que invoca y el
             // objeto recibido como parametro
             Base basParam = (Base) objObjeto;
-            return this.getX() == basParam.getX()
-                    && this.getY() == basParam.getY()
-                    && this.getAncho() == basParam.getAncho()
-                    && this.getAlto() == basParam.getAlto()
-                    && this.getImagen() == basParam.getImagen();
-        } else {
+            return this.getX() ==  basParam.getX() && 
+                    this.getY() == basParam.getY() &&
+                    this.getAncho() == basParam.getAncho() &&
+                    this.getAlto() == basParam.getAlto() &&
+                    this.getImagen() == basParam.getImagen();
+        }
+        else {
             // se regresa un falso porque el objeto recibido no es tipo Base
             return false;
         }
@@ -190,15 +191,14 @@ public class Base {
 
     /**
      * toString
-     *
+     * 
      * Metodo para obtener la interfaz del objeto
-     *
-     * @return un valor <code>String</code> que representa al objeto
-     *
+     * 
+      * @return un valor <code>String</code> que representa al objeto
+     * 
      */
     public String toString() {
-        return " x: " + this.getX() + " y: " + this.getY()
-                + " ancho: " + this.getAncho() + " alto: " + this.getAlto();
+        return " x: " + this.getX() + " y: "+ this.getY() +
+                " ancho: " + this.getAncho() + " alto: " + this.getAlto();
     }
-
 }
