@@ -323,6 +323,10 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
                 basAux.paint(graDibujo, this);
             }
 
+            // Dibuja los objetos Cuadro
+            for (Cuadro cuaAux : lklCuadrosBase) {
+                cuaAux.paint(graDibujo, this);
+            }
 
             // Dibujar el selector
             basSelector.paint(graDibujo, this);

@@ -91,4 +91,11 @@ public class Cuadro extends Base {
         isActive = bActive;
     }
 
+    public void paint(Graphics graGrafico, ImageObserver imoObserver) {
+        graGrafico.fillRect (getX(), getY(), 140, 115));
+    }
+
+
+
+
 }
