@@ -6,9 +6,9 @@ package Flood;
  * Modela la definición de todos los objetos de tipo
  * <code>Base</code>
  *
- * @author XXXXXXX
- * @version 99 
- * @date 99/XXX/99
+ * @author Left & Right
+ * @version 1.0
+ * @date APR/12/2016
  */
 import java.awt.Graphics;
 import java.awt.Image;

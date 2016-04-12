@@ -69,6 +69,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     // Objetos Base Cuadro
     private LinkedList<Base> lklCuadros; // ListaEncadenada de Cuadros
     private LinkedList<Integer> lklDisponibles;
+   
     // Variables de Teclado
     boolean bKeyPressed;
 
@@ -82,8 +83,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     public Flood() {
 
         // Jframe Configuration
-        iWidth = 800;
-        iHeight = 600;
+        iWidth = 1024;
+        iHeight = 720;
 
         // Variables de la matriz central
         iGridAncho = 140;
