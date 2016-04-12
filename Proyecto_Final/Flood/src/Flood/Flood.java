@@ -69,7 +69,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     // Objetos Base Cuadro
     private LinkedList<Base> lklCuadros; // ListaEncadenada de Cuadros
     private LinkedList<Integer> lklDisponibles;
-   
+    private LinkedList<Cuadro> lklCuadroBase;
+    
     // Variables de Teclado
     boolean bKeyPressed;
 
@@ -126,9 +127,17 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         // Lista de Cuadros
         lklCuadros = new LinkedList<Base>();
+        lklCuadrosBase = new LinkedList<Cuadro>();
+        
         lklDisponibles = new LinkedList<Integer>();
         for (int iX = 0; iX < 16; iX ++) {
             lklDisponibles.add(iX);
+            int iRow = iX / 4;
+            int iCol = iX - iRow * 4;
+            Color colAux = new Color(255, 0, 0);
+            Cuadro cuaAux = new Cuadro(arrGridX[iCol], arrGridY[iRow], Toolkit.getDefaultToolkit()
+                                   .getImage(this.getClass().getResource("Images/Cuadro.png")), iX, false, colAux, 0); 
+            
         }
 
         creaCuadro();
@@ -221,17 +230,14 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
      */
     public void creaCuadro() {
         if (lklDisponibles.size() > 0) {
-
-            int iRandPicker = (int) (Math.random() * lklDisponibles.size());
-            int iAux =  lklDisponibles.remove(iRandPicker);
-
-            int iRow = iAux / 4;
-            int iCol = iAux - iRow * 4;
-
-            Base basAux = new Base(arrGridX[iCol], arrGridY[iRow], Toolkit.getDefaultToolkit()
-                                   .getImage(this.getClass().getResource("Images/Cuadro.png")));
             
-            lklCuadros.add(basAux);
+            // Seleccionar al azar un lugar disponible
+            int iRandPicker = (int) (Math.random() * lklDisponibles.size());
+            // Remover el seleccionado de la lista
+            int iAux =  lklDisponibles.remove(iRandPicker);
+            
+            Cuadro cuaAux = lklCuadros.get(iAux);
+            cuaAux.setActive(true);
         }
 
         System.out.println(lklDisponibles.size());
