@@ -1,5 +1,6 @@
 package Flood;
 
+import java.awt.Color;
 import java.awt.Image;
 
 /**
@@ -86,7 +87,7 @@ public class Cuadro extends Base {
      * @param bActive es la <code> bandera </code> del objeto.
      * 
      */
-    public boolean setActive(boolean bActive){
+    public void setActive(boolean bActive){
         
         isActive = bActive;
     }
