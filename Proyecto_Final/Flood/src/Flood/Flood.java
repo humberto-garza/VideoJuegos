@@ -127,7 +127,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         // Lista de Cuadros
         lklCuadros = new LinkedList<Base>();
-        lklCuadrosBase = new LinkedList<Cuadro>();
+        lklCuadroBase = new LinkedList<Cuadro>();
         
         lklDisponibles = new LinkedList<Integer>();
         for (int iX = 0; iX < 16; iX ++) {
@@ -236,7 +236,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             // Remover el seleccionado de la lista
             int iAux =  lklDisponibles.remove(iRandPicker);
             
-            Cuadro cuaAux = lklCuadros.get(iAux);
+            Cuadro cuaAux = (Cuadro) lklCuadros.get(iAux);
             cuaAux.setActive(true);
         }
 
