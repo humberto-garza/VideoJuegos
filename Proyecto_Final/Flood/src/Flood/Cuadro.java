@@ -1,7 +1,9 @@
 package Flood;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.image.ImageObserver;
 
 /**
  * Cuadro
@@ -93,7 +95,7 @@ public class Cuadro extends Base {
     }
 
     public void paint(Graphics graGrafico, ImageObserver imoObserver) {
-        graGrafico.fillRect (getX(), getY(), 140, 115));
+        graGrafico.fillRect (getX(), getY(), 14, 15);
     }
 
 

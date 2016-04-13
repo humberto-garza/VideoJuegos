@@ -69,8 +69,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     // Objetos Base Cuadro
     private LinkedList<Base> lklCuadros; // ListaEncadenada de Cuadros
     private LinkedList<Integer> lklDisponibles;
-    private LinkedList<Cuadro> lklCuadroBase;
-    
+    private LinkedList<Cuadro> lklCuadrosBase;
+
     // Variables de Teclado
     boolean bKeyPressed;
 
@@ -81,11 +81,12 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     private int iRandMax;
     private int iRand;
     private int iContadorCiclos;
+
     public Flood() {
 
         // Jframe Configuration
-        iWidth = 1024;
-        iHeight = 720;
+        iWidth = 800;
+        iHeight = 600;
 
         // Variables de la matriz central
         iGridAncho = 140;
@@ -111,11 +112,11 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         // Crear la imagen de fondo.
         imaImagenFondo = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                         .getResource("Images/Fondo.png"));
+                .getResource("Images/Fondo.png"));
 
         // Crear el objeto selector
         basSelector = new Base(iMargenGrid, iMargenGrid, Toolkit.getDefaultToolkit()
-                               .getImage(this.getClass().getResource("Images/Selector.png")));
+                .getImage(this.getClass().getResource("Images/Selector.png")));
         iIncrementoX = 0;
         iIncrementoY = 0;
 
@@ -127,17 +128,18 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         // Lista de Cuadros
         lklCuadros = new LinkedList<Base>();
-        lklCuadroBase = new LinkedList<Cuadro>();
-        
+        lklCuadrosBase = new LinkedList<Cuadro>();
+
         lklDisponibles = new LinkedList<Integer>();
-        for (int iX = 0; iX < 16; iX ++) {
+        for (int iX = 0; iX < 16; iX++) {
             lklDisponibles.add(iX);
             int iRow = iX / 4;
             int iCol = iX - iRow * 4;
             Color colAux = new Color(255, 0, 0);
             Cuadro cuaAux = new Cuadro(arrGridX[iCol], arrGridY[iRow], Toolkit.getDefaultToolkit()
-                                   .getImage(this.getClass().getResource("Images/Cuadro.png")), iX, false, colAux, 0); 
-            
+                    .getImage(this.getClass().getResource("Images/Cuadro.png")), iX, false, colAux, 0);
+            lklCuadrosBase.add(cuaAux);
+
         }
 
         creaCuadro();
@@ -188,7 +190,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
                 Thread.sleep(25);
             } catch (InterruptedException iexError) {
                 System.out.println("Hubo un error en el juego "
-                                   + iexError.toString());
+                        + iexError.toString());
             }
         }
 
@@ -204,16 +206,15 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         //Determina el tiempo que ha transcurrido desde que el Applet inicio su ejecución
         long tiempoTranscurrido = System.currentTimeMillis() - tiempoActual;
 
-        iContadorCiclos ++;
+        iContadorCiclos++;
         if (iContadorCiclos >= iRand) {
             iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
             iContadorCiclos = 0;
             creaCuadro();
             //Guarda el tiempo actual
             tiempoActual += tiempoTranscurrido;
-           
-        }
 
+        }
 
         // Si se presiono una tecla de movimiento, actualizar al principal
         if (bKeyPressed) {
@@ -222,6 +223,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             basSelector.setY(arrGridY[iIncrementoY]);
         }
     }
+
     /**
      * actualiza
      *
@@ -230,13 +232,13 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
      */
     public void creaCuadro() {
         if (lklDisponibles.size() > 0) {
-            
+
             // Seleccionar al azar un lugar disponible
             int iRandPicker = (int) (Math.random() * lklDisponibles.size());
             // Remover el seleccionado de la lista
-            int iAux =  lklDisponibles.remove(iRandPicker);
-            
-            Cuadro cuaAux = (Cuadro) lklCuadros.get(iAux);
+            int iAux = lklDisponibles.remove(iRandPicker);
+
+            Cuadro cuaAux = lklCuadrosBase.get(iAux);
             cuaAux.setActive(true);
         }
 
@@ -260,14 +262,14 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         matGrid[iRandCol][iRandRow] = true;
 
         lklCuadros.add(basAux);
-        */
+         */
     }
 
     /**
-    * checaColision
-    *
-    * Checar la Colision
-    */
+     * checaColision
+     *
+     * Checar la Colision
+     */
     public void checaColision() {
 
     }
@@ -287,7 +289,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         // Si quitamos el if funciona con el resize
         if (imaImagenApplet == null) {
             imaImagenApplet = createImage(this.getSize().width,
-                                          this.getSize().height);
+                    this.getSize().height);
             graGraficaApplet = imaImagenApplet.getGraphics();
         }
         // Actualiza el Foreground.
@@ -317,7 +319,6 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             // Dibuja la imagen de fondo
             graDibujo.drawImage(imaImagenFondo, 0, 0, iWidth, iHeight, this);
 
-
             // Dibuja los objetos Cuadro
             for (Base basAux : lklCuadros) {
                 basAux.paint(graDibujo, this);
@@ -325,7 +326,9 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
             // Dibuja los objetos Cuadro
             for (Cuadro cuaAux : lklCuadrosBase) {
-                cuaAux.paint(graDibujo, this);
+                if (cuaAux.isActive()) {
+                    cuaAux.paint(graDibujo, this);
+                }
             }
 
             // Dibujar el selector
