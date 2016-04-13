@@ -48,8 +48,9 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     private int iHeight;
     private int iWidth;
     private int iMargenGrid;
-    private int iGridAncho;
-    private int iGridAlto;
+    private int iCuadroAncho;
+    private int iCuadroAlto;
+    private int iCuadroMargen;
 
     // Posicionamiento
     private int[] arrGridX = new int[4];
@@ -66,10 +67,12 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     private int iIncrementoX;
     private int iIncrementoY;
 
-    // Objetos Base Cuadro
+    // Listas Encadenadas
     private LinkedList<Base> lklCuadros; // ListaEncadenada de Cuadros
     private LinkedList<Integer> lklDisponibles;
     private LinkedList<Cuadro> lklCuadrosBase;
+    private LinkedList<Color> lklColores;
+    private LinkedList<Pregunta> lklPreguntas;
 
     // Variables de Teclado
     boolean bKeyPressed;
@@ -82,24 +85,29 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     private int iRand;
     private int iContadorCiclos;
 
-    public Flood() {
+    // Variables de archivo
+    private String nombreArchivo;    //Nombre del archivo.
+
+    public Flood() throws FileNotFoundException, IOException {
 
         // Jframe Configuration
         iWidth = 800;
         iHeight = 600;
 
         // Variables de la matriz central
-        iGridAncho = 140;
-        iGridAlto = 115;
+        iCuadroAncho = 140;
+        iCuadroAlto = 115;
+        iCuadroMargen = 5;
         iMargenGrid = 20;
+
 
         // Llenar los arreglos de posiciones de la matriz central
         for (boolean[] row : matGrid) {
             Arrays.fill(row, false);
         }
         for (int iX = 0; iX < 4; iX++) {
-            arrGridX[iX] = iMargenGrid + iX * iGridAncho;
-            arrGridY[iX] = iMargenGrid + iX * iGridAlto;
+            arrGridX[iX] = iMargenGrid + iX * iCuadroAncho;
+            arrGridY[iX] = iMargenGrid + iX * iCuadroAlto;
         }
 
         Dimension dimD = new Dimension(iWidth, iHeight);
@@ -112,11 +120,11 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         // Crear la imagen de fondo.
         imaImagenFondo = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/Fondo.png"));
+                         .getResource("Images/Fondo.png"));
 
         // Crear el objeto selector
         basSelector = new Base(iMargenGrid, iMargenGrid, Toolkit.getDefaultToolkit()
-                .getImage(this.getClass().getResource("Images/Selector.png")));
+                               .getImage(this.getClass().getResource("Images/Selector.png")));
         iIncrementoX = 0;
         iIncrementoY = 0;
 
@@ -135,12 +143,28 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             lklDisponibles.add(iX);
             int iRow = iX / 4;
             int iCol = iX - iRow * 4;
-            Color colAux = new Color(255, 0, 0);
-            Cuadro cuaAux = new Cuadro(arrGridX[iCol], arrGridY[iRow], Toolkit.getDefaultToolkit()
-                    .getImage(this.getClass().getResource("Images/Cuadro.png")), iX, false, colAux, 0);
-            lklCuadrosBase.add(cuaAux);
+            Color colAux = new Color(255, 255, 255);
+            Cuadro cuaAux = new Cuadro(
+                arrGridX[iCol] + iCuadroMargen,
+                arrGridY[iRow] + iCuadroMargen,
+                Toolkit.getDefaultToolkit()
+                .getImage(this.getClass().getResource("Images/Cuadro.png")),
+                iX,
+                false,
+                colAux,
+                iCuadroAncho - iCuadroMargen * 2,
+                iCuadroAlto - iCuadroMargen * 2,
+                0);
 
+            lklCuadrosBase.add(cuaAux);
         }
+        // Cargar Colores
+        lklColores = new LinkedList<Color>();
+        cargaColores();
+
+        // Cargar Preguntas
+        lklPreguntas = new LinkedList<Pregunta>();
+        cargaPreguntas("Quimica");
 
         creaCuadro();
 
@@ -165,7 +189,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
      *
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         Flood tarGame = new Flood();
     }
 
@@ -190,7 +214,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
                 Thread.sleep(25);
             } catch (InterruptedException iexError) {
                 System.out.println("Hubo un error en el juego "
-                        + iexError.toString());
+                                   + iexError.toString());
             }
         }
 
@@ -224,6 +248,76 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         }
     }
 
+
+    public void cargaColores() throws FileNotFoundException, IOException {
+        lklColores.clear();
+
+        nombreArchivo = "./src/Flood/Files/Paleta.txt";
+        BufferedReader fileIn;
+
+        try {
+            fileIn = new BufferedReader(new FileReader(nombreArchivo));
+        } catch (FileNotFoundException e) {
+            System.out.println("FILE NOT FOUND!");
+            File puntos = new File(nombreArchivo);
+            PrintWriter fileOut = new PrintWriter(puntos);
+            fileOut.println("100,demo");
+            fileOut.close();
+            fileIn = new BufferedReader(new FileReader(nombreArchivo));
+        }
+
+        String[] arrColores;
+        String sLine;
+        while ((sLine = fileIn.readLine()) != null)   {
+            arrColores = sLine.split(",");
+            int iR = Integer.parseInt(arrColores[0]);
+            int iG = Integer.parseInt(arrColores[1]);
+            int iB = Integer.parseInt(arrColores[2]);
+            Color colAux = new Color(iR, iG, iB);
+            lklColores.add(colAux);
+        }
+        System.out.print("Se Cargaron Colores: ");
+        System.out.println(lklColores.size());
+
+    }
+
+    public void cargaPreguntas(String sCategoria) throws FileNotFoundException, IOException {
+        lklPreguntas.clear();
+
+        nombreArchivo = "./src/Flood/Files/";
+        nombreArchivo += sCategoria + ".txt";
+
+        BufferedReader fileIn;
+
+        try {
+            fileIn = new BufferedReader(new FileReader(nombreArchivo));
+        } catch (FileNotFoundException e) {
+            System.out.println("FILE NOT FOUND!");
+            File puntos = new File(nombreArchivo);
+            PrintWriter fileOut = new PrintWriter(puntos);
+            fileOut.println("100,demo");
+            fileOut.close();
+            fileIn = new BufferedReader(new FileReader(nombreArchivo));
+        }
+
+        String[] arrPreguntas;
+        String sLine;
+        while ((sLine = fileIn.readLine()) != null)   {
+            arrPreguntas = sLine.split(",");
+            String sPreg = arrPreguntas[0];
+            String sResp = arrPreguntas[1];
+
+            Pregunta preAux = new Pregunta(sPreg, sResp);
+            lklPreguntas.add(preAux);
+        }
+        System.out.print("Se Cargaron Preguntas: ");
+        System.out.println(lklPreguntas.size());
+
+    }
+
+
+
+
     /**
      * actualiza
      *
@@ -235,14 +329,25 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
             // Seleccionar al azar un lugar disponible
             int iRandPicker = (int) (Math.random() * lklDisponibles.size());
+
             // Remover el seleccionado de la lista
             int iAux = lklDisponibles.remove(iRandPicker);
 
             Cuadro cuaAux = lklCuadrosBase.get(iAux);
+
+            // Seleccionar al azar un color nuevo
+            iRandPicker = (int) (Math.random() * lklColores.size());
+            Color colAux = lklColores.get(iRandPicker);
+            cuaAux.setColor(colAux);
+
+            // Seleccionar al azar una pregunta
+            iRandPicker = (int) (Math.random() * lklPreguntas.size());
+            cuaAux.setPregunta(iRandPicker);
+
+            // Activar
             cuaAux.setActive(true);
         }
 
-        System.out.println(lklDisponibles.size());
 
         /*
         boolean bAux = true;
@@ -289,7 +394,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         // Si quitamos el if funciona con el resize
         if (imaImagenApplet == null) {
             imaImagenApplet = createImage(this.getSize().width,
-                    this.getSize().height);
+                                          this.getSize().height);
             graGraficaApplet = imaImagenApplet.getGraphics();
         }
         // Actualiza el Foreground.
@@ -327,7 +432,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             // Dibuja los objetos Cuadro
             for (Cuadro cuaAux : lklCuadrosBase) {
                 if (cuaAux.isActive()) {
-                    cuaAux.paint(graDibujo, this);
+                    cuaAux.paint(graDibujo, this, lklPreguntas);
                 }
             }
 
@@ -393,6 +498,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             bKeyPressed = true;
         }
     }
+
 
     /**
      * keyReleased
