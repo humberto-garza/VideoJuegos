@@ -1,10 +1,3 @@
-Hidrógeno,H
-Helio,He
-Litio,Li
-Berilio,Be
-Boro,B
-Carbono,C
-Nitrógeno,N
 Oxígeno,O
 Fluor,F
 Neón,Ne

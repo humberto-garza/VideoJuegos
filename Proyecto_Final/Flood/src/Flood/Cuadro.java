@@ -109,12 +109,30 @@ public class Cuadro extends Base {
         graGrafico.fillRect(getX(), getY(), getAncho(), getAlto());
 
         String sPreg = lklPreguntas.get(getPregunta()).getPregunta();
-
-        Color colAux = new Color(0, 0, 0);
-        graGrafico.setColor(colAux);
-        graGrafico.drawString(sPreg, getX(), getY()+getAlto()/2);
+        
+        Rectangle rect = new Rectangle(getX(), getY(),  getAncho(), getAlto());
+        
+        fitInSquare(sPreg, rect, graGrafico);
+        
+        //graGrafico.drawString(sPreg, getX(), getY()+getAlto()/2);
 
     }
+    
+    
+    public void fitInSquare(String sQuestion, Rectangle rect, Graphics graGrafico){
+            
+        int iStringWidth = graGrafico.getFontMetrics().stringWidth(sQuestion);
+        int iStringHeight = graGrafico.getFontMetrics().getAscent();
+          
+        
+        int iOffsetX = (int) rect.getX() + (int)(rect.getWidth()/2) - (iStringWidth/2);
+        int iOffsetY = (int) rect.getY() + (int)(rect.getHeight()/2) - (iStringHeight/2);
+        
+        graGrafico.setColor(colAux);
+        Color colAux = new Color(0, 0, 0);
+        graGrafico.drawString(sQuestion , iOffsetX , iOffsetY);
+    
+     }
 
     public Color getColor() {
         return this.colFondo;
