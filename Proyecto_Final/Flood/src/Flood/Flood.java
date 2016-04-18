@@ -34,6 +34,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Arrays;
 import javax.swing.KeyStroke;
+import java.text.Normalizer;
+import java.util.regex.Pattern;
 
 /**
  * Jframe, load and save game
@@ -46,7 +48,6 @@ import javax.swing.KeyStroke;
 public class Flood extends JFrame implements Runnable, MouseListener, KeyListener {
 
     //Jframe Size
-
     public int iHeight;
     public int iWidth;
 
@@ -143,7 +144,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         // Variables Cuadro Respuesta
         iDisplRX = 25;
-        iDisplRY = 735;
+        iDisplRY = 730;
         disRespuesta = new DisplayRespuesta(iDisplRX, iDisplRY, "");
 
         arrGridX = new int[iGridCols];
@@ -151,7 +152,6 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         //inicializa la instancia de SidePanel
         this.side = new SidePanel(this);
-
 
         // Llenar los arreglos de posiciones de la matriz central
         for (boolean[] row : matGrid) {
@@ -181,7 +181,6 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         // Crear el objeto selector
         basSelector = new Base(iGridOffsetX, iGridOffsetY, Toolkit.getDefaultToolkit()
                                .getImage(this.getClass().getResource("Images/Selector.png")));
-
 
         iIncrementoX = 0;
         iIncrementoY = 0;
@@ -382,8 +381,11 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             arrPreguntas = sLine.split(",");
             String sPreg = arrPreguntas[0];
             String sResp = arrPreguntas[1];
+            String sPunt = arrPreguntas[2];
 
-            Pregunta preAux = new Pregunta(sPreg, sResp);
+            Pregunta preAux = new Pregunta(sPreg, sResp, Integer.parseInt(sPunt));
+
+            System.out.println(sPreg + " " + sResp + " " + sPunt);
             lklPreguntas.add(preAux);
         }
         System.out.print("Se Cargaron Preguntas: ");
@@ -418,6 +420,9 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             cuaAux.setPregunta(iRandPicker);
 
             // Activar
+            Pregunta preAux = lklPreguntas.get(iRandPicker);
+
+            cuaAux.setValor(preAux.getPuntos());
             cuaAux.setActive(true);
         }
 
@@ -577,6 +582,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
                     // Obtener el index de la pregunta
                     int iPregIndex = cuaAux.getPregunta();
                     String sResEsperada = lklPreguntas.get(iPregIndex).getRespuesta();
+                    sResEsperada = deAccent(sResEsperada);
                     String sResTotal = disRespuesta.getRespuesta();
 
                     // Comparar la respuesta esperada contra lo que se tiene
@@ -600,6 +606,11 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         }
     }
 
+    public String deAccent(String str) {
+        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("");
+    }
     /**
      * keyReleased
      *
@@ -607,17 +618,14 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
      * @param keyEvent es el objeto de <code>keyTyped</code> del teclado.
      *
      */
-
     @Override
     public void keyReleased(KeyEvent keyEvent) {
         bKeyPressed = false;
     }
 
-
     public void mouseClicked(MouseEvent mouEvent) {
         iMouseX = mouEvent.getX();
         iMouseY = mouEvent.getY();
-
 
         if (side.basBackMenu.intersects(iMouseX, iMouseY)) {//seleciono play
             //dispose menu, iniciar juego

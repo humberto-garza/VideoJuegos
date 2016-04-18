@@ -12,15 +12,17 @@ public class Pregunta {
 
     private String sPregunta;
     private String sRespuesta;
+    private int iPuntos;
 
     /**
      * Cuadro
      *
      */
 
-    public Pregunta(String sPregunta, String sRespuesta) {
+    public Pregunta(String sPregunta, String sRespuesta, int iPuntos) {
         this.sPregunta = sPregunta;
         this.sRespuesta = sRespuesta;
+        this.iPuntos = iPuntos;
     }
 
     /**
@@ -32,6 +34,9 @@ public class Pregunta {
     }
     public String getRespuesta() {
         return sRespuesta;
+    }
+    public int getPuntos() {
+        return iPuntos;
     }
 
 }

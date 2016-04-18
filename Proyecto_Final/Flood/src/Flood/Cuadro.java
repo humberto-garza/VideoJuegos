@@ -18,7 +18,7 @@ import java.util.LinkedList;
  */
 public class Cuadro extends Base {
 
-    private int iIndex;         // Indice del objeto
+    private int iValor;         // Indice del objeto
     private boolean isActive;   // Indica si el cuadro está activado o no
     private Color colFondo;     // Color para el fondo
     private int iPregunta;      // Indice de la pregunta
@@ -39,11 +39,11 @@ public class Cuadro extends Base {
      * @param colFondo es el <code> Color de fondo </code> del cuadro
      * @param iPregunta es el <index> de la matriz de preguntas </code>
      */
-    public Cuadro(int iX, int iY, Image imaImagen, int iIndex, boolean isActive,
+    public Cuadro(int iX, int iY, Image imaImagen, int iValor, boolean isActive,
                   Color colFondo, int iAncho, int iAlto, int iPregunta) {
 
         super(iX, iY, imaImagen);
-        this.iIndex = iIndex;
+        this.iValor = iValor;
         this.isActive = isActive;
         this.colFondo = colFondo;
         this.iPregunta = iPregunta;
@@ -52,16 +52,15 @@ public class Cuadro extends Base {
     }
 
     /**
-     * getIndex
+     * getValor
      *
-     * Metodo de acceso para obtener el índice del cuadro
      *
-     * @return iIndex es el <code> índice </code> del objeto.
+     * @return iValor es el <code> índice </code> del objeto.
      *
      */
-    public int getIndex() {
+    public int getValor() {
 
-        return iIndex;
+        return iValor;
     }
 
     public int getPregunta() {
@@ -74,9 +73,9 @@ public class Cuadro extends Base {
         this.iPregunta = iPregunta;
     }
 
-    public void setIndex(int iIndex) {
+    public void setValor(int iIndex) {
 
-        this.iIndex = iIndex;
+        this.iValor = iIndex;
     }
 
     /**
@@ -113,7 +112,7 @@ public class Cuadro extends Base {
 
         Rectangle rect = new Rectangle(getX(), getY(), getAncho(), getAlto());
 
-        String sAux = getPregunta() + "";
+        String sAux = getValor() + "";
 
         fitInSquare(sAux, rect, graGrafico);
     }
