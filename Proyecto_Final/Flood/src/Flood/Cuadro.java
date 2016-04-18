@@ -122,7 +122,6 @@ public class Cuadro extends Base {
 
         int iStringWidth = graGrafico.getFontMetrics().stringWidth(sQuestion);
         int iStringHeight = graGrafico.getFontMetrics().getAscent();
-<<<<<<< HEAD
 
         int iOffsetX = (int) rect.getX() + (int) (rect.getWidth() / 2) - (iStringWidth / 2);
         int iOffsetY = (int) rect.getY() + (int) (rect.getHeight() / 2) - (iStringHeight / 2);
@@ -132,19 +131,6 @@ public class Cuadro extends Base {
         graGrafico.drawString(sQuestion, iOffsetX, iOffsetY);
 
     }
-=======
-          
-        
-        int iOffsetX = (int) rect.getX() + (int)(rect.getWidth()/2) - (iStringWidth/2);
-        int iOffsetY = (int) rect.getY() + (int)(rect.getHeight()/2) - (iStringHeight/2);
-        
-      
-        Color colAux = new Color(0, 0, 0);
-        graGrafico.setColor(colAux);
-        graGrafico.drawString(sQuestion , iOffsetX , iOffsetY);
-    
-     }
->>>>>>> e8a08f5266f54b9995a42e6488f70e8e55734a7d
 
     public Color getColor() {
         return this.colFondo;
