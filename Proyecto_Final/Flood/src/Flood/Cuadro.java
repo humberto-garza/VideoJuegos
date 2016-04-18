@@ -3,6 +3,7 @@ package Flood;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import java.util.LinkedList;
 
@@ -128,8 +129,9 @@ public class Cuadro extends Base {
         int iOffsetX = (int) rect.getX() + (int)(rect.getWidth()/2) - (iStringWidth/2);
         int iOffsetY = (int) rect.getY() + (int)(rect.getHeight()/2) - (iStringHeight/2);
         
-        graGrafico.setColor(colAux);
+      
         Color colAux = new Color(0, 0, 0);
+        graGrafico.setColor(colAux);
         graGrafico.drawString(sQuestion , iOffsetX , iOffsetY);
     
      }

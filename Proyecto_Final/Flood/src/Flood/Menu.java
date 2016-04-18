@@ -12,6 +12,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -130,10 +133,12 @@ public class Menu extends JFrame implements MouseListener {
         if ( basPlay.intersects(iMouseX, iMouseY) ){//seleciono play
             //dispose menu, iniciar juego
             this.dispose();
-            Flood floodGame = new Flood();
-            
+            try {
+                Flood floodGame = new Flood();
+            } catch (IOException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
     }
 
     public void mousePressed(MouseEvent e) {
