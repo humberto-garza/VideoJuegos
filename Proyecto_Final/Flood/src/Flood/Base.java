@@ -12,6 +12,7 @@ package Flood;
  */
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
 
@@ -200,4 +201,29 @@ public class Base {
         return " x: " + this.getX() + " y: " + this.getY() +
                " ancho: " + this.getAncho() + " alto: " + this.getAlto();
     }
+    
+    public Rectangle getPerimetro() {
+        return new Rectangle(getX(), getY(), getAncho(), getAlto());
+    }
+    
+    /**
+     * intersects
+     * 
+     * Metodo para obtener el boleano de si el objeto se interesecta o no al 
+     * mouse
+     * 
+      * @return un valor <code>bool</code> que indica su el objeto colisiona con
+      * el mouse
+     * 
+     */
+    public boolean intersects (int x, int y){
+        if (getPerimetro().contains(x,y)){
+            return true;
+        }
+        return false;
+    }
+    
+
+
+    
 }

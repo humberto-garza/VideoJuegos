@@ -46,10 +46,16 @@ import javax.swing.KeyStroke;
 public class Flood extends JFrame implements Runnable, MouseListener, KeyListener {
 
     //Jframe Size
+<<<<<<< HEAD
     private int iHeight;
     private int iWidth;
 
     // Variables Grid
+=======
+    protected int iHeight;
+    protected int iWidth;
+    private int iMargenGrid;
+>>>>>>> e8a08f5266f54b9995a42e6488f70e8e55734a7d
     private int iCuadroAncho;
     private int iCuadroAlto;
     private int iCuadroMargen;
@@ -84,6 +90,9 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     private Base basSelector; // Objeto Selector
     private int iIncrementoX;
     private int iIncrementoY;
+    
+    //Objeto base BackMenu
+    private Base backMenu;
 
     // Listas Encadenadas
     private LinkedList<Base> lklCuadros; // ListaEncadenada de Cuadros
@@ -94,7 +103,14 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
     // Variables de Teclado
     boolean bKeyPressed;
-
+    
+    //Variables de las posiciones del Mouse
+    private int iMouseX;
+    private int iMouseY;
+    
+    //SidePanel Instance
+    private SidePanel side;
+   
     // Variables de tiempo
     private long tiempoActual;
     private long tiempoInicial;
@@ -114,6 +130,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         // Variables de la matriz central
         iCuadroAncho = 140;
+<<<<<<< HEAD
         iCuadroAlto = 108;
         iCuadroMargen = 4;
         iGridOffsetX = 20;
@@ -136,6 +153,14 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         arrGridX = new int[iGridCols];
         arrGridY = new int[iGridRows];
         matGrid = new boolean[iGridRows][iGridCols];
+=======
+        iCuadroAlto = 115;
+        iCuadroMargen = 5;
+        iMargenGrid = 20;
+        
+        //inicializa la instancia de SidePanel
+        this.side = new SidePanel(this);
+>>>>>>> e8a08f5266f54b9995a42e6488f70e8e55734a7d
 
         // Llenar los arreglos de posiciones de la matriz central
         for (boolean[] row : matGrid) {
@@ -165,6 +190,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         // Crear el objeto selector
         basSelector = new Base(iGridOffsetX, iGridOffsetY, Toolkit.getDefaultToolkit()
                                .getImage(this.getClass().getResource("Images/Selector.png")));
+        
+        
         iIncrementoX = 0;
         iIncrementoY = 0;
 
@@ -249,6 +276,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             actualiza();
             checaColision();
             repaint();
+         
             try {
                 // El hilo del juego se duerme: 10 default.
                 Thread.sleep(25);
@@ -258,6 +286,10 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             }
         }
 
+    }
+    
+    public void paintPanels(){
+        side.repaint();
     }
 
     /**
@@ -469,6 +501,9 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
             // Dibujar el selector
             basSelector.paint(graDibujo, this);
+            
+            //paintComponent de side Panel
+            side.paintComponent(graDibujo);
 
             // Escribir el cuadro de pregunta
             disPregunta.paint(graDibujo, this);
@@ -582,6 +617,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
      * @param keyEvent es el objeto de <code>keyTyped</code> del teclado.
      *
      */
+<<<<<<< HEAD
     @Override
     public void keyReleased(KeyEvent keyEvent
                            ) {
@@ -591,7 +627,22 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     @Override
     public void mouseClicked(MouseEvent e
                             ) {
+=======
+    public void keyReleased(KeyEvent keyEvent) {
+        bKeyPressed = false;
+    }
 
+    public void mouseClicked(MouseEvent mouEvent) {
+         iMouseX = mouEvent.getX();
+         iMouseY = mouEvent.getY();
+>>>>>>> e8a08f5266f54b9995a42e6488f70e8e55734a7d
+
+        if (side.basBackMenu.intersects(iMouseX, iMouseY)) {//seleciono play
+            //dispose menu, iniciar juego
+            
+            this.dispose();
+            Menu menu = new Menu();
+        }
     }
 
     @Override
