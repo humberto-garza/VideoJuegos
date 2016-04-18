@@ -38,7 +38,7 @@ public class SidePanel extends JPanel {
         setBackground(Color.CYAN);
         
         //crea objeto de back al menu
-        basBackMenu = new Base(230, 400, Toolkit.getDefaultToolkit()
+        basBackMenu = new Base(700, 400, Toolkit.getDefaultToolkit()
                .getImage(this.getClass().getResource("Images/backToMenu.png")));
         
     }

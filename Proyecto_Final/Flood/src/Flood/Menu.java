@@ -52,7 +52,7 @@ public class Menu extends JFrame implements MouseListener {
                 .getResource("Images/fondoMenu.png"));
         
         //crea objeto de play
-        basPlay = new Base(100, 400, Toolkit.getDefaultToolkit()
+        basPlay = new Base(iWidth-200, iHeight-200, Toolkit.getDefaultToolkit()
                 .getImage(this.getClass().getResource("Images/play.png")));
         
         addMouseListener(this);
