@@ -1,3 +1,4 @@
+Símbolo del elemento:
 Oxígeno,O
 Fluor,F
 Neón,Ne

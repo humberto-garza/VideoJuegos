@@ -33,6 +33,7 @@ import java.util.logging.Logger;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Arrays;
+import javax.swing.KeyStroke;
 
 /**
  * Jframe, load and save game
@@ -47,10 +48,27 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     //Jframe Size
     private int iHeight;
     private int iWidth;
-    private int iMargenGrid;
+
+    // Variables Grid
     private int iCuadroAncho;
     private int iCuadroAlto;
     private int iCuadroMargen;
+    private int iGridOffsetX;
+    private int iGridOffsetY;
+    private int iCasillas;
+    private int iGridRows;
+    private int iGridCols;
+    private int iIndexActual;
+
+    // Variables Cuadro Pregunta
+    private int iCuadroQX;
+    private int iCuadroQY;
+    private DisplayPregunta disPregunta;
+
+    // Variables Cuadro Respuesta
+    private int iDisplRX;
+    private int iDisplRY;
+    private DisplayRespuesta disRespuesta;
 
     // Posicionamiento
     private int[] arrGridX = new int[4];
@@ -91,23 +109,45 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     public Flood() throws FileNotFoundException, IOException {
 
         // Jframe Configuration
-        iWidth = 800;
-        iHeight = 600;
+        iWidth = 900;
+        iHeight = 768;
 
         // Variables de la matriz central
         iCuadroAncho = 140;
-        iCuadroAlto = 115;
-        iCuadroMargen = 5;
-        iMargenGrid = 20;
+        iCuadroAlto = 108;
+        iCuadroMargen = 4;
+        iGridOffsetX = 20;
+        iGridOffsetY = 110;
+        iGridRows = 5;
+        iGridCols = 5;
+        iCasillas = iGridRows * iGridCols;
+        iIndexActual = 0;
 
+        // Variables Cuadro Pregunta
+        iCuadroQX = 25;
+        iCuadroQY = 60;
+        disPregunta = new DisplayPregunta(iCuadroQX, iCuadroQY, "", "");
+
+        // Variables Cuadro Respuesta
+        iDisplRX = 25;
+        iDisplRY = 735;
+        disRespuesta = new DisplayRespuesta(iDisplRX, iDisplRY, "");
+
+        arrGridX = new int[iGridCols];
+        arrGridY = new int[iGridRows];
+        matGrid = new boolean[iGridRows][iGridCols];
 
         // Llenar los arreglos de posiciones de la matriz central
         for (boolean[] row : matGrid) {
             Arrays.fill(row, false);
         }
-        for (int iX = 0; iX < 4; iX++) {
-            arrGridX[iX] = iMargenGrid + iX * iCuadroAncho;
-            arrGridY[iX] = iMargenGrid + iX * iCuadroAlto;
+
+        for (int iX = 0; iX < iGridCols; iX++) {
+            arrGridX[iX] = iGridOffsetX + iX * iCuadroAncho;
+        }
+
+        for (int iX = 0; iX < iGridRows; iX++) {
+            arrGridY[iX] = iGridOffsetY + iX * iCuadroAlto;
         }
 
         Dimension dimD = new Dimension(iWidth, iHeight);
@@ -123,7 +163,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
                          .getResource("Images/Fondo.png"));
 
         // Crear el objeto selector
-        basSelector = new Base(iMargenGrid, iMargenGrid, Toolkit.getDefaultToolkit()
+        basSelector = new Base(iGridOffsetX, iGridOffsetY, Toolkit.getDefaultToolkit()
                                .getImage(this.getClass().getResource("Images/Selector.png")));
         iIncrementoX = 0;
         iIncrementoY = 0;
@@ -139,10 +179,10 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         lklCuadrosBase = new LinkedList<Cuadro>();
 
         lklDisponibles = new LinkedList<Integer>();
-        for (int iX = 0; iX < 16; iX++) {
+        for (int iX = 0; iX < iCasillas; iX++) {
             lklDisponibles.add(iX);
-            int iRow = iX / 4;
-            int iCol = iX - iRow * 4;
+            int iRow = iX / iGridCols;
+            int iCol = iX - iRow * iGridCols;
             Color colAux = new Color(255, 255, 255);
             Cuadro cuaAux = new Cuadro(
                 arrGridX[iCol] + iCuadroMargen,
@@ -246,8 +286,18 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             basSelector.setX(arrGridX[iIncrementoX]);
             basSelector.setY(arrGridY[iIncrementoY]);
         }
-    }
 
+        // Actualizar la Pregunta Actual
+        Cuadro cuaAux = lklCuadrosBase.get(iIndexActual);
+        if (cuaAux.isActive()) {
+            int iPregIndex = cuaAux.getPregunta();
+            String sPreguntaActual = lklPreguntas.get(iPregIndex).getPregunta();
+            disPregunta.setPregunta(sPreguntaActual);
+        } else {
+            disPregunta.setPregunta("");
+        }
+
+    }
 
     public void cargaColores() throws FileNotFoundException, IOException {
         lklColores.clear();
@@ -268,7 +318,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         String[] arrColores;
         String sLine;
-        while ((sLine = fileIn.readLine()) != null)   {
+        while ((sLine = fileIn.readLine()) != null) {
             arrColores = sLine.split(",");
             int iR = Integer.parseInt(arrColores[0]);
             int iG = Integer.parseInt(arrColores[1]);
@@ -302,21 +352,22 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         String[] arrPreguntas;
         String sLine;
-        while ((sLine = fileIn.readLine()) != null)   {
+        sLine = fileIn.readLine();
+        disPregunta.setPreguntaBase(sLine);
+
+        while ((sLine = fileIn.readLine()) != null) {
             arrPreguntas = sLine.split(",");
             String sPreg = arrPreguntas[0];
             String sResp = arrPreguntas[1];
 
             Pregunta preAux = new Pregunta(sPreg, sResp);
             lklPreguntas.add(preAux);
+            System.out.println(sPreg + " " + sResp);
         }
         System.out.print("Se Cargaron Preguntas: ");
         System.out.println(lklPreguntas.size());
 
     }
-
-
-
 
     /**
      * actualiza
@@ -348,26 +399,6 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             cuaAux.setActive(true);
         }
 
-
-        /*
-        boolean bAux = true;
-        int iRandCol = 0;
-        int iRandRow = 0;
-
-        while (bAux) {
-            iRandCol = (int) (Math.random() * 4);
-            iRandRow = (int) (Math.random() * 4);
-
-            bAux = matGrid[iRandCol][iRandRow];
-        }
-
-        Base basAux = new Base(arrGridX[iRandCol], arrGridY[iRandRow], Toolkit.getDefaultToolkit()
-                               .getImage(this.getClass().getResource("Images/Cuadro.png")));
-
-        matGrid[iRandCol][iRandRow] = true;
-
-        lklCuadros.add(basAux);
-         */
     }
 
     /**
@@ -439,6 +470,11 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             // Dibujar el selector
             basSelector.paint(graDibujo, this);
 
+            // Escribir el cuadro de pregunta
+            disPregunta.paint(graDibujo, this);
+            // Escribir el cuadro de pregunta
+            disRespuesta.paint(graDibujo, this);
+
         } // Si no se ha cargado se dibuja un mensaje
         else {
             //Da un mensaje mientras se carga el dibujo
@@ -469,36 +505,75 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         /* Revisar que tecla se presiono y cambiar la posicion*/
         if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
             int iAux = iIncrementoX + 1;
-            iAux = iAux % 4;
+            iAux = iAux % iGridCols;
             iIncrementoX = iAux;
             bKeyPressed = true;
+            iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
+            disRespuesta.setRespuesta("");
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
             int iAux = iIncrementoX - 1;
             if (iAux < 0) {
-                iAux = 3;
+                iAux = iGridCols - 1;
             }
-            iAux = iAux % 4;
+            iAux = iAux % iGridCols;
             iIncrementoX = iAux;
             bKeyPressed = true;
+            iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
+            disRespuesta.setRespuesta("");
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
             int iAux = iIncrementoY - 1;
             if (iAux < 0) {
-                iAux = 3;
+                iAux = iGridRows - 1;
             }
-            iAux = iAux % 4;
+            iAux = iAux % iGridRows;
             iIncrementoY = iAux;
             bKeyPressed = true;
+            iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
+            disRespuesta.setRespuesta("");
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
             int iAux = iIncrementoY + 1;
-            iAux = iAux % 4;
+            iAux = iAux % iGridRows;
             iIncrementoY = iAux;
             bKeyPressed = true;
+            iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
+            disRespuesta.setRespuesta("");
+        } else {
+            char cAux = keyEvent.getKeyChar();
+            if (Character.isDigit(cAux) || Character.isLetter(cAux)) {
+                System.out.println(keyEvent.getKeyChar());
+
+                // Actualizar la Pregunta Actual
+                Cuadro cuaAux = lklCuadrosBase.get(iIndexActual);
+                // Si el cuadro esta activo
+                if (cuaAux.isActive()) {
+                    // Obtener el index de la pregunta
+                    int iPregIndex = cuaAux.getPregunta();
+                    String sResEsperada = lklPreguntas.get(iPregIndex).getRespuesta();
+                    String sResTotal = disRespuesta.getRespuesta();
+
+                    // Comparar la respuesta esperada contra lo que se tiene
+                    int iCharIndex = disRespuesta.getSize();
+                    char cResEsperada = sResEsperada.charAt(iCharIndex);
+
+                    if (Character.toLowerCase(cResEsperada) == Character.toLowerCase(cAux)) {
+                        String sActualizar = disRespuesta.getRespuesta() + sResEsperada.charAt(iCharIndex);
+                        disRespuesta.setRespuesta(sActualizar);
+
+                        // Si la respuesta esta correcta
+                        if (disRespuesta.getSize() == sResEsperada.length()) {
+                            // Dar de baja el cuadro
+                            cuaAux.setActive(false);
+                            lklDisponibles.add(iIndexActual);
+                            disRespuesta.setRespuesta("");
+                        }
+                    }
+                }
+            }
         }
     }
-
 
     /**
      * keyReleased
@@ -508,28 +583,34 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
      *
      */
     @Override
-    public void keyReleased(KeyEvent keyEvent) {
+    public void keyReleased(KeyEvent keyEvent
+                           ) {
         bKeyPressed = false;
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseClicked(MouseEvent e
+                            ) {
 
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
+    public void mousePressed(MouseEvent e
+                            ) {
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
+    public void mouseReleased(MouseEvent e
+                             ) {
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
+    public void mouseEntered(MouseEvent e
+                            ) {
     }
 
     @Override
-    public void mouseExited(MouseEvent e) {
+    public void mouseExited(MouseEvent e
+                           ) {
     }
 }
