@@ -103,3 +103,5 @@ plugins/c9.docker/containers/shared/files/plugins/google*
 security-audit.log
 >>>>>>> c0048ae44c3ae66f53a051045098c319355b66bc
 /Proyecto_Final/Flood/dist/
+/Proyecto_Final/Flood/nbproject/private/
+/Proyecto_Final/Flood/build/
