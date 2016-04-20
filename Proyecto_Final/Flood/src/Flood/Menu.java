@@ -39,7 +39,7 @@ public class Menu extends JFrame implements MouseListener {
     private Graphics graGraficaApplet; // Objeto grafico de la Imagen
     
     //BasePlay
-     private Base basPlay;
+    private Base basPlay;
     
 
     
