@@ -41,12 +41,7 @@ public class BannerMenu extends JPanel implements MouseListener{
     private Base backToMenu; //boton de back to menu
     
     //Imagenes Menu principal 
-    Image imaCatUno;
-    Image imaCaDos;
-    Image imaCatTres;
-    Image imaCatCUstom;
-    Image imaPlay; //boton de play
-    Image imaHelp; //boton de help
+    Image imaMenuBackground; //Background menu
     
     
     //Imagenes Pantalla de Help
@@ -97,6 +92,8 @@ public class BannerMenu extends JPanel implements MouseListener{
     
     public void creaImagenes(){
         
+        imaMenuBackground = Toolkit.getDefaultToolkit().getImage(this.getClass()
+               .getResource("Images/menu/MenuBanner.png"));
     }
     
     public void setPlay(boolean bPlay){
@@ -176,21 +173,16 @@ public class BannerMenu extends JPanel implements MouseListener{
        
     }
     
-
-    //paint normal
     
     public void paintComponent(Graphics graGrafico){
         
         super.paint(graGrafico);
         
-        basPlay.paint(graGrafico,this);
-        basHelp.paint(graGrafico, this);
-        backToMenu.paint(graGrafico, this);
         
-     
         if(bPrincipal){
             
             paintPrincipal(graGrafico);
+            
             
         }else if(bInstrucciones){
             
@@ -208,18 +200,21 @@ public class BannerMenu extends JPanel implements MouseListener{
             
         }
         
-        
-     
     }
     
     //paint principal
     public void paintPrincipal(Graphics graGrafico){
         
-         //basSelector.paint(graDibujo, this);
+        //basSelector.paint(graDibujo, this);
+        graGrafico.drawImage(imaMenuBackground, 0, 0, tarGame.iWidth, tarGame.iHeight, this);
         basCatUno.paint(graGrafico, this);
         basCatDos.paint(graGrafico, this);
         basCatTres.paint(graGrafico,this);
         basCatCustom.paint(graGrafico,this);
+        basPlay.paint(graGrafico,this);
+        basHelp.paint(graGrafico, this);
+        backToMenu.paint(graGrafico, this);
+        
                         
     }
     
