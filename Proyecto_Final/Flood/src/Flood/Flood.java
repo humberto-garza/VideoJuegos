@@ -628,13 +628,14 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     public void mouseClicked(MouseEvent mouEvent) {
         iMouseX = mouEvent.getX();
         iMouseY = mouEvent.getY();
-
+/*
         if (side.basBackMenu.intersects(iMouseX, iMouseY)) {//seleciono play
             //dispose menu, iniciar juego
 
             this.dispose();
             Menu menu = new Menu();
         }
+*/
     }
 
     @Override
