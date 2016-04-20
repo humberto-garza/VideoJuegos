@@ -116,6 +116,9 @@ public class Menu extends JFrame implements MouseListener {
             // Dibujar el objeto de play
             basPlay.paint(graDibujo, this);
             
+            
+            
+            
         } // Si no se ha cargado se dibuja un mensaje
         else {
             //Da un mensaje mientras se carga el dibujo

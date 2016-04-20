@@ -54,6 +54,9 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
     // Variables Grid
     private int iMargenGrid;
+    
+    //Panels
+    private BannerMenu bannerMenu;
 
     private int iCuadroAncho;
     private int iCuadroAlto;
@@ -126,6 +129,12 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         // Jframe Configuration
         iWidth = 900;
         iHeight = 768;
+        
+        
+        //Panel configuration
+        this.bannerMenu = new BannerMenu(this);
+        
+        
 
         // Variables de la matriz central
         iCuadroAncho = 110;
@@ -281,6 +290,9 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
     public void paintPanels() {
         side.repaint();
+        bannerMenu.repaint();
+        
+        
     }
 
     /**
@@ -455,6 +467,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             imaImagenApplet = createImage(this.getSize().width,
                                           this.getSize().height);
             graGraficaApplet = imaImagenApplet.getGraphics();
+            
+     
         }
         // Actualiza el Foreground.
         graGraficaApplet.setColor(getForeground());
@@ -506,6 +520,9 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
             // Escribir el cuadro de pregunta
             disRespuesta.paint(graDibujo, this);
+            
+            
+            paintPanels();
 
         } // Si no se ha cargado se dibuja un mensaje
         else {

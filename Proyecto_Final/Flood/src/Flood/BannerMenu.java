@@ -1,17 +1,21 @@
 package Flood;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.ImageObserver;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Left & Right
  *
  */
-public class BannerMenu {
+public class BannerMenu extends JPanel implements MouseListener{
 
     
     private Image imaBackground; //Imagen de fondo 
@@ -37,9 +41,25 @@ public class BannerMenu {
     private boolean bRecords; //boton que lleva a records
     protected boolean bPlay; //boton que lleva a al juego
     
+    /**
+     * Creates the flood instance. 
+     */
     
+    private Flood flood;
     
-    
+    /**
+     * Crates a new BannerMenu instance.
+     *
+     * @param flood The Flood instance to use.
+     */
+    public BannerMenu(Flood flood) {
+
+        this.flood = flood;
+        setPreferredSize(new Dimension(flood.iWidth, flood.iHeight));
+        setBackground(Color.BLACK);
+    }
+
+  
     
     public void creaBotones(){
         
@@ -75,6 +95,8 @@ public class BannerMenu {
            
     }
     
+   
+    
     public void inicializaVariables(){
         
         bPrincipal = true;
@@ -83,65 +105,121 @@ public class BannerMenu {
         bRecords = false;
         bPlay = false;
         
+        
+        
     }
     
     public BannerMenu(){
         
-        
        inicializaVariables();
-       creaBotones();
-       
-       
-        
+       creaBotones();  
+         
     }
     //paint normal
     
     public void paint(Graphics graGrafico){
         
+        //borrar
+        graGrafico.fillRect(100, 100, 100, 100);
+        
+        super.paint(graGrafico);
+        
+        basPlay.paint(graGrafico,this);
+        basHelp.paint(graGrafico, this);
+        backToMenu.paint(graGrafico, this);
+        
+     
         if(bPrincipal){
             
+            paintPrincipal(graGrafico);
+            
         }else if(bInstrucciones){
+            
+            paintInstrucciones(graGrafico);
         
         }else if (bCreditos) {
             
+            paintCreditos(graGrafico);
+            
         }else if (bRecords){
+            paintRecords(graGrafico);
+            
+        }else if (bPlay){
+            
             
         }
-            
-            
-            
-        bPrincipal = true;
-        bInstrucciones = false;
-        bCreditos =false;
-        bRecords = false;
-        bPlay = false;
         
+        
+     
     }
     
     //paint principal
+    public void paintPrincipal(Graphics graGrafico){
+        
+         //basSelector.paint(graDibujo, this);
+        basCatUno.paint(graGrafico, this);
+        basCatDos.paint(graGrafico, this);
+        basCatTres.paint(graGrafico,this);
+        basCatCustom.paint(graGrafico,this);
+                        
+    }
     
     //paint instrucciones
+    public void paintInstrucciones(Graphics graGrafico){
+     
+        basInstrucciones.paint(graGrafico, this);
+        
+    }
     
     //paint creditos
+    public void paintCreditos(Graphics graGrafico){
+        
+        basCreditos.paint(graGrafico, this);
+        
+    }
+   //paint records
+    public void paintRecords(Graphics graGrafico){
+        
+        basRecords.paint(graGrafico, this);
+        
+    }
     
-    if(b)
+   
+    //Metodo que apaga todas las booleaneas de banner y ya despues de esto
+    //prendes el banner que quieras usar
+    void falseAll() {
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-     
-    
-    
-    
-    
+        bPrincipal = false;
+        bInstrucciones = false;
+        bCreditos = false;
+        bRecords = false;
+        bPlay = false;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
 
 
