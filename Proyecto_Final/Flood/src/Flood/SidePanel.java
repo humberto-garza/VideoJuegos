@@ -53,15 +53,13 @@ public class SidePanel extends JPanel implements MouseListener {
 
     //Font a usar
     private Font fonFuentel;
-<<<<<<< HEAD
+
     
     //Banner Menu
     private BannerMenu bannerMenu;
    
-=======
 
 
->>>>>>> origin/master
 
     public SidePanel(Flood floodGame) throws FontFormatException, IOException {
 
@@ -202,12 +200,8 @@ public class SidePanel extends JPanel implements MouseListener {
     }
 
     public void mouseClicked(MouseEvent mouEvent) {
-<<<<<<< HEAD
-        
-    
-=======
 
->>>>>>> origin/master
+        
         //actualiza posiciones del mouse
         iMouseX = mouEvent.getX()+iMouseXOffSet;
         iMouseY = mouEvent.getY();
@@ -218,12 +212,10 @@ public class SidePanel extends JPanel implements MouseListener {
             System.out.println("clicked help");
             bBackMenu = false;//apaga las demás
         }
-<<<<<<< HEAD
-        else if (basPause.intersects(iMouseX, iMouseY) ) {
-=======
+
+
         else if ( basPause.intersects(iMouseX, iMouseY) ) {
             System.out.println("clicked pause");
->>>>>>> origin/master
             bPause = !bPause;//niega pause
         }
         else if (basSound.intersects(iMouseX, iMouseY)) {
@@ -232,15 +224,22 @@ public class SidePanel extends JPanel implements MouseListener {
             manejaSonido();
         }
         else if (basBackMenu.intersects(iMouseX, iMouseY)){
-<<<<<<< HEAD
-            
-=======
+
             System.out.println("clicked menu");
->>>>>>> origin/master
-            bBackMenu = true;
-            bannerMenu.setPlay(false);
-             System.out.println("set play");
-            bHelp = false;//apaga las demás
+            
+            //Segun yo SDN borrar, pues 
+            //bBackMenu = true;
+            //bHelp = false;//apaga las demás
+            //Segun yo SDN borrar, pues 
+           
+            //SDN - Variables de Banner Menu
+            tarGame.bannerMenu.setPlay(false);
+            System.out.println("set play");
+            tarGame.bannerMenu.falseAll();
+            tarGame.bannerMenu.bPrincipal = true;
+            //SDN - Variables de Banner Menu
+            
+           
         }
 
     }

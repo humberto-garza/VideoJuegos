@@ -59,7 +59,7 @@ public class BannerMenu extends JPanel implements MouseListener{
     
     
     //banderas que controlan vistas
-    private boolean bPrincipal; //boton que lleva a menu principal
+    protected boolean bPrincipal; //boton que lleva a menu principal
     private boolean bInstrucciones; //boton que lleva a instrucciones 
     private boolean bCreditos; //boton que lleva a creditos
     private boolean bRecords; //boton que lleva a records
@@ -262,7 +262,7 @@ public class BannerMenu extends JPanel implements MouseListener{
    
     //Metodo que apaga todas las booleaneas de banner y ya despues de esto
     //prendes el banner que quieras usar
-    void falseAll() {
+    public void falseAll() {
         bPrincipal = false;
         bInstrucciones = false;
         bCreditos = false;

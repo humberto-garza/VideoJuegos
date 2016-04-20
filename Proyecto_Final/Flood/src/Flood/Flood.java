@@ -176,11 +176,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         
         //borderlayout para definir los paneles
         add(side, BorderLayout.EAST);
-<<<<<<< HEAD
+
         add(bannerMenu);
-=======
-        //614
->>>>>>> origin/master
 
         
 
