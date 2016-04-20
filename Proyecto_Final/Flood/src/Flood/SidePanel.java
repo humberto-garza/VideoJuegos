@@ -121,7 +121,6 @@ public class SidePanel extends JPanel implements MouseListener {
             basPause.paint(graGrafico, this);
             basSound.paint(graGrafico, this);
         }
-        // Si no se ha cargado se dibuja un mensaje
         else {
             //Da un mensaje mientras se carga el dibujo
             graGrafico.drawString("No se cargo la imagen..", 20, 20);
