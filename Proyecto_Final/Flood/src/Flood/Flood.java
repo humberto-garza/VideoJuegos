@@ -116,6 +116,10 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
     //SidePanel Instance
     private SidePanel side;
+    
+    //Variables de socre y nivel
+    protected int iPuntos;
+    protected int iNivel;
 
     // Variables de tiempo
     private long tiempoActual;
@@ -192,6 +196,10 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         iIncrementoX = 0;
         iIncrementoY = 0;
+        
+        //Variables de score y nivel
+        iPuntos = 0;
+        iNivel = 1;
 
         // Variables tiempo
         iRandMax = 75;
@@ -695,13 +703,14 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     public void mouseClicked(MouseEvent mouEvent) {
         iMouseX = mouEvent.getX();
         iMouseY = mouEvent.getY();
-
+/*
         if (side.basBackMenu.intersects(iMouseX, iMouseY)) {//seleciono play
             //dispose menu, iniciar juego
 
             this.dispose();
             Menu menu = new Menu();
         }
+*/
     }
 
     @Override
