@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.Toolkit;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.BufferedReader;
@@ -120,17 +121,17 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     // Variables de archivo
     private String nombreArchivo;    //Nombre del archivo.
 
-    public Flood() throws FileNotFoundException, IOException {
+    public Flood() throws FileNotFoundException, IOException, FontFormatException {
 
         // Jframe Configuration
         iWidth = 900;
         iHeight = 768;
 
         // Variables de la matriz central
-        iCuadroAncho = 140;
-        iCuadroAlto = 108;
+        iCuadroAncho = 110;
+        iCuadroAlto = 110;
         iCuadroMargen = 4;
-        iGridOffsetX = 20;
+        iGridOffsetX = 50;
         iGridOffsetY = 110;
         iGridRows = 5;
         iGridCols = 5;
@@ -138,13 +139,13 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         iIndexActual = 0;
 
         // Variables Cuadro Pregunta
-        iCuadroQX = 25;
+        iCuadroQX = 60;
         iCuadroQY = 60;
         disPregunta = new DisplayPregunta(iCuadroQX, iCuadroQY, "", "");
 
         // Variables Cuadro Respuesta
-        iDisplRX = 25;
-        iDisplRY = 730;
+        iDisplRX = 60;
+        iDisplRY = 710;
         disRespuesta = new DisplayRespuesta(iDisplRX, iDisplRY, "");
 
         arrGridX = new int[iGridCols];
@@ -246,7 +247,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
      *
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) throws FileNotFoundException, IOException, FontFormatException {
         Flood tarGame = new Flood();
     }
 
@@ -353,7 +354,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
     }
 
-    public void cargaPreguntas(String sCategoria) throws FileNotFoundException, IOException {
+    public void cargaPreguntas(String sCategoria) throws FileNotFoundException, IOException, FontFormatException {
         lklPreguntas.clear();
 
         nombreArchivo = "./src/Flood/Files/";
@@ -502,6 +503,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
             // Escribir el cuadro de pregunta
             disPregunta.paint(graDibujo, this);
+
             // Escribir el cuadro de pregunta
             disRespuesta.paint(graDibujo, this);
 

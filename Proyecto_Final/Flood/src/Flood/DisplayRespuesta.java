@@ -29,7 +29,7 @@ public class DisplayRespuesta {
     public void paint(Graphics graGrafico, ImageObserver imoObserver) {
         Color colAux = new Color(0, 0, 0);
         graGrafico.setColor(colAux);
-        graGrafico.setFont(new Font("TimesRoman", Font.BOLD, 25));
+        graGrafico.setFont(new Font("SansSerif", Font.PLAIN, 30));
 
         graGrafico.drawString(getRespuesta(), getX(), getY());
     }

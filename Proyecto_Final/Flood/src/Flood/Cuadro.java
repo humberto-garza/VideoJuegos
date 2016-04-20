@@ -2,8 +2,10 @@ package Flood;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.image.ImageObserver;
 import java.util.LinkedList;
 
@@ -105,8 +107,15 @@ public class Cuadro extends Base {
     }
 
     public void paint(Graphics graGrafico, ImageObserver imoObserver, LinkedList<Pregunta> lklPreguntas) {
-        graGrafico.setColor(getColor());
-        graGrafico.fillRect(getX(), getY(), getAncho(), getAlto());
+        Graphics2D g2 = (Graphics2D)graGrafico;
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        Color colTemp = getColor();
+
+        graGrafico.setColor(colTemp);
+        graGrafico.fillRoundRect(getX(), getY(), getAncho(), getAlto(), 20, 20);
+        graGrafico.setColor(colTemp);
+        graGrafico.fillRoundRect(getX() + 10, getY() + 10, getAncho() - 20, getAlto() - 20, 20, 20);
 
         String sPreg = lklPreguntas.get(getPregunta()).getPregunta();
 
@@ -123,7 +132,7 @@ public class Cuadro extends Base {
         int iStringHeight = graGrafico.getFontMetrics().getAscent();
 
         int iOffsetX = (int) rect.getX() + (int) (rect.getWidth() / 2) - (iStringWidth / 2);
-        int iOffsetY = (int) rect.getY() + (int) (rect.getHeight() / 2) - (iStringHeight / 2);
+        int iOffsetY = (int) rect.getY() + (int) (rect.getHeight() / 2) - (iStringHeight / 2) + 20;
 
         Color colAux = new Color(0, 0, 0);
         graGrafico.setColor(colAux);

@@ -1,5 +1,10 @@
 package Flood;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 
 /**
  *
@@ -14,12 +19,8 @@ public class Pregunta {
     private String sRespuesta;
     private int iPuntos;
 
-    /**
-     * Cuadro
-     *
-     */
+    public Pregunta(String sPregunta, String sRespuesta, int iPuntos) throws FontFormatException, IOException {
 
-    public Pregunta(String sPregunta, String sRespuesta, int iPuntos) {
         this.sPregunta = sPregunta;
         this.sRespuesta = sRespuesta;
         this.iPuntos = iPuntos;
