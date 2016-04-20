@@ -683,6 +683,9 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
                         // Si la respuesta esta completa
                         if (disRespuesta.getSize() == sResEsperada.length()) {
+                            // Sumar los puntos
+                            iPuntos += cuaAux.getValor();
+                            
                             // Dar de baja el cuadro
                             cuaAux.setActive(false);
 
