@@ -63,13 +63,6 @@ public class SidePanel extends JPanel implements MouseListener {
         crearImagenes();
         addMouseListener(this);
         
-//        addMouseListener(new MouseAdapter() { 
-//          public void mousePressed(MouseEvent me) { 
-//            System.out.println("FUNCIONA"); 
-//          } 
-//        });
-        
-        
         
         this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/CustomL.ttf"));
         this.fonFuentel = this.fonFuentel.deriveFont(25F);
