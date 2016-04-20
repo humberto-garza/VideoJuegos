@@ -5,6 +5,7 @@
  */
 package Flood;
 
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Color;
@@ -164,6 +165,9 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         //inicializa la instancia de SidePanel
         this.side = new SidePanel(this);
+        setLayout(new BorderLayout());
+        add(side, BorderLayout.EAST);
+        
 
         // Llenar los arreglos de posiciones de la matriz central
         for (boolean[] row : matGrid) {

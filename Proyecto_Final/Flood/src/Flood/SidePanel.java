@@ -7,6 +7,7 @@ import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileInputStream;
@@ -62,12 +63,21 @@ public class SidePanel extends JPanel implements MouseListener {
         crearImagenes();
         addMouseListener(this);
         
+//        addMouseListener(new MouseAdapter() { 
+//          public void mousePressed(MouseEvent me) { 
+//            System.out.println("FUNCIONA"); 
+//          } 
+//        });
+        
+        
+        
         this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/CustomL.ttf"));
         this.fonFuentel = this.fonFuentel.deriveFont(25F);
 
-        
-        setPreferredSize(new Dimension(floodGame.iWidth -200, floodGame.iHeight));        
-        setBackground(Color.CYAN);
+        setFocusable(true);
+       // setPreferredSize(new Dimension(floodGame.iWidth /2, floodGame.iHeight));
+        setPreferredSize(new Dimension(300, floodGame.iHeight));        
+        //setBackground(Color.CYAN);
         
     }
     /**initvars
@@ -177,6 +187,8 @@ public class SidePanel extends JPanel implements MouseListener {
     }
     
     public void mouseClicked(MouseEvent mouEvent) {
+        
+        System.out.println("HOLA");
         //actualiza posiciones del mouse
         iMouseX = mouEvent.getX();
         iMouseY = mouEvent.getY();
