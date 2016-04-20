@@ -625,7 +625,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             iIncrementoX = iAux;
             bKeyPressed = true;
             iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
-
+            disRespuesta.setRespuesta("");
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
             int iAux = iIncrementoX - 1;
@@ -636,7 +636,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             iIncrementoX = iAux;
             bKeyPressed = true;
             iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
-
+            disRespuesta.setRespuesta("");
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
             int iAux = iIncrementoY - 1;
@@ -647,7 +647,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             iIncrementoY = iAux;
             bKeyPressed = true;
             iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
-
+            disRespuesta.setRespuesta("");
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
             int iAux = iIncrementoY + 1;
@@ -655,7 +655,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             iIncrementoY = iAux;
             bKeyPressed = true;
             iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
-
+            disRespuesta.setRespuesta("");
         } else {
             char cAux = keyEvent.getKeyChar();
             if (Character.isDigit(cAux) || Character.isLetter(cAux)) {
