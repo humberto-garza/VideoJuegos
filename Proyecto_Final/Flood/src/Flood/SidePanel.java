@@ -2,11 +2,15 @@ package Flood;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileInputStream;
+import java.io.IOException;
 import javax.swing.JPanel;
 
 /**
@@ -35,24 +39,32 @@ public class SidePanel extends JPanel implements MouseListener {
     private boolean bPause;
     private boolean bSound;
     
-    
     //Variables de posicion del mouse
     int iMouseX;
     int iMouseY;
     
+    //Variable que contiene el #de nivel como string, se usa para pintar el nivel
+    private String sNivel;
+    
     //The Flood Game instance
     private Flood tarGame;
     
+    //Font a usar
+    private Font fonFuentel;
+    
    
 
-    public SidePanel(Flood floodGame) {
+    public SidePanel(Flood floodGame) throws FontFormatException, IOException {
         
+        this.tarGame = floodGame;//instancia de flood
         initVars();
         creaBases();
         crearImagenes();
         addMouseListener(this);
+        
+        this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/CustomL.ttf"));
+        this.fonFuentel = this.fonFuentel.deriveFont(25F);
 
-        this.tarGame = floodGame;
         
         setPreferredSize(new Dimension(floodGame.iWidth -200, floodGame.iHeight));        
         setBackground(Color.CYAN);
@@ -62,10 +74,13 @@ public class SidePanel extends JPanel implements MouseListener {
      inicializa las variables
      **/
     public void initVars(){
+        //booleanas de botones
         bBackMenu = false;
         bHelp = false;
         bPause = false;
         bSound = true;
+        //indica el nivel
+        sNivel = Integer.toString(tarGame.iNivel);
     }
     
     /* crearImagenes
@@ -75,10 +90,14 @@ public class SidePanel extends JPanel implements MouseListener {
         // Crear la imagen de fondo.
         imaImagenLogo = Toolkit.getDefaultToolkit().getImage(this.getClass()
                          .getResource("Images/sidePanel/logo.png"));
+        
         imaImagenPuntaje = Toolkit.getDefaultToolkit().getImage(this.getClass()
                          .getResource("Images/sidePanel/puntaje.png"));
+        
+        sNivel ="2";
         imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                         .getResource("Images/sidePanel/nivel.png"));
+                         .getResource("Images/sidePanel/nivel"+sNivel+".png"));
+        
     }
     
     /* creaBases
@@ -110,6 +129,9 @@ public class SidePanel extends JPanel implements MouseListener {
         //pinta imagenes
             graGrafico.drawImage(imaImagenLogo,640, 50, 203, 70, this);
             graGrafico.drawImage(imaImagenPuntaje,640, 150, 193, 145, this);
+            graGrafico.setFont(fonFuentel);
+            graGrafico.drawString(Integer.toString(tarGame.iPuntos), 650, 220);
+            
             graGrafico.drawImage(imaImagenNivel,640, 350, 173, 82, this);
         }
     
@@ -143,6 +165,15 @@ public class SidePanel extends JPanel implements MouseListener {
                .getImage(this.getClass().getResource("Images/sidePanel/soundOFF.png")));
             //AQUI PONER EL SOUND.PAUSE()
         }
+    }
+    
+    public void cambioNivel() {
+        //indica el nivel
+        sNivel = Integer.toString(tarGame.iNivel);
+        
+        //cambiar imagen a desplegar
+        imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                         .getResource("Images/sidePanel/nivel"+sNivel+".png"));
     }
     
     public void mouseClicked(MouseEvent mouEvent) {
