@@ -342,8 +342,10 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     public void cargaColores() throws FileNotFoundException, IOException {
         lklColores.clear();
         iColorActual = 0;
+        // Seleccionar al azar una paleta
+        int iRandPicker = (int) (Math.random() * 6) + 1;
 
-        nombreArchivo = "./src/Flood/Files/1.txt";
+        nombreArchivo = "./src/Flood/Files/Paletas/" + iRandPicker + ".txt";
         BufferedReader fileIn;
 
         try {
@@ -653,7 +655,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     }
 
     public void cambioCuadro() {
-        if (lklUsados.size() >= 0) {
+        if (lklUsados.size() > 0) {
             bCambio = true;
 
             disRespuesta.setRespuesta("");
