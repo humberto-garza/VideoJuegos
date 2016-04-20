@@ -576,7 +576,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         basSelector.paint(graDibujo, this);
 
         //paintComponent de side Panel
-        //side.paintComponent(graDibujo);
+        side.paintComponent(graDibujo);
 
         // Escribir el cuadro de pregunta
         disPregunta.paint(graDibujo, this);

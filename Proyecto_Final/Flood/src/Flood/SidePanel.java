@@ -130,7 +130,7 @@ public class SidePanel extends JPanel implements MouseListener {
     }
     
     public void paintComponent(Graphics graGrafico){
-        super.paintComponent(graGrafico);
+        //super.paintComponent(graGrafico);
         
         if (imaImagenLogo != null && imaImagenPuntaje != null &&   
                 imaImagenNivel != null) {
