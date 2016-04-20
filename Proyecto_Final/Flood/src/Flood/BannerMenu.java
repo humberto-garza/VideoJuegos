@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
 /**
@@ -288,12 +289,21 @@ public class BannerMenu extends JPanel implements MouseListener{
         
         
         //selecciona categoria 1
+       
         
         //selecciona categoria 2
         
         //selecciona categoria 3
         
         //Selecciona categoria custom 
+         if (basCatCustom.intersects(iMouseX, iMouseY)) { //seleciono play
+            
+             chooseFile();
+             System.out.println("Custom Category");
+             
+        }
+        
+        
         //Se abre ventana para seleccionar archivo.txt 
         
         //selecciona play
@@ -347,6 +357,15 @@ public class BannerMenu extends JPanel implements MouseListener{
             System.out.println("Credits");
         }
     }
+    
+    void chooseFile() {
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.showOpenDialog(fileChooser);
+       
+        String patch = fileChooser.getSelectedFile().getAbsolutePath();
+       
+    }
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -367,6 +386,8 @@ public class BannerMenu extends JPanel implements MouseListener{
     public void mouseExited(MouseEvent e) {
        
     }
+    
+    
 }
 
 
