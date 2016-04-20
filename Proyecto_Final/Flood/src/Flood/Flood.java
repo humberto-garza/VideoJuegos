@@ -55,7 +55,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
     // Variables Grid
     private int iMargenGrid;
-
+  
     private int iCuadroAncho;
     private int iCuadroAlto;
     private int iCuadroMargen;
@@ -93,6 +93,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
     //Objeto base BackMenu
     private Base backMenu;
+    
+    
 
     // Color actual
     private int iColorActual;
@@ -118,6 +120,9 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     //SidePanel Instance
     private SidePanel side;
     
+    //Banner Menu Instance
+    private BannerMenu bannerMenu;
+    
     //Variables de socre y nivel
     protected int iPuntos;
     protected int iNivel;
@@ -138,7 +143,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         // Jframe Configuration
         iWidth = 900;
         iHeight = 768;
-
+        
+      
         // Variables de la matriz central
         iCuadroAncho = 110;
         iCuadroAlto = 110;
@@ -165,8 +171,12 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         //inicializa la instancia de SidePanel
         this.side = new SidePanel(this);
+        //borderlayout para definir los paneles
         setLayout(new BorderLayout());
         add(side, BorderLayout.EAST);
+        
+        //inicializa la instancia de BannerMenu
+        this.bannerMenu = new BannerMenu(this);
         
 
         // Llenar los arreglos de posiciones de la matriz central
@@ -291,9 +301,17 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         // Mientras no sea el fin del juego
         while (true) {
-            actualiza();
+            
+            if(bannerMenu.getPlay()){
+             
+                actualiza();   
+            }
+            
             checaColision();
-            repaint();
+            repaint();  
+           
+           
+            
 
             try {
                 // El hilo del juego se duerme: 10 default.
@@ -308,6 +326,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
     public void paintPanels() {
         side.repaint();
+        bannerMenu.repaint();
+        
     }
 
     /**
@@ -354,8 +374,10 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     public void cargaColores() throws FileNotFoundException, IOException {
         lklColores.clear();
         iColorActual = 0;
+        // Seleccionar al azar una paleta
+        int iRandPicker = (int) (Math.random() * 6) + 1;
 
-        nombreArchivo = "./src/Flood/Files/1.txt";
+        nombreArchivo = "./src/Flood/Files/Paletas/" + iRandPicker + ".txt";
         BufferedReader fileIn;
 
         try {
@@ -487,12 +509,15 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     @Override
     public void paint(Graphics graGrafico) {
 
+         
         // Inicializan el DoubleBuffer
         // Si quitamos el if funciona con el resize
         if (imaImagenApplet == null) {
             imaImagenApplet = createImage(this.getSize().width,
                                           this.getSize().height);
             graGraficaApplet = imaImagenApplet.getGraphics();
+            
+     
         }
         // Actualiza el Foreground.
         graGraficaApplet.setColor(getForeground());
@@ -521,35 +546,57 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             // Dibuja la imagen de fondo
             graDibujo.drawImage(imaImagenFondo, 0, 0, iWidth, iHeight, this);
 
-            // Dibuja los objetos Cuadro
-            for (Base basAux : lklCuadros) {
-                basAux.paint(graDibujo, this);
+            
+            if (!bannerMenu.getPlay()) {
+                
+                //se pinta el menu
+                paintCustomMenu(graDibujo);
+                
             }
-
-            // Dibuja los objetos Cuadro
-            for (Cuadro cuaAux : lklCuadrosBase) {
-                if (cuaAux.isActive()) {
-                    cuaAux.paint(graDibujo, this, lklPreguntas);
-                }
+            
+            else{
+                //se pinta el juego cuando se le pica play
+                paintCustomFlood(graDibujo);
             }
-
-            // Dibujar el selector
-            basSelector.paint(graDibujo, this);
-
-            //paintComponent de side Panel
-            side.paintComponent(graDibujo);
-
-            // Escribir el cuadro de pregunta
-            disPregunta.paint(graDibujo, this);
-
-            // Escribir el cuadro de pregunta
-            disRespuesta.paint(graDibujo, this);
-
+            
         } // Si no se ha cargado se dibuja un mensaje
         else {
             //Da un mensaje mientras se carga el dibujo
             graDibujo.drawString("No se cargo la imagen..", 20, 20);
         }
+    }
+    
+    
+    public void paintCustomFlood(Graphics graDibujo){
+        
+        // Dibuja los objetos Cuadro
+        for (Base basAux : lklCuadros) {
+            basAux.paint(graDibujo, this);
+        }
+
+        // Dibuja los objetos Cuadro
+        for (Cuadro cuaAux : lklCuadrosBase) {
+            if (cuaAux.isActive()) {
+                cuaAux.paint(graDibujo, this, lklPreguntas);
+            }
+        }
+
+        // Dibujar el selector
+        basSelector.paint(graDibujo, this);
+
+        //paintComponent de side Panel
+        side.paintComponent(graDibujo);
+
+        // Escribir el cuadro de pregunta
+        disPregunta.paint(graDibujo, this);
+
+        // Escribir el cuadro de pregunta
+        disRespuesta.paint(graDibujo, this);
+    }
+    
+    public void paintCustomMenu(Graphics graDibujo){
+        
+        bannerMenu.paintComponent(graDibujo);
     }
 
     /**
@@ -582,7 +629,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             iIncrementoX = iAux;
             bKeyPressed = true;
             iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
-
+            disRespuesta.setRespuesta("");
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
             int iAux = iIncrementoX - 1;
@@ -593,7 +640,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             iIncrementoX = iAux;
             bKeyPressed = true;
             iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
-
+            disRespuesta.setRespuesta("");
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
             int iAux = iIncrementoY - 1;
@@ -604,7 +651,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             iIncrementoY = iAux;
             bKeyPressed = true;
             iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
-
+            disRespuesta.setRespuesta("");
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
             int iAux = iIncrementoY + 1;
@@ -612,7 +659,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             iIncrementoY = iAux;
             bKeyPressed = true;
             iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
-
+            disRespuesta.setRespuesta("");
         } else {
             char cAux = keyEvent.getKeyChar();
             if (Character.isDigit(cAux) || Character.isLetter(cAux)) {
@@ -665,7 +712,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     }
 
     public void cambioCuadro() {
-        if (lklUsados.size() >= 0) {
+        if (lklUsados.size() > 0) {
             bCambio = true;
 
             disRespuesta.setRespuesta("");
@@ -703,16 +750,23 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     }
 
     public void mouseClicked(MouseEvent mouEvent) {
+  
         iMouseX = mouEvent.getX();
         iMouseY = mouEvent.getY();
-/*
-        if (side.basBackMenu.intersects(iMouseX, iMouseY)) {//seleciono play
-            //dispose menu, iniciar juego
-
-            this.dispose();
-            Menu menu = new Menu();
+        
+        if ( bannerMenu.basPlay.intersects(iMouseX, iMouseY) ){//seleciono play  
+            
+            bannerMenu.setPlay(true);
+           
         }
-*/
+        
+        if ( side.basBackMenu.intersects(iMouseX, iMouseY) ){//seleciono play  
+            
+            bannerMenu.setPlay(false);
+            
+        }
+        
+        
     }
 
     @Override

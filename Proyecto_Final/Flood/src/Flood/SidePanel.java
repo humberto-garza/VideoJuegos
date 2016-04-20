@@ -24,7 +24,7 @@ public class SidePanel extends JPanel implements MouseListener {
     private boolean bIntersects;
     
     //Objetos Base para los botones del panel
-    private Base basBackMenu;
+    protected Base basBackMenu;
     private Base basHelp;
     private Base basPause;
     private Base basSound;
