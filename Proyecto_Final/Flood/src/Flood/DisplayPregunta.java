@@ -44,7 +44,7 @@ public class DisplayPregunta {
         graGrafico.setFont(fonFuentel);
         graGrafico.drawString(getPreguntaBase(), getX(), getY()-10);
         graGrafico.setFont(fonFuente);
-        graGrafico.drawString(getPregunta(), getX(), getY() + 35);
+        graGrafico.drawString(getPregunta(), getX(), getY() + 28);
     }
 
     public String getPregunta() {
