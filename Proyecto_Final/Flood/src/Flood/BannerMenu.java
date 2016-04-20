@@ -2,12 +2,18 @@ package Flood;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.ImageObserver;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -25,61 +31,118 @@ public class BannerMenu extends JPanel implements MouseListener{
     private Base basCatDos; //boton categoria dos
     private Base basCatTres; // boton categoria tres
     private Base basCatCustom; // boton custom 
-    private Base basPlay; //Boton de play
+    protected Base basPlay; //Boton de play
     private Base basHelp; //Boton de play
     
-    //Bases Help
+    //Bases Pantalla de Help
     private Base basInstrucciones; //boton 
     private Base basCreditos; //boton de creditos
     private Base basRecords; //boton de records 
     private Base backToMenu; //boton de back to menu
+    
+    //Imagenes Menu principal 
+    Image imaCatUno;
+    Image imaCaDos;
+    Image imaCatTres;
+    Image imaCatCUstom;
+    Image imaPlay; //boton de play
+    Image imaHelp; //boton de help
+    
+    
+    //Imagenes Pantalla de Help
+    
+    //Offset para acomodar los paneles
+    int iOffset;
+    
+    //Posicion del mouse
+    int iPosX;
+    int iPosY;
+    
     
     //banderas que controlan vistas
     private boolean bPrincipal; //boton que lleva a menu principal
     private boolean bInstrucciones; //boton que lleva a instrucciones 
     private boolean bCreditos; //boton que lleva a creditos
     private boolean bRecords; //boton que lleva a records
-    protected boolean bPlay; //boton que lleva a al juego
+    private boolean bPlay; //boton que lleva a al juego
+    
+    //Font a usar
+    private Font fonFuentel;
     
     /**
      * Creates the flood instance. 
      */
-    
-    private Flood flood;
+    private Flood tarGame;
     
     /**
      * Crates a new BannerMenu instance.
      *
      * @param flood The Flood instance to use.
      */
-    public BannerMenu(Flood flood) {
+    public BannerMenu(Flood floodGame) throws FontFormatException, IOException {
 
-        this.flood = flood;
-        setPreferredSize(new Dimension(flood.iWidth, flood.iHeight));
-        setBackground(Color.BLACK);
+        this.tarGame = floodGame;
+        initVars();
+        creaBases(); 
+        creaImagenes();
+        addMouseListener(this);
+        
+        this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/CustomL.ttf"));
+        this.fonFuentel = this.fonFuentel.deriveFont(25F);
+        
+        setPreferredSize(new Dimension(floodGame.iWidth -200, floodGame.iHeight));        
+        setBackground(Color.CYAN);
+     
     }
+    
+    public void creaImagenes(){
+        
+    }
+    
+    public void setPlay(boolean bPlay){
+        
+        this.bPlay = bPlay;
+      
+       
+    }
+    
+    public boolean getPlay(){
+        
+        return bPlay;
+     
+    }
+    
+    
+    
 
   
     
-    public void creaBotones(){
+    public void creaBases(){
         
-        basCatUno = new Base(200, 200, Toolkit.getDefaultToolkit()
+        //refactor 
+        int iOffsetY = 60;
+        int iOffsetX = 120;
+        int iPosicionX = (tarGame.iWidth/2) - 100; 
+        int iPosicionY = tarGame.iHeight/2 - 200;
+        
+        
+        basCatUno = new Base(iPosicionX,iPosicionY += iOffsetY ,Toolkit.getDefaultToolkit()
                                .getImage(this.getClass().getResource("Images/menu/cat1.png")));
         
-        basCatDos = new Base(200, 200, Toolkit.getDefaultToolkit()
+        basCatDos = new Base(iPosicionX, iPosicionY += iOffsetY, Toolkit.getDefaultToolkit()
                                .getImage(this.getClass().getResource("Images/menu/cat2.png")));
         
-        basCatTres = new Base(200, 200, Toolkit.getDefaultToolkit()
+        basCatTres = new Base(iPosicionX, iPosicionY += iOffsetY, Toolkit.getDefaultToolkit()
                                .getImage(this.getClass().getResource("Images/menu/cat3.png")));
         
-        basCatCustom = new Base(200, 200, Toolkit.getDefaultToolkit()
+        basCatCustom = new Base(iPosicionX , iPosicionY += iOffsetY, Toolkit.getDefaultToolkit()
                                .getImage(this.getClass().getResource("Images/menu/cat4.png")));
         
-        basPlay = new Base(200, 200, Toolkit.getDefaultToolkit()
+        basPlay = new Base(iPosicionX += iOffsetX, iPosicionY += iOffsetY, Toolkit.getDefaultToolkit()
                                .getImage(this.getClass().getResource("Images/menu/play.png")));
         
-        basHelp = new Base(200, 200, Toolkit.getDefaultToolkit()
-                               .getImage(this.getClass().getResource("Images/menu/help.png")));
+        basHelp = new Base(basPlay.getX() - iOffsetX, basPlay.getY(), Toolkit.getDefaultToolkit()
+                                .getImage(this.getClass().getResource("Images/menu/help.png")));
         
         basInstrucciones = new Base(200, 200, Toolkit.getDefaultToolkit()
                                .getImage(this.getClass().getResource("Images/menu/instrucciones.png")));
@@ -95,32 +158,28 @@ public class BannerMenu extends JPanel implements MouseListener{
            
     }
     
+    
+    private void checaColision(){
+        
+        
+        
+    }
    
     
-    public void inicializaVariables(){
+    public void initVars(){
         
         bPrincipal = true;
         bInstrucciones = false;
         bCreditos =false;
         bRecords = false;
         bPlay = false;
-        
-        
-        
+       
     }
     
-    public BannerMenu(){
-        
-       inicializaVariables();
-       creaBotones();  
-         
-    }
+
     //paint normal
     
-    public void paint(Graphics graGrafico){
-        
-        //borrar
-        graGrafico.fillRect(100, 100, 100, 100);
+    public void paintComponent(Graphics graGrafico){
         
         super.paint(graGrafico);
         
@@ -197,28 +256,28 @@ public class BannerMenu extends JPanel implements MouseListener{
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void mouseClicked(MouseEvent mouEvent) {
+          
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 }
 
