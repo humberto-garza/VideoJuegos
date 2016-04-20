@@ -175,9 +175,12 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         this.bannerMenu = new BannerMenu(this);
         
         //borderlayout para definir los paneles
-        setLayout(new BorderLayout());
         add(side, BorderLayout.EAST);
+<<<<<<< HEAD
         add(bannerMenu);
+=======
+        //614
+>>>>>>> origin/master
 
         
 
@@ -685,6 +688,9 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
                         // Si la respuesta esta completa
                         if (disRespuesta.getSize() == sResEsperada.length()) {
+                            // Sumar los puntos
+                            iPuntos += cuaAux.getValor();
+
                             // Dar de baja el cuadro
                             cuaAux.setActive(false);
 
@@ -701,6 +707,10 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
                             }
                             cambioCuadro();
                         }
+                    }
+                    // Caracter equivocado
+                    else {
+                        iPuntos -= (int)(cuaAux.getValor() / sResEsperadaCopy.length());
                     }
                 }
             }
