@@ -121,7 +121,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     private SidePanel side;
 
     //Banner Menu Instance
-    private BannerMenu bannerMenu;
+    BannerMenu bannerMenu;
 
     //Variables de score y nivel
     protected int iPuntos;
@@ -170,12 +170,16 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         //inicializa la instancia de SidePanel
         this.side = new SidePanel(this);
+        
+        //inicializa la instancia de BannerMenu
+        this.bannerMenu = new BannerMenu(this);
+        
         //borderlayout para definir los paneles
         setLayout(new BorderLayout());
         add(side, BorderLayout.EAST);
+        add(bannerMenu);
 
-        //inicializa la instancia de BannerMenu
-        this.bannerMenu = new BannerMenu(this);
+        
 
 
         // Llenar los arreglos de posiciones de la matriz central
@@ -539,10 +543,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
 
             if (!bannerMenu.getPlay()) {
-
                 //se pinta el menu
                 paintCustomMenu(graDibujo);
-
             }
 
             else {
@@ -745,20 +747,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
     public void mouseClicked(MouseEvent mouEvent) {
 
-        iMouseX = mouEvent.getX();
-        iMouseY = mouEvent.getY();
-
-        if ( bannerMenu.basPlay.intersects(iMouseX, iMouseY) ) { //seleciono play
-
-            bannerMenu.setPlay(true);
-
-        }
-
-        if ( side.basBackMenu.intersects(iMouseX, iMouseY) ) { //seleciono play
-
-            bannerMenu.setPlay(false);
-
-        }
+        
 
 
     }

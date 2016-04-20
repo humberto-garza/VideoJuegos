@@ -53,6 +53,8 @@ public class SidePanel extends JPanel implements MouseListener {
     //Font a usar
     private Font fonFuentel;
     
+    //Banner Menu
+    private BannerMenu bannerMenu;
    
 
     public SidePanel(Flood floodGame) throws FontFormatException, IOException {
@@ -179,7 +181,7 @@ public class SidePanel extends JPanel implements MouseListener {
     
     public void mouseClicked(MouseEvent mouEvent) {
         
-        System.out.println("HOLA");
+    
         //actualiza posiciones del mouse
         iMouseX = mouEvent.getX();
         iMouseY = mouEvent.getY();
@@ -189,7 +191,7 @@ public class SidePanel extends JPanel implements MouseListener {
             bHelp = true;//prende help
             bBackMenu = false;//apaga las demás
         }
-        else if ( basPause.intersects(iMouseX, iMouseY) ) {
+        else if (basPause.intersects(iMouseX, iMouseY) ) {
             bPause = !bPause;//niega pause
         }
         else if (basSound.intersects(iMouseX, iMouseY)) {
@@ -198,7 +200,10 @@ public class SidePanel extends JPanel implements MouseListener {
             manejaSonido();
         }
         else if (basBackMenu.intersects(iMouseX, iMouseY)){
+            
             bBackMenu = true;
+            bannerMenu.setPlay(false);
+             System.out.println("set play");
             bHelp = false;//apaga las demás
         }
         
