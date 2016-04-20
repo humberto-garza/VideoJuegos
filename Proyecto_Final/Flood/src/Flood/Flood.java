@@ -122,7 +122,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     //Banner Menu Instance
     private BannerMenu bannerMenu;
     
-    //Variables de socre y nivel
+    //Variables de score y nivel
     protected int iPuntos;
     protected int iNivel;
 
@@ -679,15 +679,18 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
                         cAux = 'n';
                     }
 
+                    // Si Coinciden los caracteres
                     if (Character.toLowerCase(cResEsperada) == cAux) {
+
+                        // Agregar el caracter a la respuesta
                         String sActualizar = disRespuesta.getRespuesta() + sResEsperadaCopy.charAt(iCharIndex);
                         disRespuesta.setRespuesta(sActualizar);
 
-                        // Si la respuesta esta correcta
+                        // Si la respuesta esta completa
                         if (disRespuesta.getSize() == sResEsperada.length()) {
                             // Dar de baja el cuadro
                             cuaAux.setActive(false);
-
+                            
                             // Agregar el index a disponibles
                             lklDisponibles.add(iIndexActual);
                             // Remover de usados
