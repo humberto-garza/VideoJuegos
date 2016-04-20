@@ -23,11 +23,11 @@ public class DisplayPregunta {
     private String sPreguntaBase;
     private int iX;
     private int iY;
-    private Font fontAux;
+    private Font fonFuente;
 
     public DisplayPregunta(int iX, int iY, String sPregunta, String sPreguntaBase) throws FontFormatException, IOException {
-        this.fontAux = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/Custom.ttf"));
-        this.fontAux = this.fontAux.deriveFont(50F);
+        this.fonFuente = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/Custom.ttf"));
+        this.fonFuente = this.fonFuente.deriveFont(40F);
 
         this.iX = iX;
         this.iY = iY;
@@ -36,13 +36,10 @@ public class DisplayPregunta {
     }
 
     public void paint(Graphics graGrafico, ImageObserver imoObserver) {
-
         Color colAux = new Color(0, 0, 0);
-
-
         graGrafico.setColor(colAux);
-        graGrafico.setFont(fontAux);
-        graGrafico.drawString(getPreguntaBase()+"á", getX(), getY());
+        graGrafico.setFont(fonFuente);
+        graGrafico.drawString(getPreguntaBase(), getX(), getY());
         graGrafico.drawString(getPregunta(), getX(), getY() + 35);
     }
 

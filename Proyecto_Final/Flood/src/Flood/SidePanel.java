@@ -48,7 +48,7 @@ public class SidePanel extends JPanel {
         
         if (basBackMenu != null) {
             // Dibujar el objeto de play
-            basBackMenu.paint(graGrafico, this);
+            //basBackMenu.paint(graGrafico, this);
             
         } // Si no se ha cargado se dibuja un mensaje
         else {

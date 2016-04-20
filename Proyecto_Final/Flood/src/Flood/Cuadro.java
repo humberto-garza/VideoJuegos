@@ -1,12 +1,16 @@
 package Flood;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.image.ImageObserver;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.LinkedList;
 
 /**
@@ -26,6 +30,7 @@ public class Cuadro extends Base {
     private int iPregunta;      // Indice de la pregunta
     private int iAncho;
     private int iAlto;
+    private Font fonFuente;
 
     /**
      * Cuadro
@@ -42,9 +47,10 @@ public class Cuadro extends Base {
      * @param iPregunta es el <index> de la matriz de preguntas </code>
      */
     public Cuadro(int iX, int iY, Image imaImagen, int iValor, boolean isActive,
-                  Color colFondo, int iAncho, int iAlto, int iPregunta) {
-
+                  Color colFondo, int iAncho, int iAlto, int iPregunta) throws FontFormatException, IOException {
         super(iX, iY, imaImagen);
+        this.fonFuente = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/Numbers.ttf"));
+        this.fonFuente = this.fonFuente.deriveFont(40F);
         this.iValor = iValor;
         this.isActive = isActive;
         this.colFondo = colFondo;
@@ -112,10 +118,12 @@ public class Cuadro extends Base {
 
         Color colTemp = getColor();
 
+        
         graGrafico.setColor(colTemp);
-        graGrafico.fillRoundRect(getX(), getY(), getAncho(), getAlto(), 20, 20);
+        graGrafico.fillRoundRect(getX(), getY(), getAncho(), getAlto(), 5, 5);
         graGrafico.setColor(colTemp);
-        graGrafico.fillRoundRect(getX() + 10, getY() + 10, getAncho() - 20, getAlto() - 20, 20, 20);
+        graGrafico.fillRoundRect(getX() + 10, getY() + 10, getAncho() - 20, getAlto() - 20, 5, 5);
+       
 
         String sPreg = lklPreguntas.get(getPregunta()).getPregunta();
 
@@ -123,7 +131,10 @@ public class Cuadro extends Base {
 
         String sAux = getValor() + "";
 
+        //graGrafico.drawImage(getImagen(), getX(), getY(), getAncho(), getAlto(), imoObserver);
         fitInSquare(sAux, rect, graGrafico);
+
+
     }
 
     public void fitInSquare(String sQuestion, Rectangle rect, Graphics graGrafico) {
@@ -136,7 +147,8 @@ public class Cuadro extends Base {
 
         Color colAux = new Color(0, 0, 0);
         graGrafico.setColor(colAux);
-        graGrafico.drawString(sQuestion, iOffsetX, iOffsetY);
+        graGrafico.setFont(fonFuente);
+        graGrafico.drawString(sQuestion, iOffsetX, iOffsetY+5);
 
     }
 

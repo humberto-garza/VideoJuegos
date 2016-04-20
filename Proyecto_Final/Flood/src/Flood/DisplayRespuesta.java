@@ -2,10 +2,13 @@ package Flood;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.LinkedList;
 
 /**
@@ -19,8 +22,11 @@ public class DisplayRespuesta {
     private String sRespuesta;
     private int iX;
     private int iY;
+    private Font fonFuente;
 
-    public DisplayRespuesta(int iX, int iY, String sRespuesta) {
+    public DisplayRespuesta(int iX, int iY, String sRespuesta) throws FontFormatException, IOException {
+        this.fonFuente = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/Custom.ttf"));
+        this.fonFuente = this.fonFuente.deriveFont(40F);
         this.iX = iX;
         this.iY = iY;
         this.sRespuesta = sRespuesta;
@@ -29,8 +35,7 @@ public class DisplayRespuesta {
     public void paint(Graphics graGrafico, ImageObserver imoObserver) {
         Color colAux = new Color(0, 0, 0);
         graGrafico.setColor(colAux);
-        graGrafico.setFont(new Font("SansSerif", Font.PLAIN, 30));
-
+        graGrafico.setFont(fonFuente);
         graGrafico.drawString(getRespuesta(), getX(), getY());
     }
 
