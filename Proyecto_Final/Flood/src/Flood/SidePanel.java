@@ -74,10 +74,8 @@ public class SidePanel extends JPanel implements MouseListener {
         this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/CustomL.ttf"));
         this.fonFuentel = this.fonFuentel.deriveFont(25F);
 
-        setFocusable(true);
        // setPreferredSize(new Dimension(floodGame.iWidth /2, floodGame.iHeight));
         setPreferredSize(new Dimension(300, floodGame.iHeight));        
-        //setBackground(Color.CYAN);
         
     }
     /**initvars
@@ -103,8 +101,8 @@ public class SidePanel extends JPanel implements MouseListener {
         
         imaImagenPuntaje = Toolkit.getDefaultToolkit().getImage(this.getClass()
                          .getResource("Images/sidePanel/puntaje.png"));
-        
-        sNivel ="2";
+                         
+        sNivel = "1";
         imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
                          .getResource("Images/sidePanel/nivel"+sNivel+".png"));
         
@@ -202,7 +200,7 @@ public class SidePanel extends JPanel implements MouseListener {
             bPause = !bPause;//niega pause
         }
         else if (basSound.intersects(iMouseX, iMouseY)) {
-            
+            System.out.println();
             bSound = !bSound;//niega sound
             manejaSonido();
         }
