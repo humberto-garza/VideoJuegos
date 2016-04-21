@@ -129,8 +129,8 @@ public class BannerMenu extends JPanel implements MouseListener{
         int iPosicionX = (tarGame.iWidth/2) - 100; 
         int iPosicionY = (tarGame.iHeight/2) - 200;
         
-        iSecondaryMenuOffsetX = 60;
-        iSecondaryMenuOffsetY = 30;
+        iSecondaryMenuOffsetX = 30;
+        iSecondaryMenuOffsetY = 80;
         
         
         /**
@@ -158,6 +158,11 @@ public class BannerMenu extends JPanel implements MouseListener{
         /**
          * Menu secundario
          */
+        
+        
+        iPosicionX = (tarGame.iWidth/2) - 350;
+        iPosicionY = (tarGame.iHeight/2) - 250;
+        
         
         basInstrucciones = new Base(iPosicionX, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
                                .getImage(this.getClass().getResource("Images/menu/instrucciones.png")));
