@@ -103,8 +103,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     
     
     //Sounds
-    SoundClip souMove;
-    SoundClip souEliminate;
+    SoundClip souMove; //suena cuando se mueve el seleccionador
+    SoundClip souEliminate; //suena cuando se elimina un cuadro
     
 
     // Listas Encadenadas
@@ -188,7 +188,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         add(bannerMenu);
         
         //Sounds
-        souMove = new SoundClip("Sounds/click_tiny.wav");
+        souMove = new SoundClip("Sounds/click_tiny.wav"); 
         souEliminate = new SoundClip("Sounds/eliminateline.wav");
 
         
