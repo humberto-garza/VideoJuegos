@@ -67,7 +67,21 @@ public class BannerMenu extends JPanel implements MouseListener{
     private boolean bPlay; //boton que lleva a al juego
     
     //Font a usar
-    private Font fonFuentel;
+    private Font fonFuente;
+    
+    //Instrucciones
+    private String sObjetivo;
+   
+    //CUSTOM CATEGORY
+   
+    //Custom category click
+    private String sCustomCat;
+    
+    //dile that is clicked by the user (that is choosen)
+    String sCustomFile;
+    
+    //boolean bCustomCategoryClicked
+    private boolean bCustomCategoryClicked;
     
     /**
      * Creates the flood instance. 
@@ -87,11 +101,10 @@ public class BannerMenu extends JPanel implements MouseListener{
         creaImagenes();
         addMouseListener(this);
         
-        this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/CustomL.ttf"));
-        this.fonFuentel = this.fonFuentel.deriveFont(25F);
         
-        setPreferredSize(new Dimension(tarGame.iWidth, tarGame.iHeight));        
-        setBackground(Color.CYAN);
+        
+        //setPreferredSize(new Dimension(tarGame.iWidth, tarGame.iHeight));        
+        //setBackground(Color.CYAN);
      
     }
     
@@ -108,16 +121,38 @@ public class BannerMenu extends JPanel implements MouseListener{
        
     }
     
+    public boolean getCustomCategoryClicked(){
+        
+        return bCustomCategoryClicked;
+     
+    }
+    
+    public void setCustomCategoryClicked(boolean bCustomCategoryClicked){
+        
+        this.bCustomCategoryClicked = bCustomCategoryClicked;
+      
+       
+    }
+    
     public boolean getPlay(){
         
         return bPlay;
      
     }
     
+    public void setCustomCat(String sCustomCat){
+        
+        this.sCustomCat = sCustomCat;
+      
+       
+    }
     
+    public String getCustomCat(){
+        
+        return sCustomCat;
+     
+    }
     
-
-  
     
     public void creaBases(){
         
@@ -131,6 +166,8 @@ public class BannerMenu extends JPanel implements MouseListener{
         
         iSecondaryMenuOffsetX = 30;
         iSecondaryMenuOffsetY = 80;
+        
+        
         
         
         /**
@@ -186,7 +223,7 @@ public class BannerMenu extends JPanel implements MouseListener{
     }
    
     
-    public void initVars(){
+    public void initVars() throws FontFormatException, IOException{
         
         bPrincipal = true;
         bInstrucciones = false;
@@ -195,6 +232,13 @@ public class BannerMenu extends JPanel implements MouseListener{
         bPlay = false;
         
         iMouseYOffSet = 21;
+        
+        
+        this.fonFuente = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/Custom.ttf"));
+        this.fonFuente = this.fonFuente.deriveFont(40F);
+        
+        
+        setCustomCategoryClicked(false);
        
     }
     
@@ -244,6 +288,9 @@ public class BannerMenu extends JPanel implements MouseListener{
         basCreditos.paint(graGrafico, this);
         basRecords.paint(graGrafico, this);
         basBackToMenu.paint(graGrafico, this);
+       
+        graGrafico.setFont(fonFuente);
+        graGrafico.drawString("Instruciones", 100, 100);
     }
     
     //paint creditos
@@ -254,6 +301,9 @@ public class BannerMenu extends JPanel implements MouseListener{
         basRecords.paint(graGrafico, this);
         basBackToMenu.paint(graGrafico, this);
         
+        graGrafico.setFont(fonFuente);
+        graGrafico.drawString("Créditos", 100, 100);
+        
     }
    //paint records
     public void paintRecords(Graphics graGrafico){
@@ -262,6 +312,9 @@ public class BannerMenu extends JPanel implements MouseListener{
         basCreditos.paint(graGrafico, this);
         basRecords.paint(graGrafico, this);
         basBackToMenu.paint(graGrafico, this);
+        
+        graGrafico.setFont(fonFuente);
+        graGrafico.drawString("Records", 100, 100);
         
     }
     
@@ -303,9 +356,11 @@ public class BannerMenu extends JPanel implements MouseListener{
         //Selecciona categoria custom 
          if (basCatCustom.intersects(iMouseX, iMouseY)) { //seleciono play
             
-             chooseFile();
-             System.out.println("Custom Category");
-             
+            setCustomCategoryClicked(true);
+            System.out.println("Custom Category clicked");
+            chooseFile(sCustomFile);
+            
+                
         }
         
         
@@ -317,6 +372,9 @@ public class BannerMenu extends JPanel implements MouseListener{
            
             setPlay(true); 
             System.out.println("Play!!!!!");
+            
+            setCustomCat(sCustomFile);
+            System.out.println("Custom Category: " + sCustomFile);
         }
        
         
@@ -363,12 +421,13 @@ public class BannerMenu extends JPanel implements MouseListener{
         }
     }
     
-    void chooseFile() {
+    void chooseFile(String sFile) {
 
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.showOpenDialog(fileChooser);
-       
-        String patch = fileChooser.getSelectedFile().getAbsolutePath();
+        sFile = fileChooser.getSelectedFile().getAbsolutePath();
+        
+        System.out.println("Archivo seleccionado de choose file: "+ sFile);
        
     }
 
