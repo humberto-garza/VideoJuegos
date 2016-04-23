@@ -43,7 +43,8 @@ public class SidePanel extends JPanel implements MouseListener {
     //Variables de posicion del mouse
     int iMouseX;
     int iMouseY;
-
+    int iMouseXOffSet;
+    
     //Variable que contiene el #de nivel como string, se usa para pintar el nivel
     private String sNivel;
 
@@ -52,6 +53,11 @@ public class SidePanel extends JPanel implements MouseListener {
 
     //Font a usar
     private Font fonFuentel;
+
+    
+    //Banner Menu
+    private BannerMenu bannerMenu;
+   
 
 
 
@@ -62,6 +68,15 @@ public class SidePanel extends JPanel implements MouseListener {
         creaBases();
         crearImagenes();
         addMouseListener(this);
+        
+        
+        this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/CustomL.ttf"));
+        this.fonFuentel = this.fonFuentel.deriveFont(25F);
+
+       // setPreferredSize(new Dimension(floodGame.iWidth /2, floodGame.iHeight));
+        setPreferredSize(new Dimension(228, tarGame.iHeight));        
+        
+
 
 
         this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/Score.ttf"));
@@ -82,6 +97,7 @@ public class SidePanel extends JPanel implements MouseListener {
         bSound = true;
         //indica el nivel
         sNivel = Integer.toString(tarGame.iNivel);
+        iMouseXOffSet = (tarGame.iWidth)-228;
     }
 
     /* crearImagenes
@@ -142,9 +158,10 @@ public class SidePanel extends JPanel implements MouseListener {
 
             graGrafico.drawImage(imaImagenNivel, 640, 350, 173, 82, this);
         }
+    
+        if (!bBackMenu && basBackMenu != null && 
+                basHelp !=null && basPause != null && basSound != null) {
 
-        if (!bBackMenu && !bHelp && !bPause && basBackMenu != null &&
-                basHelp != null && basPause != null && basSound != null) {
             // Dibujar el objeto de menu
             basBackMenu.paint(graGrafico, this);
             basHelp.paint(graGrafico, this);
@@ -184,24 +201,45 @@ public class SidePanel extends JPanel implements MouseListener {
 
     public void mouseClicked(MouseEvent mouEvent) {
 
-        System.out.println("HOLA");
+        
         //actualiza posiciones del mouse
-        iMouseX = mouEvent.getX();
+        iMouseX = mouEvent.getX()+iMouseXOffSet;
         iMouseY = mouEvent.getY();
 
         //checa si el jugador a presionado algun boton del panel
         if (basHelp.intersects(iMouseX, iMouseY)) {
             bHelp = true;//prende help
+            System.out.println("clicked help");
             bBackMenu = false;//apaga las demás
-        } else if ( basPause.intersects(iMouseX, iMouseY) ) {
+        }
+
+
+        else if ( basPause.intersects(iMouseX, iMouseY) ) {
+            System.out.println("clicked pause");
             bPause = !bPause;//niega pause
-        } else if (basSound.intersects(iMouseX, iMouseY)) {
-            System.out.println();
+        }
+        else if (basSound.intersects(iMouseX, iMouseY)) {
+            System.out.println("clicked sound");
             bSound = !bSound;//niega sound
             manejaSonido();
-        } else if (basBackMenu.intersects(iMouseX, iMouseY)) {
-            bBackMenu = true;
-            bHelp = false;//apaga las demás
+        }
+        else if (basBackMenu.intersects(iMouseX, iMouseY)){
+
+            System.out.println("clicked menu");
+            
+            //Segun yo SDN borrar, pues 
+            //bBackMenu = true;
+            //bHelp = false;//apaga las demás
+            //Segun yo SDN borrar, pues 
+           
+            //SDN - Variables de Banner Menu
+            tarGame.bannerMenu.setPlay(false);
+            System.out.println("set play");
+            tarGame.bannerMenu.falseAll();
+            tarGame.bannerMenu.bPrincipal = true;
+            //SDN - Variables de Banner Menu
+            
+           
         }
 
     }

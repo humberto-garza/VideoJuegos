@@ -38,6 +38,7 @@ import java.util.Arrays;
 import javax.swing.KeyStroke;
 import java.text.Normalizer;
 import java.util.regex.Pattern;
+import javax.swing.JFileChooser;
 
 /**
  * Jframe, load and save game
@@ -98,6 +99,13 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
     // Color actual
     private int iColorActual;
+    
+    
+    
+    //Sounds
+    SoundClip souMove; //suena cuando se mueve el seleccionador
+    SoundClip souEliminate; //suena cuando se elimina un cuadro
+    
 
     // Listas Encadenadas
     private LinkedList<Base> lklCuadros; // ListaEncadenada de Cuadros
@@ -121,7 +129,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     private SidePanel side;
 
     //Banner Menu Instance
-    private BannerMenu bannerMenu;
+    BannerMenu bannerMenu;
 
     //Variables de score y nivel
     protected int iPuntos;
@@ -170,12 +178,20 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         //inicializa la instancia de SidePanel
         this.side = new SidePanel(this);
-        //borderlayout para definir los paneles
-        setLayout(new BorderLayout());
-        add(side, BorderLayout.EAST);
-
+        
         //inicializa la instancia de BannerMenu
         this.bannerMenu = new BannerMenu(this);
+        
+        //borderlayout para definir los paneles
+        add(side, BorderLayout.EAST);
+
+        add(bannerMenu);
+        
+        //Sounds
+        souMove = new SoundClip("Sounds/click_tiny.wav"); 
+        souEliminate = new SoundClip("Sounds/eliminateline.wav");
+
+        
 
 
         // Llenar los arreglos de posiciones de la matriz central
@@ -252,10 +268,13 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         lklColores = new LinkedList<Color>();
         cargaColores();
 
-        // Cargar Preguntas
+        
+            
+        //Cargar Preguntas
         lklPreguntas = new LinkedList<Pregunta>();
         cargaPreguntas("Quimica");
-
+            
+  
         // Forzar actualizar
         bCambio = false;
         creaCuadro();
@@ -398,10 +417,12 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     }
 
     public void cargaPreguntas(String sCategoria) throws FileNotFoundException, IOException, FontFormatException {
-        lklPreguntas.clear();
-
+        lklPreguntas.clear();         
+        
         nombreArchivo = "./src/Flood/Files/";
         nombreArchivo += sCategoria + ".txt";
+          
+       
 
         BufferedReader fileIn;
 
@@ -539,10 +560,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
 
             if (!bannerMenu.getPlay()) {
-
                 //se pinta el menu
                 paintCustomMenu(graDibujo);
-
             }
 
             else {
@@ -613,6 +632,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         /* Revisar que tecla se presiono y cambiar la posicion*/
         if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
             cambioCuadro();
+            souMove.play();
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
             int iAux = iIncrementoX + 1;
@@ -621,6 +641,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             bKeyPressed = true;
             iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
             disRespuesta.setRespuesta("");
+            souMove.play();
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
             int iAux = iIncrementoX - 1;
@@ -632,6 +653,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             bKeyPressed = true;
             iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
             disRespuesta.setRespuesta("");
+            souMove.play();
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
             int iAux = iIncrementoY - 1;
@@ -643,6 +665,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             bKeyPressed = true;
             iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
             disRespuesta.setRespuesta("");
+            souMove.play();
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
             int iAux = iIncrementoY + 1;
@@ -651,6 +674,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             bKeyPressed = true;
             iIndexActual = iIncrementoY * iGridCols + iIncrementoX;
             disRespuesta.setRespuesta("");
+            souMove.play();
+            
         } else {
             char cAux = keyEvent.getKeyChar();
             if (Character.isDigit(cAux) || Character.isLetter(cAux)) {
@@ -685,6 +710,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
                         if (disRespuesta.getSize() == sResEsperada.length()) {
                             // Sumar los puntos
                             iPuntos += cuaAux.getValor();
+                            souEliminate.play();
 
                             // Dar de baja el cuadro
                             cuaAux.setActive(false);
@@ -752,21 +778,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
     public void mouseClicked(MouseEvent mouEvent) {
 
-        iMouseX = mouEvent.getX();
-        iMouseY = mouEvent.getY();
-
-        if ( bannerMenu.basPlay.intersects(iMouseX, iMouseY) ) { //seleciono play
-
-            bannerMenu.setPlay(true);
-
-        }
-
-        if ( side.basBackMenu.intersects(iMouseX, iMouseY) ) { //seleciono play
-
-            bannerMenu.setPlay(false);
-
-        }
-
+      
 
     }
 
@@ -786,7 +798,9 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     }
 
     @Override
-    public void mouseExited(MouseEvent e
-                           ) {
+    public void mouseExited(MouseEvent e) {
     }
+    
+    
+    
 }

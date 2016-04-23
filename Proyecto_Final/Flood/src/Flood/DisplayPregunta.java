@@ -42,6 +42,7 @@ public class DisplayPregunta {
         Color colAux = new Color(0, 0, 0);
         graGrafico.setColor(colAux);
         graGrafico.setFont(fonFuentel);
+
         graGrafico.drawString(getPreguntaBase(), getX(), getY()-10);
         graGrafico.setFont(fonFuente);
         graGrafico.drawString(getPregunta(), getX(), getY() + 28);
