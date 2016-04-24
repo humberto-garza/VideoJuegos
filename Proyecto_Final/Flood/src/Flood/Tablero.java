@@ -193,9 +193,11 @@ public class Tablero {
 	public void cargaPreguntas(String sCategoria) throws FileNotFoundException, IOException, FontFormatException {
 		lklPreguntas.clear();
 
+		/*
 		String nombreArchivo = "./src/Flood/Files/";
 		nombreArchivo += sCategoria + ".txt";
-
+		*/
+		String nombreArchivo = sCategoria;
 		BufferedReader fileIn;
 
 		try {
@@ -261,19 +263,25 @@ public class Tablero {
 				cambioCuadro();
 			}
 		}
-
 	}
 
 	public void creaCuadroAbajo() {
 		if (lklDisponibles.size() > 0) {
-
 			// Seleccionar al azar un lugar disponible
 			int iRandPicker = (int) (Math.random() * lklDisponibles.size());
+			int iIndexDisp = lklDisponibles.get(iRandPicker);
+			int iIndexNextD = iIndexDisp + iGridCols;
+			boolean bActivo = false;
 
-			for (int iC = iRandPicker + iGridCols; iC < iCasillas; iC += iGridCols) {
-				Cuadro cuaNext = lklCuadrosBase.get(iC);
-				if ( !cuaNext.isActive()) {
-					iRandPicker = iC;
+			while (iIndexNextD < iCasillas) {
+				if (!bActivo) {
+					Cuadro cuaNext = lklCuadrosBase.get(iIndexNextD);
+					bActivo = cuaNext.isActive();
+					if (!bActivo) {
+						iIndexDisp = iIndexNextD;
+						iIndexNextD = iIndexDisp + iGridCols;
+					}
+					System.out.println(bActivo);
 				} else {
 					break;
 				}
@@ -281,14 +289,14 @@ public class Tablero {
 
 			// Remover el seleccionado de la lista
 			for (int iC = 0; iC < lklDisponibles.size(); iC++) {
-				if (iRandPicker == lklDisponibles.get(iC)) {
-					lklDisponibles.remove(iRandPicker);
-					lklUsados.add(iRandPicker);
+				if (iIndexDisp == lklDisponibles.get(iC)) {
+					lklDisponibles.remove(iC);
+					lklUsados.add(iIndexDisp);
 					iIndexUsado = lklUsados.size() - 1;
 				}
 			}
 
-			Cuadro cuaAux = lklCuadrosBase.get(iRandPicker);
+			Cuadro cuaAux = lklCuadrosBase.get(iIndexDisp);
 
 			// Seleccionar un color nuevo
 			Color colAux = lklColores.get(iIndexColor);
@@ -310,9 +318,7 @@ public class Tablero {
 				cambioCuadro();
 			}
 		}
-
 	}
-
 
 	public void llenarGrid() {
 
@@ -360,7 +366,6 @@ public class Tablero {
 			disPregunta.setPregunta("");
 		}
 	}
-
 
 	public void pressedEnter() {
 		cambioCuadro();
@@ -448,6 +453,7 @@ public class Tablero {
 
 						// Agregar el index a disponibles
 						lklDisponibles.add(iIndexActual);
+
 						// Remover de usados
 						iIndexUsado = lklUsados.indexOf(iIndexActual);
 						lklUsados.remove(iIndexUsado);
@@ -470,6 +476,15 @@ public class Tablero {
 		return iPuntos;
 	}
 
+	public void bajarColumna(int iCuadro) {
+		int iColumna = iCuadro % iGridCols;
+		/*
+		for (int iC = iCuadro; iC > 0; iC += iGridCols) {
+
+
+		}
+		*/
+	}
 	public String deAccent(String str) {
 		String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
 		Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
@@ -479,6 +494,5 @@ public class Tablero {
 	public int getCasillas() {
 		return this.iCasillas;
 	}
-
 }
 
