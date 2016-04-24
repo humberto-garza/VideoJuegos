@@ -103,10 +103,10 @@ public class Tablero {
 		}
 
 		// Inicializar listas
-		lklCuadrosBase = new LinkedList<Cuadro>(); 	// Inicializada
-		lklDisponibles = new LinkedList<Integer>();	// Inicializada
-		lklUsados = new LinkedList<Integer>();		// Inicializada
-		lklColores = new LinkedList<Color>();		// Inicializada
+		lklCuadrosBase = new LinkedList<Cuadro>();
+		lklDisponibles = new LinkedList<Integer>();
+		lklUsados = new LinkedList<Integer>();
+		lklColores = new LinkedList<Color>();
 		lklPreguntas = new LinkedList<Pregunta>();
 
 		// Inicializar los cuadros
@@ -221,8 +221,6 @@ public class Tablero {
 			String sPunt = arrPreguntas[2];
 
 			Pregunta preAux = new Pregunta(sPreg, sResp, Integer.parseInt(sPunt));
-
-			System.out.println(sPreg + " " + sResp + " " + sPunt);
 			lklPreguntas.add(preAux);
 		}
 		System.out.print("ASe Cargaron Preguntas: ");
@@ -243,9 +241,7 @@ public class Tablero {
 
 			Cuadro cuaAux = lklCuadrosBase.get(iAux);
 
-			// Seleccionar al azar un color nuevo
-			iRandPicker = (int) (Math.random() * lklColores.size());
-			//Color colAux = lklColores.get(iRandPicker);
+			// Seleccionar un color nuevo
 			Color colAux = lklColores.get(iIndexColor);
 			cuaAux.setColor(colAux);
 
@@ -266,6 +262,78 @@ public class Tablero {
 			}
 		}
 
+	}
+
+	public void creaCuadroAbajo() {
+		if (lklDisponibles.size() > 0) {
+
+			// Seleccionar al azar un lugar disponible
+			int iRandPicker = (int) (Math.random() * lklDisponibles.size());
+
+			for (int iC = iRandPicker + iGridCols; iC < iCasillas; iC += iGridCols) {
+				Cuadro cuaNext = lklCuadrosBase.get(iC);
+				if ( !cuaNext.isActive()) {
+					iRandPicker = iC;
+				} else {
+					break;
+				}
+			}
+
+			// Remover el seleccionado de la lista
+			for (int iC = 0; iC < lklDisponibles.size(); iC++) {
+				if (iRandPicker == lklDisponibles.get(iC)) {
+					lklDisponibles.remove(iRandPicker);
+					lklUsados.add(iRandPicker);
+					iIndexUsado = lklUsados.size() - 1;
+				}
+			}
+
+			Cuadro cuaAux = lklCuadrosBase.get(iRandPicker);
+
+			// Seleccionar un color nuevo
+			Color colAux = lklColores.get(iIndexColor);
+			cuaAux.setColor(colAux);
+
+			// Seleccionar al azar una pregunta
+			iRandPicker = (int) (Math.random() * lklPreguntas.size());
+			cuaAux.setPregunta(iRandPicker);
+
+			// Activar
+			Pregunta preAux = lklPreguntas.get(iRandPicker);
+
+			cuaAux.setValor(preAux.getPuntos());
+			cuaAux.setActive(true);
+
+			// Si no habian cuadors, seleccionar el que se acaba de crear
+			if (lklUsados.size() == 1) {
+				System.out.println("ENTROCAMBIO");
+				cambioCuadro();
+			}
+		}
+
+	}
+
+
+	public void llenarGrid() {
+
+		lklDisponibles.clear();
+
+		for (int iC = 0; iC < getCasillas(); iC++) {
+			lklUsados.add(iC);
+			Cuadro cuaAux = lklCuadrosBase.get(iC);
+
+			// Seleccionar un color nuevo
+			Color colAux = lklColores.get(iIndexColor);
+			cuaAux.setColor(colAux);
+
+			// Seleccionar al azar una pregunta
+			int iRandPicker = (int) (Math.random() * lklPreguntas.size());
+			cuaAux.setPregunta(iRandPicker);
+			// Activar el cuadro con puntos
+			Pregunta preAux = lklPreguntas.get(iRandPicker);
+			cuaAux.setValor(preAux.getPuntos());
+			cuaAux.setActive(true);
+		}
 	}
 
 	public void cambioCuadro() {
@@ -406,6 +474,10 @@ public class Tablero {
 		String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
 		Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
 		return pattern.matcher(nfdNormalizedString).replaceAll("");
+	}
+
+	public int getCasillas() {
+		return this.iCasillas;
 	}
 
 }

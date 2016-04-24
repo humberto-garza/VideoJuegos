@@ -85,6 +85,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     //Variables de score y nivel
     protected int iPuntos;
     protected int iNivel;
+    protected int iModoJuego;
 
     // Variables de tiempo
     private long tiempoActual;
@@ -140,8 +141,40 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         // Iniciar un nuevo Tablero
         tabTablero = new Tablero("Quimica");
 
-        // Forzar actualizar
-        tabTablero.creaCuadro();
+        // Definir el primer modo de juego
+        iModoJuego = 3;
+
+        // MODO DE JUEGO
+        /////////////MODO 1///////////////////
+        /*
+         * En este modo de juego, aparecen cuadros al azar y
+         * se deben ir desapareciendo al responder correctamente
+        */
+        if (iModoJuego == 1) {
+            /////////////MODO 1///////////////////
+            tabTablero.creaCuadro();
+            /////////////////////////////////////
+        }
+        /////////////MODO 2///////////////////
+        /*
+        * En este modo de juego, se trata de desaparecer n Puntos
+        */
+        if (iModoJuego == 2) {
+            /////////////MODO 2///////////////////
+            tabTablero.llenarGrid();
+            /////////////////////////////////////
+        }
+        /////////////MODO 3///////////////////
+        /*
+        * En este modo de juego, se trata de evitar que se pasen los cuadros
+        * de arriba
+        */
+        if (iModoJuego == 3) {
+            /////////////MODO 2///////////////////
+            tabTablero.creaCuadroAbajo();
+            /////////////////////////////////////
+        }
+        /////////////////////////////////////
 
         // Variables de teclado
         bKeyPressed = false;
@@ -205,18 +238,30 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     public void actualiza() {
         //Determina el tiempo que ha transcurrido desde que el Applet inicio su ejecución
         long tiempoTranscurrido = System.currentTimeMillis() - tiempoActual;
-
         iContadorCiclos++;
         if (iContadorCiclos >= iRand) {
             iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
             iContadorCiclos = 0;
-            tabTablero.creaCuadro();
+            /////////////MODO 1///////////////////
+            if (iModoJuego == 1) {
+                tabTablero.creaCuadro();
+            }
+            /////////////MODO 2///////////////////
+            if (iModoJuego == 2) {
+                tabTablero.creaCuadro();
+            }
+            /////////////MODO 3///////////////////
+            if (iModoJuego == 3) {
+                tabTablero.creaCuadroAbajo();
+            }
+            ////////////////////////////////////////////
+
             //Guarda el tiempo actual
             tiempoActual += tiempoTranscurrido;
         }
-        // Si se presiono una tecla de movimiento, actualizar al principal
-        tabTablero.actualizarSelector();
 
+        // Actualizar el selector
+        tabTablero.actualizarSelector();
         // Actualizar la Pregunta Actual
         tabTablero.actualizarPregunta();
     }
@@ -346,7 +391,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             souMove.play();
         } else {
             char cAux = keyEvent.getKeyChar();
-            iPuntos += tabTablero.pressedKey(cAux);
+            int iResult = tabTablero.pressedKey(cAux);
+            iPuntos += iResult;
         }
     }
 
