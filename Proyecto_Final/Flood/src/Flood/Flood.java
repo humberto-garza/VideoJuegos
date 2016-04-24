@@ -139,7 +139,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
 
         // Iniciar un nuevo Tablero
-        tabTablero = new Tablero("Quimica");
+        tabTablero = new Tablero("./src/Flood/Files/Quimica.txt");
 
         // Definir el primer modo de juego
         iModoJuego = 3;

@@ -193,9 +193,11 @@ public class Tablero {
 	public void cargaPreguntas(String sCategoria) throws FileNotFoundException, IOException, FontFormatException {
 		lklPreguntas.clear();
 
+		/*
 		String nombreArchivo = "./src/Flood/Files/";
 		nombreArchivo += sCategoria + ".txt";
-
+		*/
+		String nombreArchivo = sCategoria;
 		BufferedReader fileIn;
 
 		try {
