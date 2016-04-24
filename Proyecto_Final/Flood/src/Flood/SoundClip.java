@@ -146,7 +146,8 @@ public class SoundClip {
 	/**
 	 * Metodo que reproduce el sonido.
 	 */
-	public void play() {
+	public void play(boolean bSound) {
+            if(bSound){
 		//se sale si el sonido no a sido cargado
 		if (!isLoaded()) 
 			return;
@@ -158,6 +159,7 @@ public class SoundClip {
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 		else
 			clip.loop(repeat);
+            }
 	}
 
 	/**

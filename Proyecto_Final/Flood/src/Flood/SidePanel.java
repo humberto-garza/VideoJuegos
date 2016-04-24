@@ -38,7 +38,13 @@ public class SidePanel extends JPanel implements MouseListener {
     private boolean bBackMenu;
     private boolean bHelp;
     private boolean bPause;
-    private boolean bSound;
+    protected boolean bSound;
+    
+    //Variables que indican los tamaños del side panel
+    private int iStartPanelX;
+    
+    //Variables de offsets para botones del panel
+    private int iXOffsetSelections;
 
     //Variables de posicion del mouse
     int iMouseX;
@@ -73,17 +79,12 @@ public class SidePanel extends JPanel implements MouseListener {
         this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/CustomL.ttf"));
         this.fonFuentel = this.fonFuentel.deriveFont(25F);
 
-       // setPreferredSize(new Dimension(floodGame.iWidth /2, floodGame.iHeight));
-        setPreferredSize(new Dimension(228, tarGame.iHeight));        
-        
-
-
 
         this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/Score.ttf"));
         this.fonFuentel = this.fonFuentel.deriveFont(40F);
 
         // setPreferredSize(new Dimension(floodGame.iWidth /2, floodGame.iHeight));
-        setPreferredSize(new Dimension(228, floodGame.iHeight));
+        setPreferredSize(new Dimension(228, tarGame.iHeight));
 
     }
     /**initvars
@@ -97,7 +98,11 @@ public class SidePanel extends JPanel implements MouseListener {
         bSound = true;
         //indica el nivel
         sNivel = Integer.toString(tarGame.iNivel);
+        
+        //offsets
         iMouseXOffSet = (tarGame.iWidth)-228;
+        iStartPanelX = (tarGame.iWidth)-289;
+        iXOffsetSelections = 3;
     }
 
     /* crearImagenes
@@ -106,7 +111,7 @@ public class SidePanel extends JPanel implements MouseListener {
     public void crearImagenes() {
         // Crear la imagen de fondo.
         imaImagenLogo = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                        .getResource("Images/sidePanel/logo.png"));
+                        .getResource("Images/sidePanel/logoFlood.gif"));
 
         imaImagenPuntaje = Toolkit.getDefaultToolkit().getImage(this.getClass()
                            .getResource("Images/sidePanel/puntaje.png"));
@@ -126,14 +131,14 @@ public class SidePanel extends JPanel implements MouseListener {
                                .getImage(this.getClass().getResource("Images/sidePanel/backAlMenu.png")));
 
 
-        basSound = new Base(640, 650, Toolkit.getDefaultToolkit()
+        basSound = new Base(iStartPanelX, 650, Toolkit.getDefaultToolkit()
                             .getImage(this.getClass().getResource("Images/sidePanel/soundON.png")));
 
 
-        basPause = new Base(basSound.getX() + basSound.getAncho(), 650, Toolkit.getDefaultToolkit()
+        basPause = new Base(basSound.getX() + basSound.getAncho()+iXOffsetSelections, 650, Toolkit.getDefaultToolkit()
                             .getImage(this.getClass().getResource("Images/sidePanel/pause.png")));
 
-        basHelp = new Base(basPause.getX() + basPause.getAncho(), 650, Toolkit.getDefaultToolkit()
+        basHelp = new Base(basPause.getX() + basPause.getAncho()+iXOffsetSelections, 650, Toolkit.getDefaultToolkit()
                            .getImage(this.getClass().getResource("Images/sidePanel/help.png")));
 
     }
@@ -200,21 +205,22 @@ public class SidePanel extends JPanel implements MouseListener {
     }
 
     public void mouseClicked(MouseEvent mouEvent) {
-
+        
+        System.out.println("CLICK");
         
         //actualiza posiciones del mouse
         iMouseX = mouEvent.getX()+iMouseXOffSet;
         iMouseY = mouEvent.getY();
 
+        System.out.println("Mouse: "+iMouseX+", "+iMouseY);
+        System.out.println("Sound: "+basSound.getX()+", "+ basSound.getY());
+        
         //checa si el jugador a presionado algun boton del panel
         if (basHelp.intersects(iMouseX, iMouseY)) {
             bHelp = true;//prende help
             System.out.println("clicked help");
             bBackMenu = false;//apaga las demás
-        }
-
-
-        else if ( basPause.intersects(iMouseX, iMouseY) ) {
+        }        else if ( basPause.intersects(iMouseX, iMouseY) ) {
             System.out.println("clicked pause");
             bPause = !bPause;//niega pause
         }
