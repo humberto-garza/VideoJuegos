@@ -40,10 +40,13 @@ public class BannerMenu extends JPanel implements MouseListener {
     private Base basRecords; //boton de records 
     private Base basBackToMenu; //boton de back to menu
 
-    //Imagenes Menu principal 
+    //Imagenes Menu principal
     Image imaMenuBackground; //Background menu
     private Image imaBackToMenu2; //imagen de animacion del boton de back to menu2
     private Image imaBackToMenu; //imagen de animacion del boton de back to menu2
+    private Image imaPantallaInstrucciones; //imagen de animacion del boton de back to menu2
+    
+   
 
     //Offsets
     private int iSecondaryMenuOffsetX; //Para menu secundario
@@ -115,6 +118,9 @@ public class BannerMenu extends JPanel implements MouseListener {
 
         imaBackToMenu2 = Toolkit.getDefaultToolkit().getImage(this.getClass()
                 .getResource("Images/menu/backMenu2.png"));
+        
+        imaPantallaInstrucciones =  Toolkit.getDefaultToolkit().getImage(this.getClass()
+                .getResource("Images/menu/PantallaInstrucciones.png"));
     }
 
     public void setPlay(boolean bPlay) {
@@ -156,12 +162,12 @@ public class BannerMenu extends JPanel implements MouseListener {
     public void creaBases() {
 
         //MENU PRINCIPAL
-        iOffsetY = 60; //Offset para categorias
+        iOffsetY = 88; //Offset para categorias
         iOffsetX = 120;  //Offset para categorias
 
         //refactor 
-        int iPosicionX = (tarGame.iWidth / 2) - 150;
-        int iPosicionY = (tarGame.iHeight / 2) - 200;
+        int iPosicionX = 240;
+        int iPosicionY = 200;
 
         int iOffsetXBottomPanel; //offset para boton de play y de help
         int iOffsetYBottomPanel; //offset para boton de play y de help
@@ -173,7 +179,7 @@ public class BannerMenu extends JPanel implements MouseListener {
         /**
          * Home
          */
-        basCatUno = new Base(iPosicionX, iPosicionY += iOffsetY, Toolkit.getDefaultToolkit()
+        basCatUno = new Base(iPosicionX, iPosicionY , Toolkit.getDefaultToolkit()
                 .getImage(this.getClass().getResource("Images/menu/cat1.png")));
 
         basCatDos = new Base(iPosicionX, iPosicionY += iOffsetY, Toolkit.getDefaultToolkit()
@@ -185,10 +191,15 @@ public class BannerMenu extends JPanel implements MouseListener {
         basCatCustom = new Base(iPosicionX, iPosicionY += iOffsetY, Toolkit.getDefaultToolkit()
                 .getImage(this.getClass().getResource("Images/menu/cat4.png")));
 
+    
+        iPosicionY = (tarGame.iHeight / 2) + 134;
+        iPosicionX = 290;
+        
+        
         /**
          * Bottom Home
          */
-        basHelp = new Base(iPosicionX, iPosicionY += iOffsetY * 3.1, Toolkit.getDefaultToolkit()
+        basHelp = new Base(iPosicionX, iPosicionY += iOffsetY, Toolkit.getDefaultToolkit()
                 .getImage(this.getClass().getResource("Images/menu/help.png")));
 
         basPlay = new Base(basHelp.getX() + 250, basHelp.getY(), Toolkit.getDefaultToolkit()
@@ -237,9 +248,10 @@ public class BannerMenu extends JPanel implements MouseListener {
 
     public void paintComponent(Graphics graGrafico) {
 
-        graGrafico.drawImage(imaMenuBackground, 0, 0, tarGame.iWidth, tarGame.iHeight, this);
-
+      
         if (bPrincipal) {
+            
+            graGrafico.drawImage(imaMenuBackground, 0, 0, tarGame.iWidth, tarGame.iHeight, this);
             paintPrincipal(graGrafico);
         } else {
 
@@ -268,7 +280,6 @@ public class BannerMenu extends JPanel implements MouseListener {
 
         int iPrinicipalOffsetX = 50;
         int iPrinicipalOffsetY = 40;
-       
         
         basCatUno.paint(graGrafico, this);
         //graGrafico.drawRect(basCatUno.getX() + iPrinicipalOffsetX, basCatUno.getY() + iPrinicipalOffsetY, 300, 50);
@@ -297,6 +308,7 @@ public class BannerMenu extends JPanel implements MouseListener {
     //Paint instructions, records y history 
     public void paintSecondaryMenuSidePanel(Graphics graGrafico) {
 
+        graGrafico.drawImage(imaPantallaInstrucciones, 0, 0, tarGame.iWidth, tarGame.iHeight, this);
         basInstrucciones.paint(graGrafico, this);
         basCreditos.paint(graGrafico, this);
         basRecords.paint(graGrafico, this);
