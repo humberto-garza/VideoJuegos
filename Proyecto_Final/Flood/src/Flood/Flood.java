@@ -369,30 +369,36 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
      */
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-        /* Revisar que tecla se presiono y cambiar la posicion*/
-        if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
-            tabTablero.pressedEnter();
-            souMove.play(side.bSound);
-        }
-        if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
-            tabTablero.pressedRight();
-            souMove.play(side.bSound);
-        }
-        if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
-            tabTablero.pressedLeft();
-            souMove.play(side.bSound);
-        }
-        if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
-            tabTablero.pressedUp();
-            souMove.play(side.bSound);
-        }
-        if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
-            tabTablero.pressedDown();
-            souMove.play(side.bSound);
-        } else {
-            char cAux = keyEvent.getKeyChar();
-            int iResult = tabTablero.pressedKey(cAux);
-            iPuntos += iResult;
+        
+        //Revisar si estamos en el menu o en la pantalla del juego
+        if (bannerMenu.getPlay()) {
+
+            /* Revisar que tecla se presiono y cambiar la posicion*/
+            if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
+                tabTablero.pressedEnter();
+                souMove.play(side.bSound);
+            }
+            if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
+                tabTablero.pressedRight();
+                souMove.play(side.bSound);
+            }
+            if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
+                tabTablero.pressedLeft();
+                souMove.play(side.bSound);
+            }
+            if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
+                tabTablero.pressedUp();
+                souMove.play(side.bSound);
+            }
+            if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
+                tabTablero.pressedDown();
+                souMove.play(side.bSound);
+            } else {
+                char cAux = keyEvent.getKeyChar();
+                int iResult = tabTablero.pressedKey(cAux);
+                iPuntos += iResult;
+            }
+
         }
     }
 
