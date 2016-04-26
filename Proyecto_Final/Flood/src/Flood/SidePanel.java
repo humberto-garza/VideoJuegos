@@ -100,7 +100,10 @@ public class SidePanel extends JPanel implements MouseListener {
         sNivel = Integer.toString(tarGame.iNivel);
         
         //offsets
-        iMouseXOffSet = (tarGame.iWidth)-228;
+        //iMouseXOffSet = (tarGame.iWidth)-228;
+        iMouseXOffSet = (tarGame.iWidth)-600;
+        iMouseXOffSet = (tarGame.iWidth)-289;
+
         iStartPanelX = (tarGame.iWidth)-289;
         iXOffsetSelections = 3;
     }
@@ -118,7 +121,7 @@ public class SidePanel extends JPanel implements MouseListener {
 
         sNivel = "1";
         imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                         .getResource("Images/sidePanel/nivel" + sNivel + ".png"));
+                         .getResource("Images/sidePanel/Nivel" + sNivel + ".png"));
 
     }
 
@@ -156,12 +159,11 @@ public class SidePanel extends JPanel implements MouseListener {
             graGrafico.setColor(colAux);
             graGrafico.setFont(fonFuentel);
             graGrafico.drawString(Integer.toString(tarGame.iPuntos), 660, 250);
-
-
-
-
-
-            graGrafico.drawImage(imaImagenNivel, 640, 350, 173, 82, this);
+            //graGrafico.drawImage(getImagen(), getX(), getY(), getAncho(), getAlto(), imoObserver);
+            
+            
+            graGrafico.drawImage(imaImagenNivel, iStartPanelX, 350, imaImagenNivel.getWidth(this), imaImagenNivel.getHeight(this), this);
+            //System.out.println("TAMANOSSSS DE NIVELLL!!!!!!!!!  "+imaImagenNivel.getWidth(this));
         }
     
         if (!bBackMenu && basBackMenu != null && 
@@ -210,6 +212,8 @@ public class SidePanel extends JPanel implements MouseListener {
         
         //actualiza posiciones del mouse
         iMouseX = mouEvent.getX()+iMouseXOffSet;
+          //      iMouseX = mouEvent.getX();
+
         iMouseY = mouEvent.getY();
 
         System.out.println("Mouse: "+iMouseX+", "+iMouseY);

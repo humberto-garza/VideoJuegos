@@ -476,7 +476,7 @@ public class BannerMenu extends JPanel implements MouseListener {
             falseAll();
 
             setPlay(true);
-            System.out.println("Play");
+            System.out.println("Play EN MENU");
 
             setCustomCat(sCustomFile);
             System.out.println("Custom Category: " + sCustomFile);
