@@ -32,8 +32,6 @@ import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.Arrays;
 import javax.swing.KeyStroke;
 import java.text.Normalizer;
@@ -48,7 +46,7 @@ import javax.swing.JFileChooser;
  * @date 2016
  * @version A00808689
  */
-public class Flood extends JFrame implements Runnable, MouseListener, KeyListener {
+public class Flood extends JFrame implements Runnable, KeyListener {
 
     //Jframe Size
     public int iHeight;
@@ -58,8 +56,6 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     private Image imaImagenFondo; // Imagen de fondo
     private Image imaImagenApplet; // Imagen a proyectar en Applet
     private Graphics graGraficaApplet; // Objeto grafico de la Imagen
-    
-    
 
     //Objeto base BackMenu
     private Base backMenu;
@@ -104,7 +100,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         // Crear la imagen de fondo.
         imaImagenFondo = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                         .getResource("Images/Fondo.png"));
+                .getResource("Images/Fondo.png"));
 
         //inicializa la instancia de SidePanel
         this.side = new SidePanel(this);
@@ -132,7 +128,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         //Variables de score y nivel
         iPuntos = 0;
-        iNivel  = 1;
+        iNivel = 1;
 
         // Variables tiempo
         iRandMax = 75;
@@ -151,7 +147,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         /*
          * En este modo de juego, aparecen cuadros al azar y
          * se deben ir desapareciendo al responder correctamente
-        */
+         */
         if (iModoJuego == 1) {
             /////////////MODO 1///////////////////
             tabTablero.creaCuadro();
@@ -160,7 +156,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         /////////////MODO 2///////////////////
         /*
         * En este modo de juego, se trata de desaparecer n Puntos
-        */
+         */
         if (iModoJuego == 2) {
             /////////////MODO 2///////////////////
             tabTablero.llenarGrid();
@@ -170,7 +166,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         /*
         * En este modo de juego, se trata de evitar que se pasen los cuadros
         * de arriba
-        */
+         */
         if (iModoJuego == 3) {
             /////////////MODO 2///////////////////
             tabTablero.creaCuadroAbajo();
@@ -183,7 +179,6 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         // Listeners: Teclado y Mouse
         addKeyListener(this);
-        addMouseListener(this);
 
         // Declarar thread principal
         Thread th = new Thread(this);
@@ -220,11 +215,10 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
                 actualiza();
                 add(side);
                 remove(bannerMenu);
-            }
-            else {//hacer que regrese al menu
+            } else {//hacer que regrese al menu
                 add(bannerMenu);
                 remove(side);
-                
+
             }
             checaColision();
             repaint();
@@ -233,7 +227,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
                 Thread.sleep(25);
             } catch (InterruptedException iexError) {
                 System.out.println("Hubo un error en el juego "
-                                   + iexError.toString());
+                        + iexError.toString());
             }
         }
     }
@@ -298,7 +292,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
         // Si quitamos el if funciona con el resize
         if (imaImagenApplet == null) {
             imaImagenApplet = createImage(this.getSize().width,
-                                          this.getSize().height);
+                    this.getSize().height);
             graGraficaApplet = imaImagenApplet.getGraphics();
         }
         // Actualiza el Foreground.
@@ -329,13 +323,11 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             graDibujo.drawImage(imaImagenFondo, 0, 0, iWidth, iHeight, this);
 
             if (bannerMenu.getPlay()) {
-                
+
                 //se pinta el menu     
                 paintCustomFlood(graDibujo);
-            }
+            } else {
 
-            else {
-                
                 //se pinta el juego cuando se le presiona play
                 paintCustomMenu(graDibujo);
             }
@@ -346,7 +338,6 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             graDibujo.drawString("No se cargo la imagen..", 20, 20);
         }
     }
-
 
     public void paintCustomFlood(Graphics graDibujo) {
         //paintComponent de side Panel
@@ -380,72 +371,44 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
      */
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-        
-        //Revisar si estamos en el menu o en la pantalla del juego
-        if (bannerMenu.getPlay()) {
-
-            /* Revisar que tecla se presiono y cambiar la posicion*/
-            if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
-                tabTablero.pressedEnter();
-                souMove.play(side.bSound);
-            }
-            if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
-                tabTablero.pressedRight();
-                souMove.play(side.bSound);
-            }
-            if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
-                tabTablero.pressedLeft();
-                souMove.play(side.bSound);
-            }
-            if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
-                tabTablero.pressedUp();
-                souMove.play(side.bSound);
-            }
-            if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
-                tabTablero.pressedDown();
-                souMove.play(side.bSound);
-            } else {
-                char cAux = keyEvent.getKeyChar();
-                int iResult = tabTablero.pressedKey(cAux);
-                iPuntos += iResult;
-               
-            }
+        /* Revisar que tecla se presiono y cambiar la posicion*/
+        if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
+            tabTablero.pressedEnter();
+            souMove.play(side.bSound);
+        }
+        if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
+            tabTablero.pressedRight();
+            souMove.play(side.bSound);
+        }
+        if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
+            tabTablero.pressedLeft();
+            souMove.play(side.bSound);
+        }
+        if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
+            tabTablero.pressedUp();
+            souMove.play(side.bSound);
+        }
+        if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
+            tabTablero.pressedDown();
+            souMove.play(side.bSound);
+        } else {
+            char cAux = keyEvent.getKeyChar();
+            int iResult = tabTablero.pressedKey(cAux, iModoJuego);
+            iPuntos += iResult;
 
         }
     }
 
-    /**
-     * keyReleased
-     *
-     *
-     * @param keyEvent es el objeto de <code>keyTyped</code> del teclado.
-     *
-     */
+        /**
+         * keyReleased
+         *
+         *
+         * @param keyEvent es el objeto de <code>keyTyped</code> del teclado.
+         *
+         */
     @Override
     public void keyReleased(KeyEvent keyEvent) {
         souMove.stop();
     }
 
-    public void mouseClicked(MouseEvent mouEvent) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e
-                            ) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e
-                             ) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e
-                            ) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
 }
