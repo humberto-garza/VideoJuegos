@@ -28,11 +28,14 @@ public class SidePanel extends JPanel implements MouseListener {
     private Base basHelp;
     private Base basPause;
     private Base basSound;
+    private Base basHint; //objeto base que sirve como boton para obtener una pista
 
     //Objetos para las imagenes
     private Image imaImagenLogo;
     private Image imaImagenPuntaje;
     private Image imaImagenNivel;
+   
+   
 
     //Variables booleanas que indican si un botón fue presionado
     private boolean bBackMenu;
@@ -50,6 +53,10 @@ public class SidePanel extends JPanel implements MouseListener {
     int iMouseX;
     int iMouseY;
     int iMouseXOffSet;
+    
+    int iPosX = 0; //borrar
+    int iPosY = 0;//borrar
+    
     
     //Variable que contiene el #de nivel como string, se usa para pintar el nivel
     private String sNivel;
@@ -100,8 +107,13 @@ public class SidePanel extends JPanel implements MouseListener {
         sNivel = Integer.toString(tarGame.iNivel);
         
         //offsets
-        iMouseXOffSet = (tarGame.iWidth)-228;
+        //iMouseXOffSet = (tarGame.iWidth)-228;
+        iMouseXOffSet = (tarGame.iWidth)-600;
+        //iMouseXOffSet = (tarGame.iWidth)-289;
+
         iStartPanelX = (tarGame.iWidth)-289;
+//        iMouseXOffSet = (tarGame.iWidth)-283;
+//        iStartPanelX = (tarGame.iWidth)-247;
         iXOffsetSelections = 3;
     }
 
@@ -118,7 +130,7 @@ public class SidePanel extends JPanel implements MouseListener {
 
         sNivel = "1";
         imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                         .getResource("Images/sidePanel/nivel" + sNivel + ".png"));
+                         .getResource("Images/sidePanel/Nivel" + sNivel + ".png"));
 
     }
 
@@ -140,6 +152,9 @@ public class SidePanel extends JPanel implements MouseListener {
 
         basHelp = new Base(basPause.getX() + basPause.getAncho()+iXOffsetSelections, 650, Toolkit.getDefaultToolkit()
                            .getImage(this.getClass().getResource("Images/sidePanel/help.png")));
+        
+        basHint = new Base(520, 670, Toolkit.getDefaultToolkit()
+                           .getImage(this.getClass().getResource("Images/sidePanel/pistaB.png")));
 
     }
 
@@ -156,12 +171,13 @@ public class SidePanel extends JPanel implements MouseListener {
             graGrafico.setColor(colAux);
             graGrafico.setFont(fonFuentel);
             graGrafico.drawString(Integer.toString(tarGame.iPuntos), 660, 250);
-
-
-
-
-
-            graGrafico.drawImage(imaImagenNivel, 640, 350, 173, 82, this);
+            //graGrafico.drawImage(getImagen(), getX(), getY(), getAncho(), getAlto(), imoObserver);
+            
+            
+            graGrafico.drawImage(imaImagenNivel, iStartPanelX, 350, imaImagenNivel.getWidth(this), imaImagenNivel.getHeight(this), this);
+            //System.out.println("TAMANOSSSS DE NIVELLL!!!!!!!!!  "+imaImagenNivel.getWidth(this));
+            
+            graGrafico.drawString("X " + iPosX + " " + "Y " + iPosY, 400, 100);
         }
     
         if (!bBackMenu && basBackMenu != null && 
@@ -172,6 +188,8 @@ public class SidePanel extends JPanel implements MouseListener {
             basHelp.paint(graGrafico, this);
             basPause.paint(graGrafico, this);
             basSound.paint(graGrafico, this);
+            basHint.paint(graGrafico, this);
+            
         } else {
             //Da un mensaje mientras se carga el dibujo
             graGrafico.drawString("No se cargo la imagen..", 20, 20);
@@ -211,9 +229,18 @@ public class SidePanel extends JPanel implements MouseListener {
         //actualiza posiciones del mouse
         iMouseX = mouEvent.getX()+iMouseXOffSet;
         iMouseY = mouEvent.getY();
+        
+        iPosX = iMouseX; //borrar
+        iPosY = iMouseY; //borrar
 
-        System.out.println("Mouse: "+iMouseX+", "+iMouseY);
-        System.out.println("Sound: "+basSound.getX()+", "+ basSound.getY());
+        System.out.println("---mouse--");
+        System.out.println(iMouseX +" "+iMouseY);
+        System.out.println("---HINT--");
+        System.out.println(basHint.getX() +" "+basHint.getY());
+        
+        
+        System.out.println("Mouse X-Y : "+iMouseX+", "+iMouseY);
+        System.out.println("Sound X-Y : "+basSound.getX()+", "+ basSound.getY());
         
         //checa si el jugador a presionado algun boton del panel
         if (basHelp.intersects(iMouseX, iMouseY)) {
@@ -244,8 +271,16 @@ public class SidePanel extends JPanel implements MouseListener {
             tarGame.bannerMenu.falseAll();
             tarGame.bannerMenu.bPrincipal = true;
             //SDN - Variables de Banner Menu
-            
            
+        }
+        
+        if(basHint.intersects(iMouseX, iMouseY)){
+            
+            System.out.println("Hint was clicked");
+            // Agregar el caracter a la respuesta
+            //String sActualizar = tarGame.tabTablero.disRespuesta.getRespuesta();
+            
+
         }
 
     }

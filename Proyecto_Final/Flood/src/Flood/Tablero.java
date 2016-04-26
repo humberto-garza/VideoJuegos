@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+
+
 import java.awt.image.ImageObserver;
 import java.io.BufferedReader;
 import java.io.File;
@@ -44,7 +46,7 @@ public class Tablero {
 	// Variables Display Respuesta
 	private int iDisResOffX;    // Offset del Display de Respuesta X
 	private int iDisResOffY;    // Offset del Display de Respuesta Y
-	private DisplayRespuesta disRespuesta;
+	protected DisplayRespuesta disRespuesta;
 
 	// Estructura de posicionamiento
 	private LinkedList<Coordenada> cooCoordenadas;
@@ -438,12 +440,13 @@ public class Tablero {
 				}
 
 				// Si Coinciden los caracteres
-				if (Character.toLowerCase(cResEsperada) == cAux) {
-
-					// Agregar el caracter a la respuesta
+				if (Character.toLowerCase(cResEsperada) == cAux) {   
+             
+                                        // Agregar el caracter a la respuesta
 					String sActualizar = disRespuesta.getRespuesta() + sResEsperadaCopy.charAt(iCharIndex);
 					disRespuesta.setRespuesta(sActualizar);
-
+  
+                                      
 					// Si la respuesta esta completa
 					if (disRespuesta.getSize() == sResEsperada.length()) {
 						// Sumar los puntos

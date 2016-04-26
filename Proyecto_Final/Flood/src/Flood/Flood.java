@@ -58,6 +58,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     private Image imaImagenFondo; // Imagen de fondo
     private Image imaImagenApplet; // Imagen a proyectar en Applet
     private Graphics graGraficaApplet; // Objeto grafico de la Imagen
+    
+    
 
     //Objeto base BackMenu
     private Base backMenu;
@@ -74,7 +76,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     private int iMouseY;
 
     // Tablero
-    private Tablero tabTablero;
+    protected Tablero tabTablero;
 
     //SidePanel Instance
     private SidePanel side;
@@ -214,8 +216,15 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
 
         // Mientras no sea el fin del juego
         while (true) {
-            if (bannerMenu.getPlay()) {
+            if (bannerMenu.getPlay()) {//boton de play en el menu
                 actualiza();
+                add(side);
+                remove(bannerMenu);
+            }
+            else {//hacer que regrese al menu
+                add(bannerMenu);
+                remove(side);
+                
             }
             checaColision();
             repaint();
@@ -319,14 +328,16 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             // Dibuja la imagen de fondo
             graDibujo.drawImage(imaImagenFondo, 0, 0, iWidth, iHeight, this);
 
-            if (!bannerMenu.getPlay()) {
-                //se pinta el menu
-                paintCustomMenu(graDibujo);
+            if (bannerMenu.getPlay()) {
+                
+                //se pinta el menu     
+                paintCustomFlood(graDibujo);
             }
 
             else {
+                
                 //se pinta el juego cuando se le presiona play
-                paintCustomFlood(graDibujo);
+                paintCustomMenu(graDibujo);
             }
 
         } // Si no se ha cargado se dibuja un mensaje
@@ -369,6 +380,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
      */
     @Override
     public void keyPressed(KeyEvent keyEvent) {
+<<<<<<< HEAD
         /* Revisar que tecla se presiono y cambiar la posicion*/
         if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
             tabTablero.pressedEnter();
@@ -393,6 +405,39 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             char cAux = keyEvent.getKeyChar();
             int iResult = tabTablero.pressedKey(cAux, iModoJuego);
             iPuntos += iResult;
+=======
+        
+        //Revisar si estamos en el menu o en la pantalla del juego
+        if (bannerMenu.getPlay()) {
+
+            /* Revisar que tecla se presiono y cambiar la posicion*/
+            if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
+                tabTablero.pressedEnter();
+                souMove.play(side.bSound);
+            }
+            if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
+                tabTablero.pressedRight();
+                souMove.play(side.bSound);
+            }
+            if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
+                tabTablero.pressedLeft();
+                souMove.play(side.bSound);
+            }
+            if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
+                tabTablero.pressedUp();
+                souMove.play(side.bSound);
+            }
+            if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
+                tabTablero.pressedDown();
+                souMove.play(side.bSound);
+            } else {
+                char cAux = keyEvent.getKeyChar();
+                int iResult = tabTablero.pressedKey(cAux);
+                iPuntos += iResult;
+               
+            }
+
+>>>>>>> 0f0d0fb51453ab024ed26db322b74106aee8174e
         }
     }
 
