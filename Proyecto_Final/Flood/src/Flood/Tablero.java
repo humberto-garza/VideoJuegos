@@ -54,6 +54,7 @@ public class Tablero {
 
 	// Listas Encadenadas
 	private LinkedList<Integer> lklDisponibles;
+
 	private LinkedList<Integer> lklUsados;
 	private LinkedList<Cuadro> lklCuadrosBase;
 	private LinkedList<Color> lklColores;
@@ -412,7 +413,7 @@ public class Tablero {
 		disRespuesta.setRespuesta("");
 	}
 
-	public int pressedKey(char cAux) {
+	public int pressedKey(char cAux, int iModoJuego) {
 		int iPuntos = 0;
 
 		if (Character.isDigit(cAux) || Character.isLetter(cAux)) {
@@ -448,16 +449,18 @@ public class Tablero {
 						// Sumar los puntos
 						iPuntos += cuaAux.getValor();
 
-						// Dar de baja el cuadro
-						cuaAux.setActive(false);
-
 						// Agregar el index a disponibles
 						lklDisponibles.add(iIndexActual);
-
 						// Remover de usados
 						iIndexUsado = lklUsados.indexOf(iIndexActual);
 						lklUsados.remove(iIndexUsado);
 						iIndexUsado = lklUsados.size() - 1;
+
+						// Dar de baja el cuadro
+						cuaAux.setActive(false);
+						if (iModoJuego == 3) {
+							bajarColumna(iIndexActual);
+						}
 
 						disRespuesta.setRespuesta("");
 						iIndexColor++;
@@ -478,13 +481,29 @@ public class Tablero {
 
 	public void bajarColumna(int iCuadro) {
 		int iColumna = iCuadro % iGridCols;
-		/*
-		for (int iC = iCuadro; iC > 0; iC += iGridCols) {
+		for (int iC = iCuadro - iGridCols; iC >= 0; iC -= iGridCols) {
+			Cuadro cuaArriba = lklCuadrosBase.get(iC);
+			Cuadro cuaAbajo = lklCuadrosBase.get(iC + iGridCols);
+			if (!cuaAbajo.isActive() && cuaArriba.isActive()) {
+				cuaAbajo.setValor(cuaArriba.getValor());
+				cuaAbajo.setPregunta(cuaArriba.getPregunta());
+				cuaAbajo.setColor(cuaArriba.getColor());
+				cuaArriba.setActive(false);
+				cuaAbajo.setActive(true);
+
+				lklDisponibles.add(iC);
+				int iIndexAux = lklUsados.indexOf(iC);
+				lklUsados.remove(iIndexAux);
+
+				lklUsados.add(iC + iGridCols);
+				iIndexAux = lklDisponibles.indexOf(iC + iGridCols);
+				lklDisponibles.remove(iIndexAux);
+			}
 
 
 		}
-		*/
 	}
+
 	public String deAccent(String str) {
 		String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
 		Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
