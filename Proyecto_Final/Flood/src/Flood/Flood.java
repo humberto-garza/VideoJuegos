@@ -58,6 +58,8 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     private Image imaImagenFondo; // Imagen de fondo
     private Image imaImagenApplet; // Imagen a proyectar en Applet
     private Graphics graGraficaApplet; // Objeto grafico de la Imagen
+    
+    
 
     //Objeto base BackMenu
     private Base backMenu;
@@ -74,7 +76,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
     private int iMouseY;
 
     // Tablero
-    private Tablero tabTablero;
+    protected Tablero tabTablero;
 
     //SidePanel Instance
     private SidePanel side;
@@ -326,14 +328,16 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
             // Dibuja la imagen de fondo
             graDibujo.drawImage(imaImagenFondo, 0, 0, iWidth, iHeight, this);
 
-            if (!bannerMenu.getPlay()) {
-                //se pinta el menu
-                paintCustomMenu(graDibujo);
+            if (bannerMenu.getPlay()) {
+                
+                //se pinta el menu     
+                paintCustomFlood(graDibujo);
             }
 
             else {
+                
                 //se pinta el juego cuando se le presiona play
-                paintCustomFlood(graDibujo);
+                paintCustomMenu(graDibujo);
             }
 
         } // Si no se ha cargado se dibuja un mensaje
@@ -404,6 +408,7 @@ public class Flood extends JFrame implements Runnable, MouseListener, KeyListene
                 char cAux = keyEvent.getKeyChar();
                 int iResult = tabTablero.pressedKey(cAux);
                 iPuntos += iResult;
+               
             }
 
         }

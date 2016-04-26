@@ -274,9 +274,8 @@ public class BannerMenu extends JPanel implements MouseListener {
 
     public void paintComponent(Graphics graGrafico) {
 
-      
         if (bPrincipal) {
-            
+
             graGrafico.drawImage(imaMenuBackground, 0, 0, tarGame.iWidth, tarGame.iHeight, this);
             paintPrincipal(graGrafico);
         } else {
@@ -295,10 +294,7 @@ public class BannerMenu extends JPanel implements MouseListener {
         } else if (bRecords) {
             paintRecords(graGrafico);
 
-        } else if (bPlay) {
-
         }
-
     }
 
     //paint principal
@@ -480,6 +476,7 @@ public class BannerMenu extends JPanel implements MouseListener {
 
             setCustomCat(sCustomFile);
             System.out.println("Custom Category: " + sCustomFile);
+            bPlay = true;
         }
 
         //selecciona Help
