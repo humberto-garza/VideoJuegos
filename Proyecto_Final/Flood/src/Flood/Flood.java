@@ -228,7 +228,9 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         // Mientras no sea el fin del juego
         while (true) {
             if (bannerMenu.getPlay() && !bannerMenu.getInstrucciones()) {//boton de play en el menu
-                actualiza();
+                if(!side.bPause){//no esta en pausa
+                    actualiza();//solo actualiza cuando no hay pausa
+                }
                 add(side);
                 remove(bannerMenu);
             } else {//hacer que regrese al menu
