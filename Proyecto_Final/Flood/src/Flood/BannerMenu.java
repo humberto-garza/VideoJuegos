@@ -710,7 +710,7 @@ public class BannerMenu extends JPanel implements MouseListener {
         int iRectOffsetX = (int)rectReference.getX() + (rectReference.width/2) - (iSizeImageX/2);
         int iRectOffsetY = (int)rectReference.getY() + (rectReference.height/2) - (iSizeImageY/2);
         
-        if (iContadorAnimacion < lklSplash.size()) {
+        if (iContadorAnimacion < lklSplash.size()-1) {
 
             iContadorAnimacion++;
             iSizeImageX += 5;

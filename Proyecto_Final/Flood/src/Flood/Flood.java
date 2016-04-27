@@ -16,6 +16,8 @@ import java.awt.event.KeyListener;
 import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.BufferedReader;
@@ -46,7 +48,7 @@ import javax.swing.JFileChooser;
  * @date 2016
  * @version A00808689
  */
-public class Flood extends JFrame implements Runnable, KeyListener {
+public class Flood extends JFrame implements Runnable, KeyListener, MouseListener {
 
     //Jframe Size
     public int iHeight;
@@ -73,6 +75,7 @@ public class Flood extends JFrame implements Runnable, KeyListener {
 
     // Tablero
     protected Tablero tabTablero;
+
 
     //SidePanel Instance
     protected SidePanel side;
@@ -129,6 +132,7 @@ public class Flood extends JFrame implements Runnable, KeyListener {
         //Variables de score y nivel
         iPuntos = 0;
         iNivel = 1;
+        side.cambioNivel();
 
         // Variables tiempo
         iRandMax = 75;
@@ -136,12 +140,33 @@ public class Flood extends JFrame implements Runnable, KeyListener {
         iContadorCiclos = 0;
         iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
 
-        // Iniciar un nuevo Tablero
-        tabTablero = new Tablero("./src/Flood/Files/Quimica.txt");
-
         // Definir el primer modo de juego
-        iModoJuego = 3;
+        iModoJuego = 0;
+        nuevoJuego();
 
+        // Variables de teclado
+        bKeyPressed = false;
+
+        // Listeners: Teclado y Mouse
+        addKeyListener(this);
+
+        // Declarar thread principal
+        Thread th = new Thread(this);
+
+        // Iniciar el thread
+        th.start();
+    }
+    public void nuevoJuego() {
+        // Iniciar un nuevo Tablero
+        try {
+            tabTablero = new Tablero("./src/Flood/Files/Quimica.txt");
+        } catch (FontFormatException ex) {
+            Logger.getLogger(Flood.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Flood.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        iModoJuego++;
+        iPuntos = 0;
         // MODO DE JUEGO
         /////////////MODO 1///////////////////
         /*
@@ -174,19 +199,8 @@ public class Flood extends JFrame implements Runnable, KeyListener {
             /////////////////////////////////////
         }
         /////////////////////////////////////
-
-        // Variables de teclado
-        bKeyPressed = false;
-
-        // Listeners: Teclado y Mouse
-        addKeyListener(this);
-
-        // Declarar thread principal
-        Thread th = new Thread(this);
-
-        // Iniciar el thread
-        th.start();
     }
+
 
     /**
      * main
@@ -244,7 +258,7 @@ public class Flood extends JFrame implements Runnable, KeyListener {
         //Determina el tiempo que ha transcurrido desde que el Applet inicio su ejecución
         long tiempoTranscurrido = System.currentTimeMillis() - tiempoActual;
         iContadorCiclos++;
-        if (iContadorCiclos >= iRand) {
+        if (iContadorCiclos >= iRand || tabTablero.hayDisponibles()) {
             iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
             iContadorCiclos = 0;
             /////////////MODO 1///////////////////
@@ -253,7 +267,7 @@ public class Flood extends JFrame implements Runnable, KeyListener {
             }
             /////////////MODO 2///////////////////
             if (iModoJuego == 2) {
-                tabTablero.creaCuadro();
+                //tabTablero.creaCuadro();
             }
             /////////////MODO 3///////////////////
             if (iModoJuego == 3) {
@@ -412,7 +426,16 @@ public class Flood extends JFrame implements Runnable, KeyListener {
                 souEliminate.play(side.bSound);
             }
             iPuntos += iResult;
+            if (iPuntos < 0) {
+                iPuntos = 0;
+            }
 
+            // Checar si se debe pasar de nivel
+            if (iPuntos > 200) {
+                iNivel++;
+                side.cambioNivel();
+                nuevoJuego();
+            }
 
         }
     }
@@ -427,6 +450,31 @@ public class Flood extends JFrame implements Runnable, KeyListener {
     @Override
     public void keyReleased(KeyEvent keyEvent) {
         souMove.stop();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

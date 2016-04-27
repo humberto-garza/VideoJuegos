@@ -56,7 +56,6 @@ public class Tablero {
 
 	// Listas Encadenadas
 	private LinkedList<Integer> lklDisponibles;
-
 	private LinkedList<Integer> lklUsados;
 	private LinkedList<Cuadro> lklCuadrosBase;
 	private LinkedList<Color> lklColores;
@@ -140,6 +139,13 @@ public class Tablero {
 
 
 	}
+
+
+	public boolean hayDisponibles() {
+		return lklDisponibles.size() == iCasillas;
+	}
+
+
 
 	public void paint(Graphics graDibujo, ImageObserver imoObserver) {
 		// Dibuja los objetos Cuadro
