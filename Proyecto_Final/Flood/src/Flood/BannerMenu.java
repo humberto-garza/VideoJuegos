@@ -518,7 +518,9 @@ public class BannerMenu extends JPanel implements MouseListener {
         if (basPlay.intersects(iMouseX, iMouseY)) { //seleciono play
             falseAll();
 
-            System.out.println("Play");
+            setPlay(true);
+            System.out.println("Play EN MENU");
+
             setCustomCat(sCustomFile);
             System.out.println("Custom Category: " + sCustomFile);
             bPlay = true;

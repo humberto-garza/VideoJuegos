@@ -70,7 +70,7 @@ public class Cuadro extends Base {
 
         return iValor;
     }
-
+    
     public int getPregunta() {
 
         return iPregunta;
@@ -118,12 +118,12 @@ public class Cuadro extends Base {
 
         Color colTemp = getColor();
 
-        
+
         graGrafico.setColor(colTemp);
         graGrafico.fillRoundRect(getX(), getY(), getAncho(), getAlto(), 5, 5);
         graGrafico.setColor(colTemp);
         graGrafico.fillRoundRect(getX() + 10, getY() + 10, getAncho() - 20, getAlto() - 20, 5, 5);
-       
+
 
         String sPreg = lklPreguntas.get(getPregunta()).getPregunta();
 
@@ -148,7 +148,7 @@ public class Cuadro extends Base {
         Color colAux = new Color(0, 0, 0);
         graGrafico.setColor(colAux);
         graGrafico.setFont(fonFuente);
-        graGrafico.drawString(sQuestion, iOffsetX, iOffsetY+5);
+        graGrafico.drawString(sQuestion, iOffsetX, iOffsetY + 5);
 
     }
 
