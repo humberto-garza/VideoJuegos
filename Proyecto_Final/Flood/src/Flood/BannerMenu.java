@@ -40,6 +40,7 @@ public class BannerMenu extends JPanel implements MouseListener {
     private Base basCreditos; //boton de creditos
     private Base basRecords; //boton de records 
     private Base basBackToMenu; //boton de back to menu
+    private Base basBackToPlay; //boton de regreso al juego
 
     //Imagenes Menu principal
     Image imaMenuBackground; //Background menu
@@ -139,6 +140,12 @@ public class BannerMenu extends JPanel implements MouseListener {
         this.bPlay = bPlay;
 
     }
+    
+    public void setInstrucciones(boolean bInstrucciones) {
+
+        this.bInstrucciones = bInstrucciones;
+
+    }
 
     public boolean getCustomCategoryClicked() {
 
@@ -155,6 +162,12 @@ public class BannerMenu extends JPanel implements MouseListener {
     public boolean getPlay() {
 
         return bPlay;
+
+    }
+    
+    public boolean getInstrucciones() {
+
+        return bInstrucciones;
 
     }
 
@@ -233,6 +246,9 @@ public class BannerMenu extends JPanel implements MouseListener {
 
         basInstrucciones = new Base(iPosicionX, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
                 .getImage(this.getClass().getResource("Images/menu/instrucciones.png")));
+        
+        basBackToPlay = new Base(400, 400, Toolkit.getDefaultToolkit()
+                .getImage(this.getClass().getResource("Images/menu/backToPlay.png")));
 
         basCreditos = new Base(iPosicionX, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
                 .getImage(this.getClass().getResource("Images/menu/creditos.png")));
@@ -352,8 +368,12 @@ public class BannerMenu extends JPanel implements MouseListener {
 
         graGrafico.setFont(fonFuenteMenu);
         graGrafico.fillRect(basInstrucciones.getX(),basInstrucciones.getY() + basInstrucciones.getAlto(),basInstrucciones.getAncho(),5);
-    }
 
+        if (tarGame.side.getHelp()){//si esta prendido significa que el usuario le pico help
+            basBackToPlay.paint(graGrafico, this);//da la opcion de regresar al juego
+        }   
+    }
+    
     //paint creditos
     public void paintCreditos(Graphics graGrafico) {
 
@@ -501,6 +521,15 @@ public class BannerMenu extends JPanel implements MouseListener {
         if (basInstrucciones.intersects(iMouseX, iMouseY)) { //seleciono play
             falseAll();
             bInstrucciones = true;
+            System.out.println("Instrucciones");
+        }
+        
+        //selecciona regresar al juego, desde instrucciones
+        if (basBackToPlay.intersects(iMouseX, iMouseY)) { //seleciono play
+            //sohhit to go back
+            falseAll();
+            bPlay = true;
+            tarGame.side.setHelp(false);
             System.out.println("Instrucciones");
         }
 
