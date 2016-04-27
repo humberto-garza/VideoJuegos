@@ -159,7 +159,7 @@ public class Animacion {
 
         if (isAnimated()) {
             animacionSplash(graGrafico, imgobs); //splash animation
-            System.out.println("Paint component de animacion");
+            //System.out.println("Paint component de animacion");
         }
 
     }
