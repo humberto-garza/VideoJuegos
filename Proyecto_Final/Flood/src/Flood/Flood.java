@@ -390,57 +390,61 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
      */
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-        /* Revisar que tecla se presiono y cambiar la posicion*/
-        if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
-            tabTablero.pressedEnter(iModoJuego);
-            souMove.play(side.bSound);
-        }
-        if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
-            tabTablero.pressedRight();
-            souMove.play(side.bSound);
-        }
-        if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
-            tabTablero.pressedLeft();
-            souMove.play(side.bSound);
-        }
-        if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
-            if (iModoJuego == 1) {
-                tabTablero.pressedUp();
-            } else if (iModoJuego == 2) {
-                tabTablero.pressedUp();
-            } else if (iModoJuego == 3) {
+
+        if (bannerMenu.getPlay() && !side.bPause) {
+
+            /* Revisar que tecla se presiono y cambiar la posicion*/
+            if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
+                tabTablero.pressedEnter(iModoJuego);
+                souMove.play(side.bSound);
+            }
+            if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
+                tabTablero.pressedRight();
+                souMove.play(side.bSound);
+            }
+            if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
+                tabTablero.pressedLeft();
+                souMove.play(side.bSound);
+            }
+            if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
+                if (iModoJuego == 1) {
+                    tabTablero.pressedUp();
+                } else if (iModoJuego == 2) {
+                    tabTablero.pressedUp();
+                } else if (iModoJuego == 3) {
+
+                }
+                souMove.play(side.bSound);
+            }
+            if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
+                if (iModoJuego == 1) {
+                    tabTablero.pressedDown();
+                } else if (iModoJuego == 2) {
+                    tabTablero.pressedDown();
+                } else if (iModoJuego == 3) {
+
+                }
+                souMove.play(side.bSound);
+            } else {//es lo de escribir la respuesta
+                char cAux = keyEvent.getKeyChar();
+                int iResult = tabTablero.pressedKey(cAux, iModoJuego);
+                if (iResult > 0) {
+                    souEliminate.play(side.bSound);
+                }
+                iPuntos += iResult;
+
+                if (iPuntos < 0) {
+                    iPuntos = 0;
+                }
+
+                // Checar si se debe pasar de nivel
+                if (iPuntos > 200) {
+                    iNivel++;
+                    side.cambioNivel();
+                    nuevoJuego();
+                }
 
             }
-            souMove.play(side.bSound);
-        }
-        if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
-            if (iModoJuego == 1) {
-                tabTablero.pressedDown();
-            } else if (iModoJuego == 2) {
-                tabTablero.pressedDown();
-            } else if (iModoJuego == 3) {
-
-            }
-            souMove.play(side.bSound);
-        } else {
-            char cAux = keyEvent.getKeyChar();
-            int iResult = tabTablero.pressedKey(cAux, iModoJuego);
-            if (iResult > 0) {
-                souEliminate.play(side.bSound);
-            }
-            iPuntos += iResult;
-
-            if (iPuntos < 0) {
-                iPuntos = 0;
-            }
-
-            // Checar si se debe pasar de nivel
-            if (iPuntos > 200) {
-                iNivel++;
-                side.cambioNivel();
-                nuevoJuego();
-            }
-
         }
     }
 
