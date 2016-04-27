@@ -350,8 +350,8 @@ public class BannerMenu extends JPanel implements MouseListener {
     //paint principal
     public void paintPrincipal(Graphics graGrafico) {
 
-        int iPrinicipalOffsetX = 50;
-        int iPrinicipalOffsetY = 40;
+        int iPrinicipalOffsetX = 70;
+        int iPrinicipalOffsetY = 50;
         
         basCatUno.paint(graGrafico, this);
         graGrafico.setFont(fonFuenteMenu);
@@ -608,13 +608,10 @@ public class BannerMenu extends JPanel implements MouseListener {
         
            System.out.print("No seleccionó un archivo");
        }
-        
-        
-
+       
     }
     
     //Animación
-    
     public void animacionImagenes(){
         
         
