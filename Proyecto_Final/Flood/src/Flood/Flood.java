@@ -325,7 +325,6 @@ public class Flood extends JFrame implements Runnable, KeyListener {
             graDibujo.drawImage(imaImagenFondo, 0, 0, iWidth, iHeight, this);
 
             if (bannerMenu.getPlay()) {
-
                 //se pinta el menu
                 paintCustomFlood(graDibujo);
             } else {
@@ -351,6 +350,7 @@ public class Flood extends JFrame implements Runnable, KeyListener {
 
     public void paintCustomMenu(Graphics graDibujo) {
         bannerMenu.paintComponent(graDibujo);
+        
     }
 
     /**
@@ -412,8 +412,6 @@ public class Flood extends JFrame implements Runnable, KeyListener {
                 souEliminate.play(side.bSound);
             }
             iPuntos += iResult;
-
-
         }
     }
 

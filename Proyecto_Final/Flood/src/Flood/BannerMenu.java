@@ -28,12 +28,9 @@ import javax.swing.JPanel;
 public class BannerMenu extends JPanel implements MouseListener {
 
     private Image imaBackground; //Imagen de fondo 
+    
+    protected Animacion animSplash;
 
-    int iContadorAnimacion = 0; //borrar
-    int iSizeImageX = 3;
-    int iSizeImageY = 3;
-    
-    
     //Bases Menu principal 
     private Base basCatUno; //boton categoria uno
     private Base basCatDos; //boton categoria dos
@@ -87,9 +84,6 @@ public class BannerMenu extends JPanel implements MouseListener {
     private boolean bCatCustom;  
     private boolean bCurrentCat; //booleana que contiene la categoria seleccionada
     
-    //Linked list de animaciones
-    LinkedList<Image> lklSplash;
-        
     
 
     //booleans para el hover y animacion
@@ -107,34 +101,6 @@ public class BannerMenu extends JPanel implements MouseListener {
 
     //dile that is clicked by the user (that is choosen)
     String sCustomFile;
-    
-    
-    
-    
-    //Animacion
-    Image splash1;
-    Image splash2;
-    Image splash3;
-    Image splash4;
-    Image splash5;
-    Image splash6;
-    Image splash7;
-    Image splash8;
-    Image splash9;
-    Image splash10;
-    Image splash11;
-    Image splash12;
-    Image splash13;
-    Image splash14;
-    Image splash15;
-    Image splash16;
-    Image splash17;
-    Image splash18;
-    Image splash19;
-
-    
-    
-    
 
     //boolean bCustomCategoryClicked
     private boolean bCustomCategoryClicked;
@@ -152,14 +118,14 @@ public class BannerMenu extends JPanel implements MouseListener {
     public BannerMenu(Flood floodGame) throws FontFormatException, IOException {
 
         this.tarGame = floodGame;
+        animSplash = new Animacion(400,400);
+        
         initVars();
         creaBases();
         creaImagenes();
         addMouseListener(this);
-        animacion();
+        
 
-        //setPreferredSize(new Dimension(tarGame.iWidth, tarGame.iHeight));        
-        //setBackground(Color.CYAN);
     }
 
     public void creaImagenes() {
@@ -347,7 +313,7 @@ public class BannerMenu extends JPanel implements MouseListener {
         this.fonFuenteMenu = this.fonFuenteMenu.deriveFont(40F);
       
         
-        animacion();
+       
 
     }
 
@@ -358,9 +324,10 @@ public class BannerMenu extends JPanel implements MouseListener {
        
             graGrafico.drawImage(imaMenuBackground, 0, 0, tarGame.iWidth, tarGame.iHeight, this);
             paintPrincipal(graGrafico);
-
-            animacionSplash(graGrafico); //splash animation
-               
+            
+            animSplash.paintComponent(graGrafico, this);
+          
+            
         } 
         
         else {
@@ -653,80 +620,9 @@ public class BannerMenu extends JPanel implements MouseListener {
     
     public void animacionImagenes(){
         
-        splash1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/1A.png"));
-        splash2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/1B.png"));
-        splash3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/2A.png"));
-        splash4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/2B.png"));
-        splash5 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/3A.png"));
-        splash6 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/3B.png"));
-        splash7 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/4A.png"));
-        splash8 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/4B.png"));
-        splash9 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/5A.png"));
-        splash10 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/5B.png"));
-        splash11 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/6A.png"));
-        splash12 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/6B.png"));
-        splash13 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/7A.png"));
-        splash14 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/7B.png"));
-        splash15 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/8A.png"));
-        splash16 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/8B.png"));
-        splash17 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/9A.png"));
-        splash18 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/9B.png"));
-        splash19 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/10A.png"));
+        
     }
-    
-    public void animacion(){
-        
-        animacionImagenes();
-        
-        lklSplash = new LinkedList();
-        
-        lklSplash.add(splash1);
-        lklSplash.add(splash2);
-        lklSplash.add(splash3);
-        lklSplash.add(splash4);
-        lklSplash.add(splash5);
-        lklSplash.add(splash6);
-        lklSplash.add(splash7);
-        lklSplash.add(splash8);
-        lklSplash.add(splash9);
-        lklSplash.add(splash10);
-        lklSplash.add(splash11);
-        lklSplash.add(splash12);
-        lklSplash.add(splash13);
-        lklSplash.add(splash14);
-        lklSplash.add(splash15);
-        lklSplash.add(splash16);
-        lklSplash.add(splash17);
-        lklSplash.add(splash18);
-        lklSplash.add(splash19);
-    }
-    
-    public void animacionSplash(Graphics graGrafico) {
-
-        Rectangle rectReference = new Rectangle();
-        
-        rectReference.setBounds(400,400,88,88);
-        
-        int iRectOffsetX = (int)rectReference.getX() + (rectReference.width/2) - (iSizeImageX/2);
-        int iRectOffsetY = (int)rectReference.getY() + (rectReference.height/2) - (iSizeImageY/2);
-        
-        if (iContadorAnimacion < lklSplash.size()-1) {
-
-            iContadorAnimacion++;
-            iSizeImageX += 5;
-            iSizeImageY += 5;
-
-        } else {
-            iSizeImageX = 0;
-            iSizeImageY = 0;
-            iContadorAnimacion = 0;
-        }
-
-        graGrafico.drawImage(lklSplash.get(iContadorAnimacion),iRectOffsetX, iRectOffsetY, iSizeImageX, iSizeImageY, (tarGame));
-
-    }
-    
-  
+   
     @Override
     public void mousePressed(MouseEvent e) {
 
