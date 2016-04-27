@@ -408,7 +408,11 @@ public class Flood extends JFrame implements Runnable, KeyListener {
         } else {
             char cAux = keyEvent.getKeyChar();
             int iResult = tabTablero.pressedKey(cAux, iModoJuego);
+            if (iResult > 0) {
+                souEliminate.play(side.bSound);
+            }
             iPuntos += iResult;
+
 
         }
     }
