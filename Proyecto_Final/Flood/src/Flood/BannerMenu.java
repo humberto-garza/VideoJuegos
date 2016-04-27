@@ -6,12 +6,14 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.ImageObserver;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -27,6 +29,11 @@ public class BannerMenu extends JPanel implements MouseListener {
 
     private Image imaBackground; //Imagen de fondo 
 
+    int iContadorAnimacion = 0; //borrar
+    int iSizeImageX = 3;
+    int iSizeImageY = 3;
+    
+    
     //Bases Menu principal 
     private Base basCatUno; //boton categoria uno
     private Base basCatDos; //boton categoria dos
@@ -75,7 +82,9 @@ public class BannerMenu extends JPanel implements MouseListener {
     private boolean bCatCustom;  
     private boolean bCurrentCat; //booleana que contiene la categoria seleccionada
     
-    
+    //Linked list de animaciones
+    LinkedList<Image> lklSplash;
+        
     
 
     //booleans para el hover y animacion
@@ -93,6 +102,34 @@ public class BannerMenu extends JPanel implements MouseListener {
 
     //dile that is clicked by the user (that is choosen)
     String sCustomFile;
+    
+    
+    
+    
+    //Animacion
+    Image splash1;
+    Image splash2;
+    Image splash3;
+    Image splash4;
+    Image splash5;
+    Image splash6;
+    Image splash7;
+    Image splash8;
+    Image splash9;
+    Image splash10;
+    Image splash11;
+    Image splash12;
+    Image splash13;
+    Image splash14;
+    Image splash15;
+    Image splash16;
+    Image splash17;
+    Image splash18;
+    Image splash19;
+
+    
+    
+    
 
     //boolean bCustomCategoryClicked
     private boolean bCustomCategoryClicked;
@@ -114,6 +151,7 @@ public class BannerMenu extends JPanel implements MouseListener {
         creaBases();
         creaImagenes();
         addMouseListener(this);
+        animacion();
 
         //setPreferredSize(new Dimension(tarGame.iWidth, tarGame.iHeight));        
         //setBackground(Color.CYAN);
@@ -269,16 +307,24 @@ public class BannerMenu extends JPanel implements MouseListener {
         this.fonFuenteMenu = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/Custom.ttf"));
         this.fonFuenteMenu = this.fonFuenteMenu.deriveFont(40F);
       
+        
+        animacion();
 
     }
 
     public void paintComponent(Graphics graGrafico) {
 
         if (bPrincipal) {
-
+            
+       
             graGrafico.drawImage(imaMenuBackground, 0, 0, tarGame.iWidth, tarGame.iHeight, this);
             paintPrincipal(graGrafico);
-        } else {
+
+            animacionSplash(graGrafico); //splash animation
+               
+        } 
+        
+        else {
 
             paintSecondaryMenuSidePanel(graGrafico);
         }
@@ -297,6 +343,7 @@ public class BannerMenu extends JPanel implements MouseListener {
         }
     }
 
+    //paint principal
     //paint principal
     public void paintPrincipal(Graphics graGrafico) {
 
@@ -535,6 +582,88 @@ public class BannerMenu extends JPanel implements MouseListener {
         
 
     }
+    
+    public void animacionImagenes(){
+        
+        splash1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/1A.png"));
+        splash2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/1B.png"));
+        splash3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/2A.png"));
+        splash4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/2B.png"));
+        splash5 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/3A.png"));
+        splash6 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/3B.png"));
+        splash7 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/4A.png"));
+        splash8 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/4B.png"));
+        splash9 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/5A.png"));
+        splash10 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/5B.png"));
+        splash11 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/6A.png"));
+        splash12 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/6B.png"));
+        splash13 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/7A.png"));
+        splash14 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/7B.png"));
+        splash15 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/8A.png"));
+        splash16 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/8B.png"));
+        splash17 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/9A.png"));
+        splash18 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/9B.png"));
+        splash19 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/10A.png"));
+    }
+    
+    public void animacion(){
+        
+        animacionImagenes();
+        
+        lklSplash = new LinkedList();
+        
+        lklSplash.add(splash1);
+        lklSplash.add(splash2);
+        lklSplash.add(splash3);
+        lklSplash.add(splash4);
+        lklSplash.add(splash5);
+        lklSplash.add(splash6);
+        lklSplash.add(splash7);
+        lklSplash.add(splash8);
+        lklSplash.add(splash9);
+        lklSplash.add(splash10);
+        lklSplash.add(splash11);
+        lklSplash.add(splash12);
+        lklSplash.add(splash13);
+        lklSplash.add(splash14);
+        lklSplash.add(splash15);
+        lklSplash.add(splash16);
+        lklSplash.add(splash17);
+        lklSplash.add(splash18);
+        lklSplash.add(splash19);
+    }
+    
+    public void animacionSplash(Graphics graGrafico) {
+
+        Rectangle reference = new Rectangle();
+        
+        reference.setBounds(400,400,88,88);
+
+        int iRectOffsetX = (int)reference.getX() + (reference.width/2) - (iSizeImageX/2);
+        
+        int iRectOffsetY = (int)reference.getY() + (reference.height/2) - (iSizeImageY/2);
+        
+        
+      
+        
+        if (iContadorAnimacion <= lklSplash.size()) {
+
+            iContadorAnimacion++;
+            iSizeImageX += 5;
+            iSizeImageY += 5;
+
+        } else {
+
+            iSizeImageX = 0;
+            iSizeImageY = 0;
+            iContadorAnimacion = 0;
+        }
+
+        graGrafico.drawImage(lklSplash.get(iContadorAnimacion),iRectOffsetX, iRectOffsetY, iSizeImageX, iSizeImageY, this);
+
+    }
+    
+    
 
     @Override
     public void mousePressed(MouseEvent e) {
