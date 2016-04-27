@@ -33,16 +33,15 @@ public class Animacion {
     private Image imaSplash17;
     private Image imaSplash18;
     private Image imaSplash19;
-    
+
     private int iPosCuadroX;
     private int iPosCuadroY;
-    
+
     private int iContadorCiclos;
-    
+
     private boolean bAnimated;
-    
-   
-    //Linked list para la animacion 
+
+    //Linked list para la animacion
     private LinkedList<Image> lklSplash;
 
     /**
@@ -52,33 +51,34 @@ public class Animacion {
     int iSizeImageX;
     int iSizeImageY;
 
-    public Animacion(int iPosCuadroX,int iPosCuadroY) {
+    public Animacion(int iPosCuadroX, int iPosCuadroY) {
 
         this.iPosCuadroX = iPosCuadroX;
         this.iPosCuadroY = iPosCuadroY;
-        
+
         initVars();
         initImages();
         animacion();
- 
+
     }
-    
-    public boolean isAnimated(){
-        
+
+    public boolean isAnimated() {
+
         return bAnimated;
     }
-     
-    
+    public void setAnimated(boolean bAnimated) {
+
+        this.bAnimated = bAnimated;
+    }
     private void initVars() {
 
-       
         bAnimated = true;
         lklSplash = new LinkedList();
         iContadorAnimacion = 0; //
         iSizeImageX = 3;
         iSizeImageY = 3;
         iContadorCiclos = 0;
-        
+
     }
 
     private void initImages() {
@@ -145,7 +145,11 @@ public class Animacion {
             iSizeImageY += 5;
 
         } else {
-            bAnimated = false;
+            setAnimated(false);
+            iContadorAnimacion = 0;
+            iSizeImageX = 0;
+            iSizeImageY = 0;
+
         }
 
         graGrafico.drawImage(lklSplash.get(iContadorAnimacion), iRectOffsetX, iRectOffsetY, iSizeImageX, iSizeImageY, imgobs);
@@ -153,17 +157,9 @@ public class Animacion {
 
     public void paintComponent(Graphics graGrafico, ImageObserver imgobs) {
 
-        
-        
         if (isAnimated()) {
-            
-            if(iContadorCiclos % 2 == 0){
-                animacionSplash(graGrafico, imgobs); //splash animation
-                System.out.println("Paint component de animacion");
-                
-            }
-            
-            iContadorCiclos++;
+            animacionSplash(graGrafico, imgobs); //splash animation
+            System.out.println("Paint component de animacion");
         }
 
     }
