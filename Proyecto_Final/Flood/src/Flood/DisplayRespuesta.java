@@ -22,14 +22,14 @@ import java.util.LinkedList;
  * @version 1.0
  * @date APR/12/2016
  */
-public class DisplayRespuesta implements MouseListener {
+public class DisplayRespuesta {
 
     private String sRespuesta;
     private int iX;
     private int iY;
     private Font fonFuente;
     //Base boton de hint
-    private Base basHint; //objeto base que sirve como boton para obtener una pista
+    protected Base basHint; //objeto base que sirve como boton para obtener una pista
     //Variables de posicion del mouse
     int iMouseX;
     int iMouseY;
@@ -45,7 +45,6 @@ public class DisplayRespuesta implements MouseListener {
         basHint = new Base(520, 670, Toolkit.getDefaultToolkit()
                            .getImage(this.getClass().getResource("Images/sidePanel/PistaB.png")));
 
-        addMouseListener(this);
     }
 
     public void paint(Graphics graGrafico, ImageObserver imoObserver) {
@@ -74,40 +73,6 @@ public class DisplayRespuesta implements MouseListener {
 
     public int getSize() {
         return sRespuesta.length();
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent mouEvent) {
-
-        System.out.println("LDKF;QWLEKHR;QWJEHRLKWJEHRLKJEW");
-
-        //actualiza posiciones del mouse
-        iMouseX = mouEvent.getX();
-        iMouseY = mouEvent.getY();
-
-        if (basHint.intersects(iMouseX, iMouseY)) {
-
-            System.out.println("Hint was clicked");
-            // Agregar el caracter a la respuesta
-            //String sActualizar = tarGame.tabTablero.disRespuesta.getRespuesta();
-
-        }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
     }
 
 }
