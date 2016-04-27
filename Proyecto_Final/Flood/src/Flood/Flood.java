@@ -426,8 +426,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 souEliminate.play(side.bSound);
             }
             iPuntos += iResult;
-<<<<<<< HEAD
-=======
+
             if (iPuntos < 0) {
                 iPuntos = 0;
             }
@@ -439,7 +438,6 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 nuevoJuego();
             }
 
->>>>>>> origin/master
         }
     }
 
