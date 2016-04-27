@@ -47,6 +47,7 @@ public class BannerMenu extends JPanel implements MouseListener {
     private Base basCreditos; //boton de creditos
     private Base basRecords; //boton de records 
     private Base basBackToMenu; //boton de back to menu
+    private Base basBackToPlay; //boton de regreso al juego
 
     //Imagenes Menu principal
     Image imaMenuBackground; //Background menu
@@ -177,6 +178,12 @@ public class BannerMenu extends JPanel implements MouseListener {
         this.bPlay = bPlay;
 
     }
+    
+    public void setInstrucciones(boolean bInstrucciones) {
+
+        this.bInstrucciones = bInstrucciones;
+
+    }
 
     public boolean getCustomCategoryClicked() {
 
@@ -193,6 +200,12 @@ public class BannerMenu extends JPanel implements MouseListener {
     public boolean getPlay() {
 
         return bPlay;
+
+    }
+    
+    public boolean getInstrucciones() {
+
+        return bInstrucciones;
 
     }
 
@@ -271,6 +284,9 @@ public class BannerMenu extends JPanel implements MouseListener {
 
         basInstrucciones = new Base(iPosicionX, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
                 .getImage(this.getClass().getResource("Images/menu/instrucciones.png")));
+        
+        basBackToPlay = new Base(400, 400, Toolkit.getDefaultToolkit()
+                .getImage(this.getClass().getResource("Images/menu/backToPlay.png")));
 
         basCreditos = new Base(iPosicionX, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
                 .getImage(this.getClass().getResource("Images/menu/creditos.png")));
@@ -399,8 +415,12 @@ public class BannerMenu extends JPanel implements MouseListener {
 
         graGrafico.setFont(fonFuenteMenu);
         graGrafico.fillRect(basInstrucciones.getX(),basInstrucciones.getY() + basInstrucciones.getAlto(),basInstrucciones.getAncho(),5);
-    }
 
+        if (tarGame.side.getHelp()){//si esta prendido significa que el usuario le pico help
+            basBackToPlay.paint(graGrafico, this);//da la opcion de regresar al juego
+        }   
+    }
+    
     //paint creditos
     public void paintCreditos(Graphics graGrafico) {
 
@@ -550,6 +570,15 @@ public class BannerMenu extends JPanel implements MouseListener {
             bInstrucciones = true;
             System.out.println("Instrucciones");
         }
+        
+        //selecciona regresar al juego, desde instrucciones
+        if (basBackToPlay.intersects(iMouseX, iMouseY)) { //seleciono play
+            //sohhit to go back
+            falseAll();
+            bPlay = true;
+            tarGame.side.setHelp(false);
+            System.out.println("Instrucciones");
+        }
 
         //Records
         if (basRecords.intersects(iMouseX, iMouseY)) { //seleciono play
@@ -584,6 +613,8 @@ public class BannerMenu extends JPanel implements MouseListener {
         
 
     }
+    
+    //Animación
     
     public void animacionImagenes(){
         
@@ -637,36 +668,30 @@ public class BannerMenu extends JPanel implements MouseListener {
     
     public void animacionSplash(Graphics graGrafico) {
 
-        Rectangle reference = new Rectangle();
+        Rectangle rectReference = new Rectangle();
         
-        reference.setBounds(400,400,88,88);
-
-        int iRectOffsetX = (int)reference.getX() + (reference.width/2) - (iSizeImageX/2);
+        rectReference.setBounds(400,400,88,88);
         
-        int iRectOffsetY = (int)reference.getY() + (reference.height/2) - (iSizeImageY/2);
+        int iRectOffsetX = (int)rectReference.getX() + (rectReference.width/2) - (iSizeImageX/2);
+        int iRectOffsetY = (int)rectReference.getY() + (rectReference.height/2) - (iSizeImageY/2);
         
-        
-      
-        
-        if (iContadorAnimacion <= lklSplash.size()) {
+        if (iContadorAnimacion < lklSplash.size()) {
 
             iContadorAnimacion++;
             iSizeImageX += 5;
             iSizeImageY += 5;
 
         } else {
-
             iSizeImageX = 0;
             iSizeImageY = 0;
             iContadorAnimacion = 0;
         }
 
-        graGrafico.drawImage(lklSplash.get(iContadorAnimacion),iRectOffsetX, iRectOffsetY, iSizeImageX, iSizeImageY, this);
+        graGrafico.drawImage(lklSplash.get(iContadorAnimacion),iRectOffsetX, iRectOffsetY, iSizeImageX, iSizeImageY, (tarGame));
 
     }
     
-    
-
+  
     @Override
     public void mousePressed(MouseEvent e) {
 

@@ -75,7 +75,7 @@ public class Flood extends JFrame implements Runnable, KeyListener {
     protected Tablero tabTablero;
 
     //SidePanel Instance
-    private SidePanel side;
+    protected SidePanel side;
 
     //Banner Menu Instance
     BannerMenu bannerMenu;
@@ -212,13 +212,14 @@ public class Flood extends JFrame implements Runnable, KeyListener {
 
         // Mientras no sea el fin del juego
         while (true) {
-            if (bannerMenu.getPlay()) {//boton de play en el menu
+            if (bannerMenu.getPlay() && !bannerMenu.getInstrucciones()) {//boton de play en el menu
                 actualiza();
                 add(side);
                 remove(bannerMenu);
             } else {//hacer que regrese al menu
                 add(bannerMenu);
                 remove(side);
+                bannerMenu.setPlay(false);
 
             }
             checaColision();
@@ -407,7 +408,11 @@ public class Flood extends JFrame implements Runnable, KeyListener {
         } else {
             char cAux = keyEvent.getKeyChar();
             int iResult = tabTablero.pressedKey(cAux, iModoJuego);
+            if (iResult > 0) {
+                souEliminate.play(side.bSound);
+            }
             iPuntos += iResult;
+
 
         }
     }
