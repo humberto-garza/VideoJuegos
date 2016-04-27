@@ -28,7 +28,6 @@ public class SidePanel extends JPanel implements MouseListener {
     private Base basHelp;
     private Base basPause;
     private Base basSound;
-    private Base basHint; //objeto base que sirve como boton para obtener una pista
 
     //Objetos para las imagenes
     private Image imaImagenLogo;
@@ -141,8 +140,6 @@ public class SidePanel extends JPanel implements MouseListener {
         basHelp = new Base(basPause.getX() + basPause.getAncho() + iXOffsetSelections, 650, Toolkit.getDefaultToolkit()
                 .getImage(this.getClass().getResource("Images/sidePanel/help.png")));
 
-        basHint = new Base(520, 670, Toolkit.getDefaultToolkit()
-                .getImage(this.getClass().getResource("Images/sidePanel/PistaB.png")));
 
     }
 
@@ -174,7 +171,6 @@ public class SidePanel extends JPanel implements MouseListener {
             basHelp.paint(graGrafico, this);
             basPause.paint(graGrafico, this);
             basSound.paint(graGrafico, this);
-            basHint.paint(graGrafico, this);
 
         } else {
             //Da un mensaje mientras se carga el dibujo
@@ -253,14 +249,6 @@ public class SidePanel extends JPanel implements MouseListener {
             tarGame.bannerMenu.falseAll();
             tarGame.bannerMenu.bPrincipal = true;
             //SDN - Variables de Banner Menu
-
-        }
-
-        if (basHint.intersects(iMouseX, iMouseY)) {
-
-            System.out.println("Hint was clicked");
-            // Agregar el caracter a la respuesta
-            //String sActualizar = tarGame.tabTablero.disRespuesta.getRespuesta();
 
         }
 
