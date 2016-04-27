@@ -29,7 +29,6 @@ public class BannerMenu extends JPanel implements MouseListener {
 
     private Image imaBackground; //Imagen de fondo 
     
-    protected Animacion animSplash;
 
     //Bases Menu principal 
     private Base basCatUno; //boton categoria uno
@@ -118,7 +117,7 @@ public class BannerMenu extends JPanel implements MouseListener {
     public BannerMenu(Flood floodGame) throws FontFormatException, IOException {
 
         this.tarGame = floodGame;
-        animSplash = new Animacion(400,400);
+
         
         initVars();
         creaBases();
@@ -324,9 +323,7 @@ public class BannerMenu extends JPanel implements MouseListener {
        
             graGrafico.drawImage(imaMenuBackground, 0, 0, tarGame.iWidth, tarGame.iHeight, this);
             paintPrincipal(graGrafico);
-            
-            animSplash.paintComponent(graGrafico, this);
-          
+                
             
         } 
         

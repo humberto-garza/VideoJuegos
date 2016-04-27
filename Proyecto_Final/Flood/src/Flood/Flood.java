@@ -365,7 +365,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
 
     public void paintCustomMenu(Graphics graDibujo) {
         bannerMenu.paintComponent(graDibujo);
-        
+
     }
 
     /**
@@ -468,6 +468,11 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         if (tabTablero.disRespuesta.basHint.intersects(iMouseX, iMouseY)) {
 
             System.out.println("Hint was clicked");
+            iPuntos -= tabTablero.getHint();
+            if (iPuntos < 0) {
+                iPuntos = 0;
+            }
+
         }
     }
 
