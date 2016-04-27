@@ -142,7 +142,7 @@ public class SidePanel extends JPanel implements MouseListener {
                 .getImage(this.getClass().getResource("Images/sidePanel/help.png")));
 
         basHint = new Base(520, 670, Toolkit.getDefaultToolkit()
-                .getImage(this.getClass().getResource("Images/sidePanel/pistaB.png")));
+                .getImage(this.getClass().getResource("Images/sidePanel/PistaB.png")));
 
     }
 
@@ -205,7 +205,7 @@ public class SidePanel extends JPanel implements MouseListener {
 
         //cambiar imagen a desplegar
         imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/nivel" + sNivel + ".png"));
+                .getResource("Images/sidePanel/Nivel" + sNivel + ".png"));
     }
     
     public boolean getHelp(){

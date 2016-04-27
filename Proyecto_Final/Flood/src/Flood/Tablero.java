@@ -233,6 +233,10 @@ public class Tablero {
 
 	}
 
+	public void setIndex(int iNewIndex) {
+		this.iIndexUsado = iNewIndex;
+	}
+
 	public void creaCuadro() {
 		if (lklDisponibles.size() > 0) {
 
@@ -370,8 +374,18 @@ public class Tablero {
 		}
 	}
 
-	public void pressedEnter() {
-		cambioCuadro();
+	public void pressedEnter(int iModoJuego) {
+		if (iModoJuego == 3) {
+			int iIndexAux = iIndexActual + 1;
+			if (iIndexAux == iCasillas) {
+				iIndexActual = iCasillas - iGridCols;
+			} else {
+				iIndexActual = iIndexAux;
+			}
+			disRespuesta.setRespuesta("");
+		} else {
+			cambioCuadro();
+		}
 	}
 
 	public void pressedRight() {
@@ -440,13 +454,13 @@ public class Tablero {
 				}
 
 				// Si Coinciden los caracteres
-				if (Character.toLowerCase(cResEsperada) == cAux) {   
-             
-                                        // Agregar el caracter a la respuesta
+				if (Character.toLowerCase(cResEsperada) == cAux) {
+
+					// Agregar el caracter a la respuesta
 					String sActualizar = disRespuesta.getRespuesta() + sResEsperadaCopy.charAt(iCharIndex);
 					disRespuesta.setRespuesta(sActualizar);
-  
-                                      
+
+
 					// Si la respuesta esta completa
 					if (disRespuesta.getSize() == sResEsperada.length()) {
 						// Sumar los puntos
@@ -470,7 +484,7 @@ public class Tablero {
 						if (iIndexColor >= lklColores.size()) {
 							iIndexColor = 0;
 						}
-						cambioCuadro();
+						pressedEnter(iModoJuego);
 					}
 				}
 				// Caracter equivocado

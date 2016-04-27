@@ -100,7 +100,7 @@ public class Flood extends JFrame implements Runnable, KeyListener {
 
         // Crear la imagen de fondo.
         imaImagenFondo = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/Fondo.png"));
+                         .getResource("Images/Fondo.png"));
 
         //inicializa la instancia de SidePanel
         this.side = new SidePanel(this);
@@ -169,6 +169,7 @@ public class Flood extends JFrame implements Runnable, KeyListener {
          */
         if (iModoJuego == 3) {
             /////////////MODO 2///////////////////
+            tabTablero.setIndex(11);
             tabTablero.creaCuadroAbajo();
             /////////////////////////////////////
         }
@@ -228,7 +229,7 @@ public class Flood extends JFrame implements Runnable, KeyListener {
                 Thread.sleep(25);
             } catch (InterruptedException iexError) {
                 System.out.println("Hubo un error en el juego "
-                        + iexError.toString());
+                                   + iexError.toString());
             }
         }
     }
@@ -293,7 +294,7 @@ public class Flood extends JFrame implements Runnable, KeyListener {
         // Si quitamos el if funciona con el resize
         if (imaImagenApplet == null) {
             imaImagenApplet = createImage(this.getSize().width,
-                    this.getSize().height);
+                                          this.getSize().height);
             graGraficaApplet = imaImagenApplet.getGraphics();
         }
         // Actualiza el Foreground.
@@ -325,7 +326,7 @@ public class Flood extends JFrame implements Runnable, KeyListener {
 
             if (bannerMenu.getPlay()) {
 
-                //se pinta el menu     
+                //se pinta el menu
                 paintCustomFlood(graDibujo);
             } else {
 
@@ -374,7 +375,7 @@ public class Flood extends JFrame implements Runnable, KeyListener {
     public void keyPressed(KeyEvent keyEvent) {
         /* Revisar que tecla se presiono y cambiar la posicion*/
         if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
-            tabTablero.pressedEnter();
+            tabTablero.pressedEnter(iModoJuego);
             souMove.play(side.bSound);
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
@@ -386,11 +387,23 @@ public class Flood extends JFrame implements Runnable, KeyListener {
             souMove.play(side.bSound);
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
-            tabTablero.pressedUp();
+            if (iModoJuego == 1) {
+                tabTablero.pressedUp();
+            } else if (iModoJuego == 2) {
+                tabTablero.pressedUp();
+            } else if (iModoJuego == 3) {
+
+            }
             souMove.play(side.bSound);
         }
         if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
-            tabTablero.pressedDown();
+            if (iModoJuego == 1) {
+                tabTablero.pressedDown();
+            } else if (iModoJuego == 2) {
+                tabTablero.pressedDown();
+            } else if (iModoJuego == 3) {
+
+            }
             souMove.play(side.bSound);
         } else {
             char cAux = keyEvent.getKeyChar();
@@ -400,13 +413,13 @@ public class Flood extends JFrame implements Runnable, KeyListener {
         }
     }
 
-        /**
-         * keyReleased
-         *
-         *
-         * @param keyEvent es el objeto de <code>keyTyped</code> del teclado.
-         *
-         */
+    /**
+     * keyReleased
+     *
+     *
+     * @param keyEvent es el objeto de <code>keyTyped</code> del teclado.
+     *
+     */
     @Override
     public void keyReleased(KeyEvent keyEvent) {
         souMove.stop();
