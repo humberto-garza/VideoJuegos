@@ -149,6 +149,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
 
         // Listeners: Teclado y Mouse
         addKeyListener(this);
+        addMouseListener(this);
 
         // Declarar thread principal
         Thread th = new Thread(this);
@@ -227,7 +228,9 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         // Mientras no sea el fin del juego
         while (true) {
             if (bannerMenu.getPlay() && !bannerMenu.getInstrucciones()) {//boton de play en el menu
-                actualiza();
+                if(!side.bPause){//no esta en pausa
+                    actualiza();//solo actualiza cuando no hay pausa
+                }
                 add(side);
                 remove(bannerMenu);
             } else {//hacer que regrese al menu
@@ -459,23 +462,27 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void mousePressed(MouseEvent mouEvent) {
+        //actualiza posiciones del mouse
+        iMouseX = mouEvent.getX();
+        iMouseY = mouEvent.getY();
+
+        if (tabTablero.disRespuesta.basHint.intersects(iMouseX, iMouseY)) {
+
+            System.out.println("Hint was clicked");
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

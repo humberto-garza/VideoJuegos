@@ -65,6 +65,9 @@ public class Tablero {
 	private int iIndexColor;
 	private int iIndexUsado;
 
+	// Animacion
+	protected Animacion animSplash;
+
 	// Booleanas
 	public Tablero(String sCategoria) throws FontFormatException, IOException {
 
@@ -162,6 +165,11 @@ public class Tablero {
 
 		// Escribir el cuadro de pregunta
 		disRespuesta.paint(graDibujo, imoObserver);
+
+		// Pintar la animación
+		if (animSplash != null) {
+			animSplash.paintComponent(graDibujo, imoObserver);
+		}
 	}
 
 	public void cargaColores() throws FileNotFoundException, IOException {
@@ -469,6 +477,11 @@ public class Tablero {
 
 					// Si la respuesta esta completa
 					if (disRespuesta.getSize() == sResEsperada.length()) {
+						//Animar
+						int iAnimX = cooCoordenadas.get(iIndexActual).getX() + iCuadroMargen + 3;
+						int iAnimY = cooCoordenadas.get(iIndexActual).getY() + iCuadroMargen + 3;
+						animSplash = new Animacion(iAnimX, iAnimY);
+
 						// Sumar los puntos
 						iPuntos += cuaAux.getValor();
 
@@ -491,6 +504,7 @@ public class Tablero {
 							iIndexColor = 0;
 						}
 						pressedEnter(iModoJuego);
+
 					}
 				}
 				// Caracter equivocado
