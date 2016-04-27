@@ -106,6 +106,8 @@ public class SidePanel extends JPanel implements MouseListener {
         iXOffsetSelections = 3;
     }
 
+
+
     /* crearImagenes
         crea las imagenes base del side panel
      */
@@ -119,7 +121,7 @@ public class SidePanel extends JPanel implements MouseListener {
 
         sNivel = "1";
         imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/Nivel" + sNivel + ".png"));
+                .getResource("Images/sidePanel/nivel" + sNivel + ".png"));
 
     }
 
@@ -201,7 +203,7 @@ public class SidePanel extends JPanel implements MouseListener {
 
         //cambiar imagen a desplegar
         imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/Nivel" + sNivel + ".png"));
+                .getResource("Images/sidePanel/nivel" + sNivel + ".png"));
     }
     
     public boolean getHelp(){
