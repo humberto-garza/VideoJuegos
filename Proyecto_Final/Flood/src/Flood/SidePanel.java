@@ -36,7 +36,6 @@ public class SidePanel extends JPanel implements MouseListener {
     private Image imaImagenNivel;
 
     //Variables booleanas que indican si un botón fue presionado
-    private boolean bBackMenu;
     private boolean bHelp;
     private boolean bPause;
     protected boolean bSound;
@@ -91,7 +90,6 @@ public class SidePanel extends JPanel implements MouseListener {
      */
     public void initVars() {
         //booleanas de botones
-        bBackMenu = false;
         bHelp = false;
         bPause = false;
         bSound = true;
@@ -168,7 +166,7 @@ public class SidePanel extends JPanel implements MouseListener {
 
         }
 
-        if (!bBackMenu && basBackMenu != null
+        if (basBackMenu != null
                 && basHelp != null && basPause != null && basSound != null) {
 
             // Dibujar el objeto de menu
@@ -209,7 +207,17 @@ public class SidePanel extends JPanel implements MouseListener {
         imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
                 .getResource("Images/sidePanel/Nivel" + sNivel + ".png"));
     }
-
+    
+    public boolean getHelp(){
+        return bHelp;
+    }
+    
+    public void setHelp(boolean help){
+        this.bHelp = help;
+    }
+    
+    
+    
     public void mouseClicked(MouseEvent mouEvent) {
 
         System.out.println("CLICK");
@@ -222,7 +230,7 @@ public class SidePanel extends JPanel implements MouseListener {
         if (basHelp.intersects(iMouseX, iMouseY)) {
             bHelp = true;//prende help
             System.out.println("clicked help");
-            bBackMenu = false;//apaga las demás
+            tarGame.bannerMenu.setInstrucciones(true);//para que despliegue instrucciones
         } else if (basPause.intersects(iMouseX, iMouseY)) {
             System.out.println("clicked pause");
             bPause = !bPause;//niega pause
