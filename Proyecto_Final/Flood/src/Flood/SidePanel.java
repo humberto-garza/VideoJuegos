@@ -231,6 +231,7 @@ public class SidePanel extends JPanel implements MouseListener {
             bHelp = true;//prende help
             System.out.println("clicked help");
             tarGame.bannerMenu.setInstrucciones(true);//para que despliegue instrucciones
+            tarGame.bannerMenu.setSecundario(true);//para que despliegue menu secundario
         } else if (basPause.intersects(iMouseX, iMouseY)) {
             System.out.println("clicked pause");
             bPause = !bPause;//niega pause
