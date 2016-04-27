@@ -502,13 +502,13 @@ public class BannerMenu extends JPanel implements MouseListener {
          * MENU
          */
         //selecciona categoria 1
-         if (basCatUno.intersects(iMouseX, iMouseY)) { //seleciono cat #1 
+         if (basCatUno.intersects(iMouseX, iMouseY) && !bInstrucciones ) { //seleciono cat #1 
              System.out.println("Category 1 selected");
              falseAllCategories();
              bCatUno = true;
         }
         //selecciona categoria 2
-        if (basCatDos.intersects(iMouseX, iMouseY)) { //seleciono cat #2
+        if (basCatDos.intersects(iMouseX, iMouseY) && !bInstrucciones) { //seleciono cat #2
              System.out.println("Category 2 selected");
              falseAllCategories();
              bCatDos = true;
@@ -516,14 +516,14 @@ public class BannerMenu extends JPanel implements MouseListener {
         
         //selecciona categoria 3
         
-        if (basCatTres.intersects(iMouseX, iMouseY)) { //seleciono cat #3 
+        if (basCatTres.intersects(iMouseX, iMouseY) && !bInstrucciones) { //seleciono cat #3 
              System.out.println("Category 3 selected");
              falseAllCategories();
              bCatTres = true;
         }
         
         //Selecciona categoria custom         
-        if (basCatCustom.intersects(iMouseX, iMouseY)) { //seleciono play
+        if (basCatCustom.intersects(iMouseX, iMouseY) && !bInstrucciones) { //seleciono play
 
             setCustomCategoryClicked(true);
             System.out.println("Custom Category selected");
@@ -535,7 +535,7 @@ public class BannerMenu extends JPanel implements MouseListener {
 
         //Se abre ventana para seleccionar archivo.txt 
         //selecciona play
-        if (basPlay.intersects(iMouseX, iMouseY)) { //seleciono play
+        if (basPlay.intersects(iMouseX, iMouseY) && !bInstrucciones) { //seleciono play
             falseAll();
 
             setPlay(true);
@@ -547,7 +547,7 @@ public class BannerMenu extends JPanel implements MouseListener {
         }
 
         //selecciona Help
-        if (basHelp.intersects(iMouseX, iMouseY)) { //seleciono play
+        if (basHelp.intersects(iMouseX, iMouseY)&& !bInstrucciones) { //seleciono play
 
             falseAll();
             bInstrucciones = true;
