@@ -422,13 +422,14 @@ public class BannerMenu extends JPanel implements MouseListener {
         basInstrucciones.paint(graGrafico, this);
         basCreditos.paint(graGrafico, this);
         basRecords.paint(graGrafico, this);
-
-        if (bHoverReturn) {
-            basBackToMenu.setImagen(imaBackToMenu);
-            basBackToMenu.paint(graGrafico, this);
-        } else {
-            basBackToMenu.setImagen(imaBackToMenu2);
-            basBackToMenu.paint(graGrafico, this);
+        if (!tarGame.side.getHelp()) {
+            if (bHoverReturn) {
+                basBackToMenu.setImagen(imaBackToMenu);
+                basBackToMenu.paint(graGrafico, this);
+            } else {
+                basBackToMenu.setImagen(imaBackToMenu2);
+                basBackToMenu.paint(graGrafico, this);
+            }
         }
 
     }
@@ -590,7 +591,7 @@ public class BannerMenu extends JPanel implements MouseListener {
          * Instrucciones, records, credits menu
          */
         //selecciona back to menu
-        if (basBackToMenu.intersects(iMouseX, iMouseY) && bSecundario) { //seleciono play
+        if (basBackToMenu.intersects(iMouseX, iMouseY) && bSecundario && !tarGame.side.getHelp()) { //seleciono play
             falseAll();
             bPrincipal = true;
             System.out.println("Back to menu");
