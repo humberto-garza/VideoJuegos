@@ -144,8 +144,11 @@ public class Tablero {
 	}
 
 
+	public boolean estaLleno() {
+		return lklDisponibles.size() == 0;
+	}
 
-	public boolean hayDisponibles() {
+	public boolean noHayDisponibles() {
 		return lklDisponibles.size() == iCasillas;
 	}
 
@@ -526,7 +529,7 @@ public class Tablero {
 		if (sActual.length() < sResEsperada.length() - 1) {
 			sActual += sResEsperada.charAt(disRespuesta.getSize());
 			disRespuesta.setRespuesta(sActual);
-			return ((int)(cuaAux.getValor() / sResEsperada.length()))*3;
+			return ((int)(cuaAux.getValor() / sResEsperada.length())) * 3;
 		}
 
 		return 0;

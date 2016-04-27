@@ -1,4 +1,4 @@
-Nombre del elemento:
+Teclea el nombre del elemento:
 H,Hidrógeno,1
 He,Helio,2
 Li,Litio,3

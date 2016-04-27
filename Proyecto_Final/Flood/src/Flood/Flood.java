@@ -228,7 +228,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         // Mientras no sea el fin del juego
         while (true) {
             if (bannerMenu.getPlay() && !bannerMenu.getInstrucciones()) {//boton de play en el menu
-                if(!side.bPause){//no esta en pausa
+                if (!side.bPause) { //no esta en pausa
                     actualiza();//solo actualiza cuando no hay pausa
                 }
                 add(side);
@@ -261,20 +261,32 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         //Determina el tiempo que ha transcurrido desde que el Applet inicio su ejecución
         long tiempoTranscurrido = System.currentTimeMillis() - tiempoActual;
         iContadorCiclos++;
-        if (iContadorCiclos >= iRand || tabTablero.hayDisponibles()) {
+        if (iContadorCiclos >= iRand || tabTablero.noHayDisponibles()) {
             iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
             iContadorCiclos = 0;
             /////////////MODO 1///////////////////
             if (iModoJuego == 1) {
                 tabTablero.creaCuadro();
+                if ( tabTablero.estaLleno()) {
+                    iModoJuego--;
+                    nuevoJuego();
+                }
             }
             /////////////MODO 2///////////////////
             if (iModoJuego == 2) {
                 //tabTablero.creaCuadro();
+                if ( tabTablero.noHayDisponibles()) {
+                    iModoJuego--;
+                    nuevoJuego();
+                }
             }
             /////////////MODO 3///////////////////
             if (iModoJuego == 3) {
                 tabTablero.creaCuadroAbajo();
+                if ( tabTablero.estaLleno()) {
+                    iModoJuego--;
+                    nuevoJuego();
+                }
             }
             ////////////////////////////////////////////
 
@@ -440,7 +452,6 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 side.cambioNivel();
                 nuevoJuego();
             }
-
         }
     }
 
