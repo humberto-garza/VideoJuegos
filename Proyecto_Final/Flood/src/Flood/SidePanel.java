@@ -36,7 +36,7 @@ public class SidePanel extends JPanel implements MouseListener {
 
     //Variables booleanas que indican si un botón fue presionado
     private boolean bHelp;
-    private boolean bPause;
+    protected boolean bPause;
     protected boolean bSound;
 
     //Variables que indican los tamaños del side panel
@@ -196,6 +196,21 @@ public class SidePanel extends JPanel implements MouseListener {
             //AQUI PONER EL SOUND.PAUSE()
         }
     }
+    
+    /**
+     * manejaPausa maneja la pausa del juego
+     */
+    public void manejaPausa(){
+        if (bPause) {//esta en pausa
+            //cambio de imagen
+            basPause.setImagen(Toolkit.getDefaultToolkit()
+                    .getImage(this.getClass().getResource("Images/sidePanel/unPause.png")));
+        } else {//no esta en pausa
+            //cambio de imagen
+            basPause.setImagen(Toolkit.getDefaultToolkit()
+                    .getImage(this.getClass().getResource("Images/sidePanel/pause.png")));
+        }
+    }
 
     public void cambioNivel() {
         //indica el nivel
@@ -233,6 +248,7 @@ public class SidePanel extends JPanel implements MouseListener {
         } else if (basPause.intersects(iMouseX, iMouseY)) {
             System.out.println("clicked pause");
             bPause = !bPause;//niega pause
+            manejaPausa();
         } else if (basSound.intersects(iMouseX, iMouseY)) {
             System.out.println("clicked sound");
             bSound = !bSound;//niega sound
