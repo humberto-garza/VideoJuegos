@@ -515,25 +515,26 @@ public class Tablero {
 			}
 		}
 		return iPuntos;
-	}
+	   }
 
-	public int getHint() {
-		Cuadro cuaAux = lklCuadrosBase.get(iIndexActual);
-		int iPregIndex = cuaAux.getPregunta();
-		String sResEsperada = lklPreguntas.get(iPregIndex).getRespuesta();
-		String sActual = disRespuesta.getRespuesta();
+    public int getHint() {
+        Cuadro cuaAux = lklCuadrosBase.get(iIndexActual);
 
-		if (sActual.length() < sResEsperada.length() - 1) {
-			sActual += sResEsperada.charAt(disRespuesta.getSize());
-			disRespuesta.setRespuesta(sActual);
-			return ((int)(cuaAux.getValor() / sResEsperada.length())) * 3;
-		}
+        if (cuaAux.isActive()) {
+            int iPregIndex = cuaAux.getPregunta();
 
-		return 0;
+            String sResEsperada = lklPreguntas.get(iPregIndex).getRespuesta();
+            String sActual = disRespuesta.getRespuesta();
 
+            if (sActual.length() < sResEsperada.length() - 1) {
+                sActual += sResEsperada.charAt(disRespuesta.getSize());
+                disRespuesta.setRespuesta(sActual);
+                return ((int) (cuaAux.getValor() / sResEsperada.length())) * 3;
+            }
+        }
+        return 0;
 
-
-	}
+    }
 
 	public void bajarColumna(int iCuadro) {
 		int iColumna = iCuadro % iGridCols;
