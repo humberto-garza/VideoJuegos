@@ -45,7 +45,7 @@ public class DisplayRespuesta {
         this.sRespuesta = sRespuesta;
 
         //crea base boton hint
-        basHint = new Base(520, 670, Toolkit.getDefaultToolkit()
+        basHint = new Base(520, 120, Toolkit.getDefaultToolkit()
                            .getImage(this.getClass().getResource("Images/sidePanel/PistaB.png")));
 
     }

@@ -82,7 +82,7 @@ public class Tablero {
 		iCuadroAlto     = 110;
 		iCuadroMargen   = 4;
 		iGridOffsetX    = 50;
-		iGridOffsetY    = 110;
+		iGridOffsetY    = 190;
 		iGridRows       = 5;
 		iGridCols       = 5;
 		iCasillas       = iGridRows * iGridCols;
@@ -95,7 +95,7 @@ public class Tablero {
 
 		// Variables Cuadro Respuesta
 		iDisResOffX     = 60;
-		iDisResOffY     = 710;
+		iDisResOffY     = 160;
 		disRespuesta    = new DisplayRespuesta(iDisResOffX, iDisResOffY, "");
 
 		// Estructura de posicionamiento
@@ -352,6 +352,9 @@ public class Tablero {
 			cuaAux.setActive(true);
 		}
 	}
+	public void llenarGridCapas() {
+		llenarGrid();	
+	}
 
 	public void cambioCuadro() {
 		if (lklUsados.size() > 0) {
@@ -380,13 +383,21 @@ public class Tablero {
 
 	public void pressedEnter(int iModoJuego) {
 		if (iModoJuego == 3) {
-			int iIndexAux = iIndexActual + 1;
-			if (iIndexAux == iCasillas) {
-				iIndexActual = iCasillas - iGridCols;
-			} else {
-				iIndexActual = iIndexAux;
-			}
 			disRespuesta.setRespuesta("");
+			for (int iC = 0; iC < iGridCols; iC++) {
+				int iIndexAux = iIndexActual + 1;
+				if (iIndexAux == iCasillas) {
+					iIndexActual = iCasillas - iGridCols;
+				} else {
+					iIndexActual = iIndexAux;
+				}
+
+				Cuadro cuaAux = lklCuadrosBase.get(iIndexActual);
+				if (cuaAux.isActive()) {
+					break;
+				}
+			}
+
 		} else {
 			cambioCuadro();
 		}

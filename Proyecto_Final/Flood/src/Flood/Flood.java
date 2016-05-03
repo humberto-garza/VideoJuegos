@@ -141,7 +141,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
 
         // Definir el primer modo de juego
-        iModoJuego = 0;
+        iModoJuego = 1;
         nuevoJuego();
 
         // Variables de teclado
@@ -166,7 +166,6 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         } catch (IOException ex) {
             Logger.getLogger(Flood.class.getName()).log(Level.SEVERE, null, ex);
         }
-        iModoJuego++;
         iPuntos = 0;
         // MODO DE JUEGO
         /////////////MODO 1///////////////////
@@ -197,6 +196,15 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
             /////////////MODO 2///////////////////
             tabTablero.setIndex(11);
             tabTablero.creaCuadroAbajo();
+            /////////////////////////////////////
+        }
+        /////////////MODO 4///////////////////
+        /*
+         * En este modo se debe desbloquear el ultimo cuadro
+         */
+        if (iModoJuego == 4) {
+            /////////////MODO 2///////////////////
+            tabTablero.llenarGridCapas();
             /////////////////////////////////////
         }
         /////////////////////////////////////
@@ -268,7 +276,6 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
             if (iModoJuego == 1) {
                 tabTablero.creaCuadro();
                 if ( tabTablero.estaLleno()) {
-                    iModoJuego--;
                     nuevoJuego();
                 }
             }
@@ -276,7 +283,6 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
             if (iModoJuego == 2) {
                 //tabTablero.creaCuadro();
                 if ( tabTablero.noHayDisponibles()) {
-                    iModoJuego--;
                     nuevoJuego();
                 }
             }
@@ -284,7 +290,6 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
             if (iModoJuego == 3) {
                 tabTablero.creaCuadroAbajo();
                 if ( tabTablero.estaLleno()) {
-                    iModoJuego--;
                     nuevoJuego();
                 }
             }
@@ -454,11 +459,10 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 if (iPuntos > 200) {
                     iNivel++;
                     side.cambioNivel();
+                    iModoJuego++;
                     nuevoJuego();
                 }
-
             }
-
         }
     }
 
