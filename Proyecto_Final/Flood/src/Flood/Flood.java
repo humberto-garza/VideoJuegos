@@ -118,7 +118,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         add(bannerMenu);
 
         //Sounds
-        souMove = new SoundClip("Sounds/click_tiny.wav");
+        souMove = new SoundClip("/Flood/Sounds/click_tiny.wav");
         souEliminate = new SoundClip("Sounds/eliminateline.wav");
 
         Dimension dimD = new Dimension(iWidth, iHeight);
@@ -160,7 +160,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     public void nuevoJuego() {
         // Iniciar un nuevo Tablero
         try {
-            tabTablero = new Tablero("./src/Flood/Files/Quimica.txt");
+            tabTablero = new Tablero("/Flood/Files/Quimica.txt");
         } catch (FontFormatException ex) {
             Logger.getLogger(Flood.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -428,8 +428,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 }
                 souMove.play(side.bSound);
             }
-<<<<<<< HEAD
-=======
+
             if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
                 if (iModoJuego == 1) {
                     tabTablero.pressedDown();
@@ -459,7 +458,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 }
 
             }
->>>>>>> ae471816a93b9455fe138e6a50a9479231f7667f
+
         }
     }
 

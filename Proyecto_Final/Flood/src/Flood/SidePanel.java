@@ -12,6 +12,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.swing.JPanel;
 
 /**
@@ -70,11 +71,9 @@ public class SidePanel extends JPanel implements MouseListener {
         creaBases();
         crearImagenes();
         addMouseListener(this);
-
-        this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/CustomL.ttf"));
-        this.fonFuentel = this.fonFuentel.deriveFont(25F);
-
-        this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/Score.ttf"));
+        
+        InputStream fontStream = getClass().getResourceAsStream("/Flood/Score.ttf");
+        this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, fontStream);
         this.fonFuentel = this.fonFuentel.deriveFont(40F);
 
         // setPreferredSize(new Dimension(floodGame.iWidth /2, floodGame.iHeight));

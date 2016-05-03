@@ -14,6 +14,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.ImageObserver;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
 
 /**
@@ -35,8 +36,10 @@ public class DisplayRespuesta {
     int iMouseY;
 
     public DisplayRespuesta(int iX, int iY, String sRespuesta) throws FontFormatException, IOException {
-        this.fonFuente = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/Custom.ttf"));
+        InputStream fontStream = getClass().getResourceAsStream("/Flood/Custom.ttf");
+        this.fonFuente = Font.createFont(Font.TRUETYPE_FONT, fontStream);
         this.fonFuente = this.fonFuente.deriveFont(40F);
+        
         this.iX = iX;
         this.iY = iY;
         this.sRespuesta = sRespuesta;

@@ -12,6 +12,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.text.Normalizer;
 import java.util.LinkedList;
@@ -73,7 +75,7 @@ public class Tablero {
 
 		// Crear el objeto selector
 		basSelector = new Base(iGridOffsetX, iGridOffsetY, Toolkit.getDefaultToolkit()
-		                       .getImage(this.getClass().getResource("Images/Selector.png")));
+		                       .getImage(this.getClass().getResource("/Flood/Images/Selector.png")));
 
 		// Variables de la cuadricula
 		iCuadroAncho    = 110;
@@ -182,19 +184,11 @@ public class Tablero {
 		// Seleccionar al azar una paleta
 		int iRandPicker = (int) (Math.random() * 6) + 1;
 
-		String nombreArchivo = "./src/Flood/Files/Paletas/" + iRandPicker + ".txt";
+		String nombreArchivo = "/Flood/Files/Paletas/" + iRandPicker + ".txt";
+		InputStream inpArchivo = getClass().getResourceAsStream(nombreArchivo);
 		BufferedReader fileIn;
 
-		try {
-			fileIn = new BufferedReader(new FileReader(nombreArchivo));
-		} catch (FileNotFoundException e) {
-			System.out.println("FILE NOT FOUND!");
-			File puntos = new File(nombreArchivo);
-			PrintWriter fileOut = new PrintWriter(puntos);
-			fileOut.println("100,demo");
-			fileOut.close();
-			fileIn = new BufferedReader(new FileReader(nombreArchivo));
-		}
+		fileIn = new BufferedReader(new InputStreamReader(inpArchivo));
 
 		String[] arrColores;
 		String sLine;
@@ -221,16 +215,8 @@ public class Tablero {
 		String nombreArchivo = sCategoria;
 		BufferedReader fileIn;
 
-		try {
-			fileIn = new BufferedReader(new FileReader(nombreArchivo));
-		} catch (FileNotFoundException e) {
-			System.out.println("FILE NOT FOUND!");
-			File puntos = new File(nombreArchivo);
-			PrintWriter fileOut = new PrintWriter(puntos);
-			fileOut.println("100,demo");
-			fileOut.close();
-			fileIn = new BufferedReader(new FileReader(nombreArchivo));
-		}
+		InputStream inpArchivo = getClass().getResourceAsStream(nombreArchivo);
+		fileIn = new BufferedReader(new InputStreamReader(inpArchivo));
 
 		String[] arrPreguntas;
 		String sLine;

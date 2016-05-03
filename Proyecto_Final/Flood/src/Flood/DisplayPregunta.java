@@ -9,6 +9,7 @@ import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
 
 /**
@@ -27,9 +28,13 @@ public class DisplayPregunta {
     private Font fonFuentel;
 
     public DisplayPregunta(int iX, int iY, String sPregunta, String sPreguntaBase) throws FontFormatException, IOException {
-        this.fonFuente = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/Custom.ttf"));
+
+        InputStream fontStream = getClass().getResourceAsStream("/Flood/Custom.ttf");
+        this.fonFuente = Font.createFont(Font.TRUETYPE_FONT, fontStream);
         this.fonFuente = this.fonFuente.deriveFont(40F);
-        this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/CustomL.ttf"));
+
+        InputStream fontStream2 = getClass().getResourceAsStream("/Flood/CustomL.ttf");
+        this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, fontStream2);
         this.fonFuentel = this.fonFuentel.deriveFont(25F);
 
         this.iX = iX;
@@ -43,7 +48,7 @@ public class DisplayPregunta {
         graGrafico.setColor(colAux);
         graGrafico.setFont(fonFuentel);
 
-        graGrafico.drawString(getPreguntaBase(), getX(), getY()-10);
+        graGrafico.drawString(getPreguntaBase(), getX(), getY() - 10);
         graGrafico.setFont(fonFuente);
         graGrafico.drawString(getPregunta(), getX(), getY() + 28);
     }

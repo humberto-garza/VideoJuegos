@@ -11,6 +11,7 @@ import java.awt.RenderingHints;
 import java.awt.image.ImageObserver;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
 
 /**
@@ -49,8 +50,12 @@ public class Cuadro extends Base {
     public Cuadro(int iX, int iY, Image imaImagen, int iValor, boolean isActive,
                   Color colFondo, int iAncho, int iAlto, int iPregunta) throws FontFormatException, IOException {
         super(iX, iY, imaImagen);
-        this.fonFuente = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("./src/Flood/Numbers.ttf"));
+        
+        InputStream fontStream = getClass().getResourceAsStream("/Flood/Custom.ttf");
+        this.fonFuente = Font.createFont(Font.TRUETYPE_FONT, fontStream);
         this.fonFuente = this.fonFuente.deriveFont(40F);
+        
+
         this.iValor = iValor;
         this.isActive = isActive;
         this.colFondo = colFondo;
