@@ -87,8 +87,8 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     protected int iPuntos;
     protected int iNivel;
     protected int iModoJuego;
-    
-   
+
+
     // Variables de tiempo
     private long tiempoActual;
     private long tiempoInicial;
@@ -141,7 +141,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         iRandMin = 70;
         iContadorCiclos = 0;
         iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
-        iContRespuesta =0;
+        iContRespuesta = 0;
 
         // Definir el primer modo de juego
         iModoJuego = 4;
@@ -439,23 +439,20 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 int iResult = tabTablero.pressedKey(cAux, iModoJuego);
 
                 System.out.println(iResult);
-                if (iResult > 0) {
-                    souEliminate.play(side.bSound);
-                    iPuntos += iResult;
-
                 if (iResult > 0) {//contesto bien
                     souEliminate.play(side.bSound);
                     tabTablero.disRespuesta.iContRespuesta = 10;//para que se pueda ver la respuesta
-
-
+                    iPuntos += iResult;
                 }
+                
                 if (iResult != -400) {
                     iPuntos += iResult;
                     if (iPuntos < 0) {
                         iPuntos = 0;
                     }
                 }
-                if ( iModoJuego == 4) {
+
+                if (iModoJuego == 4) {
                     if (iResult == -400) {
                         iNivel++;
                         side.cambioNivel();
@@ -472,10 +469,10 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                     }
                 }
 
+
             }
         }
     }
-
     /**
      * keyReleased
      *
