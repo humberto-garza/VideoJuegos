@@ -398,8 +398,10 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         //paintComponent de side Panel
         side.paintComponent(graDibujo);
 
+        if (!side.bExit){//solo pinta cuando no hay un banner
         // Pintar el tablero
         tabTablero.paint(graDibujo, this);
+        }
     }
 
     public void paintCustomMenu(Graphics graDibujo) {
@@ -515,8 +517,23 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void mouseClicked(MouseEvent mouEvent) {
+        if (side.bExit){//esta en el banner de exit
+            if (side.basYesSalir.intersects(iMouseX, iMouseY)) {//salir del juego
+                
+                System.out.println("idk pq no te esta pelandoojsdkjahsdlkja");
+                side.bExit = false;//quita el banner
+                side.bPause = false;//quitar pausa
+                //regresar al menu
+                bannerMenu.setPlay(false);
+                System.out.println("set play");
+                bannerMenu.falseAll();
+                bannerMenu.bPrincipal = true;
+            } else if (side.basNoPlay.intersects(iMouseX, iMouseY)) {//seguir jugando
+                side.bExit = false;//quitar banner
+                side.bPause = false;//quitar pausa
+            }
+        }
     }
 
     @Override

@@ -28,17 +28,21 @@ public class SidePanel extends JPanel implements MouseListener {
     //Objetos Base para los botones del panel
     protected Base basBackMenu;
     private Base basHelp;
-    private Base basPause;
-    private Base basSound;
+    protected Base basPause;
+    protected Base basSound;
+    protected Base basYesSalir;//salirdeljuego
+    protected Base basNoPlay;//seguir jugando
 
     //Objetos para las imagenes
     private Image imaImagenLogo;
     private Image imaImagenNivel;
+    private Image imaImagenBannerSalir;
 
     //Variables booleanas que indican si un botón fue presionado
     private boolean bHelp;
     protected boolean bPause;
     protected boolean bSound;
+    protected boolean bExit;
 
     //Variables que indican los tamaños del side panel
     private int iStartPanelX;
@@ -95,6 +99,7 @@ public class SidePanel extends JPanel implements MouseListener {
         bHelp = false;
         bPause = false;
         bSound = true;
+        bExit = false;
         //indica el nivel
         sNivel = Integer.toString(tarGame.iNivel);
 
@@ -126,6 +131,9 @@ public class SidePanel extends JPanel implements MouseListener {
         imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
                 .getResource("Images/sidePanel/nivel" + sNivel + ".png"));
 
+        
+        imaImagenBannerSalir = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                .getResource("Images/sidePanel/bannerSalir.png"));
     }
 
     /* creaBases
@@ -150,44 +158,43 @@ public class SidePanel extends JPanel implements MouseListener {
         basSound.setX(basPause.getX()- basSound.getAncho() - iXOffsetSelections);
         
         basHelp.setX(basPause.getX()+basPause.getAncho()+iXOffsetSelections);
-
         
-
+        basYesSalir= new Base(255, 400, Toolkit.getDefaultToolkit()
+                .getImage(this.getClass().getResource("Images/sidePanel/yes.png")));
+        
+        basNoPlay = new Base(basYesSalir.getX()+basYesSalir.getAncho()+50 , 400, Toolkit.getDefaultToolkit()
+                .getImage(this.getClass().getResource("Images/sidePanel/no.png")));
+        
 
     }
 
     public void paintComponent(Graphics graGrafico) {
-        
+
         //iOffsetXimagen = iStartPanelX + (119 - (imaImagenLogo.getWidth(this)/2));
         iOffsetXimagen = 630;
         iOffsetYimagen = 40;
         //super.paintComponent(graGrafico);
-        if (imaImagenLogo != null
-                && imaImagenNivel != null) {
+        /*pinta las imagenes*/
+
+        if (imaImagenLogo != null && imaImagenNivel != null) {
             //pinta imagenes
-            graGrafico.drawImage(imaImagenLogo, iOffsetXimagen , iOffsetYimagen, 196, 193, this);
-          
+            graGrafico.drawImage(imaImagenLogo, iOffsetXimagen, iOffsetYimagen, 196, 193, this);
+
             Color colAux = new Color(255, 255, 255);
             graGrafico.setColor(colAux);
             graGrafico.setFont(fonFuentel);
-            
-            
-            
-             
-            
-            Rectangle rect = new Rectangle(669,195,127,34);
-           
-            
+
+            Rectangle rect = new Rectangle(669, 195, 127, 34);
+
             fitInSquare(Integer.toString(tarGame.iPuntos), rect, graGrafico);
-            
-            
-           
             //graGrafico.drawString(Integer.toString(tarGame.iPuntos), 710, 213);
             graGrafico.drawImage(imaImagenNivel, iOffsetXimagen, iOffsetYimagen + 212, imaImagenNivel.getWidth(this), imaImagenNivel.getHeight(this), this);
-            
-
+        } else {
+            //Da un mensaje mientras se carga el dibujo
+            graGrafico.drawString("No se cargo la imagen..", 20, 20);
         }
 
+        /*pinta los objetos*/
         if (basBackMenu != null
                 && basHelp != null && basPause != null && basSound != null) {
 
@@ -201,6 +208,15 @@ public class SidePanel extends JPanel implements MouseListener {
             //Da un mensaje mientras se carga el dibujo
             graGrafico.drawString("No se cargo la imagen..", 20, 20);
         }
+        
+        if (bExit){//el usuario quiere regresar a menu
+            //pinta banner de fondo
+            graGrafico.drawImage(imaImagenBannerSalir, 0, 0, tarGame.iWidth, tarGame.iHeight, this);
+            //pinta los botones/objetos
+            basYesSalir.paint(graGrafico, this);
+            basNoPlay.paint(graGrafico, this);
+        }
+
     }
 
     /**
@@ -263,20 +279,27 @@ public class SidePanel extends JPanel implements MouseListener {
         iMouseY = mouEvent.getY();
 
         //checa si el jugador ha presionado algun boton del panel
-        if (basHelp.intersects(iMouseX, iMouseY)) {
+        if (basHelp.intersects(iMouseX, iMouseY) && !bExit) {
             bHelp = true;//prende help
             System.out.println("clicked help");
             tarGame.bannerMenu.setInstrucciones(true);//para que despliegue instrucciones
             tarGame.bannerMenu.setSecundario(true);//para que despliegue menu secundario
-        } else if (basPause.intersects(iMouseX, iMouseY)) {
+        } else if (basPause.intersects(iMouseX, iMouseY) && !bExit) {
             System.out.println("clicked pause");
             bPause = !bPause;//niega pause
             manejaPausa();
-        } else if (basSound.intersects(iMouseX, iMouseY)) {
+        } else if (basSound.intersects(iMouseX, iMouseY) && !bExit) {
             System.out.println("clicked sound");
             bSound = !bSound;//niega sound
             manejaSonido();
-        } else if (basBackMenu.intersects(iMouseX, iMouseY)) {
+        } else if (basBackMenu.intersects(iMouseX, iMouseY) && !bExit) {
+            
+            
+            /*quieres salir del juego?*/
+            //pausa juego para que no aparezcan cuadros
+            bPause = true;//pone pausa, si es que no esta puesta
+            //prende booleana para desplegar mensaje de "seguro?"
+            bExit = true;
 
             System.out.println("clicked menu");
 
@@ -285,13 +308,38 @@ public class SidePanel extends JPanel implements MouseListener {
             //bHelp = false;//apaga las demás
             //Segun yo SDN borrar, pues 
             //SDN - Variables de Banner Menu
+            
+            /**
+            
             tarGame.bannerMenu.setPlay(false);
             System.out.println("set play");
             tarGame.bannerMenu.falseAll();
             tarGame.bannerMenu.bPrincipal = true;
+            **/
+            
+            
+            
             //SDN - Variables de Banner Menu
 
         }
+        
+        /*
+        if (bExit){//esta en el banner de exit
+            if (basYesSalir.intersects(iMouseX, iMouseY)) {//salir del juego
+                bExit = false;//quita el banner
+                bPause = false;//quitar pausa
+                //regresar al menu
+                tarGame.bannerMenu.setPlay(false);
+                System.out.println("set play");
+                tarGame.bannerMenu.falseAll();
+                tarGame.bannerMenu.bPrincipal = true;
+            } else if (basNoPlay.intersects(iMouseX, iMouseY)) {//seguir jugando
+                System.out.println("ENTROOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!");
+                bExit = false;//quitar banner
+                bPause = false;//quitar pausa
+            }
+        }
+*/
 
     }
     
