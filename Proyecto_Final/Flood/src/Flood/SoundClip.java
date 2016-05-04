@@ -63,7 +63,7 @@ public class SoundClip {
 	/**
 	 * Metodo modificador usado para modificar si el sonido se repite.
 	 *
-     * @param looping
+	 * @param looping
 	 * @param _looping es un valor <code>boleano</code>.
 	 */
 	public void setLooping(boolean looping) {
@@ -82,7 +82,7 @@ public class SoundClip {
 	/**
 	 * Metodo modificador usado para definir el numero de repeticiones.
 	 *
-     * @param repeat
+	 * @param repeat
 	 * @param _repeat es un <code>entero</code> que es el numero de
 	 * repeticiones.
 	 */
@@ -103,7 +103,7 @@ public class SoundClip {
 	/**
 	 * Metodo modificador que asigna un nombre al archivo.
 	 *
-     * @param filename
+	 * @param filename
 	 */
 	public void setFilename(String filename) {
 		this.filename = filename;
@@ -147,7 +147,7 @@ public class SoundClip {
 	 *
 	 * @param audiofile es un <code>String</code> con el nombre del archivo de
 	 * sonido.
-     * @return 
+	 * @return
 	 */
 	public boolean load(String audiofile) {
 		try {
@@ -157,6 +157,7 @@ public class SoundClip {
 			DataLine.Info info = new DataLine.Info(Clip.class, sample.getFormat());
 			clip = (Clip) AudioSystem.getLine(info);
 			clip.open(sample);
+			clip.start();
 			/*
 			URL defaultSound = getClass().getResource("/Flood/Sounds/click_tiny.wav");
 			sample = AudioSystem.getAudioInputStream(defaultSound);
@@ -174,7 +175,7 @@ public class SoundClip {
 
 	/**
 	 * Metodo que reproduce el sonido.
-     * @param bSound
+	 * @param bSound
 	 */
 	public void play(boolean bSound) {
 		if (bSound && clip != null) {
