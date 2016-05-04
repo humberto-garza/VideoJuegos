@@ -443,21 +443,26 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
      */
     @Override
     public void keyTyped(KeyEvent keyEvent) {
-        
-        if(side.bLevelUp){
-            System.out.println("hihihihi    "+side.iContBannerLevel);
-        }
-        
+
         if (side.bLevelUp && side.iContBannerLevel <= 0){//esta el banner de levelup en pantalla
-            System.out.println("Hola entro");
             //leer input para continuar con juego
             //quitas pausa, y apagas las demás booleanas
             side.bPause = false;
             side.bBanner = false;
             side.bLevelUp = false;
-            
         }
+        if (side.bWonGame && side.iContBannerLevel <= 0) {
+            //apagar booleanas
+            side.bPause = false;
+            side.bBanner = false;
+            side.bLevelUp = false;
 
+            //regresar al menu
+            bannerMenu.setPlay(false);
+            System.out.println("set play");
+            bannerMenu.falseAll();
+            bannerMenu.bPrincipal = true;
+        }
     }
 
     /**
@@ -548,7 +553,8 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                     }
                 } else if (iModoJuego == 6) {
                     if (iResult ==  -600) {
-                        iNivel = iModoJuego = 1;
+                        //iNivel = iModoJuego = 1;
+                        iNivel++;
                         side.cambioNivel();
                         nuevoJuego();
                     }
@@ -572,8 +578,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     public void mouseClicked(MouseEvent mouEvent) {
         if (side.bExit) { //esta en el banner de exit
             if (side.basYesSalir.intersects(iMouseX, iMouseY)) {//salir del juego
-
-                System.out.println("idk pq no te esta pelandoojsdkjahsdlkja");
+                
                 side.bExit = false;//quita el banner
                 side.bBanner = true;//significa que no hay banner
                 side.bPause = false;//quitar pausa

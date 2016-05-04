@@ -39,6 +39,7 @@ public class SidePanel extends JPanel implements MouseListener {
     private Image imaImagenBannerSalir;
     private Image imaImagenPausa;
     private Image imaImagenLevelUp;
+    private Image imaImagenWonGame;
 
     //Variables booleanas que indican si un botón fue presionado
     private boolean bHelp;
@@ -47,6 +48,7 @@ public class SidePanel extends JPanel implements MouseListener {
     protected boolean bExit;
     protected boolean bBanner;
     protected boolean bLevelUp;
+    protected boolean bWonGame;
     
     //contadores
     protected int iContBannerLevel;
@@ -111,6 +113,8 @@ public class SidePanel extends JPanel implements MouseListener {
         sNivel = Integer.toString(tarGame.iNivel);
         
         bLevelUp = false;
+        bBanner = false;
+        bWonGame = false;
 
         //offsets
         //iMouseXOffSet = (tarGame.iWidth)-228;
@@ -149,6 +153,9 @@ public class SidePanel extends JPanel implements MouseListener {
         
         imaImagenLevelUp = Toolkit.getDefaultToolkit().getImage(this.getClass()
                 .getResource("Images/sidePanel/levelUp.png"));
+        
+        imaImagenWonGame = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                .getResource("Images/sidePanel/YouWon.png"));
     }
 
     /* creaBases
@@ -242,7 +249,10 @@ public class SidePanel extends JPanel implements MouseListener {
         if (bLevelUp) {//el juego subio de nivel
             //banner cambio de nivel
             graGrafico.drawImage(imaImagenLevelUp, 0, 0, imaImagenPausa.getWidth(this), imaImagenPausa.getHeight(this), this);
+        }
 
+        if (bWonGame) {
+            graGrafico.drawImage(imaImagenWonGame, 0, 0, imaImagenPausa.getWidth(this), imaImagenPausa.getHeight(this), this);
         }
         
         
@@ -285,10 +295,16 @@ public class SidePanel extends JPanel implements MouseListener {
         //indica el nivel
         sNivel = Integer.toString(tarGame.iNivel);
 
-        if (tarGame.iNivel > 1) {
+        if (tarGame.iNivel > 1 && tarGame.iNivel <= 6) {
             iContBannerLevel = 10;
             bPause = true;//pone pausa pq despliega un banner
             bLevelUp = true;//prende booleana
+            bBanner = true;//hay un banner de nivel
+        }
+        else if (tarGame.iNivel == 7){//ya termino el juego
+            iContBannerLevel = 10;
+            bPause = true;//pone pausa pq despliega un banner
+            bWonGame = true;//prende booleana
             bBanner = true;//hay un banner de nivel
         }
 
