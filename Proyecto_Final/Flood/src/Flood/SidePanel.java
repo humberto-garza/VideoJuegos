@@ -59,6 +59,7 @@ public class SidePanel extends JPanel implements MouseListener {
     private Image imaImagenBannerSalir;
     private Image imaImagenPausa;
     private Image imaImagenLevelUp;
+    private Image imaImagenLevelDown;
     private Image imaImagenWonGame;
 
     //instrucciones
@@ -218,6 +219,9 @@ public class SidePanel extends JPanel implements MouseListener {
         imaImagenLevelUp = Toolkit.getDefaultToolkit().getImage(this.getClass()
                            .getResource("Images/sidePanel/levelUp.png"));
 
+        imaImagenLevelUp = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                           .getResource("Images/sidePanel/levelUp.png"));
+        
         imaImagenWonGame = Toolkit.getDefaultToolkit().getImage(this.getClass()
                            .getResource("Images/sidePanel/YouWon.png"));
 
