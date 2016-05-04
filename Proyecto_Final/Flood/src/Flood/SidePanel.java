@@ -159,10 +159,10 @@ public class SidePanel extends JPanel implements MouseListener {
         
         basHelp.setX(basPause.getX()+basPause.getAncho()+iXOffsetSelections);
         
-        basYesSalir= new Base(iStartPanelX-200, 662, Toolkit.getDefaultToolkit()
+        basYesSalir= new Base(255, 400, Toolkit.getDefaultToolkit()
                 .getImage(this.getClass().getResource("Images/sidePanel/yes.png")));
         
-        basNoPlay = new Base(300, 662, Toolkit.getDefaultToolkit()
+        basNoPlay = new Base(basYesSalir.getX()+basYesSalir.getAncho()+50 , 400, Toolkit.getDefaultToolkit()
                 .getImage(this.getClass().getResource("Images/sidePanel/no.png")));
         
 

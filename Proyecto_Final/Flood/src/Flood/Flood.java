@@ -133,7 +133,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
 
         //Variables de score y nivel
         iPuntos = 0;
-        iNivel = 1;
+        iNivel = 6;
         iModoJuego = iNivel;
         side.cambioNivel();
         nuevoJuego();
@@ -175,7 +175,6 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
          * se deben ir desapareciendo al responder correctamente
          */
         if (iModoJuego == 1) {
-            /////////////MODO 1///////////////////
             tabTablero.creaCuadro();
             /////////////////////////////////////
         }
@@ -184,7 +183,6 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         * En este modo de juego, se trata de desaparecer n Puntos
          */
         if (iModoJuego == 2) {
-            /////////////MODO 2///////////////////
             tabTablero.llenarGrid();
             /////////////////////////////////////
         }
@@ -194,7 +192,6 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         * de arriba
          */
         if (iModoJuego == 3) {
-            /////////////MODO 2///////////////////
             tabTablero.setIndex(11);
             tabTablero.creaCuadroAbajo();
             /////////////////////////////////////
@@ -204,22 +201,27 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
          * En este modo se debe desbloquear el ultimo cuadro
          */
         if (iModoJuego == 4) {
-            /////////////MODO 2///////////////////
             tabTablero.llenarGridCapas();
             /////////////////////////////////////
         }
         /////////////MODO 5///////////////////
         /*
-         * En este modo se debe desbloquear el ultimo cuadro
+         * En este modo se debe desbloquear la tache
          */
         if (iModoJuego == 5) {
-            /////////////MODO 2///////////////////
             tabTablero.llenarGridTache();
+            /////////////////////////////////////
+        }
+        /////////////MODO 6///////////////////
+        /*
+         * En este modo se debe desbloquear el ultimo cuadro
+         */
+        if (iModoJuego == 6) {
+            tabTablero.llenarGrid();
             /////////////////////////////////////
         }
         /////////////////////////////////////
     }
-
 
     /**
      * main
@@ -304,7 +306,15 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 }
             }
             ////////////////////////////////////////////
-
+            //...
+            /////////////MODO 6///////////////////
+            if (iModoJuego == 6) {
+                tabTablero.bloqueaCuadro();
+                if ( tabTablero.isBloqued()) {
+                    nuevoJuego();
+                }
+            }
+            ////////////////////////////////////////////
             //Guarda el tiempo actual
             tiempoActual += tiempoTranscurrido;
         }
@@ -453,7 +463,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                     iPuntos += iResult;
                 }
 
-                if (iResult != -400) {
+                if (iResult > -400) {
                     iPuntos += iResult;
                     if (iPuntos < 0) {
                         iPuntos = 0;
@@ -474,7 +484,13 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                         iModoJuego++;
                         nuevoJuego();
                     }
-                } else {
+                } else if (iModoJuego == 6) {
+                    if (iResult ==  -600) {
+                        iNivel = iModoJuego = 1;
+                        side.cambioNivel();
+                        nuevoJuego();
+                    }
+                }  else {
                     // Checar si se debe pasar de nivel
                     if (iPuntos > 200) {
                         iNivel++;
