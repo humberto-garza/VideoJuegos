@@ -65,9 +65,7 @@ public class Menu extends JFrame implements MouseListener {
         this.pack();
         this.setResizable(true);
         this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);        
     }
     /**
      * paint

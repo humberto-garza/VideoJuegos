@@ -97,6 +97,9 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     private int iContadorCiclos;
     protected int iContRespuesta;
 
+    // Categoria
+    private String sCurCategoria;
+
     public Flood() throws FileNotFoundException, IOException, FontFormatException {
         // Jframe Configuration
         iWidth = 900;
@@ -130,11 +133,12 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //Variables de score y nivel
+        //Variables de score, nivel y categoria
+        sCurCategoria = "/Flood/Files/Quimica.txt";
         iPuntos = 0;
         iNivel = iModoJuego = 1;
         side.cambioNivel();
-        nuevoJuego();
+        nuevoJuego(sCurCategoria);
 
         // Variables tiempo
         iRandMax = 50;
@@ -157,18 +161,19 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         th.start();
     }
 
-    public void IniciaMenu() {
+    public void IniciaMenu(String sFileToOpen) {
         //Variables de score y nivel
+        sCurCategoria = sFileToOpen;
         iPuntos = 0;
         iNivel = iModoJuego = 1;
         side.cambioNivel();
-        nuevoJuego();
+        nuevoJuego(sFileToOpen);
     }
 
-    public void nuevoJuego() {
+    public void nuevoJuego(String sFileToOpen) {
         // Iniciar un nuevo Tablero
         try {
-            tabTablero = new Tablero("/Flood/Files/Quimica.txt");
+            tabTablero = new Tablero(sFileToOpen);
         } catch (FontFormatException ex) {
             Logger.getLogger(Flood.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -303,7 +308,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 iContadorCiclos = 0;
                 tabTablero.creaCuadro();
                 if ( tabTablero.estaLleno()) {
-                    nuevoJuego();
+                    nuevoJuego(sCurCategoria);
                 }
             }
         }
@@ -311,7 +316,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         if (iModoJuego == 2) {
             //tabTablero.creaCuadro();
             if ( tabTablero.noHayDisponibles()) {
-                nuevoJuego();
+                nuevoJuego(sCurCategoria);
             }
         }
         /////////////MODO 3///////////////////
@@ -321,7 +326,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 iContadorCiclos = 0;
                 tabTablero.creaCuadroAbajo();
                 if ( tabTablero.estaLleno()) {
-                    nuevoJuego();
+                    nuevoJuego(sCurCategoria);
                 }
             }
         }
@@ -334,7 +339,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 iContadorCiclos = 0;
                 tabTablero.bloqueaCuadro();
                 if ( tabTablero.isBloqued()) {
-                    nuevoJuego();
+                    nuevoJuego(sCurCategoria);
                 }
             }
         }
@@ -501,41 +506,41 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                         iNivel++;
                         side.cambioNivel();
                         iModoJuego++;
-                        nuevoJuego();
+                        nuevoJuego(sCurCategoria);
                     }
                 } else if (iModoJuego == 2) {
                     if (iRespondidas >= 20) {
                         iNivel++;
                         side.cambioNivel();
                         iModoJuego++;
-                        nuevoJuego();
+                        nuevoJuego(sCurCategoria);
                     }
                 } else if (iModoJuego == 3) {
                     if (iPuntos > 100) {
                         iNivel++;
                         side.cambioNivel();
                         iModoJuego++;
-                        nuevoJuego();
+                        nuevoJuego(sCurCategoria);
                     }
                 } else if (iModoJuego == 4) {
                     if (iResult == -400) {
                         iNivel++;
                         side.cambioNivel();
                         iModoJuego++;
-                        nuevoJuego();
+                        nuevoJuego(sCurCategoria);
                     }
                 } else if (iModoJuego == 5) {
                     if (iResult == -500) {
                         iNivel++;
                         side.cambioNivel();
                         iModoJuego++;
-                        nuevoJuego();
+                        nuevoJuego(sCurCategoria);
                     }
                 } else if (iModoJuego == 6) {
                     if (iResult ==  -600) {
                         iNivel = iModoJuego = 1;
                         side.cambioNivel();
-                        nuevoJuego();
+                        nuevoJuego(sCurCategoria);
                     }
                 }
             }
@@ -579,7 +584,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         iMouseX = mouEvent.getX();
         iMouseY = mouEvent.getY();
 
-        if (tabTablero.disRespuesta.basHint.intersects(iMouseX, iMouseY) && !side.bPause && iPuntos>0) {
+        if (tabTablero.disRespuesta.basHint.intersects(iMouseX, iMouseY) && !side.bPause && iPuntos > 0) {
             System.out.println("Hint was clicked");
             iPuntos += tabTablero.getHint();
             if (iPuntos < 0) {

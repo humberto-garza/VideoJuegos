@@ -300,7 +300,7 @@ public class BannerMenu extends JPanel implements MouseListener {
     }
 
     public void initVars() throws FontFormatException, IOException {
-
+        sCustomFile = "/Flood/Files/Quimica.txt";
         bPrincipal = true;
         bSecundario = false;
         bInstrucciones = false;
@@ -609,12 +609,14 @@ public class BannerMenu extends JPanel implements MouseListener {
             System.out.println("Category 1 selected");
             falseAllCategories();
             bCatUno = true;
+            sCustomFile = "/Flood/Files/Quimica.txt";
         }
         //selecciona categoria 2
         if (basCatDos.intersects(iMouseX, iMouseY) && bPrincipal) { //seleciono cat #2
             System.out.println("Category 2 selected");
             falseAllCategories();
             bCatDos = true;
+            sCustomFile = "/Flood/Files/Matematicas.txt";
         }
 
         //selecciona categoria 3
@@ -623,17 +625,16 @@ public class BannerMenu extends JPanel implements MouseListener {
             System.out.println("Category 3 selected");
             falseAllCategories();
             bCatTres = true;
+            sCustomFile = "/Flood/Files/Geografia.txt";
         }
 
         //Selecciona categoria custom
         if (basCatCustom.intersects(iMouseX, iMouseY) && bPrincipal) { //seleciono play
-
             setCustomCategoryClicked(true);
             System.out.println("Custom Category selected");
             falseAllCategories();
             bCatCustom = true;
-            chooseFile(sCustomFile);
-
+            sCustomFile = chooseFile();
         }
 
         //Se abre ventana para seleccionar archivo.txt
@@ -647,7 +648,7 @@ public class BannerMenu extends JPanel implements MouseListener {
             setCustomCat(sCustomFile);
             System.out.println("Custom Category: " + sCustomFile);
             bPlay = true;
-            tarGame.IniciaMenu();
+            tarGame.IniciaMenu(sCustomFile);
         }
 
         //selecciona Help
@@ -713,21 +714,20 @@ public class BannerMenu extends JPanel implements MouseListener {
         }
     }
 
-    void chooseFile(String sFile) {
-
+    String chooseFile() {
 
         try {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.showOpenDialog(fileChooser);
-            sFile = fileChooser.getSelectedFile().getAbsolutePath();
-            System.out.println("Archivo seleccionado de choose file: " + sFile);
+            return ("." + fileChooser.getSelectedFile().getAbsolutePath());
         }
 
         catch (Exception e1) {
 
             System.out.print("No seleccionó un archivo");
+            return "/Flood/Files/Defualt.txt";
         }
-
+        
     }
 
     //Animación

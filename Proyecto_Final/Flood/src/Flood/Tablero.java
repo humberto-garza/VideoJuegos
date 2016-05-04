@@ -216,10 +216,29 @@ public class Tablero {
 		nombreArchivo += sCategoria + ".txt";
 		*/
 		String nombreArchivo = sCategoria;
+		System.out.println("ARCHIVO FINAL:" + nombreArchivo);
 		BufferedReader fileIn;
 
-		InputStream inpArchivo = getClass().getResourceAsStream(nombreArchivo);
-		fileIn = new BufferedReader(new InputStreamReader(inpArchivo));
+		// Custom File
+		if (nombreArchivo.charAt(0) == '.') {
+			nombreArchivo = nombreArchivo.substring(1);
+			try {
+				fileIn = new BufferedReader(new FileReader(nombreArchivo));
+			} catch (FileNotFoundException e) {
+				System.out.println("FILE NOT FOUND!");
+				File puntos = new File(nombreArchivo);
+				PrintWriter fileOut = new PrintWriter(puntos);
+				fileOut.println("NO SE CARGO EL ARCHIVO:\nERROR,0,0");
+				fileOut.close();
+				fileIn = new BufferedReader(new FileReader(nombreArchivo));
+			}
+		} else {
+			// Local al JAR
+			InputStream inpArchivo = getClass().getResourceAsStream(nombreArchivo);
+			fileIn = new BufferedReader(new InputStreamReader(inpArchivo));
+		}
+
+
 
 		String[] arrPreguntas;
 		String sLine;
@@ -235,7 +254,7 @@ public class Tablero {
 			Pregunta preAux = new Pregunta(sPreg, sResp, (Integer.parseInt(sPunt) % 10) + 1);
 			lklPreguntas.add(preAux);
 		}
-		System.out.print("ASe Cargaron Preguntas: ");
+		System.out.print("Se Cargaron Preguntas: ");
 		System.out.println(lklPreguntas.size());
 
 	}

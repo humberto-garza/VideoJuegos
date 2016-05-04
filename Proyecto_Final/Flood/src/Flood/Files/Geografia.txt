@@ -1,0 +1,2 @@
+Teclea la capital del Lugar:
+Perú,Lima,1
