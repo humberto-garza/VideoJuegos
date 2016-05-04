@@ -614,11 +614,11 @@ public class Tablero {
 							}
 							disRespuesta.setRespuesta("");
 							setNextColor();
-							
+
 							disRespuesta.sRespPasada = sResEsperada;
 
 							pressedEnter(iModoJuego);
-							
+
 						}
 					}
 					// Caracter equivocado
@@ -632,6 +632,7 @@ public class Tablero {
 	}
 
 	public void setNextColor() {
+		int aux = iIndexColor;
 		iIndexColor++;
 		if (iIndexColor >= lklColores.size()) {
 			iIndexColor = 0;
