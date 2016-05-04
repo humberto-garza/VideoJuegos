@@ -374,11 +374,30 @@ public class Tablero {
 		cuaAux.setColor(colAux);
 
 	}
+	public void llenarGridTache() {
+		iIndexActual = 7;
+		llenarGrid();
+		lklUsados.clear();
+		int[] arrUsados = new int[] {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23};
+		for (int iC = arrUsados.length - 1; iC >= 0; iC--) {
+			lklUsados.add(arrUsados[iC]);
+		}
 
+		int[] arrCuadros = new int[] {0, 4, 6, 8, 12, 16, 18, 20, 24};
+		setNextColor();
+		setNextColor();
+
+		for (int iC = 0; iC < arrCuadros.length; iC++) {
+			Cuadro cuaAux = lklCuadrosBase.get(arrCuadros[iC]);
+			// Seleccionar un color nuevo
+			Color colAux = lklColores.get(iIndexColor);
+			cuaAux.setColor(colAux);
+		}
+	}
 
 
 	public void cambioCuadro() {
-		if (lklUsados.size() > 0) {
+		if (lklUsados.size() > 0 && iIndexUsado >= 0) {
 			disRespuesta.setRespuesta("");
 			iIndexActual = lklUsados.get(iIndexUsado);
 			iIndexUsado = (iIndexUsado + 1) % lklUsados.size();
@@ -403,11 +422,7 @@ public class Tablero {
 	}
 
 	public void pressedEnter(int iModoJuego) {
-		if ( iModoJuego == 4) {
-			cambioCuadro();
-
-
-		} else if (iModoJuego == 3) {
+		if (iModoJuego == 3) {
 			disRespuesta.setRespuesta("");
 			for (int iC = 0; iC < iGridCols; iC++) {
 				int iIndexAux = iIndexActual + 1;
@@ -422,14 +437,13 @@ public class Tablero {
 					break;
 				}
 			}
-
 		} else {
 			cambioCuadro();
 		}
 	}
 
 	public void pressedRight(int iModoJuego) {
-		if (iModoJuego == 4) {
+		if (iModoJuego == 4 || iModoJuego == 5) {
 			int iIndexR;
 			if ((iIndexActual + 1) % iGridCols == 0) {
 				iIndexR = iIndexActual - (iGridCols - 1);
@@ -461,7 +475,7 @@ public class Tablero {
 
 
 	public void pressedLeft(int iModoJuego) {
-		if (iModoJuego == 4) {
+		if (iModoJuego == 4 || iModoJuego == 5) {
 			int iIndexL;
 			if ((iIndexActual - 1) % iGridCols == iGridCols - 1 || (iIndexActual - 1) < 0) {
 				iIndexL = iIndexActual + (iGridCols - 1);
@@ -492,7 +506,7 @@ public class Tablero {
 
 
 	public void pressedUp(int iModoJuego) {
-		if (iModoJuego == 4) {
+		if (iModoJuego == 4 || iModoJuego == 5) {
 			int iIndexU;
 			if ((iIndexActual - iGridCols) < 0) {
 				iIndexU = (iCasillas - iGridCols) + (iIndexActual % iGridCols);
@@ -519,7 +533,7 @@ public class Tablero {
 
 
 	public void pressedDown(int iModoJuego) {
-		if (iModoJuego == 4) {
+		if (iModoJuego == 4 || iModoJuego == 5) {
 			int iIndexD;
 			if ((iIndexActual + iGridCols) >= iCasillas) {
 				iIndexD = iIndexActual % iGridCols;
@@ -614,6 +628,23 @@ public class Tablero {
 								return -400;
 							}
 						}
+						if (iModoJuego == 5) {
+							desbloquear(iIndexActual);
+							lklUsados.remove(lklUsados.indexOf(iIndexActual));
+							iIndexUsado = lklUsados.size() - 1;
+
+							boolean bterminado = true;
+							int[] arrCuadros = new int[] {0, 4, 6, 8, 12, 16, 18, 20, 24};
+							for (int iC = 0; iC < arrCuadros.length; iC++ ) {
+								cuaAux = lklCuadrosBase.get(arrCuadros[iC]);
+								if (cuaAux.isActive()) {
+									bterminado = false;
+								}
+							}
+							if (bterminado) {
+								return -500;
+							}
+						}
 						disRespuesta.setRespuesta("");
 						setNextColor();
 						disRespuesta.sRespPasada = sResEsperada;
@@ -638,43 +669,64 @@ public class Tablero {
 	public void desbloquear(int iCentro) {
 		int iAux;
 		Cuadro cuaAux;
-
+		Color colPend;
+		int iXColor;
 
 		// Desbloquera Vecindad IZQUIERDA
 		iAux = iCentro - 1;
 		if (iAux >= 0) {
 			cuaAux = lklCuadrosBase.get(iAux);
-			cuaAux.setColor(lklColores.get(0));
-			if (!lklUsados.contains(iAux) && cuaAux.isActive()) {
+			colPend = cuaAux.getColor();
+			iXColor = lklColores.indexOf(colPend) - 1;
+			if (!lklUsados.contains(iAux) && cuaAux.isActive() && iXColor == 0) {
 				lklUsados.add(iAux);
 			}
+			if (iXColor < 0) {
+				iXColor = 0;
+			}
+			cuaAux.setColor(lklColores.get(iXColor));
 		}
 		// Desbloquera Vecindad ARRIBA
 		iAux = iCentro - iGridCols;
 		if (iAux >= 0) {
 			cuaAux = lklCuadrosBase.get(iAux);
-			cuaAux.setColor(lklColores.get(0));
-			if (!lklUsados.contains(iAux) && cuaAux.isActive()) {
+			colPend = cuaAux.getColor();
+			iXColor = lklColores.indexOf(colPend) - 1;
+			if (!lklUsados.contains(iAux) && cuaAux.isActive() && iXColor == 0) {
 				lklUsados.add(iAux);
 			}
+			if (iXColor < 0) {
+				iXColor = 0;
+			}
+			cuaAux.setColor(lklColores.get(iXColor));
 		}
 		// Desbloquera Vecindad DERECHA
 		iAux = iCentro + 1;
 		if (iAux < iCasillas) {
 			cuaAux = lklCuadrosBase.get(iAux);
-			cuaAux.setColor(lklColores.get(0));
-			if (!lklUsados.contains(iAux) && cuaAux.isActive()) {
+			colPend = cuaAux.getColor();
+			iXColor = lklColores.indexOf(colPend) - 1;
+			if (!lklUsados.contains(iAux) && cuaAux.isActive() && iXColor == 0) {
 				lklUsados.add(iAux);
 			}
+			if (iXColor < 0) {
+				iXColor = 0;
+			}
+			cuaAux.setColor(lklColores.get(iXColor));
 		}
 		// Desbloquera Vecindad ABAJO
 		iAux = iCentro + iGridCols;
 		if (iAux < iCasillas) {
 			cuaAux = lklCuadrosBase.get(iAux);
-			cuaAux.setColor(lklColores.get(0));
-			if (!lklUsados.contains(iAux) && cuaAux.isActive()) {
+			colPend = cuaAux.getColor();
+			iXColor = lklColores.indexOf(colPend) - 1;
+			if (!lklUsados.contains(iAux) && cuaAux.isActive() && iXColor == 0) {
 				lklUsados.add(iAux);
 			}
+			if (iXColor < 0) {
+				iXColor = 0;
+			}
+			cuaAux.setColor(lklColores.get(iXColor));
 		}
 	}
 

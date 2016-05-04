@@ -134,7 +134,9 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         //Variables de score y nivel
         iPuntos = 0;
         iNivel = 1;
+        iModoJuego = iNivel;
         side.cambioNivel();
+        nuevoJuego();
 
         // Variables tiempo
         iRandMax = 75;
@@ -142,10 +144,6 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         iContadorCiclos = 0;
         iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
         iContRespuesta = 0;
-
-        // Definir el primer modo de juego
-        iModoJuego = 1;
-        nuevoJuego();
 
         // Variables de teclado
         bKeyPressed = false;
@@ -216,7 +214,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
          */
         if (iModoJuego == 5) {
             /////////////MODO 2///////////////////
-            tabTablero.llenarGridCapas();
+            tabTablero.llenarGridTache();
             /////////////////////////////////////
         }
         /////////////////////////////////////
@@ -449,7 +447,6 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 char cAux = keyEvent.getKeyChar();
                 int iResult = tabTablero.pressedKey(cAux, iModoJuego);
 
-                System.out.println(iResult);
                 if (iResult > 0) {//contesto bien
                     souEliminate.play(side.bSound);
                     tabTablero.disRespuesta.iContRespuesta = 10;//para que se pueda ver la respuesta
@@ -465,6 +462,13 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
 
                 if (iModoJuego == 4) {
                     if (iResult == -400) {
+                        iNivel++;
+                        side.cambioNivel();
+                        iModoJuego++;
+                        nuevoJuego();
+                    }
+                } else if (iModoJuego == 5) {
+                    if (iResult == -500) {
                         iNivel++;
                         side.cambioNivel();
                         iModoJuego++;
