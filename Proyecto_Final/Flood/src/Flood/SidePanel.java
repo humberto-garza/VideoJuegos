@@ -59,8 +59,9 @@ public class SidePanel extends JPanel implements MouseListener {
     private Image imaImagenBannerSalir;
     private Image imaImagenPausa;
     private Image imaImagenLevelUp;
+    private Image imaImagenLevelDown;
     private Image imaImagenWonGame;
-    
+
     //instrucciones
     private Image imaInst1;
     private Image imaInst2;
@@ -68,9 +69,9 @@ public class SidePanel extends JPanel implements MouseListener {
     private Image imaInst4;
     private Image imaInst5;
     private Image imaInst6;
-    
-    
-    
+
+
+
 
     //Variables booleanas que indican si un botón fue presionado
     private boolean bHelp;
@@ -136,7 +137,7 @@ public class SidePanel extends JPanel implements MouseListener {
     //Banner Menu
     private BannerMenu bannerMenu;
 
-    //Offset del side panel 
+    //Offset del side panel
     int iOffsetXimagen;
     int iOffsetYimagen;
 
@@ -158,18 +159,18 @@ public class SidePanel extends JPanel implements MouseListener {
 
         //inicializa fonts
         InputStream fontStream = getClass().getResourceAsStream
-                ("/Flood/Score.ttf");
+                                 ("/Flood/Score.ttf");
         this.fonFuentel = Font.createFont(Font.TRUETYPE_FONT, fontStream);
         this.fonFuentel = this.fonFuentel.deriveFont(40F);
 
-        setPreferredSize(new Dimension((tarGame.iWidth) - 
-                ((tarGame.iWidth) - 289), tarGame.iHeight));
+        setPreferredSize(new Dimension((tarGame.iWidth) -
+                                       ((tarGame.iWidth) - 289), tarGame.iHeight));
 
     }
 
     /**
-     * initvars 
-     * 
+     * initvars
+     *
      * inicializa las variables
      */
     public void initVars() {
@@ -185,7 +186,7 @@ public class SidePanel extends JPanel implements MouseListener {
 
         //indica el nivel
         sNivel = Integer.toString(tarGame.iNivel);
-        
+
         //offsets
         iStartPanelX = (tarGame.iWidth) - 289;
         iMouseXOffSet = iStartPanelX;
@@ -203,43 +204,46 @@ public class SidePanel extends JPanel implements MouseListener {
     public void crearImagenes() {
         // Crear la imagen de fondo.
         imaImagenLogo = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/FloodPuntos.png"));
+                        .getResource("Images/sidePanel/FloodPuntos.png"));
 
         sNivel = "1";
         imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/nivel" + sNivel + ".png"));
+                         .getResource("Images/sidePanel/nivel" + sNivel + ".png"));
 
         imaImagenBannerSalir = Toolkit.getDefaultToolkit().getImage(this.
-                getClass().getResource("Images/sidePanel/bannerSalir.png"));
+                               getClass().getResource("Images/sidePanel/bannerSalir.png"));
 
         imaImagenPausa = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/bannerPausa.png"));
+                         .getResource("Images/sidePanel/bannerPausa.png"));
 
         imaImagenLevelUp = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/levelUp.png"));
+                           .getResource("Images/sidePanel/levelUp.png"));
 
+        imaImagenLevelUp = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                           .getResource("Images/sidePanel/levelUp.png"));
+        
         imaImagenWonGame = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/YouWon.png"));
-        
+                           .getResource("Images/sidePanel/YouWon.png"));
+
         //imagen de instrucciones
-        
+
         imaInst1 = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/Instrucciones/1.png"));
-        
+                   .getResource("Images/sidePanel/Instrucciones/1.png"));
+
         imaInst2 = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/Instrucciones/2.png"));
-        
+                   .getResource("Images/sidePanel/Instrucciones/2.png"));
+
         imaInst3 = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/Instrucciones/3.png"));
-        
+                   .getResource("Images/sidePanel/Instrucciones/3.png"));
+
         imaInst4 = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/Instrucciones/4.png"));
-        
+                   .getResource("Images/sidePanel/Instrucciones/4.png"));
+
         imaInst5 = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/Instrucciones/5.png"));
-        
+                   .getResource("Images/sidePanel/Instrucciones/5.png"));
+
         imaInst6 = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/Instrucciones/6.png"));
+                   .getResource("Images/sidePanel/Instrucciones/6.png"));
     }
 
     /** creaBases
@@ -248,42 +252,42 @@ public class SidePanel extends JPanel implements MouseListener {
     public void creaBases() {
 
         basBackMenu = new Base(630, 570, Toolkit.getDefaultToolkit()
-                .getImage(this.getClass().getResource
-                        ("Images/sidePanel/backMenu.png")));
+                               .getImage(this.getClass().getResource
+                                         ("Images/sidePanel/backMenu.png")));
 
         basPause = new Base(iStartPanelX, 662, Toolkit.getDefaultToolkit()
-                .getImage(this.getClass().getResource
-                        ("Images/sidePanel/Pause.png")));
+                            .getImage(this.getClass().getResource
+                                      ("Images/sidePanel/Pause.png")));
 
         basSound = new Base(iStartPanelX, 662, Toolkit.getDefaultToolkit()
-                .getImage(this.getClass().getResource
-                        ("Images/sidePanel/Sound.png")));
+                            .getImage(this.getClass().getResource
+                                      ("Images/sidePanel/Sound.png")));
 
         basHelp = new Base(iStartPanelX, 662, Toolkit.getDefaultToolkit()
-                .getImage(this.getClass().getResource
-                        ("Images/sidePanel/Question.png")));
+                           .getImage(this.getClass().getResource
+                                     ("Images/sidePanel/Question.png")));
 
         basPause.setX(iStartPanelX + 119 - (basPause.getAncho() / 2));
 
-        basSound.setX(basPause.getX() - basSound.getAncho() - 
-                iXOffsetSelections);
+        basSound.setX(basPause.getX() - basSound.getAncho() -
+                      iXOffsetSelections);
 
-        basHelp.setX(basPause.getX() + basPause.getAncho() + 
-                iXOffsetSelections);
+        basHelp.setX(basPause.getX() + basPause.getAncho() +
+                     iXOffsetSelections);
 
         basYesSalir = new Base(255, 400, Toolkit.getDefaultToolkit()
-                .getImage(this.getClass().
-                        getResource("Images/sidePanel/yes.png")));
+                               .getImage(this.getClass().
+                                         getResource("Images/sidePanel/yes.png")));
 
-        basNoPlay = new Base(basYesSalir.getX() + basYesSalir.getAncho() + 50, 
-                400, Toolkit.getDefaultToolkit().getImage(this.getClass().
-                        getResource("Images/sidePanel/no.png")));
+        basNoPlay = new Base(basYesSalir.getX() + basYesSalir.getAncho() + 50,
+                             400, Toolkit.getDefaultToolkit().getImage(this.getClass().
+                                     getResource("Images/sidePanel/no.png")));
 
     }
 
     /***
      * paint component
-     * @param graGrafico 
+     * @param graGrafico
      */
     public void paintComponent(Graphics graGrafico) {
 
@@ -292,40 +296,40 @@ public class SidePanel extends JPanel implements MouseListener {
         iOffsetYimagen = 40;
         //super.paintComponent(graGrafico);
         /*pinta las imagenes*/
-        
-        
+
+
 
         if (imaImagenLogo != null && imaImagenNivel != null) {
             //pinta imagenes
-            graGrafico.drawImage(imaImagenLogo, iOffsetXimagen, iOffsetYimagen, 
-                    196, 193, this);
+            graGrafico.drawImage(imaImagenLogo, iOffsetXimagen, iOffsetYimagen,
+                                 196, 193, this);
             //poner color y font
             Color colAux = new Color(255, 255, 255);
             graGrafico.setColor(colAux);
             graGrafico.setFont(fonFuentel);
-            
+
             Rectangle rect = new Rectangle(669, 195, 127, 34);
-            
+
             //centra los puntos en el recuadro
             fitInSquare(Integer.toString(tarGame.iPuntos), rect, graGrafico);
-           //graGrafico.drawString(Integer.toString(tarGame.iPuntos), 710, 213);
+            //graGrafico.drawString(Integer.toString(tarGame.iPuntos), 710, 213);
 
-            graGrafico.drawImage(imaImagenNivel, iOffsetXimagen, iOffsetYimagen 
-                    + 212, imaImagenNivel.getWidth(this), 
-                            imaImagenNivel.getHeight(this), this);
-            
-            
-            
+            graGrafico.drawImage(imaImagenNivel, iOffsetXimagen, iOffsetYimagen
+                                 + 212, imaImagenNivel.getWidth(this),
+                                 imaImagenNivel.getHeight(this), this);
+
+
+
             dibujaInstrucciones(graGrafico);
-            
-            
-            
+
+
+
         } else {
             //Da un mensaje mientras se carga el dibujo
             graGrafico.drawString("No se cargo la imagen..", 20, 20);
         }
 
-        
+
         /*pinta los objetos*/
         if (basBackMenu != null
                 && basHelp != null && basPause != null && basSound != null) {
@@ -343,32 +347,32 @@ public class SidePanel extends JPanel implements MouseListener {
         if (bPause && !bBanner) {//el juego esta en pausa
             //pinta banner de fondo
             graGrafico.drawImage(imaImagenPausa, -8, -10, imaImagenPausa.
-                    getWidth(this), imaImagenPausa.getHeight(this), this);
+                                 getWidth(this), imaImagenPausa.getHeight(this), this);
         }
 
         if (bExit) {//el usuario quiere regresar a menu
             //pinta banner de fondo
-            graGrafico.drawImage(imaImagenBannerSalir, 0, 0, tarGame.iWidth, 
-                    tarGame.iHeight, this);
+            graGrafico.drawImage(imaImagenBannerSalir, 0, 0, tarGame.iWidth,
+                                 tarGame.iHeight, this);
             //pinta los botones/objetos
             basYesSalir.paint(graGrafico, this);
             basNoPlay.paint(graGrafico, this);
         }
 
         if (bLevelUp) {//el juego subio de nivel
-            
-      
+
+
             //banner cambio de nivel
             graGrafico.drawImage(imaImagenLevelUp, 0, 0, imaImagenPausa.
-                    getWidth(this), imaImagenPausa.getHeight(this), this);
-            
+                                 getWidth(this), imaImagenPausa.getHeight(this), this);
+
         }
 
         if (bWonGame) {
             graGrafico.drawImage(imaImagenWonGame, 0, 0, 900, 788, this);
         }
 
-        
+
     }
 
     /***
@@ -379,14 +383,14 @@ public class SidePanel extends JPanel implements MouseListener {
         if (bSound) {
             //cambio de imagen
             basSound.setImagen(Toolkit.getDefaultToolkit()
-                    .getImage(this.getClass().getResource
-                        ("Images/sidePanel/Sound.png")));
+                               .getImage(this.getClass().getResource
+                                         ("Images/sidePanel/Sound.png")));
             //AQUI PONER EL SOUND.PLAY()
         } else {
             //cambio de imagen
             basSound.setImagen(Toolkit.getDefaultToolkit()
-                    .getImage(this.getClass().
-                                getResource("Images/sidePanel/Mute.png")));
+                               .getImage(this.getClass().
+                                         getResource("Images/sidePanel/Mute.png")));
             //AQUI PONER EL SOUND.PAUSE()
         }
     }
@@ -399,16 +403,16 @@ public class SidePanel extends JPanel implements MouseListener {
         if (bPause) {//esta en pausa
             //cambio de imagen
             basPause.setImagen(Toolkit.getDefaultToolkit()
-                    .getImage(this.getClass().
-                            getResource("Images/sidePanel/Play.png")));
+                               .getImage(this.getClass().
+                                         getResource("Images/sidePanel/Play.png")));
         } else {//no esta en pausa
             //cambio de imagen
             basPause.setImagen(Toolkit.getDefaultToolkit()
-                    .getImage(this.getClass().
-                            getResource("Images/sidePanel/Pause.png")));
+                               .getImage(this.getClass().
+                                         getResource("Images/sidePanel/Pause.png")));
         }
     }
-    
+
     /***
      * cambioNivel
      * maneja los cambios de nivel (banners y checa si ya termino el juego)
@@ -431,9 +435,9 @@ public class SidePanel extends JPanel implements MouseListener {
 
         //cambiar imagen a desplegar
         imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/sidePanel/nivel" + sNivel + ".png"));
-        
-        
+                         .getResource("Images/sidePanel/nivel" + sNivel + ".png"));
+
+
     }
     /***
      * getHelp
@@ -443,11 +447,11 @@ public class SidePanel extends JPanel implements MouseListener {
     public boolean getHelp() {
         return bHelp;
     }
-    
+
     /***
      * setHeklp
      * @param help
-     * @param boolean help 
+     * @param boolean help
      * pone un valor booleano al atributo help
      */
     public void setHelp(boolean help) {
@@ -456,7 +460,7 @@ public class SidePanel extends JPanel implements MouseListener {
 
     /***
      * mouseClicked
-     * @param mouEvent 
+     * @param mouEvent
      * realiza los cambios y acciones cuando el usuario utiliza el mouse
      */
     public void mouseClicked(MouseEvent mouEvent) {
@@ -473,15 +477,18 @@ public class SidePanel extends JPanel implements MouseListener {
             System.out.println("clicked help");
             tarGame.bannerMenu.setInstrucciones(true);//despliega sinstrucciones
             tarGame.bannerMenu.setSecundario(true);//despliega menu secundario
-        } else if (basPause.intersects(iMouseX, iMouseY) && !bExit) {
+        }
+        if (basPause.intersects(iMouseX, iMouseY) && !bExit) {
             System.out.println("clicked pause");
             bPause = !bPause;//niega pause
             manejaPausa();
-        } else if (basSound.intersects(iMouseX, iMouseY) && !bExit) {
+        }
+        if (basSound.intersects(iMouseX, iMouseY) && !bExit) {
             System.out.println("clicked sound");
             bSound = !bSound;//niega sound
             manejaSonido();
-        } else if (basBackMenu.intersects(iMouseX, iMouseY) && !bExit) {
+        }
+        if (basBackMenu.intersects(iMouseX, iMouseY) && !bExit) {
 
             /*quieres salir del juego?*/
             //pausa juego para que no aparezcan cuadros
@@ -493,39 +500,39 @@ public class SidePanel extends JPanel implements MouseListener {
             System.out.println("clicked menu");
         }
         if (basNoPlay.intersects(iMouseX, iMouseY)) {//seguir jugando
-                bExit = false;//quitar banner
-                bPause = false;//quitar pausa
-                bBanner = true;//significa que no hay banner
+            bExit = false;//quitar banner
+            bPause = false;//quitar pausa
+            bBanner = true;//significa que no hay banner
         }
     }
-    
+
     /***
      * fitInSquare
      * @param sQuestion
      * @param rect
-     * @param graGrafico 
+     * @param graGrafico
      * metodo que centra la pregunta en el cuadro
      */
-    public void fitInSquare(String sQuestion, Rectangle rect, Graphics 
-            graGrafico) {
+    public void fitInSquare(String sQuestion, Rectangle rect, Graphics
+                            graGrafico) {
         //inicializa valores
         int iStringWidth = graGrafico.getFontMetrics().stringWidth(sQuestion);
         int iStringHeight = graGrafico.getFontMetrics().getAscent();
         //crea los offsets
-        int iOffsetX = (int) rect.getX() + (int) (rect.getWidth() / 2) - 
-                (iStringWidth / 2);
-        int iOffsetY = (int) rect.getY() + (int) (rect.getHeight() / 2) - 
-                (iStringHeight / 2) + 20;
-        
+        int iOffsetX = (int) rect.getX() + (int) (rect.getWidth() / 2) -
+                       (iStringWidth / 2);
+        int iOffsetY = (int) rect.getY() + (int) (rect.getHeight() / 2) -
+                       (iStringHeight / 2) + 20;
+
         //pinta las preguntas ya con el offset y font
         Color colAux = new Color(255, 255, 255);
         graGrafico.setColor(colAux);
         graGrafico.setFont(fonFuentel);
         graGrafico.drawString(sQuestion, iOffsetX, iOffsetY);
     }
-    
-    void dibujaInstrucciones(Graphics graGrafico){
-        
+
+    void dibujaInstrucciones(Graphics graGrafico) {
+
         if (tarGame.iNivel == 1) {
 
             graGrafico.drawImage(imaInst1, 642, 334, 172, 169, this);
@@ -561,10 +568,10 @@ public class SidePanel extends JPanel implements MouseListener {
             graGrafico.drawImage(imaInst6, 642, 334, 172, 169, this);
 
         }
-        
+
     }
-            
-            
+
+
 
     public void mousePressed(MouseEvent e) {
     }
