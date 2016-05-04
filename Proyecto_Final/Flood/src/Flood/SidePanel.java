@@ -40,6 +40,17 @@ public class SidePanel extends JPanel implements MouseListener {
     private Image imaImagenPausa;
     private Image imaImagenLevelUp;
     private Image imaImagenWonGame;
+    
+    //instrucciones
+    private Image imaInst1;
+    private Image imaInst2;
+    private Image imaInst3;
+    private Image imaInst4;
+    private Image imaInst5;
+    private Image imaInst6;
+    
+    
+    
 
     //Variables booleanas que indican si un botón fue presionado
     private boolean bHelp;
@@ -158,6 +169,26 @@ public class SidePanel extends JPanel implements MouseListener {
 
         imaImagenWonGame = Toolkit.getDefaultToolkit().getImage(this.getClass()
                 .getResource("Images/sidePanel/YouWon.png"));
+        
+        //imagen de instrucciones
+        
+        imaInst1 = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                .getResource("Images/sidePanel/Instrucciones/1.png"));
+        
+        imaInst2 = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                .getResource("Images/sidePanel/Instrucciones/2.png"));
+        
+        imaInst3 = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                .getResource("Images/sidePanel/Instrucciones/3.png"));
+        
+        imaInst4 = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                .getResource("Images/sidePanel/Instrucciones/4.png"));
+        
+        imaInst5 = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                .getResource("Images/sidePanel/Instrucciones/5.png"));
+        
+        imaInst6 = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                .getResource("Images/sidePanel/Instrucciones/6.png"));
     }
 
     /** creaBases
@@ -231,6 +262,13 @@ public class SidePanel extends JPanel implements MouseListener {
             graGrafico.drawImage(imaImagenNivel, iOffsetXimagen, iOffsetYimagen 
                     + 212, imaImagenNivel.getWidth(this), 
                             imaImagenNivel.getHeight(this), this);
+            
+            
+            
+            dibujaInstrucciones(graGrafico);
+            
+            
+            
         } else {
             //Da un mensaje mientras se carga el dibujo
             graGrafico.drawString("No se cargo la imagen..", 20, 20);
@@ -267,14 +305,19 @@ public class SidePanel extends JPanel implements MouseListener {
         }
 
         if (bLevelUp) {//el juego subio de nivel
+            
+      
             //banner cambio de nivel
             graGrafico.drawImage(imaImagenLevelUp, 0, 0, imaImagenPausa.
                     getWidth(this), imaImagenPausa.getHeight(this), this);
+            
         }
 
         if (bWonGame) {
             graGrafico.drawImage(imaImagenWonGame, 0, 0, 900, 788, this);
         }
+
+        
     }
 
     /***
@@ -338,6 +381,8 @@ public class SidePanel extends JPanel implements MouseListener {
         //cambiar imagen a desplegar
         imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
                 .getResource("Images/sidePanel/nivel" + sNivel + ".png"));
+        
+        
     }
     /***
      * getHelp
@@ -395,6 +440,11 @@ public class SidePanel extends JPanel implements MouseListener {
 
             System.out.println("clicked menu");
         }
+        if (basNoPlay.intersects(iMouseX, iMouseY)) {//seguir jugando
+                bExit = false;//quitar banner
+                bPause = false;//quitar pausa
+                bBanner = true;//significa que no hay banner
+        }
     }
     
     /***
@@ -421,6 +471,48 @@ public class SidePanel extends JPanel implements MouseListener {
         graGrafico.setFont(fonFuentel);
         graGrafico.drawString(sQuestion, iOffsetX, iOffsetY);
     }
+    
+    void dibujaInstrucciones(Graphics graGrafico){
+        
+        if (tarGame.iNivel == 1) {
+
+            graGrafico.drawImage(imaInst1, 642, 334, 172, 169, this);
+
+        }
+
+        if (tarGame.iNivel == 2) {
+
+            graGrafico.drawImage(imaInst2, 642, 334, 172, 169, this);
+
+        }
+
+        if (tarGame.iNivel == 3) {
+
+            graGrafico.drawImage(imaInst3, 642, 350, 172, 169, this);
+
+        }
+
+        if (tarGame.iNivel == 4) {
+
+            graGrafico.drawImage(imaInst4, 642, 334, 172, 169, this);
+
+        }
+
+        if (tarGame.iNivel == 5) {
+
+            graGrafico.drawImage(imaInst5, 642, 334, 172, 169, this);
+
+        }
+
+        if (tarGame.iNivel == 6) {
+
+            graGrafico.drawImage(imaInst6, 642, 334, 172, 169, this);
+
+        }
+        
+    }
+            
+            
 
     public void mousePressed(MouseEvent e) {
     }
