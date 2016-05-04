@@ -65,6 +65,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     //Sounds
     SoundClip souMove; //suena cuando se mueve el seleccionador
     SoundClip souEliminate; //suena cuando se elimina un cuadro
+    SoundClip souWrong;  //suena cuando se equivoca al teclear
 
     // Variables de Teclado
     boolean bKeyPressed;
@@ -124,6 +125,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         //Sounds
         souMove = new SoundClip("/Flood/Sounds/click_tiny.wav");
         souEliminate = new SoundClip("Sounds/eliminateline.wav");
+        souWrong = new SoundClip("Sounds/wrong.wav");
 
         Dimension dimD = new Dimension(iWidth, iHeight);
         Container conC = this.getContentPane();
@@ -449,25 +451,6 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     @Override
     public void keyTyped(KeyEvent keyEvent) {
 
-        if (side.bLevelUp && side.iContBannerLevel <= 0){//esta el banner de levelup en pantalla
-            //leer input para continuar con juego
-            //quitas pausa, y apagas las demás booleanas
-            side.bPause = false;
-            side.bBanner = false;
-            side.bLevelUp = false;
-        }
-        if (side.bWonGame && side.iContBannerLevel <= 0) {
-            //apagar booleanas
-            side.bPause = false;
-            side.bBanner = false;
-            side.bLevelUp = false;
-
-            //regresar al menu
-            bannerMenu.setPlay(false);
-            System.out.println("set play");
-            bannerMenu.falseAll();
-            bannerMenu.bPrincipal = true;
-        }
     }
 
     /**
@@ -513,16 +496,16 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                     iPuntos += iResult;
                     iRespondidas++;
                 }
-                System.out.println(iResult);
 
-                if (iResult > -400) {
+                if (iResult > -400 && iResult < 0) {
                     iPuntos += iResult;
                     if (iPuntos < 0) {
                         iPuntos = 0;
                     }
+                    souWrong.play(side.bSound);
                 }
                 if (iModoJuego == 1) {
-                    if (iPuntos > 100) {
+                    if (iPuntos > 10) {
                         iNivel++;
                         side.cambioNivel();
                         iModoJuego++;
@@ -577,13 +560,35 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     @Override
     public void keyReleased(KeyEvent keyEvent) {
         souMove.stop();
+
+        if (side.bLevelUp && side.iContBannerLevel <= 0 && keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) { //esta el banner de levelup en pantalla
+            //leer input para continuar con juego
+            //quitas pausa, y apagas las demás booleanas
+
+            side.bPause = false;
+            side.bBanner = false;
+            side.bLevelUp = false;
+        }
+        if (side.bWonGame && side.iContBannerLevel <= 0  && keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
+            //apagar booleanas
+            side.bPause = false;
+            side.bBanner = false;
+            side.bLevelUp = false;
+
+            //regresar al menu
+            bannerMenu.setPlay(false);
+            System.out.println("set play");
+            bannerMenu.falseAll();
+            bannerMenu.bPrincipal = true;
+        }
+
     }
 
     @Override
     public void mouseClicked(MouseEvent mouEvent) {
         if (side.bExit) { //esta en el banner de exit
             if (side.basYesSalir.intersects(iMouseX, iMouseY)) {//salir del juego
-                
+
                 side.bExit = false;//quita el banner
                 side.bBanner = true;//significa que no hay banner
                 side.bPause = false;//quitar pausa

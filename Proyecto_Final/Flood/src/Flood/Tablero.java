@@ -706,7 +706,7 @@ public class Tablero {
 						pressedEnter(iModoJuego);
 					}
 				} else {
-					iPuntos = -1 * cuaAux.getValor() / 2;
+					iPuntos = -1 * (cuaAux.getValor() / 2 + 1);
 				}
 			}
 		}
