@@ -44,6 +44,8 @@ public class SidePanel extends JPanel implements MouseListener {
     protected boolean bPause;
     protected boolean bSound;
     protected boolean bExit;
+    protected boolean bBanner;
+    protected boolean bLevelUp;
 
     //Variables que indican los tamaños del side panel
     private int iStartPanelX;
@@ -103,6 +105,8 @@ public class SidePanel extends JPanel implements MouseListener {
         bExit = false;
         //indica el nivel
         sNivel = Integer.toString(tarGame.iNivel);
+        
+        bLevelUp = false;
 
         //offsets
         //iMouseXOffSet = (tarGame.iWidth)-228;
@@ -226,6 +230,8 @@ public class SidePanel extends JPanel implements MouseListener {
             basYesSalir.paint(graGrafico, this);
             basNoPlay.paint(graGrafico, this);
         }
+        
+        
 
     }
 
@@ -264,6 +270,8 @@ public class SidePanel extends JPanel implements MouseListener {
     public void cambioNivel() {
         //indica el nivel
         sNivel = Integer.toString(tarGame.iNivel);
+        
+        bLevelUp = true;
 
         //cambiar imagen a desplegar
         imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
