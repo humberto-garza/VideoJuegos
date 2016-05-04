@@ -100,7 +100,7 @@ public class SidePanel extends JPanel implements MouseListener {
      *
      */
     protected boolean bLevelUp;
-
+    protected boolean bLevelDown;
     /**
      *
      */
@@ -180,6 +180,7 @@ public class SidePanel extends JPanel implements MouseListener {
         bSound = true;
         bExit = false;
         //booleanas de banners y mensajes
+        bLevelDown = false;
         bLevelUp = false;
         bBanner = false;
         bWonGame = false;
@@ -219,9 +220,9 @@ public class SidePanel extends JPanel implements MouseListener {
         imaImagenLevelUp = Toolkit.getDefaultToolkit().getImage(this.getClass()
                            .getResource("Images/sidePanel/levelUp.png"));
 
-        imaImagenLevelUp = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                           .getResource("Images/sidePanel/levelUp.png"));
-        
+        imaImagenLevelDown = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                             .getResource("Images/sidePanel/ResetLevel.png"));
+
         imaImagenWonGame = Toolkit.getDefaultToolkit().getImage(this.getClass()
                            .getResource("Images/sidePanel/YouWon.png"));
 
@@ -368,6 +369,12 @@ public class SidePanel extends JPanel implements MouseListener {
 
         }
 
+        if (bLevelDown) {//no se paso el nivel
+            //banner cambio de nivel
+            graGrafico.drawImage(imaImagenLevelDown, 0, 0, imaImagenPausa.
+                                 getWidth(this), imaImagenPausa.getHeight(this), this);
+        }
+
         if (bWonGame) {
             graGrafico.drawImage(imaImagenWonGame, 0, 0, 900, 788, this);
         }
@@ -386,12 +393,16 @@ public class SidePanel extends JPanel implements MouseListener {
                                .getImage(this.getClass().getResource
                                          ("Images/sidePanel/Sound.png")));
             //AQUI PONER EL SOUND.PLAY()
+            
+            tarGame.souLoop.play(bSound);
+
         } else {
             //cambio de imagen
             basSound.setImagen(Toolkit.getDefaultToolkit()
                                .getImage(this.getClass().
                                          getResource("Images/sidePanel/Mute.png")));
             //AQUI PONER EL SOUND.PAUSE()
+            tarGame.souLoop.stop();
         }
     }
 
@@ -425,6 +436,7 @@ public class SidePanel extends JPanel implements MouseListener {
             iContBannerLevel = 10;
             bPause = true;//pone pausa pq despliega un banner
             bLevelUp = true;//prende booleana
+            bLevelDown = false;
             bBanner = true;//hay un banner de nivel
         } else if (tarGame.iNivel == 7) {//ya termino el juego
             iContBannerLevel = 10;
@@ -436,9 +448,18 @@ public class SidePanel extends JPanel implements MouseListener {
         //cambiar imagen a desplegar
         imaImagenNivel = Toolkit.getDefaultToolkit().getImage(this.getClass()
                          .getResource("Images/sidePanel/nivel" + sNivel + ".png"));
-
-
     }
+
+    public void perdioNivel() {
+        if (tarGame.iNivel >= 1 && tarGame.iNivel <= 6) {
+            iContBannerLevel = 10;
+            bPause = true;//pone pausa pq despliega un banner
+            bLevelUp = false;//prende booleana
+            bLevelDown = true;
+            bBanner = true;//hay un banner de nivel
+        }
+    }
+
     /***
      * getHelp
      * metodo que regresa el atributo de help
@@ -472,23 +493,23 @@ public class SidePanel extends JPanel implements MouseListener {
         iMouseY = mouEvent.getY();
 
         //checa si el jugador ha presionado algun boton del panel
-        if (basHelp.intersects(iMouseX, iMouseY) && !bExit) {
+        if (basHelp.intersects(iMouseX, iMouseY) && !bBanner) {
             bHelp = true;//prende help
             System.out.println("clicked help");
             tarGame.bannerMenu.setInstrucciones(true);//despliega sinstrucciones
             tarGame.bannerMenu.setSecundario(true);//despliega menu secundario
         }
-        if (basPause.intersects(iMouseX, iMouseY) && !bExit) {
+        if (basPause.intersects(iMouseX, iMouseY) && !bBanner) {
             System.out.println("clicked pause");
             bPause = !bPause;//niega pause
             manejaPausa();
         }
-        if (basSound.intersects(iMouseX, iMouseY) && !bExit) {
+        if (basSound.intersects(iMouseX, iMouseY) && !bBanner) {
             System.out.println("clicked sound");
             bSound = !bSound;//niega sound
             manejaSonido();
         }
-        if (basBackMenu.intersects(iMouseX, iMouseY) && !bExit) {
+        if (basBackMenu.intersects(iMouseX, iMouseY) && !bBanner) {
 
             /*quieres salir del juego?*/
             //pausa juego para que no aparezcan cuadros
@@ -499,10 +520,10 @@ public class SidePanel extends JPanel implements MouseListener {
 
             System.out.println("clicked menu");
         }
-        if (basNoPlay.intersects(iMouseX, iMouseY)) {//seguir jugando
+        if (basNoPlay.intersects(iMouseX, iMouseY) && bBanner) {//seguir jugando
             bExit = false;//quitar banner
             bPause = false;//quitar pausa
-            bBanner = true;//significa que no hay banner
+            bBanner = false;//significa que no hay banner
         }
     }
 

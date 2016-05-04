@@ -75,6 +75,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     SoundClip souMove; //suena cuando se mueve el seleccionador
     SoundClip souEliminate; //suena cuando se elimina un cuadro
     SoundClip souWrong;  //suena cuando se equivoca al teclear
+    SoundClip souLoop;
 
     // Variables de Teclado
     boolean bKeyPressed;
@@ -151,7 +152,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
 
         // Crear la imagen de fondo.
         imaImagenFondo = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                .getResource("Images/Fondo.png"));
+                         .getResource("Images/Fondo.png"));
 
         //inicializa la instancia de SidePanel
         this.side = new SidePanel(this);
@@ -169,6 +170,9 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         souMove = new SoundClip("/Flood/Sounds/click_tiny.wav");
         souEliminate = new SoundClip("Sounds/eliminateline.wav");
         souWrong = new SoundClip("Sounds/wrong.wav");
+        souLoop = new SoundClip("Sounds/Loop.wav");
+        souLoop.setLooping(true);
+        souLoop.play(side.bSound);
 
         Dimension dimD = new Dimension(iWidth, iHeight);
         Container conC = this.getContentPane();
@@ -241,8 +245,8 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
          * se deben ir desapareciendo al responder correctamente
          */
         if (iModoJuego == 1) {
-            iRandMax = 40;
-            iRandMin = 10;
+            iRandMax = 50;
+            iRandMin = 20;
             tabTablero.creaCuadro();
             /////////////////////////////////////
         }
@@ -342,7 +346,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 Thread.sleep(25);
             } catch (InterruptedException iexError) {
                 System.out.println("Hubo un error en el juego "
-                        + iexError.toString());
+                                   + iexError.toString());
             }
         }
     }
@@ -365,6 +369,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 iContadorCiclos = 0;
                 tabTablero.creaCuadro();
                 if (tabTablero.estaLleno()) {
+                    side.perdioNivel();
                     nuevoJuego(sCurCategoria);
                 }
             }
@@ -374,6 +379,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
             //tabTablero.creaCuadro();
             if (tabTablero.noHayDisponibles()) {
                 nuevoJuego(sCurCategoria);
+                side.perdioNivel();
             }
         }
         /////////////MODO 3///////////////////
@@ -384,6 +390,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 tabTablero.creaCuadroAbajo();
                 if (tabTablero.estaLleno()) {
                     nuevoJuego(sCurCategoria);
+                    side.perdioNivel();
                 }
             }
         }
@@ -397,6 +404,8 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 tabTablero.bloqueaCuadro();
                 if (tabTablero.isBloqued()) {
                     nuevoJuego(sCurCategoria);
+                    side.perdioNivel();
+                    side.perdioNivel();
                 }
             }
         }
@@ -434,7 +443,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         // Si quitamos el if funciona con el resize
         if (imaImagenApplet == null) {
             imaImagenApplet = createImage(this.getSize().width,
-                    this.getSize().height);
+                                          this.getSize().height);
             graGraficaApplet = imaImagenApplet.getGraphics();
         }
         // Actualiza el Foreground.
@@ -623,18 +632,20 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     public void keyReleased(KeyEvent keyEvent) {
         souMove.stop();
 
-        if (side.bLevelUp && side.iContBannerLevel <= 0 && keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) { //esta el banner de levelup en pantalla
+        if ((side.bLevelDown || side.bLevelUp) && side.iContBannerLevel <= 0 && keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) { //esta el banner de levelup en pantalla
             //leer input para continuar con juego
             //quitas pausa, y apagas las demás booleanas
 
             side.bPause = false;
             side.bBanner = false;
             side.bLevelUp = false;
+            side.bLevelDown = false;
         }
         if (side.bWonGame && side.iContBannerLevel <= 0 && keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
             //apagar booleanas
             side.bPause = false;
             side.bBanner = false;
+            side.bLevelUp = false;
             side.bLevelUp = false;
 
             //regresar al menu
@@ -648,7 +659,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
 
     @Override
     public void mouseClicked(MouseEvent mouEvent) {
-        if (side.bExit) {//esta en el banner de exit 
+        if (side.bExit) {//esta en el banner de exit
             if (side.basYesSalir.intersects(iMouseX, iMouseY)) {//salir del juego
                 side.bExit = false;//quita el banner
                 side.bBanner = false;//significa que no hay banner

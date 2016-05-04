@@ -342,11 +342,8 @@ public class BannerMenu extends JPanel implements MouseListener {
                                .getImage(this.getClass().getResource("Images/menu/CreditosA.png")));
 
         basRecords = new Base(iPosicionX, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
-<<<<<<< HEAD
                 .getImage(this.getClass().getResource("Images/menu/DescripcionA.png")));
-=======
-                              .getImage(this.getClass().getResource("Images/menu/PuntajeA.png")));
->>>>>>> origin/master
+
 
         basBackToMenu = new Base(170, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
                                  .getImage(this.getClass().getResource("Images/menu/backMenu.png")));
@@ -504,20 +501,14 @@ public class BannerMenu extends JPanel implements MouseListener {
         if (bRecords) {
             //cambio de imagen
             basRecords.setImagen(Toolkit.getDefaultToolkit()
-<<<<<<< HEAD
                     .getImage(this.getClass().getResource("Images/menu/DescripcionB.png")));
-=======
-                                 .getImage(this.getClass().getResource("Images/menu/PuntajeB.png")));
->>>>>>> origin/master
+
 
         } else {
             //cambio de imagen
             basRecords.setImagen(Toolkit.getDefaultToolkit()
-<<<<<<< HEAD
                     .getImage(this.getClass().getResource("Images/menu/DescripcionA.png")));
-=======
-                                 .getImage(this.getClass().getResource("Images/menu/PuntajeA.png")));
->>>>>>> origin/master
+
 
         }
 
