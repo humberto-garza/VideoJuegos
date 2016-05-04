@@ -30,15 +30,34 @@ public class DisplayRespuesta {
     private int iY;
     private Font fonFuente;
     
+    /**
+     *
+     */
     protected int iContRespuesta;
+
+    /**
+     *
+     */
     protected String sRespPasada;
     
     //Base boton de hint
+
+    /**
+     *
+     */
     protected Base basHint; //objeto base que sirve como boton para obtener una pista
     //Variables de posicion del mouse
     int iMouseX;
     int iMouseY;
 
+    /**
+     *
+     * @param iX
+     * @param iY
+     * @param sRespuesta
+     * @throws FontFormatException
+     * @throws IOException
+     */
     public DisplayRespuesta(int iX, int iY, String sRespuesta) throws FontFormatException, IOException {
         InputStream fontStream = getClass().getResourceAsStream("/Flood/Custom.ttf");
         this.fonFuente = Font.createFont(Font.TRUETYPE_FONT, fontStream);
@@ -55,6 +74,11 @@ public class DisplayRespuesta {
 
     }
 
+    /**
+     *
+     * @param graGrafico
+     * @param imoObserver
+     */
     public void paint(Graphics graGrafico, ImageObserver imoObserver) {
         Color colAux = new Color(0, 0, 0);
         graGrafico.setColor(colAux);
@@ -69,22 +93,42 @@ public class DisplayRespuesta {
         basHint.paint(graGrafico, imoObserver);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getRespuesta() {
         return sRespuesta;
     }
 
+    /**
+     *
+     * @param sRespuesta
+     */
     public void setRespuesta(String sRespuesta) {
         this.sRespuesta = sRespuesta;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getX() {
         return iX;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getY() {
         return iY;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSize() {
         return sRespuesta.length();
     }

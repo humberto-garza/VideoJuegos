@@ -45,16 +45,19 @@ public class Cuadro extends Base {
      * @param iIndex es el <code> índice </code> del objeto.
      * @param isActive es la <code> Bandera de activacion </code> del objeto.
      * @param colFondo es el <code> Color de fondo </code> del cuadro
+     * @param iAncho
      * @param iPregunta es el <index> de la matriz de preguntas </code>
+     * @param iAlto
+     * @throws java.awt.FontFormatException
+     * @throws java.io.IOException
      */
     public Cuadro(int iX, int iY, Image imaImagen, int iValor, boolean isActive,
-                  Color colFondo, int iAncho, int iAlto, int iPregunta) throws FontFormatException, IOException {
+            Color colFondo, int iAncho, int iAlto, int iPregunta) throws FontFormatException, IOException {
         super(iX, iY, imaImagen);
-        
+
         InputStream fontStream = getClass().getResourceAsStream("/Flood/Custom.ttf");
         this.fonFuente = Font.createFont(Font.TRUETYPE_FONT, fontStream);
         this.fonFuente = this.fonFuente.deriveFont(40F);
-        
 
         this.iValor = iValor;
         this.isActive = isActive;
@@ -75,17 +78,29 @@ public class Cuadro extends Base {
 
         return iValor;
     }
-    
+
+    /**
+     *
+     * @return
+     */
     public int getPregunta() {
 
         return iPregunta;
     }
 
+    /**
+     *
+     * @param iPregunta
+     */
     public void setPregunta(int iPregunta) {
 
         this.iPregunta = iPregunta;
     }
 
+    /**
+     *
+     * @param iIndex
+     */
     public void setValor(int iIndex) {
 
         this.iValor = iIndex;
@@ -117,18 +132,22 @@ public class Cuadro extends Base {
         isActive = bActive;
     }
 
+    /**
+     *
+     * @param graGrafico
+     * @param imoObserver
+     * @param lklPreguntas
+     */
     public void paint(Graphics graGrafico, ImageObserver imoObserver, LinkedList<Pregunta> lklPreguntas) {
-        Graphics2D g2 = (Graphics2D)graGrafico;
+        Graphics2D g2 = (Graphics2D) graGrafico;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         Color colTemp = getColor();
-
 
         graGrafico.setColor(colTemp);
         graGrafico.fillRoundRect(getX(), getY(), getAncho(), getAlto(), 5, 5);
         graGrafico.setColor(colTemp);
         graGrafico.fillRoundRect(getX() + 10, getY() + 10, getAncho() - 20, getAlto() - 20, 5, 5);
-
 
         String sPreg = lklPreguntas.get(getPregunta()).getPregunta();
 
@@ -139,9 +158,14 @@ public class Cuadro extends Base {
         //graGrafico.drawImage(getImagen(), getX(), getY(), getAncho(), getAlto(), imoObserver);
         fitInSquare(sAux, rect, graGrafico);
 
-
     }
 
+    /**
+     *
+     * @param sQuestion
+     * @param rect
+     * @param graGrafico
+     */
     public void fitInSquare(String sQuestion, Rectangle rect, Graphics graGrafico) {
 
         int iStringWidth = graGrafico.getFontMetrics().stringWidth(sQuestion);
@@ -157,10 +181,18 @@ public class Cuadro extends Base {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public Color getColor() {
         return this.colFondo;
     }
 
+    /**
+     *
+     * @param colFondo
+     */
     public void setColor(Color colFondo) {
         this.colFondo = colFondo;
     }

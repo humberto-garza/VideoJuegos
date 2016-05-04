@@ -35,6 +35,10 @@ public class BannerMenu extends JPanel implements MouseListener {
     private Base basCatDos; //boton categoria dos
     private Base basCatTres; // boton categoria tres
     private Base basCatCustom; // boton custom
+
+    /**
+     *
+     */
     protected Base basPlay; //Boton de play
     private Base basHelp; //Boton de question
 
@@ -70,7 +74,15 @@ public class BannerMenu extends JPanel implements MouseListener {
     int iMouseYOffSet;
 
     //banderas que controlan vistas
+
+    /**
+     *
+     */
     protected boolean bPrincipal; //boton que lleva a menu principal
+
+    /**
+     *
+     */
     protected boolean bSecundario;//indica si esta en el menu secundario
     private boolean bInstrucciones; //boton que lleva a instrucciones
     private boolean bCreditos; //boton que lleva a creditos
@@ -84,8 +96,6 @@ public class BannerMenu extends JPanel implements MouseListener {
     private boolean bCatCustom;
     private boolean bCurrentCat; //booleana que contiene la categoria seleccionada
     private boolean bSound;//controla booleana del sonido en menu principal
-
-
 
     //booleans para el hover y animacion
     private boolean bHoverReturn;
@@ -114,111 +124,165 @@ public class BannerMenu extends JPanel implements MouseListener {
     /**
      * Crates a new BannerMenu instance.
      *
-     * @param flood The Flood instance to use.
+     * @param floodGame
+     * @throws java.awt.FontFormatException
+     * @throws java.io.IOException
      */
     public BannerMenu(Flood floodGame) throws FontFormatException, IOException {
 
         this.tarGame = floodGame;
-
 
         initVars();
         creaBases();
         creaImagenes();
         addMouseListener(this);
 
-
     }
 
+    /**
+     *
+     */
     public void creaImagenes() {
 
         imaMenuBackground = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                            .getResource("Images/menu/PantallaJuego.png"));
+                .getResource("Images/menu/PantallaJuego.png"));
 
         imaBackToMenu = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                        .getResource("Images/menu/backMenu.png"));
+                .getResource("Images/menu/backMenu.png"));
 
         imaBackToMenu2 = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                         .getResource("Images/menu/backMenu.png"));
+                .getResource("Images/menu/backMenu.png"));
 
-        imaPantallaInstrucciones =  Toolkit.getDefaultToolkit().getImage(this.getClass()
-                                    .getResource("Images/menu/PantallaInstrucciones.png"));
+        imaPantallaInstrucciones = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                .getResource("Images/menu/PantallaInstrucciones.png"));
 
-        imaInstrucciones =  Toolkit.getDefaultToolkit().getImage(this.getClass()
-                            .getResource("Images/menu/Instrucciones.png"));
+        imaInstrucciones = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                .getResource("Images/menu/Instrucciones.png"));
 
-        imaCredits =  Toolkit.getDefaultToolkit().getImage(this.getClass()
-                      .getResource("Images/menu/Credits.png"));
+        imaCredits = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                .getResource("Images/menu/Credits.png"));
     }
 
+    /**
+     *
+     * @param bPlay
+     */
     public void setPlay(boolean bPlay) {
 
         this.bPlay = bPlay;
 
     }
 
+    /**
+     *
+     * @param bSecundario
+     */
     public void setSecundario(boolean bSecundario) {
 
         this.bSecundario = bSecundario;
 
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getSecundario() {
 
         return bSecundario;
 
     }
 
+    /**
+     *
+     * @param bInstrucciones
+     */
     public void setInstrucciones(boolean bInstrucciones) {
 
         this.bInstrucciones = bInstrucciones;
 
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getCustomCategoryClicked() {
 
         return bCustomCategoryClicked;
 
     }
 
+    /**
+     *
+     * @param bCustomCategoryClicked
+     */
     public void setCustomCategoryClicked(boolean bCustomCategoryClicked) {
 
         this.bCustomCategoryClicked = bCustomCategoryClicked;
 
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getPlay() {
 
         return bPlay;
 
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getInstrucciones() {
 
         return bInstrucciones;
 
     }
 
+    /**
+     *
+     * @param sCustomCat
+     */
     public void setCustomCat(String sCustomCat) {
 
         this.sCustomCat = sCustomCat;
 
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCustomCat() {
 
         return sCustomCat;
 
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean getCurrentCat() {
 
         return bCurrentCat;
     }
 
+    /**
+     *
+     * @param bCurrentCat
+     */
     public void setCurrentCat(boolean bCurrentCat) {
         this.bCurrentCat = bCurrentCat;
     }
 
+    /**
+     *
+     */
     public void creaBases() {
 
         //MENU PRINCIPAL
@@ -232,35 +296,32 @@ public class BannerMenu extends JPanel implements MouseListener {
         int iOffsetXBottomPanel; //offset para boton de play y de help
         int iOffsetYBottomPanel; //offset para boton de play y de help
 
-
-
         /**
          * Home
          */
-        basCatUno = new Base(iPosicionX, iPosicionY , Toolkit.getDefaultToolkit()
-                             .getImage(this.getClass().getResource("Images/menu/cat1.png")));
+        basCatUno = new Base(iPosicionX, iPosicionY, Toolkit.getDefaultToolkit()
+                .getImage(this.getClass().getResource("Images/menu/cat1.png")));
 
         basCatDos = new Base(iPosicionX, iPosicionY += iOffsetY, Toolkit.getDefaultToolkit()
-                             .getImage(this.getClass().getResource("Images/menu/cat2.png")));
+                .getImage(this.getClass().getResource("Images/menu/cat2.png")));
 
         basCatTres = new Base(iPosicionX, iPosicionY += iOffsetY, Toolkit.getDefaultToolkit()
-                              .getImage(this.getClass().getResource("Images/menu/cat3.png")));
+                .getImage(this.getClass().getResource("Images/menu/cat3.png")));
 
         basCatCustom = new Base(iPosicionX, iPosicionY += iOffsetY, Toolkit.getDefaultToolkit()
-                                .getImage(this.getClass().getResource("Images/menu/cat4.png")));
+                .getImage(this.getClass().getResource("Images/menu/cat4.png")));
 
         /**
          * Bottom Home
          */
         basHelp = new Base(25, 670, Toolkit.getDefaultToolkit()
-                           .getImage(this.getClass().getResource("Images/menu/help.png")));
-
+                .getImage(this.getClass().getResource("Images/menu/help.png")));
 
         basSound = new Base(basHelp.getX() + basHelp.getAncho() + 15, 670, Toolkit.getDefaultToolkit()
-                            .getImage(this.getClass().getResource("Images/menu/Sound.png")));
+                .getImage(this.getClass().getResource("Images/menu/Sound.png")));
 
         basPlay = new Base(414, 651, Toolkit.getDefaultToolkit()
-                           .getImage(this.getClass().getResource("Images/menu/play.png")));
+                .getImage(this.getClass().getResource("Images/menu/play.png")));
 
         /**
          * Menu secundario
@@ -270,26 +331,24 @@ public class BannerMenu extends JPanel implements MouseListener {
 
         //iPosicionY = (tarGame.iHeight / 2) + 134;
         //iPosicionX = 290;
-
         //MENU SECUNDARIO records, credits, instructions
         iSecondaryMenuOffsetX = 30;//
         iSecondaryMenuOffsetY = 84;
 
-
         basInstrucciones = new Base(iPosicionX, iPosicionY, Toolkit.getDefaultToolkit()
-                                    .getImage(this.getClass().getResource("Images/menu/InstruccionesA.png")));
+                .getImage(this.getClass().getResource("Images/menu/InstruccionesA.png")));
 
         basCreditos = new Base(iPosicionX, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
-                               .getImage(this.getClass().getResource("Images/menu/CreditosA.png")));
+                .getImage(this.getClass().getResource("Images/menu/CreditosA.png")));
 
         basRecords = new Base(iPosicionX, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
-                              .getImage(this.getClass().getResource("Images/menu/PuntajeA.png")));
+                .getImage(this.getClass().getResource("Images/menu/PuntajeA.png")));
 
         basBackToMenu = new Base(170, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
-                                 .getImage(this.getClass().getResource("Images/menu/backMenu.png")));
+                .getImage(this.getClass().getResource("Images/menu/backMenu.png")));
 
         basBackToPlay = new Base((tarGame.iWidth / 2), 600, Toolkit.getDefaultToolkit()
-                                 .getImage(this.getClass().getResource("Images/menu/BackToPlay.png")));
+                .getImage(this.getClass().getResource("Images/menu/BackToPlay.png")));
 
         basBackToPlay.setX((tarGame.iWidth / 2) - (basBackToPlay.getAncho() / 2));
 
@@ -299,6 +358,11 @@ public class BannerMenu extends JPanel implements MouseListener {
 
     }
 
+    /**
+     *
+     * @throws FontFormatException
+     * @throws IOException
+     */
     public void initVars() throws FontFormatException, IOException {
         sCustomFile = "/Flood/Files/Quimica.txt";
         bPrincipal = true;
@@ -309,7 +373,6 @@ public class BannerMenu extends JPanel implements MouseListener {
         bPlay = false;
         bHoverReturn = false;
 
-
         //Categorias selecccionadas
         bCatUno = true;
         bCatDos = false;
@@ -318,8 +381,8 @@ public class BannerMenu extends JPanel implements MouseListener {
         bSound = true;
 
         //inicializa posiciones del basbacktoplay
-        iPosBackPlayX =  600;
-        iPosBackPlayY =  600;
+        iPosBackPlayX = 600;
+        iPosBackPlayY = 600;
 
         iMouseYOffSet = 21;
 
@@ -327,23 +390,16 @@ public class BannerMenu extends JPanel implements MouseListener {
         this.fonFuenteMenu = Font.createFont(Font.TRUETYPE_FONT, fontStream);
         this.fonFuenteMenu = this.fonFuenteMenu.deriveFont(40F);
 
-
-
-
     }
 
     public void paintComponent(Graphics graGrafico) {
 
         if (bPrincipal) {
 
-
             graGrafico.drawImage(imaMenuBackground, 0, 0, tarGame.iWidth, tarGame.iHeight, this);
             paintPrincipal(graGrafico);
 
-
-        }
-
-        else {
+        } else {
 
             paintSecondaryMenuSidePanel(graGrafico);
         }
@@ -364,6 +420,11 @@ public class BannerMenu extends JPanel implements MouseListener {
 
     //paint principal
     //paint principal
+
+    /**
+     *
+     * @param graGrafico
+     */
     public void paintPrincipal(Graphics graGrafico) {
 
         int iPrinicipalOffsetX = 70;
@@ -371,40 +432,39 @@ public class BannerMenu extends JPanel implements MouseListener {
 
         basCatUno.paint(graGrafico, this);
 
-
         basCatDos.paint(graGrafico, this);
-
 
         basCatTres.paint(graGrafico, this);
 
-
         basCatCustom.paint(graGrafico, this);
-
-
 
         basPlay.paint(graGrafico, this);
         basHelp.paint(graGrafico, this);
         basSound.paint(graGrafico, this);
 
-        if ( tarGame.side.bSound ) {
+        if (tarGame.side.bSound) {
             //cambio de imagen
             basSound.setImagen(Toolkit.getDefaultToolkit()
-                               .getImage(this.getClass().getResource("Images/menu/Sound.png")));
+                    .getImage(this.getClass().getResource("Images/menu/Sound.png")));
 
         } else {
             //cambio de imagen
             basSound.setImagen(Toolkit.getDefaultToolkit()
-                               .getImage(this.getClass().getResource("Images/menu/Mute.png")));
+                    .getImage(this.getClass().getResource("Images/menu/Mute.png")));
 
         }
 
-
         //current categroy selected
-        paintSelectedCategory (graGrafico);
+        paintSelectedCategory(graGrafico);
 
     }
 
     //Paint instructions, records y history
+
+    /**
+     *
+     * @param graGrafico
+     */
     public void paintSecondaryMenuSidePanel(Graphics graGrafico) {
 
         graGrafico.drawImage(imaPantallaInstrucciones, 0, 0, tarGame.iWidth, tarGame.iHeight, this);
@@ -416,44 +476,38 @@ public class BannerMenu extends JPanel implements MouseListener {
         if (bInstrucciones) {
             //cambio de imagen
             basInstrucciones.setImagen(Toolkit.getDefaultToolkit()
-                                       .getImage(this.getClass().getResource("Images/menu/InstruccionesB.png")));
+                    .getImage(this.getClass().getResource("Images/menu/InstruccionesB.png")));
 
         } else {
             //cambio de imagen
             basInstrucciones.setImagen(Toolkit.getDefaultToolkit()
-                                       .getImage(this.getClass().getResource("Images/menu/InstruccionesA.png")));
+                    .getImage(this.getClass().getResource("Images/menu/InstruccionesA.png")));
 
         }
 
         if (bCreditos) {
             //cambio de imagen
             basCreditos.setImagen(Toolkit.getDefaultToolkit()
-                                  .getImage(this.getClass().getResource("Images/menu/CreditosB.png")));
-
+                    .getImage(this.getClass().getResource("Images/menu/CreditosB.png")));
 
         } else {
             //cambio de imagen
             basCreditos.setImagen(Toolkit.getDefaultToolkit()
-                                  .getImage(this.getClass().getResource("Images/menu/CreditosA.png")));
+                    .getImage(this.getClass().getResource("Images/menu/CreditosA.png")));
 
         }
 
         if (bRecords) {
             //cambio de imagen
             basRecords.setImagen(Toolkit.getDefaultToolkit()
-                                 .getImage(this.getClass().getResource("Images/menu/PuntajeB.png")));
-
+                    .getImage(this.getClass().getResource("Images/menu/PuntajeB.png")));
 
         } else {
             //cambio de imagen
             basRecords.setImagen(Toolkit.getDefaultToolkit()
-                                 .getImage(this.getClass().getResource("Images/menu/PuntajeA.png")));
+                    .getImage(this.getClass().getResource("Images/menu/PuntajeA.png")));
 
         }
-
-
-
-
 
         if (!tarGame.side.getHelp()) {
             if (bHoverReturn) {
@@ -468,6 +522,11 @@ public class BannerMenu extends JPanel implements MouseListener {
     }
 
     //paint instrucciones
+
+    /**
+     *
+     * @param graGrafico
+     */
     public void paintInstrucciones(Graphics graGrafico) {
 
         graGrafico.setFont(fonFuenteMenu);
@@ -477,10 +536,14 @@ public class BannerMenu extends JPanel implements MouseListener {
             basBackToPlay.paint(graGrafico, this);//da la opcion de regresar al juego
         }
 
-
     }
 
     //paint creditos
+
+    /**
+     *
+     * @param graGrafico
+     */
     public void paintCreditos(Graphics graGrafico) {
 
         graGrafico.setFont(fonFuenteMenu);
@@ -493,6 +556,11 @@ public class BannerMenu extends JPanel implements MouseListener {
     }
 
     //paint records
+
+    /**
+     *
+     * @param graGrafico
+     */
     public void paintRecords(Graphics graGrafico) {
 
         graGrafico.setFont(fonFuenteMenu);
@@ -503,54 +571,49 @@ public class BannerMenu extends JPanel implements MouseListener {
     }
 
     //resalta la categoria seleccionada con un cambio de imagen en la base
-    public void paintSelectedCategory(Graphics graGrafico) {
 
+    /**
+     *
+     * @param graGrafico
+     */
+    public void paintSelectedCategory(Graphics graGrafico) {
 
         if (!bCatUno) {
 
             //cambio de imagen
             basCatUno.setImagen(Toolkit.getDefaultToolkit()
-                                .getImage(this.getClass().getResource("Images/menu/cat1.png")));
+                    .getImage(this.getClass().getResource("Images/menu/cat1.png")));
 
-        }
-
-        else {
+        } else {
             //cambio de imagen
             basCatUno.setImagen(Toolkit.getDefaultToolkit()
-                                .getImage(this.getClass().getResource("Images/menu/cat1b.png")));
+                    .getImage(this.getClass().getResource("Images/menu/cat1b.png")));
 
         }
-
 
         if (!bCatDos) {
 
             //cambio de imagen
             basCatDos.setImagen(Toolkit.getDefaultToolkit()
-                                .getImage(this.getClass().getResource("Images/menu/cat2.png")));
+                    .getImage(this.getClass().getResource("Images/menu/cat2.png")));
 
-        }
-
-        else {
+        } else {
             //cambio de imagen
             basCatDos.setImagen(Toolkit.getDefaultToolkit()
-                                .getImage(this.getClass().getResource("Images/menu/cat2b.png")));
+                    .getImage(this.getClass().getResource("Images/menu/cat2b.png")));
 
         }
-
 
         if (!bCatTres) {
 
-
             //cambio de imagen
             basCatTres.setImagen(Toolkit.getDefaultToolkit()
-                                 .getImage(this.getClass().getResource("Images/menu/cat3.png")));
+                    .getImage(this.getClass().getResource("Images/menu/cat3.png")));
 
-        }
-
-        else {
+        } else {
             //cambio de imagen
             basCatTres.setImagen(Toolkit.getDefaultToolkit()
-                                 .getImage(this.getClass().getResource("Images/menu/cat3b.png")));
+                    .getImage(this.getClass().getResource("Images/menu/cat3b.png")));
 
         }
 
@@ -558,19 +621,21 @@ public class BannerMenu extends JPanel implements MouseListener {
 
             //cambio de imagen
             basCatCustom.setImagen(Toolkit.getDefaultToolkit()
-                                   .getImage(this.getClass().getResource("Images/menu/cat4.png")));
-        }
-
-        else {
+                    .getImage(this.getClass().getResource("Images/menu/cat4.png")));
+        } else {
             //cambio de imagen
             basCatCustom.setImagen(Toolkit.getDefaultToolkit()
-                                   .getImage(this.getClass().getResource("Images/menu/cat4b.png")));
+                    .getImage(this.getClass().getResource("Images/menu/cat4b.png")));
         }
 
     }
 
     //Metodo que apaga todas las booleaneas de banner y ya despues de esto
     //prendes el banner que quieras usar
+
+    /**
+     *
+     */
     public void falseAll() {
         bPrincipal = false;
         bSecundario = false;
@@ -581,6 +646,10 @@ public class BannerMenu extends JPanel implements MouseListener {
 
     //Metodo que apaga todas las booleaneas de las categorias y ya despues de esto
     //prendes la categoria que quieras usar
+
+    /**
+     *
+     */
     public void falseAllCategories() {
         bCatUno = false;
         bCatDos = false;
@@ -600,12 +669,11 @@ public class BannerMenu extends JPanel implements MouseListener {
         System.out.println("---Help--");
         System.out.println(basHelp.getX() +" "+basHelp.getY());
          */
-
         /**
          * MENU
          */
         //selecciona categoria 1
-        if (basCatUno.intersects(iMouseX, iMouseY) && bPrincipal ) { //seleciono cat #1
+        if (basCatUno.intersects(iMouseX, iMouseY) && bPrincipal) { //seleciono cat #1
             System.out.println("Category 1 selected");
             falseAllCategories();
             bCatUno = true;
@@ -620,7 +688,6 @@ public class BannerMenu extends JPanel implements MouseListener {
         }
 
         //selecciona categoria 3
-
         if (basCatTres.intersects(iMouseX, iMouseY) && bPrincipal) { //seleciono cat #3
             System.out.println("Category 3 selected");
             falseAllCategories();
@@ -659,7 +726,6 @@ public class BannerMenu extends JPanel implements MouseListener {
             bSecundario = true;
             System.out.println("Help");
         }
-
 
         //Sound click
         if (basSound.intersects(iMouseX, iMouseY) && bPrincipal) { //seleciono play
@@ -720,19 +786,20 @@ public class BannerMenu extends JPanel implements MouseListener {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.showOpenDialog(fileChooser);
             return ("." + fileChooser.getSelectedFile().getAbsolutePath());
-        }
-
-        catch (Exception e1) {
+        } catch (Exception e1) {
 
             System.out.print("No seleccionó un archivo");
             return "/Flood/Files/Defualt.txt";
         }
-        
+
     }
 
     //Animación
-    public void animacionImagenes() {
 
+    /**
+     *
+     */
+    public void animacionImagenes() {
 
     }
 

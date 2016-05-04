@@ -19,6 +19,14 @@ public class Pregunta {
     private String sRespuesta;
     private int iPuntos;
 
+    /**
+     *
+     * @param sPregunta
+     * @param sRespuesta
+     * @param iPuntos
+     * @throws FontFormatException
+     * @throws IOException
+     */
     public Pregunta(String sPregunta, String sRespuesta, int iPuntos) throws FontFormatException, IOException {
 
         this.sPregunta = sPregunta;
@@ -29,13 +37,24 @@ public class Pregunta {
     /**
      *
      *
+     * @return 
      */
     public String getPregunta() {
         return sPregunta;
     }
+
+    /**
+     *
+     * @return
+     */
     public String getRespuesta() {
         return sRespuesta;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getPuntos() {
         return iPuntos;
     }

@@ -51,6 +51,11 @@ public class Animacion {
     int iSizeImageX;
     int iSizeImageY;
 
+    /**
+     *
+     * @param iPosCuadroX
+     * @param iPosCuadroY
+     */
     public Animacion(int iPosCuadroX, int iPosCuadroY) {
 
         this.iPosCuadroX = iPosCuadroX;
@@ -62,10 +67,19 @@ public class Animacion {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isAnimated() {
 
         return bAnimated;
     }
+
+    /**
+     *
+     * @param bAnimated
+     */
     public void setAnimated(boolean bAnimated) {
 
         this.bAnimated = bAnimated;
@@ -104,6 +118,9 @@ public class Animacion {
         imaSplash19 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("Images/splash/10A.png"));
     }
 
+    /**
+     *
+     */
     public void animacion() {
 
         lklSplash = new LinkedList();
@@ -155,6 +172,11 @@ public class Animacion {
         graGrafico.drawImage(lklSplash.get(iContadorAnimacion), iRectOffsetX, iRectOffsetY, iSizeImageX, iSizeImageY, imgobs);
     }
 
+    /**
+     *
+     * @param graGrafico
+     * @param imgobs
+     */
     public void paintComponent(Graphics graGrafico, ImageObserver imgobs) {
 
         if (isAnimated()) {

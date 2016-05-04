@@ -1,25 +1,52 @@
 package Flood;
 
+/**
+ *
+ * @author asushg
+ */
 public class Coordenada {
 	private int iX;
 	private int iY;
 
-	public Coordenada(int iX, int iY) {
+    /**
+     *
+     * @param iX
+     * @param iY
+     */
+    public Coordenada(int iX, int iY) {
 		this.iX = iX;
 		this.iY = iY;
 	}
 
-	public int getX() {
+    /**
+     *
+     * @return
+     */
+    public int getX() {
 		return this.iX;
 	}
-	public int getY() {
+
+    /**
+     *
+     * @return
+     */
+    public int getY() {
 		return this.iY;
 	}
-	public void setX(int iX) {
+
+    /**
+     *
+     * @param iX
+     */
+    public void setX(int iX) {
 		this.iX = iX;
 	}
 
-	public void setY(int iY) {
+    /**
+     *
+     * @param iY
+     */
+    public void setY(int iY) {
 		this.iY = iY;
 	}
 };

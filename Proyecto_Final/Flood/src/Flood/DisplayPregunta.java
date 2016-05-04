@@ -27,6 +27,15 @@ public class DisplayPregunta {
     private Font fonFuente;
     private Font fonFuentel;
 
+    /**
+     *
+     * @param iX
+     * @param iY
+     * @param sPregunta
+     * @param sPreguntaBase
+     * @throws FontFormatException
+     * @throws IOException
+     */
     public DisplayPregunta(int iX, int iY, String sPregunta, String sPreguntaBase) throws FontFormatException, IOException {
 
         InputStream fontStream = getClass().getResourceAsStream("/Flood/Custom.ttf");
@@ -43,6 +52,11 @@ public class DisplayPregunta {
         this.sPreguntaBase = sPreguntaBase;
     }
 
+    /**
+     *
+     * @param graGrafico
+     * @param imoObserver
+     */
     public void paint(Graphics graGrafico, ImageObserver imoObserver) {
         Color colAux = new Color(0, 0, 0);
         graGrafico.setColor(colAux);
@@ -53,26 +67,50 @@ public class DisplayPregunta {
         graGrafico.drawString(getPregunta(), getX(), getY() + 28);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPregunta() {
         return sPregunta;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPreguntaBase() {
         return sPreguntaBase;
     }
 
+    /**
+     *
+     * @param sPregunta
+     */
     public void setPregunta(String sPregunta) {
         this.sPregunta = sPregunta;
     }
 
+    /**
+     *
+     * @param sPreguntaBase
+     */
     public void setPreguntaBase(String sPreguntaBase) {
         this.sPreguntaBase = sPreguntaBase;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getX() {
         return iX;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getY() {
         return iY;
     }
