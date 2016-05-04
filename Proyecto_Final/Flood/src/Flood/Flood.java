@@ -611,13 +611,19 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         iMouseX = mouEvent.getX();
         iMouseY = mouEvent.getY();
 
-        if (tabTablero.disRespuesta.basHint.intersects(iMouseX, iMouseY) && !side.bPause && iPuntos > 0) {
+        if (iPuntos <= 0) {
+            souWrong.play(side.bSound);
+        } else if (tabTablero.disRespuesta.basHint.intersects(iMouseX, iMouseY) && !side.bPause) {
             System.out.println("Hint was clicked");
-            iPuntos += tabTablero.getHint();
-            if (iPuntos < 0) {
-                iPuntos = 0;
+            int iMenosPista = tabTablero.getHint();
+            if ( iMenosPista == -100) {
+                souWrong.play(side.bSound);
+            } else {
+                iPuntos += iMenosPista;
+                if (iPuntos < 0) {
+                    iPuntos = 0;
+                }
             }
-
         }
     }
 

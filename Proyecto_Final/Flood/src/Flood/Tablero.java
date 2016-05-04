@@ -800,6 +800,8 @@ public class Tablero {
 				sActual += sResEsperada.charAt(disRespuesta.getSize());
 				disRespuesta.setRespuesta(sActual);
 				return -1 * cuaAux.getValor() / 2;
+			} else {
+				return -100;
 			}
 		}
 		return 0;
