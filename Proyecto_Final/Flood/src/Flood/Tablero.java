@@ -632,11 +632,12 @@ public class Tablero {
 	}
 
 	public void setNextColor() {
-		int aux = iIndexColor;
+		int trema = iIndexColor;
 		iIndexColor++;
 		if (iIndexColor >= lklColores.size()) {
 			iIndexColor = 0;
 		}
+		trema = iIndexColor;
 	}
 	public void desbloquear(int iCentro) {
 		int iAux;
