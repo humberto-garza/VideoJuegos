@@ -70,6 +70,8 @@ public class Tablero {
 	// Animacion
 	protected Animacion animSplash;
 
+	private int totalPuntos;
+
 	// Booleanas
 	public Tablero(String sCategoria) throws FontFormatException, IOException {
 
@@ -157,7 +159,7 @@ public class Tablero {
 
 
 	public void paint(Graphics graDibujo, ImageObserver imoObserver) {
-            
+
 		// Dibuja los objetos Cuadro
 		for (Cuadro cuaAux : lklCuadrosBase) {
 			if (cuaAux.isActive()) {
@@ -230,7 +232,7 @@ public class Tablero {
 			String sResp = arrPreguntas[1];
 			String sPunt = arrPreguntas[2];
 
-			Pregunta preAux = new Pregunta(sPreg, sResp, Integer.parseInt(sPunt));
+			Pregunta preAux = new Pregunta(sPreg, sResp, (Integer.parseInt(sPunt) % 10) + 1);
 			lklPreguntas.add(preAux);
 		}
 		System.out.print("ASe Cargaron Preguntas: ");
@@ -610,7 +612,6 @@ public class Tablero {
 					String sActualizar = disRespuesta.getRespuesta() + sResEsperadaCopy.charAt(iCharIndex);
 					disRespuesta.setRespuesta(sActualizar);
 
-
 					// Si la respuesta esta completa
 					if (disRespuesta.getSize() == sResEsperada.length()) {
 						//Animar
@@ -685,10 +686,8 @@ public class Tablero {
 						disRespuesta.sRespPasada = sResEsperada;
 						pressedEnter(iModoJuego);
 					}
-					// Caracter equivocado
-					else {
-						iPuntos -= (int)(cuaAux.getValor() / sResEsperadaCopy.length());
-					}
+				} else {
+					iPuntos = -1 * cuaAux.getValor() / 2;
 				}
 			}
 		}
@@ -781,7 +780,7 @@ public class Tablero {
 			if (sActual.length() < sResEsperada.length() - 1) {
 				sActual += sResEsperada.charAt(disRespuesta.getSize());
 				disRespuesta.setRespuesta(sActual);
-				return ((int) (cuaAux.getValor() / sResEsperada.length())) * 3;
+				return -1 * cuaAux.getValor() / 2;
 			}
 		}
 		return 0;
