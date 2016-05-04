@@ -144,7 +144,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         iContRespuesta = 0;
 
         // Definir el primer modo de juego
-        iModoJuego = 4;
+        iModoJuego = 5;
         nuevoJuego();
 
         // Variables de teclado
@@ -206,6 +206,15 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
          * En este modo se debe desbloquear el ultimo cuadro
          */
         if (iModoJuego == 4) {
+            /////////////MODO 2///////////////////
+            tabTablero.llenarGridCapas();
+            /////////////////////////////////////
+        }
+        /////////////MODO 5///////////////////
+        /*
+         * En este modo se debe desbloquear el ultimo cuadro
+         */
+        if (iModoJuego == 5) {
             /////////////MODO 2///////////////////
             tabTablero.llenarGridCapas();
             /////////////////////////////////////
@@ -444,7 +453,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                     tabTablero.disRespuesta.iContRespuesta = 10;//para que se pueda ver la respuesta
                     iPuntos += iResult;
                 }
-                
+
                 if (iResult != -400) {
                     iPuntos += iResult;
                     if (iPuntos < 0) {

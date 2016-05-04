@@ -375,6 +375,8 @@ public class Tablero {
 		cuaAux.setColor(colAux);
 
 	}
+	
+
 
 	public void cambioCuadro() {
 		if (lklUsados.size() > 0) {
@@ -632,12 +634,10 @@ public class Tablero {
 	}
 
 	public void setNextColor() {
-		int trema = iIndexColor;
 		iIndexColor++;
 		if (iIndexColor >= lklColores.size()) {
 			iIndexColor = 0;
 		}
-		trema = iIndexColor;
 	}
 	public void desbloquear(int iCentro) {
 		int iAux;
