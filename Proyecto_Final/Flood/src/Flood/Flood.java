@@ -144,7 +144,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         iContRespuesta = 0;
 
         // Definir el primer modo de juego
-        iModoJuego = 4;
+        iModoJuego = 1;
         nuevoJuego();
 
         // Variables de teclado
