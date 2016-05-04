@@ -345,14 +345,9 @@ public class BannerMenu extends JPanel implements MouseListener {
         basCreditos = new Base(iPosicionX, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
                                .getImage(this.getClass().getResource("Images/menu/CreditosA.png")));
 
-<<<<<<< HEAD
         basRecords = new Base(iPosicionX, iPosicionY += iSecondaryMenuOffsetY, 
                 Toolkit.getDefaultToolkit().getImage(this.getClass().getResource
                 ("Images/menu/DescripcionA.png")));
-=======
-        basRecords = new Base(iPosicionX, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
-                .getImage(this.getClass().getResource("Images/menu/DescripcionA.png")));
->>>>>>> origin/master
 
 
         basBackToMenu = new Base(170, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
@@ -510,26 +505,14 @@ public class BannerMenu extends JPanel implements MouseListener {
 
         if (bRecords) {
             //cambio de imagen
-<<<<<<< HEAD
             basRecords.setImagen(Toolkit.getDefaultToolkit().getImage
                     (this.getClass().getResource("Images/menu/DescripcionB.png")));
 
                                  
-=======
-            basRecords.setImagen(Toolkit.getDefaultToolkit()
-                    .getImage(this.getClass().getResource("Images/menu/DescripcionB.png")));
-
->>>>>>> origin/master
-
         } else {
             //cambio de imagen
             basRecords.setImagen(Toolkit.getDefaultToolkit()
                     .getImage(this.getClass().getResource("Images/menu/DescripcionA.png")));
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
-
         }
 
         if (!tarGame.side.getHelp()) {
