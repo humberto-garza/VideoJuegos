@@ -161,9 +161,6 @@ public class SidePanel extends JPanel implements MouseListener {
         //iOffsetXimagen = iStartPanelX + (119 - (imaImagenLogo.getWidth(this)/2));
         iOffsetXimagen = 630;
         iOffsetYimagen = 40;
-        
-        System.out.println("HOLA" + iOffsetXimagen);
-
         //super.paintComponent(graGrafico);
         if (imaImagenLogo != null
                 && imaImagenNivel != null) {

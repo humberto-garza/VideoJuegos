@@ -270,7 +270,6 @@ public class Tablero {
 
 			// Si no habian cuadors, seleccionar el que se acaba de crear
 			if (lklUsados.size() == 1) {
-				System.out.println("ENTROCAMBIO");
 				cambioCuadro();
 			}
 		}
@@ -292,7 +291,6 @@ public class Tablero {
 						iIndexDisp = iIndexNextD;
 						iIndexNextD = iIndexDisp + iGridCols;
 					}
-					System.out.println(bActivo);
 				} else {
 					break;
 				}
@@ -375,7 +373,7 @@ public class Tablero {
 		cuaAux.setColor(colAux);
 
 	}
-	
+
 
 
 	public void cambioCuadro() {
@@ -614,14 +612,11 @@ public class Tablero {
 								// Gano el nivel 4
 								return -400;
 							}
-							disRespuesta.setRespuesta("");
-							setNextColor();
-
-							disRespuesta.sRespPasada = sResEsperada;
-
-							pressedEnter(iModoJuego);
-
 						}
+						disRespuesta.setRespuesta("");
+						setNextColor();
+						disRespuesta.sRespPasada = sResEsperada;
+						pressedEnter(iModoJuego);
 					}
 					// Caracter equivocado
 					else {
