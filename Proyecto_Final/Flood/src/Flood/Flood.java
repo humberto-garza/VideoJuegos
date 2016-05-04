@@ -141,7 +141,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
 
         // Definir el primer modo de juego
-        iModoJuego = 1;
+        iModoJuego = 4;
         nuevoJuego();
 
         // Variables de teclado
@@ -416,52 +416,52 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 souMove.play(side.bSound);
             }
             if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
-                tabTablero.pressedRight();
+                tabTablero.pressedRight(iModoJuego);
                 souMove.play(side.bSound);
             }
             if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
-                tabTablero.pressedLeft();
+                tabTablero.pressedLeft(iModoJuego);
                 souMove.play(side.bSound);
             }
             if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
-                if (iModoJuego == 1) {
-                    tabTablero.pressedUp();
-                } else if (iModoJuego == 2) {
-                    tabTablero.pressedUp();
-                } else if (iModoJuego == 3) {
-
-                }
+                tabTablero.pressedUp(iModoJuego);
                 souMove.play(side.bSound);
             }
 
             if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
-                if (iModoJuego == 1) {
-                    tabTablero.pressedDown();
-                } else if (iModoJuego == 2) {
-                    tabTablero.pressedDown();
-                } else if (iModoJuego == 3) {
-
-                }
+                tabTablero.pressedDown(iModoJuego);
                 souMove.play(side.bSound);
             } else {//es lo de escribir la respuesta
                 char cAux = keyEvent.getKeyChar();
                 int iResult = tabTablero.pressedKey(cAux, iModoJuego);
+                System.out.println(iResult);
                 if (iResult > 0) {
                     souEliminate.play(side.bSound);
+                    iPuntos += iResult;
                 }
-                iPuntos += iResult;
+                if (iResult != -400) {
+                    iPuntos += iResult;
+                    if (iPuntos < 0) {
+                        iPuntos = 0;
+                    }
+                }
+                if ( iModoJuego == 4) {
+                    if (iResult == -400) {
+                        iNivel++;
+                        side.cambioNivel();
+                        iModoJuego++;
+                        nuevoJuego();
+                    }
+                } else {
+                    // Checar si se debe pasar de nivel
+                    if (iPuntos > 200) {
+                        iNivel++;
+                        side.cambioNivel();
+                        iModoJuego++;
+                        nuevoJuego();
+                    }
+                }
 
-                if (iPuntos < 0) {
-                    iPuntos = 0;
-                }
-
-                // Checar si se debe pasar de nivel
-                if (iPuntos > 200) {
-                    iNivel++;
-                    side.cambioNivel();
-                    iModoJuego++;
-                    nuevoJuego();
-                }
             }
         }
     }

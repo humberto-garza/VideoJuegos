@@ -353,7 +353,27 @@ public class Tablero {
 		}
 	}
 	public void llenarGridCapas() {
-		llenarGrid();	
+		llenarGrid();
+		lklUsados.clear();
+		int[] arrUsados = new int[] {0, 1, 2, 3, 4, 5, 9, 10, 14, 15, 19, 20, 21, 22, 23, 24};
+		for (int iC = arrUsados.length-1; iC >=0; iC--) {
+			lklUsados.add(arrUsados[iC]);
+		}
+
+		int[] arrCuadros = new int[] {6, 7, 8, 11, 12, 13, 16, 17, 18};
+		setNextColor();
+		for (int iC = 0; iC < arrCuadros.length; iC++) {
+			Cuadro cuaAux = lklCuadrosBase.get(arrCuadros[iC]);
+			// Seleccionar un color nuevo
+			Color colAux = lklColores.get(iIndexColor);
+			cuaAux.setColor(colAux);
+		}
+		setNextColor();
+		Cuadro cuaAux = lklCuadrosBase.get(12);
+		// Seleccionar un color nuevo
+		Color colAux = lklColores.get(iIndexColor);
+		cuaAux.setColor(colAux);
+
 	}
 
 	public void cambioCuadro() {
@@ -382,7 +402,11 @@ public class Tablero {
 	}
 
 	public void pressedEnter(int iModoJuego) {
-		if (iModoJuego == 3) {
+		if ( iModoJuego == 4) {
+			cambioCuadro();
+
+
+		} else if (iModoJuego == 3) {
 			disRespuesta.setRespuesta("");
 			for (int iC = 0; iC < iGridCols; iC++) {
 				int iIndexAux = iIndexActual + 1;
@@ -403,7 +427,25 @@ public class Tablero {
 		}
 	}
 
-	public void pressedRight() {
+	public void pressedRight(int iModoJuego) {
+		if (iModoJuego == 4) {
+			int iIndexR;
+			if ((iIndexActual + 1) % iGridCols == 0) {
+				iIndexR = iIndexActual - (iGridCols - 1);
+			} else {
+				iIndexR = (iIndexActual + 1) % iCasillas;
+			}
+
+			Cuadro cuaAux = lklCuadrosBase.get(iIndexR);
+			if (cuaAux.getColor() == lklColores.get(0)) {
+				goRight();
+			}
+
+		} else {
+			goRight();
+		}
+	}
+	public void goRight()  {
 		/*
 		* Si moverlo a la derecha se pasa, ponerlo en
 		* la primera columna de su fila original
@@ -415,7 +457,26 @@ public class Tablero {
 		}
 		disRespuesta.setRespuesta("");
 	}
-	public void pressedLeft() {
+
+
+	public void pressedLeft(int iModoJuego) {
+		if (iModoJuego == 4) {
+			int iIndexL;
+			if ((iIndexActual - 1) % iGridCols == iGridCols - 1 || (iIndexActual - 1) < 0) {
+				iIndexL = iIndexActual + (iGridCols - 1);
+			} else {
+				iIndexL = iIndexActual - 1;
+			}
+
+			Cuadro cuaAux = lklCuadrosBase.get(iIndexL);
+			if (cuaAux.getColor() == lklColores.get(0)) {
+				goLeft();
+			}
+		} else {
+			goLeft();
+		}
+	}
+	public void goLeft()  {
 		/*
 		 * Si moverlo a la Izquierda se regresa, ponerlo en
 		 * la ultima columna de su fila original
@@ -427,7 +488,26 @@ public class Tablero {
 		}
 		disRespuesta.setRespuesta("");
 	}
-	public void pressedUp() {
+
+
+	public void pressedUp(int iModoJuego) {
+		if (iModoJuego == 4) {
+			int iIndexU;
+			if ((iIndexActual - iGridCols) < 0) {
+				iIndexU = (iCasillas - iGridCols) + (iIndexActual % iGridCols);
+			} else {
+				iIndexU = iIndexActual - iGridCols;
+			}
+			Cuadro cuaAux = lklCuadrosBase.get(iIndexU);
+			if (cuaAux.getColor() == lklColores.get(0)) {
+				goUp();
+			}
+		}
+		if ( iModoJuego == 1 || iModoJuego == 2) {
+			goUp();
+		}
+	}
+	public void goUp()  {
 		if ((iIndexActual - iGridCols) < 0) {
 			iIndexActual = (iCasillas - iGridCols) + (iIndexActual % iGridCols);
 		} else {
@@ -435,7 +515,26 @@ public class Tablero {
 		}
 		disRespuesta.setRespuesta("");
 	}
-	public void pressedDown() {
+
+
+	public void pressedDown(int iModoJuego) {
+		if (iModoJuego == 4) {
+			int iIndexD;
+			if ((iIndexActual + iGridCols) >= iCasillas) {
+				iIndexD = iIndexActual % iGridCols;
+			} else {
+				iIndexD = iIndexActual + iGridCols;
+			}
+			Cuadro cuaAux = lklCuadrosBase.get(iIndexD);
+			if (cuaAux.getColor() == lklColores.get(0)) {
+				goDown();
+			}
+		}
+		if ( iModoJuego == 1 || iModoJuego == 2) {
+			goDown();
+		}
+	}
+	public void goDown()  {
 		if ((iIndexActual + iGridCols) >= iCasillas) {
 			iIndexActual = iIndexActual % iGridCols;
 		} else {
@@ -488,24 +587,35 @@ public class Tablero {
 
 						// Agregar el index a disponibles
 						lklDisponibles.add(iIndexActual);
-						// Remover de usados
-						iIndexUsado = lklUsados.indexOf(iIndexActual);
-						lklUsados.remove(iIndexUsado);
-						iIndexUsado = lklUsados.size() - 1;
 
 						// Dar de baja el cuadro
 						cuaAux.setActive(false);
+						if (iModoJuego == 1 || iModoJuego == 2) {
+							// Remover de usados
+							iIndexUsado = lklUsados.indexOf(iIndexActual);
+							lklUsados.remove(iIndexUsado);
+							iIndexUsado = lklUsados.size() - 1;
+						}
 						if (iModoJuego == 3) {
+							// Remover de usados
+							iIndexUsado = lklUsados.indexOf(iIndexActual);
+							lklUsados.remove(iIndexUsado);
+							iIndexUsado = lklUsados.size() - 1;
 							bajarColumna(iIndexActual);
 						}
-
-						disRespuesta.setRespuesta("");
-						iIndexColor++;
-						if (iIndexColor >= lklColores.size()) {
-							iIndexColor = 0;
+						if (iModoJuego == 4) {
+							lklUsados.remove(lklUsados.indexOf(iIndexActual));
+							iIndexUsado = lklUsados.size() - 1;
+							desbloquear(iIndexActual);
+							if(iIndexActual == 12)
+							{	
+								// Gano el nivel 4
+								return -400;
+							}
 						}
 						pressedEnter(iModoJuego);
-
+						disRespuesta.setRespuesta("");
+						setNextColor();
 					}
 				}
 				// Caracter equivocado
@@ -515,6 +625,57 @@ public class Tablero {
 			}
 		}
 		return iPuntos;
+	}
+	public void desbloquear(int iCentro) {
+		int iAux;
+		Cuadro cuaAux;
+
+
+		// Desbloquera Vecindad IZQUIERDA
+		iAux = iCentro - 1;
+		if (iAux >= 0) {
+			cuaAux = lklCuadrosBase.get(iAux);
+			cuaAux.setColor(lklColores.get(0));
+			if (!lklUsados.contains(iAux) && cuaAux.isActive()) {
+				lklUsados.add(iAux);
+			}
+		}
+		// Desbloquera Vecindad ARRIBA
+		iAux = iCentro - iGridCols;
+		if (iAux >= 0) {
+			cuaAux = lklCuadrosBase.get(iAux);
+			cuaAux.setColor(lklColores.get(0));
+			if (!lklUsados.contains(iAux) && cuaAux.isActive()) {
+				lklUsados.add(iAux);
+			}
+		}
+		// Desbloquera Vecindad DERECHA
+		iAux = iCentro + 1;
+		if (iAux < iCasillas) {
+			cuaAux = lklCuadrosBase.get(iAux);
+			cuaAux.setColor(lklColores.get(0));
+			if (!lklUsados.contains(iAux) && cuaAux.isActive()) {
+				lklUsados.add(iAux);
+			}
+		}
+		// Desbloquera Vecindad ABAJO
+		iAux = iCentro + iGridCols;
+		if (iAux < iCasillas) {
+			cuaAux = lklCuadrosBase.get(iAux);
+			cuaAux.setColor(lklColores.get(0));
+			if (!lklUsados.contains(iAux) && cuaAux.isActive()) {
+				lklUsados.add(iAux);
+			}
+		}
+	}
+
+
+
+	public void setNextColor() {
+		iIndexColor++;
+		if (iIndexColor >= lklColores.size()) {
+			iIndexColor = 0;
+		}
 	}
 
 	public int getHint() {
