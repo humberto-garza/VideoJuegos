@@ -250,6 +250,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 if (!side.bPause) { //no esta en pausa
                     actualiza();//solo actualiza cuando no hay pausa
                 }
+                side.iContBannerLevel --;//contador de banner nivel up
                 add(side);
                 remove(bannerMenu);
             } else {//hacer que regrese al menu
@@ -416,6 +417,20 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
      */
     @Override
     public void keyTyped(KeyEvent keyEvent) {
+        
+        if(side.bLevelUp){
+            System.out.println("hihihihi    "+side.iContBannerLevel);
+        }
+        
+        if (side.bLevelUp && side.iContBannerLevel <= 0){//esta el banner de levelup en pantalla
+            System.out.println("Hola entro");
+            //leer input para continuar con juego
+            //quitas pausa, y apagas las demás booleanas
+            side.bPause = false;
+            side.bBanner = false;
+            side.bLevelUp = false;
+            
+        }
 
     }
 
@@ -522,6 +537,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 
                 System.out.println("idk pq no te esta pelandoojsdkjahsdlkja");
                 side.bExit = false;//quita el banner
+                side.bBanner = true;//significa que no hay banner
                 side.bPause = false;//quitar pausa
                 //regresar al menu
                 bannerMenu.setPlay(false);
@@ -531,6 +547,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
             } else if (side.basNoPlay.intersects(iMouseX, iMouseY)) {//seguir jugando
                 side.bExit = false;//quitar banner
                 side.bPause = false;//quitar pausa
+                side.bBanner = true;//significa que no hay banner
             }
         }
     }
