@@ -647,7 +647,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
 
     @Override
     public void mouseClicked(MouseEvent mouEvent) {
-        if (side.bExit) { //esta en el banner de exit
+        if (side.bExit) {//esta en el banner de exit 
             if (side.basYesSalir.intersects(iMouseX, iMouseY)) {//salir del juego
                 side.bExit = false;//quita el banner
                 side.bBanner = false;//significa que no hay banner
