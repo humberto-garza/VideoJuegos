@@ -274,6 +274,26 @@ public class Tablero {
 			}
 		}
 	}
+	public void bloqueaCuadro() {
+		if (lklUsados.size() > 1) {
+			int iRandPicker = iIndexActual;
+			int iIndexRand = 0;
+			// Seleccionar al azar un lugar disponible
+			while (iRandPicker == iIndexActual) {
+				iIndexRand = (int) (Math.random() * lklUsados.size());
+				iRandPicker = lklUsados.get(iIndexRand);
+			}
+
+			Cuadro cuaAux = lklCuadrosBase.get(iRandPicker);
+			Color colAux = cuaAux.getColor();
+			int iXColor = lklColores.indexOf(colAux) + 1;
+			cuaAux.setColor(lklColores.get(iXColor));
+
+			// Remover el seleccionado de la lista
+			int iAux = lklUsados.remove(iIndexRand);
+			iIndexUsado = lklUsados.size() - 1;
+		}
+	}
 
 	public void creaCuadroAbajo() {
 		if (lklDisponibles.size() > 0) {
@@ -330,7 +350,7 @@ public class Tablero {
 	}
 
 	public void llenarGrid() {
-
+		lklUsados.clear();
 		lklDisponibles.clear();
 
 		for (int iC = 0; iC < getCasillas(); iC++) {
@@ -371,8 +391,9 @@ public class Tablero {
 		// Seleccionar un color nuevo
 		Color colAux = lklColores.get(iIndexColor);
 		cuaAux.setColor(colAux);
-
 	}
+
+
 	public void llenarGridTache() {
 		iIndexActual = 7;
 		llenarGrid();
@@ -442,7 +463,7 @@ public class Tablero {
 	}
 
 	public void pressedRight(int iModoJuego) {
-		if (iModoJuego == 4 || iModoJuego == 5) {
+		if (iModoJuego == 4 || iModoJuego == 5 || iModoJuego == 6) {
 			int iIndexR;
 			if ((iIndexActual + 1) % iGridCols == 0) {
 				iIndexR = iIndexActual - (iGridCols - 1);
@@ -474,7 +495,7 @@ public class Tablero {
 
 
 	public void pressedLeft(int iModoJuego) {
-		if (iModoJuego == 4 || iModoJuego == 5) {
+		if (iModoJuego == 4 || iModoJuego == 5 || iModoJuego == 6) {
 			int iIndexL;
 			if ((iIndexActual - 1) % iGridCols == iGridCols - 1 || (iIndexActual - 1) < 0) {
 				iIndexL = iIndexActual + (iGridCols - 1);
@@ -505,7 +526,7 @@ public class Tablero {
 
 
 	public void pressedUp(int iModoJuego) {
-		if (iModoJuego == 4 || iModoJuego == 5) {
+		if (iModoJuego == 4 || iModoJuego == 5 || iModoJuego == 6) {
 			int iIndexU;
 			if ((iIndexActual - iGridCols) < 0) {
 				iIndexU = (iCasillas - iGridCols) + (iIndexActual % iGridCols);
@@ -532,7 +553,7 @@ public class Tablero {
 
 
 	public void pressedDown(int iModoJuego) {
-		if (iModoJuego == 4 || iModoJuego == 5) {
+		if (iModoJuego == 4 || iModoJuego == 5 || iModoJuego == 6) {
 			int iIndexD;
 			if ((iIndexActual + iGridCols) >= iCasillas) {
 				iIndexD = iIndexActual % iGridCols;
@@ -619,9 +640,9 @@ public class Tablero {
 						}
 
 						if (iModoJuego == 4) {
+							desbloquear(iIndexActual);
 							lklUsados.remove(lklUsados.indexOf(iIndexActual));
 							iIndexUsado = lklUsados.size() - 1;
-							desbloquear(iIndexActual);
 							if (iIndexActual == 12) {
 								// Gano el nivel 4
 								return -400;
@@ -644,6 +665,20 @@ public class Tablero {
 								return -500;
 							}
 						}
+						if (iModoJuego == 6) {
+							desbloquear(iIndexActual);
+							int iIndexToRemove = lklUsados.indexOf(iIndexActual);
+							if (iIndexToRemove >= 0) {
+								lklUsados.remove(iIndexToRemove);
+							}
+							iIndexUsado = lklUsados.size() - 1;
+							if (lklDisponibles.size() == iCasillas) {
+								return -600;
+							}
+
+						}
+
+
 						disRespuesta.setRespuesta("");
 						setNextColor();
 						disRespuesta.sRespPasada = sResEsperada;
@@ -658,7 +693,9 @@ public class Tablero {
 		}
 		return iPuntos;
 	}
-
+	public boolean isBloqued() {
+		return lklDisponibles.size() < iCasillas && lklUsados.size() == 0;
+	}
 	public void setNextColor() {
 		iIndexColor++;
 		if (iIndexColor >= lklColores.size()) {
@@ -728,10 +765,6 @@ public class Tablero {
 			cuaAux.setColor(lklColores.get(iXColor));
 		}
 	}
-
-
-
-
 
 
 
