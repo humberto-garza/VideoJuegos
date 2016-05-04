@@ -16,6 +16,10 @@ import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import javax.swing.ImageIcon;
 
+/**
+ *
+ * @author asushg
+ */
 public class Base {
 
     private int iX;     //posicion en x.
@@ -32,9 +36,7 @@ public class Base {
      * creando el icono a partir de una imagen
      *
      * @param iX es la <code>posicion en x</code> del objeto.
-     * @param iY es la <code>posicion en y</code> del objeto.
      * @param iAncho es el <code>ancho</code> del objeto.
-     * @param iAlto es el <code>Largo</code> del objeto.
      * @param imaImagen es la <code>imagen</code> del objeto.
      *
      */
@@ -202,6 +204,10 @@ public class Base {
                " ancho: " + this.getAncho() + " alto: " + this.getAlto();
     }
     
+    /**
+     *
+     * @return
+     */
     public Rectangle getPerimetro() {
         return new Rectangle(getX(), getY(), getAncho(), getAlto());
     }
@@ -212,6 +218,8 @@ public class Base {
      * Metodo para obtener el boleano de si el objeto se interesecta o no al 
      * mouse
      * 
+     * @param x
+     * @param y
       * @return un valor <code>bool</code> que indica su el objeto colisiona con
       * el mouse
      * 

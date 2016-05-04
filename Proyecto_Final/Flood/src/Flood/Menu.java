@@ -41,8 +41,9 @@ public class Menu extends JFrame implements MouseListener {
     //BasePlay
     private Base basPlay;
     
-
-    
+    /**
+     *
+     */
     public Menu(){
         
         // Jframe Configuration
@@ -124,6 +125,10 @@ public class Menu extends JFrame implements MouseListener {
         }
     }
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Menu floodMenu = new Menu();
     }

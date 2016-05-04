@@ -51,7 +51,15 @@ import javax.swing.JFileChooser;
 public class Flood extends JFrame implements Runnable, KeyListener, MouseListener {
 
     //Jframe Size
+
+    /**
+     *
+     */
     public int iHeight;
+
+    /**
+     *
+     */
     public int iWidth;
 
     // Objetos imagen
@@ -75,18 +83,42 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     private int iMouseY;
 
     // Tablero
+
+    /**
+     *
+     */
     protected Tablero tabTablero;
 
     //SidePanel Instance
+
+    /**
+     *
+     */
     protected SidePanel side;
 
     //Banner Menu Instance
     BannerMenu bannerMenu;
 
     //Variables de score y nivel
+
+    /**
+     *
+     */
     protected int iPuntos;
+
+    /**
+     *
+     */
     protected int iNivel;
+
+    /**
+     *
+     */
     protected int iModoJuego;
+
+    /**
+     *
+     */
     protected int iRespondidas;
 
     // Variables de tiempo
@@ -96,11 +128,21 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     private int iRandMax;
     private int iRand;
     private int iContadorCiclos;
+
+    /**
+     *
+     */
     protected int iContRespuesta;
 
     // Categoria
     private String sCurCategoria;
 
+    /**
+     *
+     * @throws FileNotFoundException
+     * @throws IOException
+     * @throws FontFormatException
+     */
     public Flood() throws FileNotFoundException, IOException, FontFormatException {
         // Jframe Configuration
         iWidth = 900;
@@ -108,7 +150,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
 
         // Crear la imagen de fondo.
         imaImagenFondo = Toolkit.getDefaultToolkit().getImage(this.getClass()
-                         .getResource("Images/Fondo.png"));
+                .getResource("Images/Fondo.png"));
 
         //inicializa la instancia de SidePanel
         this.side = new SidePanel(this);
@@ -163,6 +205,10 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         th.start();
     }
 
+    /**
+     *
+     * @param sFileToOpen
+     */
     public void IniciaMenu(String sFileToOpen) {
         //Variables de score y nivel
         sCurCategoria = sFileToOpen;
@@ -172,6 +218,10 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         nuevoJuego(sFileToOpen);
     }
 
+    /**
+     *
+     * @param sFileToOpen
+     */
     public void nuevoJuego(String sFileToOpen) {
         // Iniciar un nuevo Tablero
         try {
@@ -250,6 +300,9 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
      * Main del juego principal
      *
      * @param args the command line arguments
+     * @throws java.io.FileNotFoundException
+     * @throws java.io.IOException
+     * @throws java.awt.FontFormatException
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, FontFormatException {
         Flood tarGame = new Flood();
@@ -272,7 +325,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 if (!side.bPause) { //no esta en pausa
                     actualiza();//solo actualiza cuando no hay pausa
                 }
-                side.iContBannerLevel --;//contador de banner nivel up
+                side.iContBannerLevel--;//contador de banner nivel up
                 add(side);
                 remove(bannerMenu);
             } else {//hacer que regrese al menu
@@ -288,7 +341,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 Thread.sleep(25);
             } catch (InterruptedException iexError) {
                 System.out.println("Hubo un error en el juego "
-                                   + iexError.toString());
+                        + iexError.toString());
             }
         }
     }
@@ -310,7 +363,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
                 iContadorCiclos = 0;
                 tabTablero.creaCuadro();
-                if ( tabTablero.estaLleno()) {
+                if (tabTablero.estaLleno()) {
                     nuevoJuego(sCurCategoria);
                 }
             }
@@ -318,7 +371,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         /////////////MODO 2///////////////////
         if (iModoJuego == 2) {
             //tabTablero.creaCuadro();
-            if ( tabTablero.noHayDisponibles()) {
+            if (tabTablero.noHayDisponibles()) {
                 nuevoJuego(sCurCategoria);
             }
         }
@@ -328,7 +381,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
                 iContadorCiclos = 0;
                 tabTablero.creaCuadroAbajo();
-                if ( tabTablero.estaLleno()) {
+                if (tabTablero.estaLleno()) {
                     nuevoJuego(sCurCategoria);
                 }
             }
@@ -341,7 +394,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
                 iContadorCiclos = 0;
                 tabTablero.bloqueaCuadro();
-                if ( tabTablero.isBloqued()) {
+                if (tabTablero.isBloqued()) {
                     nuevoJuego(sCurCategoria);
                 }
             }
@@ -356,7 +409,6 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         // Actualizar la Pregunta Actual
         tabTablero.actualizarPregunta();
     }
-
 
     /**
      * checaColision
@@ -381,7 +433,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         // Si quitamos el if funciona con el resize
         if (imaImagenApplet == null) {
             imaImagenApplet = createImage(this.getSize().width,
-                                          this.getSize().height);
+                    this.getSize().height);
             graGraficaApplet = imaImagenApplet.getGraphics();
         }
         // Actualiza el Foreground.
@@ -427,6 +479,10 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         }
     }
 
+    /**
+     *
+     * @param graDibujo
+     */
     public void paintCustomFlood(Graphics graDibujo) {
         //paintComponent de side Panel
         side.paintComponent(graDibujo);
@@ -437,6 +493,10 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         }
     }
 
+    /**
+     *
+     * @param graDibujo
+     */
     public void paintCustomMenu(Graphics graDibujo) {
         bannerMenu.paintComponent(graDibujo);
 
@@ -488,8 +548,8 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 souMove.play(side.bSound);
             } else {//es lo de escribir la respuesta
                 char cAux = keyEvent.getKeyChar();
+                System.out.println(cAux);
                 int iResult = tabTablero.pressedKey(cAux, iModoJuego);
-
                 if (iResult > 0) {//contesto bien
                     souEliminate.play(side.bSound);
                     tabTablero.disRespuesta.iContRespuesta = 10;//para que se pueda ver la respuesta
@@ -505,7 +565,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                     souWrong.play(side.bSound);
                 }
                 if (iModoJuego == 1) {
-                    if (iPuntos > 10) {
+                    if (iPuntos > 100) {
                         iNivel++;
                         side.cambioNivel();
                         iModoJuego++;
@@ -540,7 +600,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                         nuevoJuego(sCurCategoria);
                     }
                 } else if (iModoJuego == 6) {
-                    if (iResult ==  -600) {
+                    if (iResult == -600) {
                         //iNivel = iModoJuego = 1;
                         iNivel++;
                         side.cambioNivel();
@@ -550,6 +610,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
             }
         }
     }
+
     /**
      * keyReleased
      *
@@ -569,7 +630,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
             side.bBanner = false;
             side.bLevelUp = false;
         }
-        if (side.bWonGame && side.iContBannerLevel <= 0  && keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
+        if (side.bWonGame && side.iContBannerLevel <= 0 && keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
             //apagar booleanas
             side.bPause = false;
             side.bBanner = false;
@@ -616,7 +677,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         } else if (tabTablero.disRespuesta.basHint.intersects(iMouseX, iMouseY) && !side.bPause) {
             System.out.println("Hint was clicked");
             int iMenosPista = tabTablero.getHint();
-            if ( iMenosPista == -100) {
+            if (iMenosPista == -100) {
                 souWrong.play(side.bSound);
             } else {
                 iPuntos += iMenosPista;

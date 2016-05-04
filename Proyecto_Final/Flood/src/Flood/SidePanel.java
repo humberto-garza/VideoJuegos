@@ -26,11 +26,31 @@ public class SidePanel extends JPanel implements MouseListener {
     private boolean bIntersects;
 
     //Objetos Base para los botones del panel
+
+    /**
+     *
+     */
     protected Base basBackMenu;
     private Base basHelp;
+
+    /**
+     *
+     */
     protected Base basPause;
+
+    /**
+     *
+     */
     protected Base basSound;
+
+    /**
+     *
+     */
     protected Base basYesSalir;//salirdeljuego
+
+    /**
+     *
+     */
     protected Base basNoPlay;//seguir jugando
 
     //Objetos para las imagenes
@@ -54,14 +74,42 @@ public class SidePanel extends JPanel implements MouseListener {
 
     //Variables booleanas que indican si un botón fue presionado
     private boolean bHelp;
+
+    /**
+     *
+     */
     protected boolean bPause;
+
+    /**
+     *
+     */
     protected boolean bSound;
+
+    /**
+     *
+     */
     protected boolean bExit;
+
+    /**
+     *
+     */
     protected boolean bBanner;
+
+    /**
+     *
+     */
     protected boolean bLevelUp;
+
+    /**
+     *
+     */
     protected boolean bWonGame;
 
     //contadores
+
+    /**
+     *
+     */
     protected int iContBannerLevel;
 
     //Variables que indican los tamaños del side panel
@@ -94,8 +142,11 @@ public class SidePanel extends JPanel implements MouseListener {
 
     /**
      * SidePanel
+     * @param floodGame
      * @param Flood
      * Constructor de SidePanel, inicializa
+     * @throws java.awt.FontFormatException
+     * @throws java.io.IOException
      */
     public SidePanel(Flood floodGame) throws FontFormatException, IOException {
 
@@ -395,6 +446,7 @@ public class SidePanel extends JPanel implements MouseListener {
     
     /***
      * setHeklp
+     * @param help
      * @param boolean help 
      * pone un valor booleano al atributo help
      */
