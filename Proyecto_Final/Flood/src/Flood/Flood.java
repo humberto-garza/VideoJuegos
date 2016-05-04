@@ -6,6 +6,9 @@
  */
 package Flood;
 
+import java.io.*;
+import javax.sound.sampled.*;
+
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -39,6 +42,16 @@ import java.util.Arrays;
 import javax.swing.KeyStroke;
 import java.text.Normalizer;
 import java.util.regex.Pattern;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineListener;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFileChooser;
 
 /**
@@ -52,7 +65,6 @@ import javax.swing.JFileChooser;
 public class Flood extends JFrame implements Runnable, KeyListener, MouseListener {
 
     //Jframe Size
-
     /**
      *
      */
@@ -85,14 +97,12 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     private int iMouseY;
 
     // Tablero
-
     /**
      *
      */
     protected Tablero tabTablero;
 
     //SidePanel Instance
-
     /**
      *
      */
@@ -102,7 +112,6 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     BannerMenu bannerMenu;
 
     //Variables de score y nivel
-
     /**
      *
      */
@@ -131,6 +140,8 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     private int iRand;
     private int iContadorCiclos;
 
+    MakeSound makAux;
+
     /**
      *
      */
@@ -145,7 +156,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
      * @throws IOException
      * @throws FontFormatException
      */
-    public Flood() throws FileNotFoundException, IOException, FontFormatException {
+    public Flood() throws FileNotFoundException, IOException, FontFormatException, UnsupportedAudioFileException, LineUnavailableException {
         // Jframe Configuration
         iWidth = 900;
         iHeight = 768;
@@ -170,9 +181,11 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         souMove = new SoundClip("/Flood/Sounds/click_tiny.wav");
         souEliminate = new SoundClip("Sounds/eliminateline.wav");
         souWrong = new SoundClip("Sounds/wrong.wav");
-        souLoop = new SoundClip("Sounds/Loop.wav");
-        souLoop.setLooping(true);
-        souLoop.play(side.bSound);
+        //souLoop = new SoundClip("/Flood/Sounds/Loop.wav");
+        //souLoop.setLooping(true);
+        //souLoop.play(side.bSound);
+
+        makAux = new MakeSound();
 
         Dimension dimD = new Dimension(iWidth, iHeight);
         Container conC = this.getContentPane();
@@ -206,6 +219,14 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         // Declarar thread principal
         Thread th = new Thread(this);
 
+        Thread thread1 = new Thread() {
+            public void run() {
+                while (true) {
+                    makAux.playSound("/Flood/Sounds/Loop.wav", side);
+                }
+            }
+        };
+        thread1.start();
         // Iniciar el thread
         th.start();
     }
@@ -241,8 +262,8 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         // MODO DE JUEGO
         /////////////MODO 1///////////////////
         /*
-         * En este modo de juego, aparecen cuadros al azar y
-         * se deben ir desapareciendo al responder correctamente
+             * En este modo de juego, aparecen cuadros al azar y
+             * se deben ir desapareciendo al responder correctamente
          */
         if (iModoJuego == 1) {
             iRandMax = 50;
@@ -252,7 +273,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         }
         /////////////MODO 2///////////////////
         /*
-        * En este modo de juego, se trata de desaparecer n Puntos
+            * En este modo de juego, se trata de desaparecer n Puntos
          */
         if (iModoJuego == 2) {
             tabTablero.llenarGrid();
@@ -260,8 +281,8 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         }
         /////////////MODO 3///////////////////
         /*
-        * En este modo de juego, se trata de evitar que se pasen los cuadros
-        * de arriba
+            * En este modo de juego, se trata de evitar que se pasen los cuadros
+            * de arriba
          */
         if (iModoJuego == 3) {
             iRandMax = 45;
@@ -272,7 +293,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         }
         /////////////MODO 4///////////////////
         /*
-         * En este modo se debe desbloquear el ultimo cuadro
+             * En este modo se debe desbloquear el ultimo cuadro
          */
         if (iModoJuego == 4) {
             tabTablero.llenarGridCapas();
@@ -280,7 +301,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         }
         /////////////MODO 5///////////////////
         /*
-         * En este modo se debe desbloquear la tache
+             * En este modo se debe desbloquear la tache
          */
         if (iModoJuego == 5) {
             tabTablero.llenarGridTache();
@@ -288,7 +309,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         }
         /////////////MODO 6///////////////////
         /*
-         * En este modo se debe desbloquear el ultimo cuadro
+             * En este modo se debe desbloquear el ultimo cuadro
          */
         if (iModoJuego == 6) {
             iRandMax = 75;
@@ -309,7 +330,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
      * @throws java.io.IOException
      * @throws java.awt.FontFormatException
      */
-    public static void main(String[] args) throws FileNotFoundException, IOException, FontFormatException {
+    public static void main(String[] args) throws FileNotFoundException, IOException, FontFormatException, UnsupportedAudioFileException, LineUnavailableException {
         Flood tarGame = new Flood();
     }
 

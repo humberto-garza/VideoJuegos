@@ -151,24 +151,20 @@ public class SoundClip {
 	 */
 	public boolean load(String audiofile) {
 		try {
-
 			URL sounURL = this.getClass().getResource(getFilename());
 			sample = AudioSystem.getAudioInputStream(sounURL);
 			DataLine.Info info = new DataLine.Info(Clip.class, sample.getFormat());
 			clip = (Clip) AudioSystem.getLine(info);
 			clip.open(sample);
-			clip.start();
-			/*
-			URL defaultSound = getClass().getResource("/Flood/Sounds/click_tiny.wav");
-			sample = AudioSystem.getAudioInputStream(defaultSound);
-			clip.open(sample);
-			 */
 			return true;
 		} catch (IOException e) {
+			System.out.println("ExceptAudio");
 			return false;
 		} catch (UnsupportedAudioFileException | IllegalArgumentException e) {
+			System.out.println("ExceptAudio");
 			return false;
 		} catch (LineUnavailableException e) {
+			System.out.println("ExceptAudio");
 			return false;
 		}
 	}

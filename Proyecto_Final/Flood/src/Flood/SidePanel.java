@@ -394,7 +394,7 @@ public class SidePanel extends JPanel implements MouseListener {
                                          ("Images/sidePanel/Sound.png")));
             //AQUI PONER EL SOUND.PLAY()
             
-            tarGame.souLoop.play(bSound);
+
 
         } else {
             //cambio de imagen
@@ -402,7 +402,6 @@ public class SidePanel extends JPanel implements MouseListener {
                                .getImage(this.getClass().
                                          getResource("Images/sidePanel/Mute.png")));
             //AQUI PONER EL SOUND.PAUSE()
-            tarGame.souLoop.stop();
         }
     }
 
