@@ -398,7 +398,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         //paintComponent de side Panel
         side.paintComponent(graDibujo);
 
-        if (!side.bExit){//solo pinta cuando no hay un banner
+        if (!side.bPause){//solo pinta cuando no hay un banner
         // Pintar el tablero
         tabTablero.paint(graDibujo, this);
         }

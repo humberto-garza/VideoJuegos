@@ -37,6 +37,7 @@ public class SidePanel extends JPanel implements MouseListener {
     private Image imaImagenLogo;
     private Image imaImagenNivel;
     private Image imaImagenBannerSalir;
+    private Image imaImagenPausa;
 
     //Variables booleanas que indican si un botón fue presionado
     private boolean bHelp;
@@ -134,6 +135,9 @@ public class SidePanel extends JPanel implements MouseListener {
         
         imaImagenBannerSalir = Toolkit.getDefaultToolkit().getImage(this.getClass()
                 .getResource("Images/sidePanel/bannerSalir.png"));
+        
+        imaImagenPausa = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                .getResource("Images/sidePanel/bannerPausa.png"));
     }
 
     /* creaBases
@@ -207,6 +211,12 @@ public class SidePanel extends JPanel implements MouseListener {
         } else {
             //Da un mensaje mientras se carga el dibujo
             graGrafico.drawString("No se cargo la imagen..", 20, 20);
+        }
+        
+        if (bPause && !bExit){//el juego esta en pausa
+            //pinta banner de fondo
+            graGrafico.drawImage(imaImagenPausa, 0, 0, imaImagenPausa.getWidth(this), imaImagenPausa.getWidth(this), this);
+
         }
         
         if (bExit){//el usuario quiere regresar a menu
