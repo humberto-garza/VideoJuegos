@@ -185,7 +185,7 @@ public class Tablero {
 		lklColores.clear();
 		iIndexColor = 0;
 		// Seleccionar al azar una paleta
-		int iRandPicker = (int) (Math.random() * 6) + 1;
+		int iRandPicker = (int) (Math.random() * 2) + 1;
 
 		String nombreArchivo = "/Flood/Files/Paletas/" + iRandPicker + ".txt";
 		InputStream inpArchivo = getClass().getResourceAsStream(nombreArchivo);
@@ -602,9 +602,7 @@ public class Tablero {
 
 	public int pressedKey(char cAux, int iModoJuego) {
 		int iPuntos = 0;
-
-		if (Character.isDigit(cAux) || Character.isLetter(cAux)) {
-
+		if (Character.isDigit(cAux) || Character.isLetter(cAux) || cAux == ' ' || cAux == '.' || cAux == '-') {
 			// Actualizar la Pregunta Actual
 			Cuadro cuaAux = lklCuadrosBase.get(iIndexActual);
 			// Si el cuadro esta activo
@@ -619,16 +617,20 @@ public class Tablero {
 				// Comparar la respuesta esperada contra lo que se tiene
 				int iCharIndex = disRespuesta.getSize();
 				char cResEsperada = sResEsperada.charAt(iCharIndex);
-				cAux = Character.toLowerCase(cAux);
-				if (cAux == 'ñ') {
-					cAux = 'n';
+				if (cAux == ' ' || cAux == '.' || cAux == '-') {
+					cAux = Character.toLowerCase(cAux);
+					if (cAux == 'ñ') {
+						cAux = 'n';
+					}
 				}
-
 				// Si Coinciden los caracteres
 				if (Character.toLowerCase(cResEsperada) == cAux) {
-
+					char cNextChar = sResEsperadaCopy.charAt(iCharIndex);
 					// Agregar el caracter a la respuesta
-					String sActualizar = disRespuesta.getRespuesta() + sResEsperadaCopy.charAt(iCharIndex);
+					if (cNextChar == ' ') {
+						cNextChar = '_';
+					}
+					String sActualizar = disRespuesta.getRespuesta() + cNextChar;
 					disRespuesta.setRespuesta(sActualizar);
 
 					// Si la respuesta esta completa
@@ -706,7 +708,7 @@ public class Tablero {
 						pressedEnter(iModoJuego);
 					}
 				} else {
-					iPuntos = -1 * (cuaAux.getValor() / 2 + 1);
+					iPuntos = -1 * (cuaAux.getValor() / 3 + 1);
 				}
 			}
 		}
@@ -785,8 +787,6 @@ public class Tablero {
 		}
 	}
 
-
-
 	public int getHint() {
 		Cuadro cuaAux = lklCuadrosBase.get(iIndexActual);
 
@@ -797,9 +797,13 @@ public class Tablero {
 			String sActual = disRespuesta.getRespuesta();
 
 			if (sActual.length() < sResEsperada.length() - 1) {
-				sActual += sResEsperada.charAt(disRespuesta.getSize());
+				char cNextChar = sResEsperada.charAt(disRespuesta.getSize());
+				if ( cNextChar == ' ') {
+					cNextChar = '_';
+				}
+				sActual += cNextChar;
 				disRespuesta.setRespuesta(sActual);
-				return -1 * cuaAux.getValor() / 2;
+				return -1 * cuaAux.getValor() / 3;
 			} else {
 				return -100;
 			}

@@ -28,8 +28,8 @@ public class SoundClip {
 		try {
 			//crea el Buffer de sonido
 			clip = AudioSystem.getClip();
-		} catch (LineUnavailableException e) {
-
+		} catch (LineUnavailableException | IllegalArgumentException e) {
+			clip = null;
 		}
 	}
 
@@ -158,7 +158,7 @@ public class SoundClip {
 			return true;
 		} catch (IOException e) {
 			return false;
-		} catch (UnsupportedAudioFileException e) {
+		} catch (UnsupportedAudioFileException | IllegalArgumentException e) {
 			return false;
 		} catch (LineUnavailableException e) {
 			return false;
@@ -169,7 +169,7 @@ public class SoundClip {
 	 * Metodo que reproduce el sonido.
 	 */
 	public void play(boolean bSound) {
-		if (bSound) {
+		if (bSound && clip != null) {
 			//se sale si el sonido no a sido cargado
 			if (!isLoaded()) {
 				System.out.println("no se cargo");
@@ -191,7 +191,9 @@ public class SoundClip {
 	 * Metodo que detiene el sonido.
 	 */
 	public void stop() {
-		clip.stop();
+		if (clip != null) {
+			clip.stop();
+		}
 	}
 
 }

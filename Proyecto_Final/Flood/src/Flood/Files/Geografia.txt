@@ -1,2 +1,33 @@
-Teclea la capital del Lugar:
-Perú,Lima,1
+Teclea la capital de:
+Aguascalientes,Aguascalientes,1
+Baja California Norte,Mexicali,2
+Baja California Sur,La Paz,3
+Campeche,Campeche,4
+Coahuila,Saltillo,5
+Colima,Colima,6
+Chiapas,Tuxtla Gutiérrez,7
+Chihuahua,Chihuahua,8
+Distrito Federal,Ciudad de México,9
+Durango,Durango,10
+Guanajuato,Guanajuato,11
+Guerrero,Chilpancingo,12
+Hidalgo,Pachuca,13
+Jalisco,Guadalajara,14
+Estado de México,Toluca,15
+Michoacán,Morelia,16
+Morelos,Cuernavaca,17
+Nayarit,Tepic,18
+Nuevo León,Monterrey,19
+Oaxaca,Oaxaca,20
+Puebla,Puebla,21
+Querétaro,Querétaro,22
+Quintana Roo,Chetumal,23
+San Luis Potosí,San Luis Potosí,24
+Sinaloa,Culiacán,25
+Sonora,Hermosillo,26
+Tabasco,Villahermosa,27
+Tamaulipas,Ciudad Victoria,28
+Tlaxcala,Tlaxcala,29
+Veracruz,Xalapa,30
+Yucatán,Mérida,31
+Zacatecas,Zacatecas,32

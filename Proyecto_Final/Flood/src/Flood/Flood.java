@@ -488,8 +488,8 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 souMove.play(side.bSound);
             } else {//es lo de escribir la respuesta
                 char cAux = keyEvent.getKeyChar();
+                System.out.println(cAux);
                 int iResult = tabTablero.pressedKey(cAux, iModoJuego);
-
                 if (iResult > 0) {//contesto bien
                     souEliminate.play(side.bSound);
                     tabTablero.disRespuesta.iContRespuesta = 10;//para que se pueda ver la respuesta
@@ -505,7 +505,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                     souWrong.play(side.bSound);
                 }
                 if (iModoJuego == 1) {
-                    if (iPuntos > 10) {
+                    if (iPuntos > 100) {
                         iNivel++;
                         side.cambioNivel();
                         iModoJuego++;
