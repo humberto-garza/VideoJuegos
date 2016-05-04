@@ -215,7 +215,8 @@ public class SidePanel extends JPanel implements MouseListener {
         
         if (bPause && !bExit){//el juego esta en pausa
             //pinta banner de fondo
-            graGrafico.drawImage(imaImagenPausa, 0, 0, imaImagenPausa.getWidth(this), imaImagenPausa.getHeight(this), this);
+
+            graGrafico.drawImage(imaImagenPausa, -8, -10, imaImagenPausa.getWidth(this), imaImagenPausa.getHeight(this), this);
 
         }
         
