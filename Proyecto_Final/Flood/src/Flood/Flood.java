@@ -87,7 +87,8 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     protected int iPuntos;
     protected int iNivel;
     protected int iModoJuego;
-
+    
+   
     // Variables de tiempo
     private long tiempoActual;
     private long tiempoInicial;
@@ -95,6 +96,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     private int iRandMax;
     private int iRand;
     private int iContadorCiclos;
+    protected int iContRespuesta;
 
     public Flood() throws FileNotFoundException, IOException, FontFormatException {
         // Jframe Configuration
@@ -139,6 +141,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         iRandMin = 70;
         iContadorCiclos = 0;
         iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
+        iContRespuesta =0;
 
         // Definir el primer modo de juego
         iModoJuego = 1;
@@ -446,8 +449,10 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
             } else {//es lo de escribir la respuesta
                 char cAux = keyEvent.getKeyChar();
                 int iResult = tabTablero.pressedKey(cAux, iModoJuego);
-                if (iResult > 0) {
+                if (iResult > 0) {//contesto bien
                     souEliminate.play(side.bSound);
+                    tabTablero.disRespuesta.iContRespuesta = 10;//para que se pueda ver la respuesta
+
                 }
                 iPuntos += iResult;
 

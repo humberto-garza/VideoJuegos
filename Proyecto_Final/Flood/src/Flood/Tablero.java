@@ -500,6 +500,7 @@ public class Tablero {
 						}
 
 						disRespuesta.setRespuesta("");
+                                                disRespuesta.sRespPasada = sResEsperada;
 						iIndexColor++;
 						if (iIndexColor >= lklColores.size()) {
 							iIndexColor = 0;
