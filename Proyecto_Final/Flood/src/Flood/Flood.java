@@ -133,8 +133,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
 
         //Variables de score y nivel
         iPuntos = 0;
-        iNivel = 6;
-        iModoJuego = iNivel;
+        iNivel = iModoJuego = 1;
         side.cambioNivel();
         nuevoJuego();
 
