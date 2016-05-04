@@ -603,6 +603,7 @@ public class Tablero {
 							iIndexUsado = lklUsados.size() - 1;
 							bajarColumna(iIndexActual);
 						}
+
 						if (iModoJuego == 4) {
 							lklUsados.remove(lklUsados.indexOf(iIndexActual));
 							iIndexUsado = lklUsados.size() - 1;
@@ -612,6 +613,14 @@ public class Tablero {
 								// Gano el nivel 4
 								return -400;
 							}
+
+
+						disRespuesta.setRespuesta("");
+                                                disRespuesta.sRespPasada = sResEsperada;
+						iIndexColor++;
+						if (iIndexColor >= lklColores.size()) {
+							iIndexColor = 0;
+
 						}
 						pressedEnter(iModoJuego);
 						disRespuesta.setRespuesta("");
@@ -625,6 +634,7 @@ public class Tablero {
 			}
 		}
 		return iPuntos;
+<<<<<<< HEAD
 	}
 	public void desbloquear(int iCentro) {
 		int iAux;
@@ -677,24 +687,28 @@ public class Tablero {
 			iIndexColor = 0;
 		}
 	}
+=======
+	   }
+>>>>>>> a2e99626055fe606fb03720885dc5e73db465f50
 
-	public int getHint() {
-		Cuadro cuaAux = lklCuadrosBase.get(iIndexActual);
-		int iPregIndex = cuaAux.getPregunta();
-		String sResEsperada = lklPreguntas.get(iPregIndex).getRespuesta();
-		String sActual = disRespuesta.getRespuesta();
+    public int getHint() {
+        Cuadro cuaAux = lklCuadrosBase.get(iIndexActual);
 
-		if (sActual.length() < sResEsperada.length() - 1) {
-			sActual += sResEsperada.charAt(disRespuesta.getSize());
-			disRespuesta.setRespuesta(sActual);
-			return ((int)(cuaAux.getValor() / sResEsperada.length())) * 3;
-		}
+        if (cuaAux.isActive()) {
+            int iPregIndex = cuaAux.getPregunta();
 
-		return 0;
+            String sResEsperada = lklPreguntas.get(iPregIndex).getRespuesta();
+            String sActual = disRespuesta.getRespuesta();
 
+            if (sActual.length() < sResEsperada.length() - 1) {
+                sActual += sResEsperada.charAt(disRespuesta.getSize());
+                disRespuesta.setRespuesta(sActual);
+                return ((int) (cuaAux.getValor() / sResEsperada.length())) * 3;
+            }
+        }
+        return 0;
 
-
-	}
+    }
 
 	public void bajarColumna(int iCuadro) {
 		int iColumna = iCuadro % iGridCols;

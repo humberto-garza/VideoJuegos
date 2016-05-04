@@ -29,6 +29,10 @@ public class DisplayRespuesta {
     private int iX;
     private int iY;
     private Font fonFuente;
+    
+    protected int iContRespuesta;
+    protected String sRespPasada;
+    
     //Base boton de hint
     protected Base basHint; //objeto base que sirve como boton para obtener una pista
     //Variables de posicion del mouse
@@ -43,6 +47,7 @@ public class DisplayRespuesta {
         this.iX = iX;
         this.iY = iY;
         this.sRespuesta = sRespuesta;
+        iContRespuesta =0;
 
         //crea base boton hint
         basHint = new Base(520, 120, Toolkit.getDefaultToolkit()
@@ -55,6 +60,12 @@ public class DisplayRespuesta {
         graGrafico.setColor(colAux);
         graGrafico.setFont(fonFuente);
         graGrafico.drawString(getRespuesta(), getX(), getY());
+        
+        if (iContRespuesta >0){
+            graGrafico.drawString(sRespPasada, getX(), getY());
+            iContRespuesta--;
+        }
+        
         basHint.paint(graGrafico, imoObserver);
     }
 
