@@ -226,28 +226,16 @@ public class SidePanel extends JPanel implements MouseListener {
             
             //centra los puntos en el recuadro
             fitInSquare(Integer.toString(tarGame.iPuntos), rect, graGrafico);
-<<<<<<< HEAD
-            //graGrafico.drawString(Integer.toString(tarGame.iPuntos), 710, 213);
-            graGrafico.drawImage(imaImagenNivel, iOffsetXimagen, iOffsetYimagen + 212, imaImagenNivel.getWidth(this),
-                    
-                    imaImagenNivel.getHeight(this), this);
-            
-            
-            
-=======
+           //graGrafico.drawString(Integer.toString(tarGame.iPuntos), 710, 213);
+
             graGrafico.drawImage(imaImagenNivel, iOffsetXimagen, iOffsetYimagen 
                     + 212, imaImagenNivel.getWidth(this), 
                             imaImagenNivel.getHeight(this), this);
->>>>>>> origin/master
         } else {
             //Da un mensaje mientras se carga el dibujo
             graGrafico.drawString("No se cargo la imagen..", 20, 20);
         }
-<<<<<<< HEAD
 
-        
-=======
->>>>>>> origin/master
         
         /*pinta los objetos*/
         if (basBackMenu != null
@@ -284,15 +272,8 @@ public class SidePanel extends JPanel implements MouseListener {
                     getWidth(this), imaImagenPausa.getHeight(this), this);
         }
 
-<<<<<<< HEAD
         if (bWonGame) {
-          
             graGrafico.drawImage(imaImagenWonGame, 0, 0, 900, 788, this);
-=======
-        if (bWonGame) {//termino el juego, pinta banner
-            graGrafico.drawImage(imaImagenWonGame, 0, 0, imaImagenPausa.
-                    getWidth(this), imaImagenPausa.getHeight(this), this);
->>>>>>> origin/master
         }
     }
 
