@@ -661,7 +661,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
             } else if (side.basNoPlay.intersects(iMouseX, iMouseY)) {//seguir jugando
                 side.bExit = false;//quitar banner
                 side.bPause = false;//quitar pausa
-                side.bBanner = true;//significa que no hay banner
+                side.bBanner = false;//significa que no hay banner
             }
         }
     }
