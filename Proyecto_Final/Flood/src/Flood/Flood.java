@@ -88,6 +88,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     protected int iNivel;
     protected int iModoJuego;
 
+
     // Variables de tiempo
     private long tiempoActual;
     private long tiempoInicial;
@@ -95,6 +96,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
     private int iRandMax;
     private int iRand;
     private int iContadorCiclos;
+    protected int iContRespuesta;
 
     public Flood() throws FileNotFoundException, IOException, FontFormatException {
         // Jframe Configuration
@@ -139,9 +141,10 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         iRandMin = 70;
         iContadorCiclos = 0;
         iRand = (int) (Math.random() * (iRandMin + 1) + iRandMax);
+        iContRespuesta = 0;
 
         // Definir el primer modo de juego
-        iModoJuego = 1;
+        iModoJuego = 4;
         nuevoJuego();
 
         // Variables de teclado
@@ -416,56 +419,60 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
                 souMove.play(side.bSound);
             }
             if (keyEvent.getKeyCode() == KeyEvent.VK_RIGHT) {
-                tabTablero.pressedRight();
+                tabTablero.pressedRight(iModoJuego);
                 souMove.play(side.bSound);
             }
             if (keyEvent.getKeyCode() == KeyEvent.VK_LEFT) {
-                tabTablero.pressedLeft();
+                tabTablero.pressedLeft(iModoJuego);
                 souMove.play(side.bSound);
             }
             if (keyEvent.getKeyCode() == KeyEvent.VK_UP) {
-                if (iModoJuego == 1) {
-                    tabTablero.pressedUp();
-                } else if (iModoJuego == 2) {
-                    tabTablero.pressedUp();
-                } else if (iModoJuego == 3) {
-
-                }
+                tabTablero.pressedUp(iModoJuego);
                 souMove.play(side.bSound);
             }
 
             if (keyEvent.getKeyCode() == KeyEvent.VK_DOWN) {
-                if (iModoJuego == 1) {
-                    tabTablero.pressedDown();
-                } else if (iModoJuego == 2) {
-                    tabTablero.pressedDown();
-                } else if (iModoJuego == 3) {
-
-                }
+                tabTablero.pressedDown(iModoJuego);
                 souMove.play(side.bSound);
             } else {//es lo de escribir la respuesta
                 char cAux = keyEvent.getKeyChar();
                 int iResult = tabTablero.pressedKey(cAux, iModoJuego);
-                if (iResult > 0) {
+
+                System.out.println(iResult);
+                if (iResult > 0) {//contesto bien
                     souEliminate.play(side.bSound);
+                    tabTablero.disRespuesta.iContRespuesta = 10;//para que se pueda ver la respuesta
+                    iPuntos += iResult;
                 }
-                iPuntos += iResult;
+                
+                if (iResult != -400) {
+                    iPuntos += iResult;
+                    if (iPuntos < 0) {
+                        iPuntos = 0;
+                    }
+                }
 
-                if (iPuntos < 0) {
-                    iPuntos = 0;
+                if (iModoJuego == 4) {
+                    if (iResult == -400) {
+                        iNivel++;
+                        side.cambioNivel();
+                        iModoJuego++;
+                        nuevoJuego();
+                    }
+                } else {
+                    // Checar si se debe pasar de nivel
+                    if (iPuntos > 200) {
+                        iNivel++;
+                        side.cambioNivel();
+                        iModoJuego++;
+                        nuevoJuego();
+                    }
                 }
 
-                // Checar si se debe pasar de nivel
-                if (iPuntos > 200) {
-                    iNivel++;
-                    side.cambioNivel();
-                    iModoJuego++;
-                    nuevoJuego();
-                }
+
             }
         }
     }
-
     /**
      * keyReleased
      *
@@ -489,7 +496,7 @@ public class Flood extends JFrame implements Runnable, KeyListener, MouseListene
         iMouseX = mouEvent.getX();
         iMouseY = mouEvent.getY();
 
-        if (tabTablero.disRespuesta.basHint.intersects(iMouseX, iMouseY)) {
+        if (tabTablero.disRespuesta.basHint.intersects(iMouseX, iMouseY) && !side.bPause) {
 
             System.out.println("Hint was clicked");
             iPuntos -= tabTablero.getHint();
