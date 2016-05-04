@@ -157,6 +157,7 @@ public class Tablero {
 
 
 	public void paint(Graphics graDibujo, ImageObserver imoObserver) {
+            
 		// Dibuja los objetos Cuadro
 		for (Cuadro cuaAux : lklCuadrosBase) {
 			if (cuaAux.isActive()) {
