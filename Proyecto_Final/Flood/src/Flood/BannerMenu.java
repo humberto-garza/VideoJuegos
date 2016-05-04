@@ -759,6 +759,7 @@ public class BannerMenu extends JPanel implements MouseListener {
         if (basBackToPlay.intersects(iMouseX, iMouseY) && bSecundario && tarGame.side.getHelp()) { //seleciono play
             falseAll();
             bPlay = true;
+            tarGame.side.bPause = false;
             tarGame.side.setHelp(false);//apaga help
             System.out.println("Regreso a jugar");
         }
