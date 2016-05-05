@@ -57,6 +57,7 @@ public class BannerMenu extends JPanel implements MouseListener {
     private Image imaPantallaInstrucciones; //imagen de animacion del boton de back to menu2
     private Image imaInstrucciones; //texto de instrucciones
     private Image imaCredits; //texto de los credits
+    private Image imaDescription; //Texto de la descripcion del juego 
 
     //Offsets
     private int iSecondaryMenuOffsetX; //Para menu secundario
@@ -161,6 +162,9 @@ public class BannerMenu extends JPanel implements MouseListener {
 
         imaCredits = Toolkit.getDefaultToolkit().getImage(this.getClass()
                      .getResource("Images/menu/Credits.png"));
+        
+        imaDescription = Toolkit.getDefaultToolkit().getImage(this.getClass()
+                     .getResource("Images/menu/Descripcion.png"));
     }
 
     /**
@@ -341,8 +345,9 @@ public class BannerMenu extends JPanel implements MouseListener {
         basCreditos = new Base(iPosicionX, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
                                .getImage(this.getClass().getResource("Images/menu/CreditosA.png")));
 
-        basRecords = new Base(iPosicionX, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
-                .getImage(this.getClass().getResource("Images/menu/DescripcionA.png")));
+        basRecords = new Base(iPosicionX, iPosicionY += iSecondaryMenuOffsetY, 
+                Toolkit.getDefaultToolkit().getImage(this.getClass().getResource
+                ("Images/menu/DescripcionA.png")));
 
 
         basBackToMenu = new Base(170, iPosicionY += iSecondaryMenuOffsetY, Toolkit.getDefaultToolkit()
@@ -500,16 +505,14 @@ public class BannerMenu extends JPanel implements MouseListener {
 
         if (bRecords) {
             //cambio de imagen
-            basRecords.setImagen(Toolkit.getDefaultToolkit()
-                    .getImage(this.getClass().getResource("Images/menu/DescripcionB.png")));
+            basRecords.setImagen(Toolkit.getDefaultToolkit().getImage
+                    (this.getClass().getResource("Images/menu/DescripcionB.png")));
 
-
+                                 
         } else {
             //cambio de imagen
             basRecords.setImagen(Toolkit.getDefaultToolkit()
                     .getImage(this.getClass().getResource("Images/menu/DescripcionA.png")));
-
-
         }
 
         if (!tarGame.side.getHelp()) {
@@ -567,6 +570,7 @@ public class BannerMenu extends JPanel implements MouseListener {
     public void paintRecords(Graphics graGrafico) {
 
         graGrafico.setFont(fonFuenteMenu);
+        graGrafico.drawImage(imaDescription, 327, 219, imaInstrucciones.getWidth(tarGame), imaInstrucciones.getHeight(tarGame), this);
 
         if (tarGame.side.getHelp()) { //si esta prendido significa que el usuario le pico help
             basBackToPlay.paint(graGrafico, this);//da la opcion de regresar al juego
